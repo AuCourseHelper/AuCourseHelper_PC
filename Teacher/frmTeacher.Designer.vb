@@ -24,33 +24,33 @@ Partial Class frmTeacher
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmTeacher))
         Me.mnuMain = New System.Windows.Forms.MenuStrip()
+        Me.tsmConnection = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuLogin = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSignUp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuLogOut = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmAccount = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditPwd = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditPublic = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmCourse = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmLog = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewLog = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewHistory = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuUploadLog = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmIp = New System.Windows.Forms.ToolStripMenuItem()
         Me.stpMain = New System.Windows.Forms.StatusStrip()
         Me.tslLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tslStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tslUserName = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tslSysTime = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.連線ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.登入ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.註冊ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.登出ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.帳號資訊ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.修改密碼ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.修改公開資訊ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.紀錄ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.檢視紀錄ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.查閱歷史紀錄檔ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.上傳記錄提供偵錯ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tsmIp = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.tslCourseName = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
+        Me.tslAttend = New System.Windows.Forms.ToolStripButton()
+        Me.tslScore = New System.Windows.Forms.ToolStripButton()
+        Me.tslHomeWork = New System.Windows.Forms.ToolStripButton()
+        Me.tslExam = New System.Windows.Forms.ToolStripButton()
+        Me.tslReport = New System.Windows.Forms.ToolStripButton()
         Me.pnlMain = New System.Windows.Forms.Panel()
         Me.mnuMain.SuspendLayout()
         Me.stpMain.SuspendLayout()
@@ -60,12 +60,106 @@ Partial Class frmTeacher
         'mnuMain
         '
         Me.mnuMain.Font = New System.Drawing.Font("微軟正黑體", 12.0!)
-        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.連線ToolStripMenuItem, Me.帳號資訊ToolStripMenuItem, Me.ToolStripMenuItem2, Me.紀錄ToolStripMenuItem, Me.tsmIp})
+        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmConnection, Me.tsmAccount, Me.tsmCourse, Me.tsmLog, Me.tsmIp})
         Me.mnuMain.Location = New System.Drawing.Point(0, 0)
         Me.mnuMain.Name = "mnuMain"
         Me.mnuMain.Size = New System.Drawing.Size(784, 28)
         Me.mnuMain.TabIndex = 0
         Me.mnuMain.Text = "MenuStrip1"
+        '
+        'tsmConnection
+        '
+        Me.tsmConnection.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuLogin, Me.mnuSignUp, Me.mnuLogOut})
+        Me.tsmConnection.Name = "tsmConnection"
+        Me.tsmConnection.Size = New System.Drawing.Size(53, 24)
+        Me.tsmConnection.Text = "連線"
+        '
+        'mnuLogin
+        '
+        Me.mnuLogin.Name = "mnuLogin"
+        Me.mnuLogin.Size = New System.Drawing.Size(152, 24)
+        Me.mnuLogin.Text = "登入"
+        '
+        'mnuSignUp
+        '
+        Me.mnuSignUp.Name = "mnuSignUp"
+        Me.mnuSignUp.Size = New System.Drawing.Size(152, 24)
+        Me.mnuSignUp.Text = "註冊"
+        '
+        'mnuLogOut
+        '
+        Me.mnuLogOut.Enabled = False
+        Me.mnuLogOut.Name = "mnuLogOut"
+        Me.mnuLogOut.Size = New System.Drawing.Size(152, 24)
+        Me.mnuLogOut.Text = "登出"
+        '
+        'tsmAccount
+        '
+        Me.tsmAccount.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditPwd, Me.mnuEditPublic})
+        Me.tsmAccount.Enabled = False
+        Me.tsmAccount.Name = "tsmAccount"
+        Me.tsmAccount.Size = New System.Drawing.Size(85, 24)
+        Me.tsmAccount.Text = "帳號資訊"
+        '
+        'mnuEditPwd
+        '
+        Me.mnuEditPwd.Name = "mnuEditPwd"
+        Me.mnuEditPwd.Size = New System.Drawing.Size(174, 24)
+        Me.mnuEditPwd.Text = "修改密碼"
+        '
+        'mnuEditPublic
+        '
+        Me.mnuEditPublic.Name = "mnuEditPublic"
+        Me.mnuEditPublic.Size = New System.Drawing.Size(174, 24)
+        Me.mnuEditPublic.Text = "修改公開資訊"
+        '
+        'tsmCourse
+        '
+        Me.tsmCourse.Enabled = False
+        Me.tsmCourse.Name = "tsmCourse"
+        Me.tsmCourse.Size = New System.Drawing.Size(85, 24)
+        Me.tsmCourse.Text = "課程資訊"
+        '
+        'tsmLog
+        '
+        Me.tsmLog.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewLog, Me.mnuViewHistory, Me.ToolStripMenuItem1, Me.mnuUploadLog})
+        Me.tsmLog.Name = "tsmLog"
+        Me.tsmLog.Size = New System.Drawing.Size(53, 24)
+        Me.tsmLog.Text = "紀錄"
+        '
+        'mnuViewLog
+        '
+        Me.mnuViewLog.Name = "mnuViewLog"
+        Me.mnuViewLog.Size = New System.Drawing.Size(206, 24)
+        Me.mnuViewLog.Text = "檢視紀錄"
+        '
+        'mnuViewHistory
+        '
+        Me.mnuViewHistory.Name = "mnuViewHistory"
+        Me.mnuViewHistory.Size = New System.Drawing.Size(206, 24)
+        Me.mnuViewHistory.Text = "查閱歷史紀錄檔"
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(203, 6)
+        '
+        'mnuUploadLog
+        '
+        Me.mnuUploadLog.Enabled = False
+        Me.mnuUploadLog.Name = "mnuUploadLog"
+        Me.mnuUploadLog.Size = New System.Drawing.Size(206, 24)
+        Me.mnuUploadLog.Text = "上傳記錄提供偵錯"
+        '
+        'tsmIp
+        '
+        Me.tsmIp.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.tsmIp.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.tsmIp.ForeColor = System.Drawing.Color.Blue
+        Me.tsmIp.Name = "tsmIp"
+        Me.tsmIp.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.tsmIp.Size = New System.Drawing.Size(112, 24)
+        Me.tsmIp.Text = "IP ADDRESS"
         '
         'stpMain
         '
@@ -109,154 +203,65 @@ Partial Class frmTeacher
         '
         'ToolStrip1
         '
+        Me.ToolStrip1.Enabled = False
         Me.ToolStrip1.Font = New System.Drawing.Font("微軟正黑體", 14.0!)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.ToolStripSeparator1, Me.ToolStripButton1, Me.ToolStripButton2, Me.ToolStripButton3, Me.ToolStripButton4, Me.ToolStripButton5})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslCourseName, Me.ToolStripSeparator1, Me.tslAttend, Me.tslScore, Me.tslHomeWork, Me.tslExam, Me.tslReport})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 28)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(784, 31)
         Me.ToolStrip1.TabIndex = 3
         Me.ToolStrip1.Text = "tlsMain"
         '
-        '連線ToolStripMenuItem
+        'tslCourseName
         '
-        Me.連線ToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.登入ToolStripMenuItem, Me.註冊ToolStripMenuItem, Me.登出ToolStripMenuItem})
-        Me.連線ToolStripMenuItem.Name = "連線ToolStripMenuItem"
-        Me.連線ToolStripMenuItem.Size = New System.Drawing.Size(53, 24)
-        Me.連線ToolStripMenuItem.Text = "連線"
-        '
-        '登入ToolStripMenuItem
-        '
-        Me.登入ToolStripMenuItem.Name = "登入ToolStripMenuItem"
-        Me.登入ToolStripMenuItem.Size = New System.Drawing.Size(152, 24)
-        Me.登入ToolStripMenuItem.Text = "登入"
-        '
-        '註冊ToolStripMenuItem
-        '
-        Me.註冊ToolStripMenuItem.Name = "註冊ToolStripMenuItem"
-        Me.註冊ToolStripMenuItem.Size = New System.Drawing.Size(152, 24)
-        Me.註冊ToolStripMenuItem.Text = "註冊"
-        '
-        '登出ToolStripMenuItem
-        '
-        Me.登出ToolStripMenuItem.Name = "登出ToolStripMenuItem"
-        Me.登出ToolStripMenuItem.Size = New System.Drawing.Size(152, 24)
-        Me.登出ToolStripMenuItem.Text = "登出"
-        '
-        '帳號資訊ToolStripMenuItem
-        '
-        Me.帳號資訊ToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.修改密碼ToolStripMenuItem, Me.修改公開資訊ToolStripMenuItem})
-        Me.帳號資訊ToolStripMenuItem.Name = "帳號資訊ToolStripMenuItem"
-        Me.帳號資訊ToolStripMenuItem.Size = New System.Drawing.Size(85, 24)
-        Me.帳號資訊ToolStripMenuItem.Text = "帳號資訊"
-        '
-        '修改密碼ToolStripMenuItem
-        '
-        Me.修改密碼ToolStripMenuItem.Name = "修改密碼ToolStripMenuItem"
-        Me.修改密碼ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
-        Me.修改密碼ToolStripMenuItem.Text = "修改密碼"
-        '
-        '修改公開資訊ToolStripMenuItem
-        '
-        Me.修改公開資訊ToolStripMenuItem.Name = "修改公開資訊ToolStripMenuItem"
-        Me.修改公開資訊ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
-        Me.修改公開資訊ToolStripMenuItem.Text = "修改公開資訊"
-        '
-        '紀錄ToolStripMenuItem
-        '
-        Me.紀錄ToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.檢視紀錄ToolStripMenuItem, Me.查閱歷史紀錄檔ToolStripMenuItem, Me.ToolStripMenuItem1, Me.上傳記錄提供偵錯ToolStripMenuItem})
-        Me.紀錄ToolStripMenuItem.Name = "紀錄ToolStripMenuItem"
-        Me.紀錄ToolStripMenuItem.Size = New System.Drawing.Size(53, 24)
-        Me.紀錄ToolStripMenuItem.Text = "紀錄"
-        '
-        '檢視紀錄ToolStripMenuItem
-        '
-        Me.檢視紀錄ToolStripMenuItem.Name = "檢視紀錄ToolStripMenuItem"
-        Me.檢視紀錄ToolStripMenuItem.Size = New System.Drawing.Size(206, 24)
-        Me.檢視紀錄ToolStripMenuItem.Text = "檢視紀錄"
-        '
-        '查閱歷史紀錄檔ToolStripMenuItem
-        '
-        Me.查閱歷史紀錄檔ToolStripMenuItem.Name = "查閱歷史紀錄檔ToolStripMenuItem"
-        Me.查閱歷史紀錄檔ToolStripMenuItem.Size = New System.Drawing.Size(206, 24)
-        Me.查閱歷史紀錄檔ToolStripMenuItem.Text = "查閱歷史紀錄檔"
-        '
-        'ToolStripMenuItem1
-        '
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(203, 6)
-        '
-        '上傳記錄提供偵錯ToolStripMenuItem
-        '
-        Me.上傳記錄提供偵錯ToolStripMenuItem.Name = "上傳記錄提供偵錯ToolStripMenuItem"
-        Me.上傳記錄提供偵錯ToolStripMenuItem.Size = New System.Drawing.Size(206, 24)
-        Me.上傳記錄提供偵錯ToolStripMenuItem.Text = "上傳記錄提供偵錯"
-        '
-        'tsmIp
-        '
-        Me.tsmIp.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.tsmIp.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.tsmIp.ForeColor = System.Drawing.Color.Blue
-        Me.tsmIp.Name = "tsmIp"
-        Me.tsmIp.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.tsmIp.Size = New System.Drawing.Size(112, 24)
-        Me.tsmIp.Text = "IP ADDRESS"
-        '
-        'ToolStripMenuItem2
-        '
-        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(85, 24)
-        Me.ToolStripMenuItem2.Text = "課程資訊"
-        '
-        'ToolStripLabel1
-        '
-        Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        Me.ToolStripLabel1.Size = New System.Drawing.Size(86, 28)
-        Me.ToolStripLabel1.Text = "課程名稱"
+        Me.tslCourseName.Name = "tslCourseName"
+        Me.tslCourseName.Size = New System.Drawing.Size(86, 28)
+        Me.tslCourseName.Text = "課程名稱"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 31)
         '
-        'ToolStripButton1
+        'tslAttend
         '
-        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
-        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(68, 28)
-        Me.ToolStripButton1.Text = "點名"
+        Me.tslAttend.Image = CType(resources.GetObject("tslAttend.Image"), System.Drawing.Image)
+        Me.tslAttend.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tslAttend.Name = "tslAttend"
+        Me.tslAttend.Size = New System.Drawing.Size(68, 28)
+        Me.tslAttend.Text = "點名"
         '
-        'ToolStripButton2
+        'tslScore
         '
-        Me.ToolStripButton2.Image = CType(resources.GetObject("ToolStripButton2.Image"), System.Drawing.Image)
-        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(68, 28)
-        Me.ToolStripButton2.Text = "評分"
+        Me.tslScore.Image = CType(resources.GetObject("tslScore.Image"), System.Drawing.Image)
+        Me.tslScore.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tslScore.Name = "tslScore"
+        Me.tslScore.Size = New System.Drawing.Size(68, 28)
+        Me.tslScore.Text = "評分"
         '
-        'ToolStripButton3
+        'tslHomeWork
         '
-        Me.ToolStripButton3.Image = CType(resources.GetObject("ToolStripButton3.Image"), System.Drawing.Image)
-        Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton3.Name = "ToolStripButton3"
-        Me.ToolStripButton3.Size = New System.Drawing.Size(106, 28)
-        Me.ToolStripButton3.Text = "建立作業"
+        Me.tslHomeWork.Image = CType(resources.GetObject("tslHomeWork.Image"), System.Drawing.Image)
+        Me.tslHomeWork.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tslHomeWork.Name = "tslHomeWork"
+        Me.tslHomeWork.Size = New System.Drawing.Size(106, 28)
+        Me.tslHomeWork.Text = "建立作業"
         '
-        'ToolStripButton4
+        'tslExam
         '
-        Me.ToolStripButton4.Image = CType(resources.GetObject("ToolStripButton4.Image"), System.Drawing.Image)
-        Me.ToolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton4.Name = "ToolStripButton4"
-        Me.ToolStripButton4.Size = New System.Drawing.Size(106, 28)
-        Me.ToolStripButton4.Text = "建立考試"
+        Me.tslExam.Image = CType(resources.GetObject("tslExam.Image"), System.Drawing.Image)
+        Me.tslExam.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tslExam.Name = "tslExam"
+        Me.tslExam.Size = New System.Drawing.Size(106, 28)
+        Me.tslExam.Text = "建立考試"
         '
-        'ToolStripButton5
+        'tslReport
         '
-        Me.ToolStripButton5.Image = CType(resources.GetObject("ToolStripButton5.Image"), System.Drawing.Image)
-        Me.ToolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton5.Name = "ToolStripButton5"
-        Me.ToolStripButton5.Size = New System.Drawing.Size(106, 28)
-        Me.ToolStripButton5.Text = "統計報表"
+        Me.tslReport.Image = CType(resources.GetObject("tslReport.Image"), System.Drawing.Image)
+        Me.tslReport.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tslReport.Name = "tslReport"
+        Me.tslReport.Size = New System.Drawing.Size(106, 28)
+        Me.tslReport.Text = "統計報表"
         '
         'pnlMain
         '
@@ -277,7 +282,9 @@ Partial Class frmTeacher
         Me.Controls.Add(Me.stpMain)
         Me.Controls.Add(Me.mnuMain)
         Me.MainMenuStrip = Me.mnuMain
+        Me.MinimumSize = New System.Drawing.Size(800, 600)
         Me.Name = "frmTeacher"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "課程輔助系統-教師端"
         Me.mnuMain.ResumeLayout(False)
         Me.mnuMain.PerformLayout()
@@ -296,27 +303,27 @@ Partial Class frmTeacher
     Friend WithEvents tslUserName As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents tslSysTime As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
-    Friend WithEvents 連線ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents 登入ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents 註冊ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents 登出ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents 帳號資訊ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents 修改密碼ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents 修改公開資訊ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents 紀錄ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents 檢視紀錄ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents 查閱歷史紀錄檔ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsmConnection As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuLogin As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuSignUp As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuLogOut As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsmAccount As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuEditPwd As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuEditPublic As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsmLog As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuViewLog As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuViewHistory As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents 上傳記錄提供偵錯ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuUploadLog As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tsmIp As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
+    Friend WithEvents tsmCourse As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tslCourseName As System.Windows.Forms.ToolStripLabel
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripButton2 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripButton3 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripButton4 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripButton5 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tslAttend As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tslScore As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tslHomeWork As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tslExam As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tslReport As System.Windows.Forms.ToolStripButton
     Friend WithEvents pnlMain As System.Windows.Forms.Panel
 
 End Class

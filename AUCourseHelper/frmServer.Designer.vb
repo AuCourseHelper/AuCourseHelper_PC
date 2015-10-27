@@ -286,6 +286,7 @@ Partial Class frmServer
         Me.MainMenuStrip = Me.mnuMain
         Me.MinimumSize = New System.Drawing.Size(800, 500)
         Me.Name = "frmServer"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "課程輔助系統-伺服端"
         Me.stpMain.ResumeLayout(False)
         Me.stpMain.PerformLayout()

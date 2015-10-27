@@ -28,11 +28,22 @@ Public Class frmServer
         log("====執行系統====", LogType_SYSTEM)
         log("==伺服端", LogType_SYSTEM)
         log("==版本號:" & version, LogType_SYSTEM)
+        If GetRealIPaddress() <> GetIPaddress() Then
+            MsgBox("您可能位於路由器底下" & vbCrLf _
+                   & "請將路由器Port:5566" & vbCrLf _
+                   & "對應到目前IP:" & GetIPaddress() & vbCrLf _
+                   & "否則將造成教師與學生無法連線!!!" _
+                   , MsgBoxStyle.OkOnly, "實際對外IP位址與目前網卡IP位址不相同！")
+            tsmIp.Text = "區網IP: " & GetIPaddress() & " - 對外IP: " & GetRealIPaddress()
+        Else
+            tsmIp.Text = "IP: " & GetRealIPaddress()
+        End If
+        log("==" & tsmIp.Text, LogType_SYSTEM)
         tslSysTime.Text = Now
         lvTeacher.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
         lvStudent.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
-        tsmIp.Text = "IP: " & GetRealIPaddress()
-        log("==" & tsmIp.Text, LogType_SYSTEM)
+
+        openDb()
         'Me.MaximizeBox = False
         'Me.MinimizeBox = False
         'Me.TopMost = True
@@ -46,10 +57,7 @@ Public Class frmServer
         '    .RegWrite(strKey & "\ProxyEnable", 1, "REG_DWORD")
         '    .RegWrite(strKey & "\ProxyServer", "127.0.0.1:8889", "REG_SZ")
         'End With
-        openDb()
-        If GetRealIPaddress() <> GetIPaddress() Then
-            MsgBox("您可能位於路由器底下" & vbCrLf & "請將路由器Port:5566對應到目前IP:" & GetIPaddress(), MsgBoxStyle.OkOnly, "實際對外IP位址與目前網卡IP位址不相同！")
-        End If
+
         'auSysLogin("AM001871", "a0tim82326")
         'auSysGetAllGrade()
         'auSysGetTimetable("103", "2")
