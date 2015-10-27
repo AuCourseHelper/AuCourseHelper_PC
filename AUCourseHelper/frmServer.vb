@@ -54,7 +54,8 @@ Public Class frmServer
         'End With
         openDb()
         MsgBox(auSysLogin("AM001871", "a0tim82326"))
-        MsgBox(asSysGetAllGrade())
+        'auSysGetAllGrade()
+        auSysGetTimetable("103", "2")
     End Sub
 
     Delegate Sub _AddClient(ByVal client As Socket)
