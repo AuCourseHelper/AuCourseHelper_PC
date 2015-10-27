@@ -3,6 +3,7 @@ Imports System.Net.Sockets
 Imports System.Text
 
 Module ServerSocket
+    Public objFrmServer As frmServer
     Public isServerOn As Boolean = False
     Public clients As New List(Of Socket)
     Private serverSocket As Socket
@@ -77,20 +78,20 @@ Module ServerSocket
                     exeCmd(String.Format("UPDATE Student SET LastLogin='{0}',LastIp='{1}' WHERE Id='{2}'", loginTime, clientIp, returns(0)))
                 End If
 
-                ' 回傳"welcome;IP;ID;姓名"
-                Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("welcome;" & clientIp & ";" & returns(0) & ";" & returns(1))
+                ' 回傳(ID;姓名)
+                Dim sendBytes As Byte() = Encoding.UTF8.GetBytes(returns(0) & ";" & returns(1))
                 clientSocket.Send(sendBytes)
 
                 ' 加入資料到視窗畫面，開始監聽
                 clients.Add(clientSocket)
-                frmServer.AddClient(clientSocket, clientUserType, returns(1), loginTime)
+                objFrmServer.AddClient(clientSocket, clientUserType, returns(1), loginTime)
                 clientSocket.BeginReceive(byteData, 0, byteData.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), clientSocket)
                 log(clientIp & ": " & returns(1) & "登入成功", LogType_NORMAL)
 
             Else ' 登入失敗
                 log(clientIp & ": " & returns(1) & "登入失敗", LogType_NORMAL)
                 ' 回傳"loginFail"
-                Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("loginFail")
+                Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("loginFail;")
                 clientSocket.Send(sendBytes)
                 ' 關閉連線，結束此socket所有動作
                 clientSocket.Close()

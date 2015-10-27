@@ -25,6 +25,7 @@ Public Class frmServer
     End Sub
 
     Private Sub frmServer_Load(sender As Object, e As EventArgs) Handles Me.Load
+        objFrmServer = Me
         log("====執行系統====", LogType_SYSTEM)
         log("==伺服端", LogType_SYSTEM)
         log("==版本號:" & version, LogType_SYSTEM)
@@ -65,7 +66,7 @@ Public Class frmServer
         'auSysGetTimetable("103", "2")
     End Sub
 
-    Private Delegate Sub _AddClient(ByVal client As Socket, ByVal userType As String, ByVal userName As String, ByVal time As String)
+    Delegate Sub _AddClient(ByVal client As Socket, ByVal userType As String, ByVal userName As String, ByVal time As String)
     Public Sub AddClient(ByVal client As Socket, ByVal userType As String, ByVal userName As String, ByVal time As String)
         If InvokeRequired Then
             Invoke(New _AddClient(AddressOf AddClient), client, userType, userName, time)
