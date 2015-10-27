@@ -51,19 +51,20 @@ Module ServerSocket
     End Sub
 
     Private Sub OnAccept(ByVal ar As IAsyncResult)
+        Dim dataLength = 0
         Try
             clientSocket = serverSocket.EndAccept(ar)
             serverSocket.BeginAccept(New AsyncCallback(AddressOf OnAccept), Nothing)
-            clientSocket.Receive(byteData)
+            dataLength = clientSocket.Receive(byteData)
 
-            ' 客戶端回傳: IP;帳號;密碼;使用者型態
-            Dim message = Encoding.UTF8.GetString(byteData, 0, byteData.Length)
+            ' 客戶端回傳: 帳號;密碼;使用者型態
+            Dim message = Encoding.UTF8.GetString(byteData, 0, dataLength)
             Dim returns() = message.Split(";")
             Dim clientIp = clientSocket.RemoteEndPoint.ToString
-            Dim clientUserType = returns(3)
+            Dim clientUserType = returns(2)
 
             ' 登入驗證(帳號,密碼,型態)，回傳"ID;姓名"，回傳空字串為登入失敗
-            Dim loginStatus = login(returns(1), returns(2), returns(3))
+            Dim loginStatus = login(returns(0), returns(1), returns(2))
 
             If loginStatus <> "" Then ' 登入成功
                 returns = loginStatus.Split(";")

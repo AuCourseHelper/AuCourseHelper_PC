@@ -22,12 +22,15 @@ Partial Class frmTeacher
     '請不要使用程式碼編輯器進行修改。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmTeacher))
         Me.mnuMain = New System.Windows.Forms.MenuStrip()
         Me.tsmConnection = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogin = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuSignUp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogOut = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmAccount = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditPwd = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditPublic = New System.Windows.Forms.ToolStripMenuItem()
@@ -52,6 +55,7 @@ Partial Class frmTeacher
         Me.tslExam = New System.Windows.Forms.ToolStripButton()
         Me.tslReport = New System.Windows.Forms.ToolStripButton()
         Me.pnlMain = New System.Windows.Forms.Panel()
+        Me.tmrSysTime = New System.Windows.Forms.Timer(Me.components)
         Me.mnuMain.SuspendLayout()
         Me.stpMain.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
@@ -69,7 +73,7 @@ Partial Class frmTeacher
         '
         'tsmConnection
         '
-        Me.tsmConnection.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuLogin, Me.mnuSignUp, Me.mnuLogOut})
+        Me.tsmConnection.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuLogin, Me.mnuSignUp, Me.mnuLogOut, Me.ToolStripMenuItem2, Me.mnuExit})
         Me.tsmConnection.Name = "tsmConnection"
         Me.tsmConnection.Size = New System.Drawing.Size(53, 24)
         Me.tsmConnection.Text = "連線"
@@ -92,6 +96,17 @@ Partial Class frmTeacher
         Me.mnuLogOut.Name = "mnuLogOut"
         Me.mnuLogOut.Size = New System.Drawing.Size(152, 24)
         Me.mnuLogOut.Text = "登出"
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(149, 6)
+        '
+        'mnuExit
+        '
+        Me.mnuExit.Name = "mnuExit"
+        Me.mnuExit.Size = New System.Drawing.Size(152, 24)
+        Me.mnuExit.Text = "結束"
         '
         'tsmAccount
         '
@@ -272,6 +287,11 @@ Partial Class frmTeacher
         Me.pnlMain.Size = New System.Drawing.Size(784, 480)
         Me.pnlMain.TabIndex = 4
         '
+        'tmrSysTime
+        '
+        Me.tmrSysTime.Enabled = True
+        Me.tmrSysTime.Interval = 1000
+        '
         'frmTeacher
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -325,5 +345,8 @@ Partial Class frmTeacher
     Friend WithEvents tslExam As System.Windows.Forms.ToolStripButton
     Friend WithEvents tslReport As System.Windows.Forms.ToolStripButton
     Friend WithEvents pnlMain As System.Windows.Forms.Panel
+    Friend WithEvents tmrSysTime As System.Windows.Forms.Timer
+    Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents mnuExit As System.Windows.Forms.ToolStripMenuItem
 
 End Class

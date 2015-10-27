@@ -44,6 +44,8 @@ Public Class frmServer
         lvStudent.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
 
         openDb()
+        mnuStart.PerformClick()
+
         'Me.MaximizeBox = False
         'Me.MinimizeBox = False
         'Me.TopMost = True
@@ -63,7 +65,7 @@ Public Class frmServer
         'auSysGetTimetable("103", "2")
     End Sub
 
-    Delegate Sub _AddClient(ByVal client As Socket, ByVal userType As String, ByVal userName As String, ByVal time As String)
+    Private Delegate Sub _AddClient(ByVal client As Socket, ByVal userType As String, ByVal userName As String, ByVal time As String)
     Public Sub AddClient(ByVal client As Socket, ByVal userType As String, ByVal userName As String, ByVal time As String)
         If InvokeRequired Then
             Invoke(New _AddClient(AddressOf AddClient), client, userType, userName, time)
@@ -74,6 +76,7 @@ Public Class frmServer
         item.SubItems.Add(userName)
         item.SubItems.Add(time)
         item.Tag = client
+
         If userType = "T" Then
             lvTeacher.Items.Add(item)
         Else
