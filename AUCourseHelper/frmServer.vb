@@ -53,7 +53,8 @@ Public Class frmServer
         '    .RegWrite(strKey & "\ProxyServer", "127.0.0.1:8889", "REG_SZ")
         'End With
         openDb()
-
+        MsgBox(auSysLogin("AM001871", "a0tim82326"))
+        MsgBox(asSysGetAllGrade())
     End Sub
 
     Delegate Sub _AddClient(ByVal client As Socket)

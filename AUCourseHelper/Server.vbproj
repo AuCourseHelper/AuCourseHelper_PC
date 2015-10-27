@@ -93,6 +93,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SchoolSystemConnection.vb" />
     <Compile Include="ServerSocket.vb" />
     <Compile Include="LogFunc.vb" />
   </ItemGroup>
