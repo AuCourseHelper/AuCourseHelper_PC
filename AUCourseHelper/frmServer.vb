@@ -5,6 +5,7 @@ Imports System.Runtime.InteropServices
 Imports System.Management
 
 Public Class frmServer
+    Public version = "1.0.151027"
     Dim p As Process
 
     Private Sub frmServer_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -23,24 +24,17 @@ Public Class frmServer
         'p.Kill()
     End Sub
 
-    Private Sub frmServer_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
-        If e.KeyCode = Keys.RWin Then
-            e.SuppressKeyPress = False
-        End If
-        If e.Alt = True Then
-            If e.KeyCode = Keys.Tab Then
-                e.Handled = True
-            End If
-        End If
-    End Sub
-
     Private Sub frmServer_Load(sender As Object, e As EventArgs) Handles Me.Load
         log("====執行系統====", LogType_SYSTEM)
+        log("==伺服端", LogType_SYSTEM)
+        log("==版本號:" & version, LogType_SYSTEM)
         tslSysTime.Text = Now
         lvTeacher.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
         lvStudent.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
+        tsmIp.Text = "IP: " & GetRealIPaddress()
+        log("==" & tsmIp.Text, LogType_SYSTEM)
+        'Me.MaximizeBox = False
+        'Me.MinimizeBox = False
         'Me.TopMost = True
         'Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
         'Me.WindowState = FormWindowState.Maximized
@@ -53,22 +47,31 @@ Public Class frmServer
         '    .RegWrite(strKey & "\ProxyServer", "127.0.0.1:8889", "REG_SZ")
         'End With
         openDb()
-        MsgBox(auSysLogin("AM001871", "a0tim82326"))
+        If GetRealIPaddress() <> GetIPaddress() Then
+            MsgBox("您可能位於路由器底下" & vbCrLf & "請將路由器Port:5566對應到目前IP:" & GetIPaddress(), MsgBoxStyle.OkOnly, "實際對外IP位址與目前網卡IP位址不相同！")
+        End If
+        'auSysLogin("AM001871", "a0tim82326")
         'auSysGetAllGrade()
-        auSysGetTimetable("103", "2")
+        'auSysGetTimetable("103", "2")
     End Sub
 
-    Delegate Sub _AddClient(ByVal client As Socket)
-    Private Sub AddClient(ByVal client As Socket)
+    Delegate Sub _AddClient(ByVal client As Socket, ByVal userType As String, ByVal userName As String, ByVal time As String)
+    Public Sub AddClient(ByVal client As Socket, ByVal userType As String, ByVal userName As String, ByVal time As String)
         If InvokeRequired Then
-            Invoke(New _AddClient(AddressOf AddClient), client)
+            Invoke(New _AddClient(AddressOf AddClient), client, userType, userName, time)
             Exit Sub
         End If
+
         Dim item As New ListViewItem(client.LocalEndPoint.ToString)
-        item.SubItems.Add("王小明")
-        item.SubItems.Add("2015/10/25 17:52:00")
+        item.SubItems.Add(userName)
+        item.SubItems.Add(time)
         item.Tag = client
-        lvTeacher.Items.Add(item)
+        If userType = "T" Then
+            lvTeacher.Items.Add(item)
+        Else
+            lvStudent.Items.Add(item)
+        End If
+        tslOnlineCount.Text = "伺服器：開啟  人數：" & clients.Count & "人"
     End Sub
 
     Private Sub tmrSysTime_Tick(sender As Object, e As EventArgs) Handles tmrSysTime.Tick
@@ -89,10 +92,16 @@ Public Class frmServer
     End Sub
 
     Private Sub mnuStop_Click(sender As Object, e As EventArgs) Handles mnuStop.Click
-        If isServerOn Then
-
+        If clients.Count > 0 Then
+            Select Case MsgBox("目前仍有使用者連接中，是否確定關閉？", MsgBoxStyle.YesNo, "伺服器關閉確認")
+                Case MsgBoxResult.No
+                    Exit Sub
+            End Select
         End If
         stopServer()
+        tlpMain.Enabled = False
+        mnuStart.Enabled = True
+        mnuStop.Enabled = False
         tslOnlineCount.Text = "伺服器：關閉  人數：0人"
     End Sub
 
@@ -115,4 +124,16 @@ Public Class frmServer
         System.Diagnostics.Process.Start(filePath)
     End Sub
 
+    Private Sub mnuViewLog_Click(sender As Object, e As EventArgs) Handles mnuViewLog.Click
+        Dim frmLog As New Form
+        Dim log As New RichTextBox()
+        log.Text = logData
+        log.Enabled = False
+        log.ScrollBars = RichTextBoxScrollBars.Both
+        log.Dock = DockStyle.Fill
+        frmLog.Text = Me.Text & " | 程式執行紀錄"
+        frmLog.Size = New Size(400, 500)
+        frmLog.Controls.Add(log)
+        frmLog.ShowDialog()
+    End Sub
 End Class

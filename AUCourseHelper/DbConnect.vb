@@ -4,6 +4,7 @@ Imports System.Data.SqlClient
 Module DbConnect
     Private sqlConn As SqlConnection
     Private sqlConnString As String = "Data Source=192.192.122.202;Initial Catalog=AUCourse;Persist Security Info=True;User ID=NDML-202;Password=714b"
+    Dim sqlExeLock As New Object
 
     Public Function openDb() As Boolean
         log("連接系統資料庫...", LogType_NORMAL)
@@ -38,7 +39,9 @@ Module DbConnect
     Public Function exeCmd(ByVal sql As String) As Boolean
         Dim sqlCmd As New SqlCommand(sql, sqlConn)
         Try
-            sqlCmd.ExecuteNonQuery()
+            SyncLock sqlExeLock
+                sqlCmd.ExecuteNonQuery()
+            End SyncLock
         Catch ex As Exception
             log("資料庫命令執行失敗! " & ex.Message, LogType_ERROR)
             Return False
@@ -65,33 +68,4 @@ Module DbConnect
         Return userInfo
     End Function
 
-    Public Function exeTransation(ByVal sSqls() As String) As Boolean
-        Dim adoConnection As New SqlConnection
-        Dim adoCommand As SqlCommand = Nothing
-        Dim adoTransaction As SqlTransaction = Nothing
-        Dim nIndex As Integer = 0
-
-        Try
-            adoConnection.ConnectionString = sqlConnString
-            adoConnection.Open()
-            adoTransaction = adoConnection.BeginTransaction()
-            adoCommand = adoConnection.CreateCommand()
-            adoCommand.Transaction = adoTransaction
-
-            For Each sSql In sSqls
-                adoCommand.CommandText = sSql
-                adoCommand.ExecuteNonQuery()
-                nIndex += 1
-            Next
-
-            adoTransaction.Commit()
-            adoConnection.Close()
-        Catch ex As Exception
-            ' 回復所有變更，第 nIndex 筆語法出錯
-            adoTransaction.Rollback()
-            adoConnection.Close()
-        End Try
-
-        Return True
-    End Function
 End Module

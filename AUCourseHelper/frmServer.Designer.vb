@@ -37,6 +37,7 @@ Partial Class frmServer
         Me.tsmReport = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewLog = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewHistory = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmIp = New System.Windows.Forms.ToolStripMenuItem()
         Me.tmrSysTime = New System.Windows.Forms.Timer(Me.components)
         Me.tlpMain = New System.Windows.Forms.TableLayoutPanel()
         Me.lvTeacher = New System.Windows.Forms.ListView()
@@ -97,7 +98,7 @@ Partial Class frmServer
         'mnuMain
         '
         Me.mnuMain.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmFile, Me.tsmServer, Me.tsmReport})
+        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmFile, Me.tsmServer, Me.tsmReport, Me.tsmIp})
         Me.mnuMain.Location = New System.Drawing.Point(0, 0)
         Me.mnuMain.Name = "mnuMain"
         Me.mnuMain.Size = New System.Drawing.Size(784, 28)
@@ -155,6 +156,16 @@ Partial Class frmServer
         Me.mnuViewHistory.Name = "mnuViewHistory"
         Me.mnuViewHistory.Size = New System.Drawing.Size(190, 24)
         Me.mnuViewHistory.Text = "查閱歷史紀錄檔"
+        '
+        'tsmIp
+        '
+        Me.tsmIp.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.tsmIp.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.tsmIp.ForeColor = System.Drawing.Color.Blue
+        Me.tsmIp.Name = "tsmIp"
+        Me.tsmIp.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.tsmIp.Size = New System.Drawing.Size(112, 24)
+        Me.tsmIp.Text = "IP ADDRESS"
         '
         'tmrSysTime
         '
@@ -311,5 +322,6 @@ Partial Class frmServer
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents tsmIp As System.Windows.Forms.ToolStripMenuItem
 
 End Class

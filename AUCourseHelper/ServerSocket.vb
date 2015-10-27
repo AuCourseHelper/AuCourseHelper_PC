@@ -4,6 +4,7 @@ Imports System.Text
 
 Module ServerSocket
     Public isServerOn As Boolean = False
+    Public clients As New List(Of Socket)
     Private serverSocket As Socket
     Private clientSocket As Socket
     Private byteData(2047) As Byte
@@ -17,6 +18,14 @@ Module ServerSocket
             End If
         Next
         Return "Get Ip Fail"
+    End Function
+
+    Public Function GetRealIPaddress() As String
+        Dim wc As New WebClient
+        Dim html = wc.DownloadString("http://whereismyip.com/")
+        Dim nStart = html.IndexOf("""verdana"">") + 10
+        Dim nStop = html.IndexOf("</font></b>")
+        Return html.Substring(nStart, nStop - nStart)
     End Function
 
     Public Function startServer() As Boolean
@@ -58,18 +67,23 @@ Module ServerSocket
 
             If loginStatus <> "" Then ' 登入成功
                 returns = loginStatus.Split(";")
+                Dim loginTime = Format(Now, "yyyyMMdd-HHmm")
 
                 ' 更新資料庫內登入紀錄
                 If clientUserType = "T" Then
-                    exeCmd(String.Format("UPDATE Teacher SET LastLogin='{0}',LastIp='{1}' WHERE Id='{2}'", Format(Now, "yyyyMMdd-HHmm"), clientIp, returns(0)))
+                    exeCmd(String.Format("UPDATE Teacher SET LastLogin='{0}',LastIp='{1}' WHERE Id='{2}'", loginTime, clientIp, returns(0)))
                 Else
-                    exeCmd(String.Format("UPDATE Student SET LastLogin='{0}',LastIp='{1}' WHERE Id='{2}'", Format(Now, "yyyyMMdd-HHmm"), clientIp, returns(0)))
+                    exeCmd(String.Format("UPDATE Student SET LastLogin='{0}',LastIp='{1}' WHERE Id='{2}'", loginTime, clientIp, returns(0)))
                 End If
 
                 ' 回傳"welcome;IP;ID;姓名"
                 Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("welcome;" & clientIp & ";" & returns(0) & ";" & returns(1))
                 clientSocket.Send(sendBytes)
-                'AddClient(clientSocket)
+
+                ' 加入資料到視窗畫面，開始監聽
+                clients.Add(clientSocket)
+                frmServer.AddClient(clientSocket, clientUserType, returns(1), loginTime)
+                clientSocket.BeginReceive(byteData, 0, byteData.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), clientSocket)
                 log(clientIp & ": " & returns(1) & "登入成功", LogType_NORMAL)
 
             Else ' 登入失敗
@@ -85,6 +99,15 @@ Module ServerSocket
                 log("伺服器接收連線建立異常! " & ex.Message, LogType_ERROR)
             End If
         End Try
+    End Sub
+
+    Private Sub OnRecieve(ByVal ar As IAsyncResult)
+        Dim client As Socket = ar.AsyncState
+        client.EndReceive(ar)
+
+
+
+        clientSocket.BeginReceive(byteData, 0, byteData.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), clientSocket)
     End Sub
 
 End Module
