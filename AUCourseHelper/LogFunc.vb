@@ -14,16 +14,16 @@ Module LogFunc
         SyncLock logLock
             Select Case logType
                 Case LogType_NORMAL
-                    frmServer.tslStatus.BackColor = System.Drawing.SystemColors.GrayText
-                    frmServer.tslStatus.Text = log
+                    objFrmServer.tslStatus.BackColor = System.Drawing.SystemColors.GrayText
+                    objFrmServer.tslStatus.Text = log
                     log = Format(Now, "yyyyMMdd-HHmmss:") & vbTab & "O  " & log & vbCrLf
                 Case LogType_ERROR
-                    frmServer.tslStatus.BackColor = Color.Red
-                    frmServer.tslStatus.Text = log
+                    objFrmServer.tslStatus.BackColor = Color.Red
+                    objFrmServer.tslStatus.Text = log
                     log = Format(Now, "yyyyMMdd-HHmmss:") & vbTab & "X  " & log & vbCrLf
                 Case LogType_SYSTEM
-                    frmServer.tslStatus.BackColor = System.Drawing.SystemColors.GrayText
-                    frmServer.tslStatus.Text = log
+                    objFrmServer.tslStatus.BackColor = System.Drawing.SystemColors.GrayText
+                    objFrmServer.tslStatus.Text = log
                     log = Format(Now, "yyyyMMdd-HHmmss:") & vbTab & log & vbCrLf
             End Select
             logData &= log

@@ -79,7 +79,7 @@ Partial Class frmLogin
         Me.btnLogin.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnLogin.Font = New System.Drawing.Font("新細明體", 11.0!)
-        Me.btnLogin.Location = New System.Drawing.Point(145, 132)
+        Me.btnLogin.Location = New System.Drawing.Point(180, 132)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(75, 23)
         Me.btnLogin.TabIndex = 4
@@ -90,7 +90,7 @@ Partial Class frmLogin
         '
         Me.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnCancel.Font = New System.Drawing.Font("新細明體", 11.0!)
-        Me.btnCancel.Location = New System.Drawing.Point(45, 132)
+        Me.btnCancel.Location = New System.Drawing.Point(24, 132)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnCancel.TabIndex = 5

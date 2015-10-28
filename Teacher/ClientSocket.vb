@@ -2,9 +2,16 @@
 Imports System.Net.Sockets
 Imports System.Text
 
-Module ClientSocket
-    Private clientSocket As Socket
+Module SocketProcess
+    Public objFrmTeacher As frmTeacher
+    Public serverIp As String = "192.192.122.203" '"127.0.0.1"
+    Public clientSocket As Socket
     Private byteData(2047) As Byte
+    Public isLogin As Boolean = False
+    Public myId As String
+    Public myName As String
+    Public myUid As String
+    Public myPwd As String
 
     Public Function GetIPaddress() As String
         Dim myHost As String = System.Net.Dns.GetHostName
@@ -25,13 +32,48 @@ Module ClientSocket
         Return html.Substring(nStart, nStop - nStart)
     End Function
 
+    Public Function connectStatusTest() As Boolean
+        Try
+            Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("PING;")
+            clientSocket.Send(sendBytes)
+            Dim dataLength = clientSocket.Receive(byteData)
+            If dataLength <= 0 Then
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        End Try
+        Return True
+    End Function
+
+    Private Sub OnRecieve(ByVal ar As IAsyncResult)
+        Dim clientSocket As Socket = ar.AsyncState
+        Try
+            clientSocket.EndReceive(ar)
+            ' 讀取對方要求
+            Dim returnFunc = Encoding.UTF8.GetString(byteData).Split(";")(0)
+
+            Select Case returnFunc
+                Case "PING" ' 測試連線狀態
+                    Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("PONG;")
+                    clientSocket.Send(sendBytes)
+                Case "BYE" ' 被server踢除
+                    objFrmTeacher.uiLogout()
+            End Select
+
+            clientSocket.BeginReceive(byteData, 0, byteData.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), clientSocket)
+        Catch ex As Exception
+            
+        End Try
+    End Sub
+
     Public Function connectAndLogin(ByVal uid As String, ByVal pwd As String) As Boolean
-        Dim serverIp As New IPEndPoint(Net.IPAddress.Parse("127.0.0.1"), 5566)
+        Dim ip As New IPEndPoint(Net.IPAddress.Parse(serverIp), 5566)
         clientSocket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
         Dim dataLength = 0
 
         Try
-            clientSocket.Connect(serverIp)
+            clientSocket.Connect(ip)
             Dim sendBytes As Byte() = Encoding.UTF8.GetBytes(uid & ";" & pwd & ";T;")
             clientSocket.Send(sendBytes)
 
@@ -42,11 +84,26 @@ Module ClientSocket
             If returns(0) = "loginFail" Then
                 Return False
             End If
+
+            isLogin = True
+            myId = returns(0)
+            myName = returns(1)
+            objFrmTeacher.tslUserName.Text = myName & " 你好!"
+            clientSocket.BeginReceive(byteData, 0, byteData.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), clientSocket)
         Catch ex As Exception
-            MsgBox(ex.Message)
             Return False
         End Try
         Return True
     End Function
+
+    Public Sub Logout()
+        Try
+            Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("LOGOUT;")
+            clientSocket.Send(sendBytes)
+            Dim dataLength = clientSocket.Receive(byteData)
+        Catch ex As Exception
+
+        End Try
+    End Sub
 
 End Module

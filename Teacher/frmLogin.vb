@@ -16,6 +16,12 @@
         txtUid.Focus()
     End Sub
 
+    Private Sub txtPwd_KeyDown(sender As Object, e As KeyEventArgs) Handles txtPwd.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnLogin.PerformClick()
+        End If
+    End Sub
+
     Private Sub txtPwd_TextChanged(sender As Object, e As EventArgs) Handles txtPwd.TextChanged
         If txtPwd.Text <> "" Then
             lblPwdHint.Visible = False
@@ -31,8 +37,19 @@
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         Me.Cursor = Cursors.WaitCursor
         If connectAndLogin(txtUid.Text, txtPwd.Text) Then
+            ' 帳號資訊
+            ' 課程資訊
+
+            objFrmTeacher.tmrServerPing.Enabled = True
+            objFrmTeacher.tsmAccount.Enabled = True
+            objFrmTeacher.tsmCourse.Enabled = True
+            objFrmTeacher.mnuLogin.Enabled = False
+            objFrmTeacher.mnuSignUp.Enabled = False
+            objFrmTeacher.mnuLogout.Enabled = True
             Me.Cursor = Cursors.Default
+            Me.Hide()
         Else
+            Me.Cursor = Cursors.Default
             MsgBox("登入失敗! 帳號或密碼錯誤")
         End If
     End Sub

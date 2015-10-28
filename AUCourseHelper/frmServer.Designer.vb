@@ -44,6 +44,8 @@ Partial Class frmServer
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.cmuRMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuKickClient = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.lvStudent = New System.Windows.Forms.ListView()
         Me.cohIp = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -53,6 +55,7 @@ Partial Class frmServer
         Me.stpMain.SuspendLayout()
         Me.mnuMain.SuspendLayout()
         Me.tlpMain.SuspendLayout()
+        Me.cmuRMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'stpMain
@@ -223,6 +226,18 @@ Partial Class frmServer
         Me.ColumnHeader3.Text = "教師登入時間"
         Me.ColumnHeader3.Width = 118
         '
+        'cmuRMenu
+        '
+        Me.cmuRMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuKickClient})
+        Me.cmuRMenu.Name = "cmLsvClient"
+        Me.cmuRMenu.Size = New System.Drawing.Size(125, 26)
+        '
+        'mnuKickClient
+        '
+        Me.mnuKickClient.Name = "mnuKickClient"
+        Me.mnuKickClient.Size = New System.Drawing.Size(124, 22)
+        Me.mnuKickClient.Text = "踢除連線"
+        '
         'Label2
         '
         Me.Label2.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
@@ -238,6 +253,7 @@ Partial Class frmServer
         '
         Me.lvStudent.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.lvStudent.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.cohIp, Me.cohName, Me.cohTime})
+        Me.lvStudent.ContextMenuStrip = Me.cmuRMenu
         Me.lvStudent.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lvStudent.FullRowSelect = True
         Me.lvStudent.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
@@ -293,6 +309,7 @@ Partial Class frmServer
         Me.mnuMain.ResumeLayout(False)
         Me.mnuMain.PerformLayout()
         Me.tlpMain.ResumeLayout(False)
+        Me.cmuRMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -324,5 +341,7 @@ Partial Class frmServer
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
     Friend WithEvents tsmIp As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents cmuRMenu As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents mnuKickClient As System.Windows.Forms.ToolStripMenuItem
 
 End Class

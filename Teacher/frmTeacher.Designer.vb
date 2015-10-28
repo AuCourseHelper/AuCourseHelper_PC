@@ -28,7 +28,7 @@ Partial Class frmTeacher
         Me.tsmConnection = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogin = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuSignUp = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuLogOut = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuLogout = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmAccount = New System.Windows.Forms.ToolStripMenuItem()
@@ -56,6 +56,7 @@ Partial Class frmTeacher
         Me.tslReport = New System.Windows.Forms.ToolStripButton()
         Me.pnlMain = New System.Windows.Forms.Panel()
         Me.tmrSysTime = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrServerPing = New System.Windows.Forms.Timer(Me.components)
         Me.mnuMain.SuspendLayout()
         Me.stpMain.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
@@ -73,7 +74,7 @@ Partial Class frmTeacher
         '
         'tsmConnection
         '
-        Me.tsmConnection.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuLogin, Me.mnuSignUp, Me.mnuLogOut, Me.ToolStripMenuItem2, Me.mnuExit})
+        Me.tsmConnection.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuLogin, Me.mnuSignUp, Me.mnuLogout, Me.ToolStripMenuItem2, Me.mnuExit})
         Me.tsmConnection.Name = "tsmConnection"
         Me.tsmConnection.Size = New System.Drawing.Size(53, 24)
         Me.tsmConnection.Text = "連線"
@@ -81,31 +82,31 @@ Partial Class frmTeacher
         'mnuLogin
         '
         Me.mnuLogin.Name = "mnuLogin"
-        Me.mnuLogin.Size = New System.Drawing.Size(152, 24)
+        Me.mnuLogin.Size = New System.Drawing.Size(110, 24)
         Me.mnuLogin.Text = "登入"
         '
         'mnuSignUp
         '
         Me.mnuSignUp.Name = "mnuSignUp"
-        Me.mnuSignUp.Size = New System.Drawing.Size(152, 24)
+        Me.mnuSignUp.Size = New System.Drawing.Size(110, 24)
         Me.mnuSignUp.Text = "註冊"
         '
-        'mnuLogOut
+        'mnuLogout
         '
-        Me.mnuLogOut.Enabled = False
-        Me.mnuLogOut.Name = "mnuLogOut"
-        Me.mnuLogOut.Size = New System.Drawing.Size(152, 24)
-        Me.mnuLogOut.Text = "登出"
+        Me.mnuLogout.Enabled = False
+        Me.mnuLogout.Name = "mnuLogout"
+        Me.mnuLogout.Size = New System.Drawing.Size(152, 24)
+        Me.mnuLogout.Text = "登出"
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(107, 6)
         '
         'mnuExit
         '
         Me.mnuExit.Name = "mnuExit"
-        Me.mnuExit.Size = New System.Drawing.Size(152, 24)
+        Me.mnuExit.Size = New System.Drawing.Size(110, 24)
         Me.mnuExit.Text = "結束"
         '
         'tsmAccount
@@ -292,6 +293,10 @@ Partial Class frmTeacher
         Me.tmrSysTime.Enabled = True
         Me.tmrSysTime.Interval = 1000
         '
+        'tmrServerPing
+        '
+        Me.tmrServerPing.Interval = 30000
+        '
         'frmTeacher
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -326,7 +331,7 @@ Partial Class frmTeacher
     Friend WithEvents tsmConnection As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuLogin As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuSignUp As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents mnuLogOut As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuLogout As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tsmAccount As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuEditPwd As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuEditPublic As System.Windows.Forms.ToolStripMenuItem
@@ -348,5 +353,6 @@ Partial Class frmTeacher
     Friend WithEvents tmrSysTime As System.Windows.Forms.Timer
     Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mnuExit As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tmrServerPing As System.Windows.Forms.Timer
 
 End Class

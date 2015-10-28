@@ -10,6 +10,7 @@
     End Sub
 
     Private Sub frmTeacher_Load(sender As Object, e As EventArgs) Handles Me.Load
+        objFrmTeacher = Me
         log("====執行系統====", LogType_SYSTEM)
         log("==教師端", LogType_SYSTEM)
         log("==版本號:" & version, LogType_SYSTEM)
@@ -64,5 +65,48 @@
 
     Private Sub mnuLogin_Click(sender As Object, e As EventArgs) Handles mnuLogin.Click
         frmLogin.ShowDialog()
+    End Sub
+
+    Private Sub tmrServerPing_Tick(sender As Object, e As EventArgs) Handles tmrServerPing.Tick
+        ' 每30秒檢查一次伺服器連線狀態
+        If Not connectStatusTest() Then
+            ' 斷線處理
+            uiLogout()
+        End If
+    End Sub
+
+    Delegate Sub _uiLogout()
+    Public Sub uiLogout()
+        If InvokeRequired Then
+            Invoke(New _uiLogout(AddressOf uiLogout))
+            Exit Sub
+        End If
+
+        MsgBox("與伺服器失去連線!" & vbCrLf & "請重新登入!!!", MsgBoxStyle.AbortRetryIgnore, "斷線")
+        tmrServerPing.Enabled = False
+        tsmAccount.Enabled = False
+        tsmCourse.Enabled = False
+        mnuLogin.Enabled = True
+        mnuSignUp.Enabled = True
+        mnuLogout.Enabled = False
+        tslUserName.Text = "尚未登入"
+    End Sub
+
+    Private Sub mnuLogout_Click(sender As Object, e As EventArgs) Handles mnuLogout.Click
+        Logout()
+        isLogin = False
+        myId = ""
+        myName = ""
+        myUid = ""
+        myPwd = ""
+        clientSocket.Close()
+        clientSocket = Nothing
+        tmrServerPing.Enabled = False
+        tsmAccount.Enabled = False
+        tsmCourse.Enabled = False
+        mnuLogin.Enabled = True
+        mnuSignUp.Enabled = True
+        mnuLogout.Enabled = False
+        tslUserName.Text = "尚未登入"
     End Sub
 End Class

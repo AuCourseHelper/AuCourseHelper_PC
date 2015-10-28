@@ -53,13 +53,13 @@ Module DbConnect
         Dim userInfo As String = ""
         Select Case userType
             Case "T" ' 老師
-                Dim sql = String.Format("SELECT Id,Name FROM Teacher WHERE Num='{0}' AND Pwd='{1}'", uid, pwd)
+                Dim sql = String.Format("SELECT Id,RTRIM(Name) FROM Teacher WHERE Num='{0}' AND Pwd='{1}'", uid, pwd)
                 Dim result = selectCmd(sql)
                 If result.Rows.Count > 0 Then
                     userInfo = result.Rows(0).Item(0) & ";" & result.Rows(0).Item(1)
                 End If
             Case "S" ' 學生
-                Dim sql = String.Format("SELECT Id,Name FROM Student WHERE Num='{0}' AND Pwd='{1}'", uid, pwd)
+                Dim sql = String.Format("SELECT Id,RTRIM(Name) FROM Student WHERE Num='{0}' AND Pwd='{1}'", uid, pwd)
                 Dim result = selectCmd(sql)
                 If result.Rows.Count > 0 Then
                     userInfo = result.Rows(0).Item(0) & ";" & result.Rows(0).Item(1)

@@ -3,10 +3,11 @@ Imports Microsoft.Win32
 Imports System.Threading
 Imports System.Runtime.InteropServices
 Imports System.Management
+Imports System.Text
 
 Public Class frmServer
     Public version = "1.0.151027"
-    Dim p As Process
+    'Dim p As Process
 
     Private Sub frmServer_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         If MessageBox.Show("是否確定要關閉本系統", "關閉程式", MessageBoxButtons.YesNo) = DialogResult.No Then
@@ -66,26 +67,6 @@ Public Class frmServer
         'auSysGetTimetable("103", "2")
     End Sub
 
-    Delegate Sub _AddClient(ByVal client As Socket, ByVal userType As String, ByVal userName As String, ByVal time As String)
-    Public Sub AddClient(ByVal client As Socket, ByVal userType As String, ByVal userName As String, ByVal time As String)
-        If InvokeRequired Then
-            Invoke(New _AddClient(AddressOf AddClient), client, userType, userName, time)
-            Exit Sub
-        End If
-
-        Dim item As New ListViewItem(client.LocalEndPoint.ToString)
-        item.SubItems.Add(userName)
-        item.SubItems.Add(time)
-        item.Tag = client
-
-        If userType = "T" Then
-            lvTeacher.Items.Add(item)
-        Else
-            lvStudent.Items.Add(item)
-        End If
-        tslOnlineCount.Text = "伺服器：開啟  人數：" & clients.Count & "人"
-    End Sub
-
     Private Sub tmrSysTime_Tick(sender As Object, e As EventArgs) Handles tmrSysTime.Tick
         tslSysTime.Text = Now
     End Sub
@@ -134,18 +115,110 @@ Public Class frmServer
         Dim historyLog As ToolStripDropDownItem = sender
         Dim filePath As String = historyLog.Tag
         System.Diagnostics.Process.Start(filePath)
+        log("檢視歷史紀錄: " & historyLog.Text, LogType_SYSTEM)
     End Sub
 
     Private Sub mnuViewLog_Click(sender As Object, e As EventArgs) Handles mnuViewLog.Click
         Dim frmLog As New Form
-        Dim log As New RichTextBox()
-        log.Text = logData
-        log.Enabled = False
-        log.ScrollBars = RichTextBoxScrollBars.Both
-        log.Dock = DockStyle.Fill
+        Dim txtLog As New RichTextBox()
+        txtLog.Text = logData
+        txtLog.Enabled = False
+        txtLog.ScrollBars = RichTextBoxScrollBars.Both
+        txtLog.Dock = DockStyle.Fill
         frmLog.Text = Me.Text & " | 程式執行紀錄"
         frmLog.Size = New Size(400, 500)
-        frmLog.Controls.Add(log)
+        frmLog.Controls.Add(txtLog)
         frmLog.ShowDialog()
+        log("檢視執行紀錄", LogType_SYSTEM)
+    End Sub
+
+    Delegate Sub _AddClient(ByVal client As Client)
+    Public Sub AddClient(ByVal client As Client)
+        If InvokeRequired Then
+            Invoke(New _AddClient(AddressOf AddClient), client)
+            Exit Sub
+        End If
+
+        Dim item As New ListViewItem(client._ip)
+        item.SubItems.Add(client._name)
+        item.SubItems.Add(client._loginTime)
+        item.Tag = client
+
+        If client._type = "T" Then
+            lvTeacher.Items.Add(item)
+            lvTeacher.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
+        Else
+            lvStudent.Items.Add(item)
+            lvStudent.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
+        End If
+
+        tslOnlineCount.Text = "伺服器：開啟  人數：" & clients.Count & "人"
+    End Sub
+
+    Delegate Sub _RemoveAllClient()
+    Public Sub RemoveAllClient()
+        If InvokeRequired Then
+            Invoke(New _RemoveAllClient(AddressOf RemoveAllClient))
+            Exit Sub
+        End If
+
+        lvTeacher.Clear()
+        lvStudent.Clear()
+        tslOnlineCount.Text = "伺服器：開啟  人數：0人"
+    End Sub
+
+    Delegate Sub _RemoveClient(ByVal client As Client)
+    Public Sub RemoveClient(ByVal client As Client)
+        If InvokeRequired Then
+            Invoke(New _RemoveClient(AddressOf RemoveClient), client)
+            Exit Sub
+        End If
+
+        For Each item In lvTeacher.Items
+            If item.tag.Equals(client) Then
+                lvTeacher.Items.Remove(item)
+            End If
+        Next
+        For Each item In lvStudent.Items
+            If item.tag.Equals(client) Then
+                lvStudent.Items.Remove(item)
+            End If
+        Next
+        clients.Remove(client)
+        tslOnlineCount.Text = "伺服器：開啟  人數：" & clients.Count & "人"
+    End Sub
+
+    Private Sub mnuKickClient_Click(sender As Object, e As EventArgs) Handles mnuKickClient.Click
+        If lvTeacher.Focused Then
+            log("踢除教師: " & lvTeacher.SelectedItems(0).Text, LogType_SYSTEM)
+            Dim client As Client = lvTeacher.SelectedItems(0).Tag
+            Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("BYE;")
+            client._socket.Send(sendBytes)
+            RemoveClient(lvTeacher.SelectedItems(0).Tag)
+        Else
+            log("踢除學生: " & lvStudent.SelectedItems(0).Text, LogType_SYSTEM)
+            Dim client As Client = lvStudent.SelectedItems(0).Tag
+            Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("BYE;")
+            client._socket.Send(sendBytes)
+            RemoveClient(lvStudent.SelectedItems(0).Tag)
+        End If
+    End Sub
+
+    Private Sub lvTeacher_MouseClick(sender As Object, e As MouseEventArgs) Handles lvTeacher.MouseClick
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            If lvTeacher.GetItemAt(e.X, e.Y) IsNot Nothing Then
+                lvTeacher.GetItemAt(e.X, e.Y).Selected = True
+                cmuRMenu.Show(lvTeacher, New Point(e.X, e.Y))
+            End If
+        End If
+    End Sub
+
+    Private Sub lvStudent_MouseClick(sender As Object, e As MouseEventArgs) Handles lvStudent.MouseClick
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            If lvStudent.GetItemAt(e.X, e.Y) IsNot Nothing Then
+                lvStudent.GetItemAt(e.X, e.Y).Selected = True
+                cmuRMenu.Show(lvStudent, New Point(e.X, e.Y))
+            End If
+        End If
     End Sub
 End Class

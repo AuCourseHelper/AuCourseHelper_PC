@@ -5,9 +5,8 @@ Imports System.Text
 Module ServerSocket
     Public objFrmServer As frmServer
     Public isServerOn As Boolean = False
-    Public clients As New List(Of Socket)
+    Public clients As New List(Of Client)
     Private serverSocket As Socket
-    Private clientSocket As Socket
     Private byteData(2047) As Byte
 
     Public Function GetIPaddress() As String
@@ -48,20 +47,25 @@ Module ServerSocket
     Public Sub stopServer()
         isServerOn = False
         serverSocket.Close()
+        serverSocket = Nothing
+        clients.Clear()
+        objFrmServer.RemoveAllClient()
         log("伺服器已關閉", LogType_NORMAL)
     End Sub
 
     Private Sub OnAccept(ByVal ar As IAsyncResult)
         Dim dataLength = 0
+        Dim clientSocket As Socket
+
         Try
             clientSocket = serverSocket.EndAccept(ar)
-            serverSocket.BeginAccept(New AsyncCallback(AddressOf OnAccept), Nothing)
             dataLength = clientSocket.Receive(byteData)
 
             ' 客戶端回傳: 帳號;密碼;使用者型態
             Dim message = Encoding.UTF8.GetString(byteData, 0, dataLength)
             Dim returns() = message.Split(";")
-            Dim clientIp = clientSocket.RemoteEndPoint.ToString
+            Dim clientIp = clientSocket.RemoteEndPoint.ToString.Split(":")(0)
+            Dim clientUid = returns(0)
             Dim clientUserType = returns(2)
 
             ' 登入驗證(帳號,密碼,型態)，回傳"ID;姓名"，回傳空字串為登入失敗
@@ -69,7 +73,7 @@ Module ServerSocket
 
             If loginStatus <> "" Then ' 登入成功
                 returns = loginStatus.Split(";")
-                Dim loginTime = Format(Now, "yyyyMMdd-HHmm")
+                Dim loginTime = Format(Now, "yyyyMMdd-HHmmss")
 
                 ' 更新資料庫內登入紀錄
                 If clientUserType = "T" Then
@@ -83,13 +87,14 @@ Module ServerSocket
                 clientSocket.Send(sendBytes)
 
                 ' 加入資料到視窗畫面，開始監聽
-                clients.Add(clientSocket)
-                objFrmServer.AddClient(clientSocket, clientUserType, returns(1), loginTime)
+                Dim client As New Client(clientSocket, clientIp, returns(0), returns(1), clientUserType, loginTime)
+                clients.Add(client)
+                objFrmServer.AddClient(client)
                 clientSocket.BeginReceive(byteData, 0, byteData.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), clientSocket)
                 log(clientIp & ": " & returns(1) & "登入成功", LogType_NORMAL)
 
             Else ' 登入失敗
-                log(clientIp & ": " & returns(1) & "登入失敗", LogType_NORMAL)
+                log(clientIp & ": 帳號" & clientUid & "登入失敗", LogType_NORMAL)
                 ' 回傳"loginFail"
                 Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("loginFail;")
                 clientSocket.Send(sendBytes)
@@ -99,17 +104,77 @@ Module ServerSocket
         Catch ex As Exception
             If isServerOn Then
                 log("伺服器接收連線建立異常! " & ex.Message, LogType_ERROR)
+            Else
+                serverSocket = Nothing
+            End If
+        End Try
+
+        serverSocket.BeginAccept(New AsyncCallback(AddressOf OnAccept), Nothing)
+    End Sub
+
+    Private Sub OnRecieve(ByVal ar As IAsyncResult)
+        Dim clientSocket As Socket = ar.AsyncState
+        Try
+            clientSocket.EndReceive(ar)
+            ' 讀取對方要求
+            Dim returnFunc = Encoding.UTF8.GetString(byteData).Split(";")(0)
+
+            Select Case returnFunc
+                Case "PING" ' 測試連線狀態
+                    Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("PONG;")
+                    clientSocket.Send(sendBytes)
+                Case "LOGOUT" ' 登出
+                    MsgBox("LOGOUT")
+                    Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("BYE;")
+                    clientSocket.Send(sendBytes)
+                    Dim client = getClientInfo(clientSocket)
+                    log(client._ip & ": " & client._name & "已登出", LogType_NORMAL)
+                    objFrmServer.RemoveClient(client)
+                    clientSocket.Close()
+                    clientSocket.Dispose()
+                    Exit Sub
+            End Select
+
+            clientSocket.BeginReceive(byteData, 0, byteData.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), clientSocket)
+        Catch ex As Exception
+            If isServerOn Then
+                Dim client = getClientInfo(clientSocket)
+                objFrmServer.RemoveClient(client)
+                clientSocket.Close()
+                clientSocket.Dispose()
+                log(client._ip & ": 接收資料異常! " & ex.Message, LogType_ERROR)
+                log(client._ip & ": 連線已斷開", LogType_NORMAL)
+            Else
+                clientSocket.Dispose()
             End If
         End Try
     End Sub
 
-    Private Sub OnRecieve(ByVal ar As IAsyncResult)
-        Dim client As Socket = ar.AsyncState
-        client.EndReceive(ar)
-
-
-
-        clientSocket.BeginReceive(byteData, 0, byteData.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), clientSocket)
-    End Sub
+    Public Function getClientInfo(ByVal clientSocket As Socket) As Client
+        For Each client In clients
+            If client._socket.Equals(clientSocket) Then
+                Return client
+            End If
+        Next
+        Return Nothing
+    End Function
 
 End Module
+
+Public Class Client
+    Property _socket As Socket
+    Property _ip As String
+    Property _id As String
+    Property _name As String
+    Property _type As String
+    Property _loginTime As String
+
+    Public Sub New(ByVal socket As Socket, ByVal ip As String, ByVal id As String, ByVal name As String, ByVal type As String, ByVal loginTime As String)
+        _socket = socket
+        _ip = ip
+        _id = id
+        _name = name
+        _type = type
+        _loginTime = loginTime
+    End Sub
+End Class
