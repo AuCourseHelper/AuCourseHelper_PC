@@ -136,7 +136,7 @@ Public Class frmServer
         Dim frmLog As New Form
         Dim txtLog As New RichTextBox()
         txtLog.Text = logData
-        txtLog.Enabled = False
+        txtLog.ReadOnly = True
         txtLog.ScrollBars = RichTextBoxScrollBars.Both
         txtLog.Dock = DockStyle.Fill
         frmLog.Text = Me.Text & " | 程式執行紀錄"

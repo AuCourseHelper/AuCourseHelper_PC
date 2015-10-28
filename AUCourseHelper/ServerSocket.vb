@@ -67,8 +67,9 @@ Module ServerSocket
 
         Try
             clientSocket = serverSocket.EndAccept(ar)
+            log(clientSocket.RemoteEndPoint.ToString & ": 連線", LogType_NORMAL)
             dataLength = clientSocket.Receive(byteData)
-
+            log(clientSocket.RemoteEndPoint.ToString & ": 接收登入字串", LogType_NORMAL)
             ' 客戶端回傳: 帳號;密碼;使用者型態
             Dim message = Encoding.UTF8.GetString(byteData, 0, dataLength)
             Dim returns() = message.Split(";")
@@ -78,6 +79,7 @@ Module ServerSocket
 
             ' 登入驗證(帳號,密碼,型態)，回傳"ID;姓名"，回傳空字串為登入失敗
             Dim loginStatus = login(returns(0), returns(1), returns(2))
+            log(clientSocket.RemoteEndPoint.ToString & ": 資料庫登入驗證", LogType_NORMAL)
 
             If loginStatus <> "" Then ' =====登入成功
                 returns = loginStatus.Split(";")
@@ -89,15 +91,18 @@ Module ServerSocket
                 Else
                     exeCmd(String.Format("UPDATE Student SET LastLogin='{0}',LastIp='{1}' WHERE Id='{2}'", loginTime, clientIp, returns(0)))
                 End If
+                log(clientSocket.RemoteEndPoint.ToString & ": 資料庫寫入登入", LogType_NORMAL)
 
                 ' 回傳(ID;姓名)
                 Dim sendBytes As Byte() = Encoding.UTF8.GetBytes(returns(0) & ";" & returns(1))
                 clientSocket.Send(sendBytes)
+                log(clientSocket.RemoteEndPoint.ToString & ": 回傳登入結果", LogType_NORMAL)
 
                 ' 加入資料到視窗畫面，開始監聽
                 Dim client As New Client(clientSocket, clientIp, returns(0), returns(1), clientUserType, loginTime)
                 clients.Add(client)
                 objFrmServer.AddClient(client)
+                log(clientSocket.RemoteEndPoint.ToString & ": 畫面listview更新", LogType_NORMAL)
                 clientSocket.BeginReceive(byteData, 0, byteData.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), clientSocket)
                 log(clientIp & ": " & returns(1) & "登入成功", LogType_NORMAL)
 
@@ -124,24 +129,32 @@ Module ServerSocket
         Dim clientSocket As Socket = ar.AsyncState
         Try
             clientSocket.EndReceive(ar)
+            log(clientSocket.RemoteEndPoint.ToString & ": 接字串", LogType_NORMAL)
             ' 讀取對方要求
             Dim returnFunc = Encoding.UTF8.GetString(byteData).Split(";")(0)
 
             Select Case returnFunc
                 Case "PING" ' 測試連線狀態
+                    log(clientSocket.RemoteEndPoint.ToString & ": 要求PING", LogType_NORMAL)
                     Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("PONG;")
                     clientSocket.Send(sendBytes)
+                    log(clientSocket.RemoteEndPoint.ToString & ": 回傳PONG", LogType_NORMAL)
                 Case "LOGOUT" ' 登出
+                    log(clientSocket.RemoteEndPoint.ToString & ": 要求LOGOUT", LogType_NORMAL)
                     Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("BYE;")
                     clientSocket.Send(sendBytes)
+                    log(clientSocket.RemoteEndPoint.ToString & ": 回傳BYE", LogType_NORMAL)
                     Dim client = getClientInfo(clientSocket)
                     log(client._ip & ": " & client._name & "已登出", LogType_NORMAL)
+                    log(clientSocket.RemoteEndPoint.ToString & ": 畫面移除該連線", LogType_NORMAL)
                     objFrmServer.RemoveClient(client)
                     clientSocket.Shutdown(SocketShutdown.Both)
                     clientSocket.Close()
+                    log(clientSocket.RemoteEndPoint.ToString & ": 結束登出處理", LogType_NORMAL)
                     Exit Sub
             End Select
 
+            log(clientSocket.RemoteEndPoint.ToString & ": 開啟再次聆聽", LogType_NORMAL)
             clientSocket.BeginReceive(byteData, 0, byteData.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), clientSocket)
         Catch ex As Exception
             If isServerOn Then

@@ -64,13 +64,16 @@
     End Sub
 
     Private Sub mnuLogin_Click(sender As Object, e As EventArgs) Handles mnuLogin.Click
+        log("開啟登入視窗", LogType_NORMAL)
         frmLogin.ShowDialog()
     End Sub
 
     Private Sub tmrServerPing_Tick(sender As Object, e As EventArgs) Handles tmrServerPing.Tick
         ' 每30秒檢查一次伺服器連線狀態
+        log("呼叫連線檢查", LogType_NORMAL)
         If Not connectStatusTest() Then
             ' 斷線處理
+            log("斷線處理", LogType_NORMAL)
             uiLogout()
         End If
     End Sub
@@ -82,6 +85,7 @@
             Exit Sub
         End If
 
+        log("斷線處理開始", LogType_NORMAL)
         tmrServerPing.Enabled = False
         MsgBox("與伺服器失去連線!" & vbCrLf & "請重新登入!!!", MsgBoxStyle.OkOnly, "斷線")
         isLogin = False
@@ -97,9 +101,11 @@
         mnuSignUp.Enabled = True
         mnuLogout.Enabled = False
         tslUserName.Text = "尚未登入"
+        log("斷線處理完畢", LogType_NORMAL)
     End Sub
 
     Private Sub mnuLogout_Click(sender As Object, e As EventArgs) Handles mnuLogout.Click
+        log("執行登出", LogType_NORMAL)
         logout()
     End Sub
 End Class

@@ -1,4 +1,6 @@
-﻿Public Class frmLogin
+﻿Imports System.Threading
+
+Public Class frmLogin
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Hide()
@@ -36,21 +38,26 @@
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         Me.Cursor = Cursors.WaitCursor
-        If connectAndLogin(txtUid.Text, txtPwd.Text) Then
-            ' 帳號資訊
-            ' 課程資訊
+        Select Case connectAndLogin(txtUid.Text, txtPwd.Text)
+            Case "SUCCESS"
+                ' 帳號資訊
+                ' 課程資訊
 
-            objFrmTeacher.tmrServerPing.Enabled = True
-            objFrmTeacher.tsmAccount.Enabled = True
-            objFrmTeacher.tsmCourse.Enabled = True
-            objFrmTeacher.mnuLogin.Enabled = False
-            objFrmTeacher.mnuSignUp.Enabled = False
-            objFrmTeacher.mnuLogout.Enabled = True
-            Me.Cursor = Cursors.Default
-            Me.Hide()
-        Else
-            Me.Cursor = Cursors.Default
-            MsgBox("登入失敗! 帳號或密碼錯誤")
-        End If
+                objFrmTeacher.tslUserName.Text = myName & " 你好!"
+                objFrmTeacher.tmrServerPing.Enabled = True
+                objFrmTeacher.tsmAccount.Enabled = True
+                objFrmTeacher.tsmCourse.Enabled = True
+                objFrmTeacher.mnuLogin.Enabled = False
+                objFrmTeacher.mnuSignUp.Enabled = False
+                objFrmTeacher.mnuLogout.Enabled = True
+                Me.Cursor = Cursors.Default
+                Me.Hide()
+            Case "FAIL"
+                Me.Cursor = Cursors.Default
+                MsgBox("登入失敗! 帳號或密碼錯誤")
+            Case "TIMEOUT"
+                Me.Cursor = Cursors.Default
+                MsgBox("無法連線!" & vbCrLf & "伺服器可能斷線或未開啟")
+        End Select
     End Sub
 End Class
