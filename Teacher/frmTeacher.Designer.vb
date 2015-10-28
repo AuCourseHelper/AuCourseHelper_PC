@@ -95,7 +95,7 @@ Partial Class frmTeacher
         '
         Me.mnuLogout.Enabled = False
         Me.mnuLogout.Name = "mnuLogout"
-        Me.mnuLogout.Size = New System.Drawing.Size(152, 24)
+        Me.mnuLogout.Size = New System.Drawing.Size(110, 24)
         Me.mnuLogout.Text = "登出"
         '
         'ToolStripMenuItem2
@@ -199,7 +199,7 @@ Partial Class frmTeacher
         Me.tslStatus.BackColor = System.Drawing.SystemColors.GrayText
         Me.tslStatus.ForeColor = System.Drawing.SystemColors.Info
         Me.tslStatus.Name = "tslStatus"
-        Me.tslStatus.Size = New System.Drawing.Size(584, 18)
+        Me.tslStatus.Size = New System.Drawing.Size(553, 18)
         Me.tslStatus.Spring = True
         Me.tslStatus.Text = "~狀態訊息~"
         Me.tslStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft

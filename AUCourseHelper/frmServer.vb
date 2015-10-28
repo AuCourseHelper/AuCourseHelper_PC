@@ -6,14 +6,24 @@ Imports System.Management
 Imports System.Text
 
 Public Class frmServer
-    Public version = "1.0.151027"
+    Public version = "1.0.151028"
     'Dim p As Process
 
     Private Sub frmServer_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        If MessageBox.Show("是否確定要關閉本系統", "關閉程式", MessageBoxButtons.YesNo) = DialogResult.No Then
-            e.Cancel = True
-            Exit Sub
+        If isServerOn Then
+            If clients.Count > 0 Then
+                If MsgBox("目前仍有使用者連接中，是否確定關閉？", MsgBoxStyle.YesNo, "伺服器關閉確認") = MsgBoxResult.No Then
+                    e.Cancel = True
+                End If
+            End If
+        Else
+            If MessageBox.Show("是否確定要關閉本系統", "關閉程式", MessageBoxButtons.YesNo) = DialogResult.No Then
+                e.Cancel = True
+                Exit Sub
+            End If
         End If
+
+        stopServer()
         closeDb()
         log("====關閉系統====" & vbCrLf, LogType_SYSTEM)
 
@@ -31,16 +41,13 @@ Public Class frmServer
         log("==伺服端", LogType_SYSTEM)
         log("==版本號:" & version, LogType_SYSTEM)
         If GetRealIPaddress() <> GetIPaddress() Then
-            MsgBox("您可能位於路由器底下" & vbCrLf _
-                   & "請將路由器Port:5566" & vbCrLf _
-                   & "對應到目前IP:" & GetIPaddress() & vbCrLf _
-                   & "否則將造成教師與學生無法連線!!!" _
-                   , MsgBoxStyle.OkOnly, "實際對外IP位址與目前網卡IP位址不相同！")
             tsmIp.Text = "區網IP: " & GetIPaddress() & " - 對外IP: " & GetRealIPaddress()
         Else
             tsmIp.Text = "IP: " & GetRealIPaddress()
         End If
         log("==" & tsmIp.Text, LogType_SYSTEM)
+
+        Me.Text &= "(" & version & ")"
         tslSysTime.Text = Now
         lvTeacher.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
         lvStudent.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
@@ -76,6 +83,14 @@ Public Class frmServer
     End Sub
 
     Private Sub mnuStart_Click(sender As Object, e As EventArgs) Handles mnuStart.Click
+        If GetRealIPaddress() <> GetIPaddress() Then
+            MsgBox("您可能位於路由器底下" & vbCrLf _
+                   & "請將路由器Port:5566" & vbCrLf _
+                   & "對應到目前IP:" & GetIPaddress() & vbCrLf _
+                   & "否則將造成教師與學生無法連線!!!" _
+                   , MsgBoxStyle.OkOnly, "對外IP與目前網卡IP不相同！")
+            tsmIp.Text = "區網IP: " & GetIPaddress() & " - 對外IP: " & GetRealIPaddress()
+        End If
         If startServer() Then
             tlpMain.Enabled = True
             mnuStart.Enabled = False
@@ -86,10 +101,9 @@ Public Class frmServer
 
     Private Sub mnuStop_Click(sender As Object, e As EventArgs) Handles mnuStop.Click
         If clients.Count > 0 Then
-            Select Case MsgBox("目前仍有使用者連接中，是否確定關閉？", MsgBoxStyle.YesNo, "伺服器關閉確認")
-                Case MsgBoxResult.No
-                    Exit Sub
-            End Select
+            If MsgBox("目前仍有使用者連接中，是否確定關閉？", MsgBoxStyle.YesNo, "伺服器關閉確認") = MsgBoxResult.No Then
+                Exit Sub
+            End If
         End If
         stopServer()
         tlpMain.Enabled = False
@@ -162,8 +176,8 @@ Public Class frmServer
             Exit Sub
         End If
 
-        lvTeacher.Clear()
-        lvStudent.Clear()
+        lvTeacher.Items.Clear()
+        lvStudent.Items.Clear()
         tslOnlineCount.Text = "伺服器：開啟  人數：0人"
     End Sub
 
@@ -190,14 +204,14 @@ Public Class frmServer
 
     Private Sub mnuKickClient_Click(sender As Object, e As EventArgs) Handles mnuKickClient.Click
         If lvTeacher.Focused Then
-            log("踢除教師: " & lvTeacher.SelectedItems(0).Text, LogType_SYSTEM)
             Dim client As Client = lvTeacher.SelectedItems(0).Tag
+            log("踢除教師: " & client._ip & "-" & client._name, LogType_SYSTEM)
             Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("BYE;")
             client._socket.Send(sendBytes)
             RemoveClient(lvTeacher.SelectedItems(0).Tag)
         Else
-            log("踢除學生: " & lvStudent.SelectedItems(0).Text, LogType_SYSTEM)
             Dim client As Client = lvStudent.SelectedItems(0).Tag
+            log("踢除學生: " & client._ip & "-" & client._name, LogType_SYSTEM)
             Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("BYE;")
             client._socket.Send(sendBytes)
             RemoveClient(lvStudent.SelectedItems(0).Tag)
@@ -220,5 +234,30 @@ Public Class frmServer
                 cmuRMenu.Show(lvStudent, New Point(e.X, e.Y))
             End If
         End If
+    End Sub
+
+    Delegate Sub _UpdateLog(ByVal logText As String, ByVal logType As Integer)
+    Public Sub UpdateLog(ByVal logText As String, ByVal logType As Integer)
+        If InvokeRequired Then
+            Invoke(New _UpdateLog(AddressOf UpdateLog), logText, logType)
+            Exit Sub
+        End If
+
+        Select Case logType
+            Case LogType_NORMAL
+                tslStatus.BackColor = System.Drawing.SystemColors.GrayText
+                tslStatus.Text = logText
+                logText = Format(Now, "yyyyMMdd-HHmmss:") & vbTab & "O  " & logText & vbCrLf
+            Case LogType_ERROR
+                tslStatus.BackColor = Color.Red
+                tslStatus.Text = logText
+                logText = Format(Now, "yyyyMMdd-HHmmss:") & vbTab & "X  " & logText & vbCrLf
+            Case LogType_SYSTEM
+                tslStatus.BackColor = System.Drawing.SystemColors.GrayText
+                tslStatus.Text = logText
+                logText = Format(Now, "yyyyMMdd-HHmmss:") & vbTab & logText & vbCrLf
+        End Select
+        logData &= logText
+        saveLog(logText)
     End Sub
 End Class

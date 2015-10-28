@@ -45,6 +45,14 @@ Module ServerSocket
     End Function
 
     Public Sub stopServer()
+        For Each client In clients
+            Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("BYE;")
+            client._socket.Send(sendBytes)
+            log("強制踢除: " & client._ip & "-" & client._name, LogType_SYSTEM)
+            objFrmServer.RemoveClient(client)
+            client._socket.Shutdown(SocketShutdown.Both)
+            client._socket.Close()
+        Next
         isServerOn = False
         serverSocket.Close()
         serverSocket = Nothing
@@ -71,7 +79,7 @@ Module ServerSocket
             ' 登入驗證(帳號,密碼,型態)，回傳"ID;姓名"，回傳空字串為登入失敗
             Dim loginStatus = login(returns(0), returns(1), returns(2))
 
-            If loginStatus <> "" Then ' 登入成功
+            If loginStatus <> "" Then ' =====登入成功
                 returns = loginStatus.Split(";")
                 Dim loginTime = Format(Now, "yyyyMMdd-HHmmss")
 
@@ -93,7 +101,7 @@ Module ServerSocket
                 clientSocket.BeginReceive(byteData, 0, byteData.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), clientSocket)
                 log(clientIp & ": " & returns(1) & "登入成功", LogType_NORMAL)
 
-            Else ' 登入失敗
+            Else ' =====登入失敗
                 log(clientIp & ": 帳號" & clientUid & "登入失敗", LogType_NORMAL)
                 ' 回傳"loginFail"
                 Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("loginFail;")
@@ -101,6 +109,8 @@ Module ServerSocket
                 ' 關閉連線，結束此socket所有動作
                 clientSocket.Close()
             End If
+
+            serverSocket.BeginAccept(New AsyncCallback(AddressOf OnAccept), Nothing)
         Catch ex As Exception
             If isServerOn Then
                 log("伺服器接收連線建立異常! " & ex.Message, LogType_ERROR)
@@ -108,8 +118,6 @@ Module ServerSocket
                 serverSocket = Nothing
             End If
         End Try
-
-        serverSocket.BeginAccept(New AsyncCallback(AddressOf OnAccept), Nothing)
     End Sub
 
     Private Sub OnRecieve(ByVal ar As IAsyncResult)
@@ -124,14 +132,13 @@ Module ServerSocket
                     Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("PONG;")
                     clientSocket.Send(sendBytes)
                 Case "LOGOUT" ' 登出
-                    MsgBox("LOGOUT")
                     Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("BYE;")
                     clientSocket.Send(sendBytes)
                     Dim client = getClientInfo(clientSocket)
                     log(client._ip & ": " & client._name & "已登出", LogType_NORMAL)
                     objFrmServer.RemoveClient(client)
+                    clientSocket.Shutdown(SocketShutdown.Both)
                     clientSocket.Close()
-                    clientSocket.Dispose()
                     Exit Sub
             End Select
 
@@ -139,15 +146,17 @@ Module ServerSocket
         Catch ex As Exception
             If isServerOn Then
                 Dim client = getClientInfo(clientSocket)
-                objFrmServer.RemoveClient(client)
+                If client IsNot Nothing Then
+                    log(client._ip & ": 接收資料異常! " & ex.Message, LogType_ERROR)
+                    log(client._ip & ": 連線已斷開", LogType_NORMAL)
+                    objFrmServer.RemoveClient(client)
+                End If
                 clientSocket.Close()
-                clientSocket.Dispose()
-                log(client._ip & ": 接收資料異常! " & ex.Message, LogType_ERROR)
-                log(client._ip & ": 連線已斷開", LogType_NORMAL)
             Else
-                clientSocket.Dispose()
+                clientSocket.Close()
             End If
         End Try
+
     End Sub
 
     Public Function getClientInfo(ByVal clientSocket As Socket) As Client

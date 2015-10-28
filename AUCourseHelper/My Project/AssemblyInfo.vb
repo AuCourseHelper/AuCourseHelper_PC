@@ -1,4 +1,6 @@
-﻿Imports System
+﻿Imports System.Resources
+
+Imports System
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 
@@ -8,14 +10,14 @@ Imports System.Runtime.InteropServices
 
 ' 檢閱組件屬性的值
 
-<Assembly: AssemblyTitle("AUCourseHelper")> 
+<Assembly: AssemblyTitle("課堂輔助系統-伺服端")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("AUCourseHelper")> 
-<Assembly: AssemblyCopyright("Copyright ©  2015")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyCompany("嶢海龍")> 
+<Assembly: AssemblyProduct("課堂輔助系統")> 
+<Assembly: AssemblyCopyright("嶢海龍 ©  2015")> 
+<Assembly: AssemblyTrademark("嶢海龍")> 
 
-<Assembly: ComVisible(False)>
+<Assembly: ComVisible(False)> 
 
 '下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
 <Assembly: Guid("faea5a91-8d83-457c-b01c-c6c9d037b394")> 
@@ -33,3 +35,5 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyVersion("1.0.0.0")> 
 <Assembly: AssemblyFileVersion("1.0.0.0")> 
+
+<Assembly: NeutralResourcesLanguageAttribute("zh-Hant")> 

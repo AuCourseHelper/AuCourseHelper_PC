@@ -82,8 +82,15 @@
             Exit Sub
         End If
 
-        MsgBox("與伺服器失去連線!" & vbCrLf & "請重新登入!!!", MsgBoxStyle.AbortRetryIgnore, "斷線")
         tmrServerPing.Enabled = False
+        MsgBox("與伺服器失去連線!" & vbCrLf & "請重新登入!!!", MsgBoxStyle.OkOnly, "斷線")
+        isLogin = False
+        myId = ""
+        myName = ""
+        myUid = ""
+        myPwd = ""
+        clientSocket.Close()
+        clientSocket.Dispose()
         tsmAccount.Enabled = False
         tsmCourse.Enabled = False
         mnuLogin.Enabled = True
@@ -93,20 +100,6 @@
     End Sub
 
     Private Sub mnuLogout_Click(sender As Object, e As EventArgs) Handles mnuLogout.Click
-        Logout()
-        isLogin = False
-        myId = ""
-        myName = ""
-        myUid = ""
-        myPwd = ""
-        clientSocket.Close()
-        clientSocket = Nothing
-        tmrServerPing.Enabled = False
-        tsmAccount.Enabled = False
-        tsmCourse.Enabled = False
-        mnuLogin.Enabled = True
-        mnuSignUp.Enabled = True
-        mnuLogout.Enabled = False
-        tslUserName.Text = "尚未登入"
+        logout()
     End Sub
 End Class

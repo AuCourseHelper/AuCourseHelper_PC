@@ -4,7 +4,7 @@ Imports System.Text
 
 Module SocketProcess
     Public objFrmTeacher As frmTeacher
-    Public serverIp As String = "192.192.122.203" '"127.0.0.1"
+    Public serverIp As String = "127.0.0.1"
     Public clientSocket As Socket
     Private byteData(2047) As Byte
     Public isLogin As Boolean = False
@@ -74,6 +74,9 @@ Module SocketProcess
 
         Try
             clientSocket.Connect(ip)
+            'MsgBox(clientSocket.ReceiveTimeout)
+            clientSocket.ReceiveTimeout = 5000
+            clientSocket.SendTimeout = 5000
             Dim sendBytes As Byte() = Encoding.UTF8.GetBytes(uid & ";" & pwd & ";T;")
             clientSocket.Send(sendBytes)
 
@@ -96,11 +99,10 @@ Module SocketProcess
         Return True
     End Function
 
-    Public Sub Logout()
+    Public Sub logout()
         Try
             Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("LOGOUT;")
             clientSocket.Send(sendBytes)
-            Dim dataLength = clientSocket.Receive(byteData)
         Catch ex As Exception
 
         End Try

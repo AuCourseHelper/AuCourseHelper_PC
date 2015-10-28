@@ -44,13 +44,13 @@ Partial Class frmServer
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.cmuRMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.mnuKickClient = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.lvStudent = New System.Windows.Forms.ListView()
         Me.cohIp = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.cohName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.cohTime = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.cmuRMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuKickClient = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.stpMain.SuspendLayout()
         Me.mnuMain.SuspendLayout()
@@ -80,7 +80,7 @@ Partial Class frmServer
         Me.tslStatus.BackColor = System.Drawing.SystemColors.GrayText
         Me.tslStatus.ForeColor = System.Drawing.SystemColors.Info
         Me.tslStatus.Name = "tslStatus"
-        Me.tslStatus.Size = New System.Drawing.Size(484, 18)
+        Me.tslStatus.Size = New System.Drawing.Size(453, 18)
         Me.tslStatus.Spring = True
         Me.tslStatus.Text = "~狀態訊息~"
         Me.tslStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -226,18 +226,6 @@ Partial Class frmServer
         Me.ColumnHeader3.Text = "教師登入時間"
         Me.ColumnHeader3.Width = 118
         '
-        'cmuRMenu
-        '
-        Me.cmuRMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuKickClient})
-        Me.cmuRMenu.Name = "cmLsvClient"
-        Me.cmuRMenu.Size = New System.Drawing.Size(125, 26)
-        '
-        'mnuKickClient
-        '
-        Me.mnuKickClient.Name = "mnuKickClient"
-        Me.mnuKickClient.Size = New System.Drawing.Size(124, 22)
-        Me.mnuKickClient.Text = "踢除連線"
-        '
         'Label2
         '
         Me.Label2.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
@@ -279,6 +267,18 @@ Partial Class frmServer
         '
         Me.cohTime.Text = "學生登入時間"
         Me.cohTime.Width = 118
+        '
+        'cmuRMenu
+        '
+        Me.cmuRMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuKickClient})
+        Me.cmuRMenu.Name = "cmLsvClient"
+        Me.cmuRMenu.Size = New System.Drawing.Size(125, 26)
+        '
+        'mnuKickClient
+        '
+        Me.mnuKickClient.Name = "mnuKickClient"
+        Me.mnuKickClient.Size = New System.Drawing.Size(124, 22)
+        Me.mnuKickClient.Text = "踢除連線"
         '
         'Label1
         '
