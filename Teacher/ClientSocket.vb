@@ -95,6 +95,7 @@ Module SocketProcess
                         s &= b & " "
                     Next
                     MsgBox(s)
+
                     resultDataTable = CType(bf.Deserialize(ms), DataTable)
             End Select
 
