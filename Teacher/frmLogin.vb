@@ -23,7 +23,7 @@ Public Class frmLogin
         If Regex.IsMatch(txtUid.Text, "[^\w_]+") Then
             tip.Hide(sender)
             tip.IsBalloon = True
-            tip.Show("不能輸入(^%!&+'""?<>/\\)等符號喔", sender, New Point(30, -50), 1000)
+            tip.Show("不能輸入(^%!&+'""?<>/\)等符號喔", sender, New Point(30, -50), 1000)
             txtUid.Text = Regex.Replace(txtUid.Text, "[\W_]+", "")
             txtUid.SelectionStart = txtUid.Text.Length
         End If
@@ -88,6 +88,9 @@ Public Class frmLogin
             Case "FAIL"
                 Me.Cursor = Cursors.Default
                 MsgBox("登入失敗! 帳號或密碼錯誤")
+            Case "RELOGIN"
+                Me.Cursor = Cursors.Default
+                MsgBox("登入失敗! 帳號重覆登入")
             Case "TIMEOUT"
                 Me.Cursor = Cursors.Default
                 MsgBox("無法連線!" & vbCrLf & "伺服器可能斷線或未開啟")

@@ -110,4 +110,44 @@
         log("執行登出", LogType_NORMAL)
         logout()
     End Sub
+
+    Delegate Sub _UpdateLog(ByVal logText As String, ByVal logType As Integer)
+    Public Sub UpdateLog(ByVal logText As String, ByVal logType As Integer)
+        If InvokeRequired Then
+            Invoke(New _UpdateLog(AddressOf UpdateLog), logText, logType)
+            Exit Sub
+        End If
+
+        Select Case logType
+            Case LogType_NORMAL
+                tslStatus.BackColor = System.Drawing.SystemColors.GrayText
+                tslStatus.Text = logText
+                logText = Format(Now, "yyyyMMdd-HHmmss:") & vbTab & "O  " & logText & vbCrLf
+            Case LogType_ERROR
+                tslStatus.BackColor = Color.Red
+                tslStatus.Text = logText
+                logText = Format(Now, "yyyyMMdd-HHmmss:") & vbTab & "X  " & logText & vbCrLf
+            Case LogType_SYSTEM
+                tslStatus.BackColor = System.Drawing.SystemColors.GrayText
+                tslStatus.Text = logText
+                logText = Format(Now, "yyyyMMdd-HHmmss:") & vbTab & logText & vbCrLf
+        End Select
+        logData &= logText
+        saveLog(logText)
+    End Sub
+
+    Private Sub tslSysTime_Click(sender As Object, e As EventArgs) Handles tslSysTime.Click
+        Dim result = doSqlQuery("SELECT * FROM Course;")
+        Dim d As New DataGridView()
+        d.Dock = DockStyle.Fill
+        d.DataSource = result
+        d.Refresh()
+        d.AutoResizeColumns()
+        Dim frmLog As New Form
+        frmLog.Text = Me.Text & " | 程式執行紀錄"
+        frmLog.Size = New Size(400, 500)
+        frmLog.Controls.Add(d)
+        frmLog.StartPosition = FormStartPosition.CenterParent
+        frmLog.ShowDialog(Me)
+    End Sub
 End Class

@@ -148,7 +148,7 @@ Partial Class frmTeacher
         '
         Me.mnuViewLog.Name = "mnuViewLog"
         Me.mnuViewLog.Size = New System.Drawing.Size(206, 24)
-        Me.mnuViewLog.Text = "檢視紀錄"
+        Me.mnuViewLog.Text = "檢視今日紀錄"
         '
         'mnuViewHistory
         '
@@ -200,7 +200,7 @@ Partial Class frmTeacher
         Me.tslStatus.BackColor = System.Drawing.SystemColors.GrayText
         Me.tslStatus.ForeColor = System.Drawing.SystemColors.Info
         Me.tslStatus.Name = "tslStatus"
-        Me.tslStatus.Size = New System.Drawing.Size(584, 18)
+        Me.tslStatus.Size = New System.Drawing.Size(553, 18)
         Me.tslStatus.Spring = True
         Me.tslStatus.Text = "~狀態訊息~"
         Me.tslStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft

@@ -15,6 +15,11 @@ Public Class frmServer
                 If MsgBox("目前仍有使用者連接中，是否確定關閉？", MsgBoxStyle.YesNo, "伺服器關閉確認") = MsgBoxResult.No Then
                     e.Cancel = True
                 End If
+            Else
+                If MessageBox.Show("是否確定要關閉本系統", "關閉程式", MessageBoxButtons.YesNo) = DialogResult.No Then
+                    e.Cancel = True
+                    Exit Sub
+                End If
             End If
         Else
             If MessageBox.Show("是否確定要關閉本系統", "關閉程式", MessageBoxButtons.YesNo) = DialogResult.No Then
@@ -70,12 +75,19 @@ Public Class frmServer
         'End With
 
         'auSysLogin("AM001871", "a0tim82326")
+        'auSysGetCourseStudents("104", "1")
         'auSysGetAllGrade()
         'auSysGetTimetable("103", "2")
     End Sub
 
     Private Sub tmrSysTime_Tick(sender As Object, e As EventArgs) Handles tmrSysTime.Tick
         tslSysTime.Text = Now
+        If Now.Hour = 5 And Now.Minute = 0 Then ' 早上五點定時排程
+            log("==執行系統排程", LogType_SYSTEM)
+            ' 重開server，藉此排除登入狀態卡死導致使用者無法再登入
+            stopServer()
+            startServer()
+        End If
     End Sub
 
     Private Sub tsmExit_Click(sender As Object, e As EventArgs) Handles mnuExit.Click
@@ -198,8 +210,7 @@ Public Class frmServer
                 lvStudent.Items.Remove(item)
             End If
         Next
-        clients.Remove(client)
-        tslOnlineCount.Text = "伺服器：開啟  人數：" & clients.Count & "人"
+        tslOnlineCount.Text = "伺服器：開啟  人數：" & clients.Count - 1 & "人"
     End Sub
 
     Private Sub mnuKickClient_Click(sender As Object, e As EventArgs) Handles mnuKickClient.Click
@@ -208,13 +219,15 @@ Public Class frmServer
             log("踢除教師: " & client._ip & "-" & client._name, LogType_SYSTEM)
             Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("BYE;")
             client._socket.Send(sendBytes)
-            RemoveClient(lvTeacher.SelectedItems(0).Tag)
+            RemoveClient(client)
+            clients.Remove(client)
         Else
             Dim client As Client = lvStudent.SelectedItems(0).Tag
             log("踢除學生: " & client._ip & "-" & client._name, LogType_SYSTEM)
             Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("BYE;")
             client._socket.Send(sendBytes)
-            RemoveClient(lvStudent.SelectedItems(0).Tag)
+            RemoveClient(client)
+            clients.Remove(client)
         End If
     End Sub
 
@@ -260,4 +273,5 @@ Public Class frmServer
         logData &= logText
         saveLog(logText)
     End Sub
+
 End Class

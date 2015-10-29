@@ -5,7 +5,7 @@ Module LogFunc
     Public Const LogType_ERROR = 2
     Public Const LogType_SYSTEM = 3
 
-    Private logFilePath As String = Application.StartupPath & "\logs\log-" & Format(Now, "yyyyMMdd") & ".txt"
+    Private logFilePath As String = Application.StartupPath & "\logs\log-server-" & Format(Now, "yyyyMMdd") & ".txt"
     Public logData As String = ""
     Private historyLogList() As String
     Private logLock As New Object
@@ -18,6 +18,7 @@ Module LogFunc
 
     Public Sub saveLog(ByVal log As String)
         If Not Directory.Exists(Application.StartupPath & "\logs") Then
+            logData = ""
             Directory.CreateDirectory(Application.StartupPath & "\logs")
         End If
         File.AppendAllText(logFilePath, log)

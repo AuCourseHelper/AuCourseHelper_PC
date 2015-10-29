@@ -5,34 +5,20 @@ Module LogFunc
     Public Const LogType_ERROR = 2
     Public Const LogType_SYSTEM = 3
 
-    Private logFilePath As String = Application.StartupPath & "\logs\log-" & Format(Now, "yyyyMMdd") & ".txt"
+    Private logFilePath As String = Application.StartupPath & "\logs\log-T-" & Format(Now, "yyyyMMdd") & ".txt"
     Public logData As String = ""
     Private historyLogList() As String
     Private logLock As New Object
 
-    Public Sub log(ByVal log As String, ByVal logType As Integer)
+    Public Sub log(ByVal logText As String, ByVal logType As Integer)
         SyncLock logLock
-            Select Case logType
-                Case LogType_NORMAL
-                    frmTeacher.tslStatus.BackColor = System.Drawing.SystemColors.GrayText
-                    frmTeacher.tslStatus.Text = log
-                    log = Format(Now, "yyyyMMdd-HHmmss:") & vbTab & "O  " & log & vbCrLf
-                Case LogType_ERROR
-                    frmTeacher.tslStatus.BackColor = Color.Red
-                    frmTeacher.tslStatus.Text = log
-                    log = Format(Now, "yyyyMMdd-HHmmss:") & vbTab & "X  " & log & vbCrLf
-                Case LogType_SYSTEM
-                    frmTeacher.tslStatus.BackColor = System.Drawing.SystemColors.GrayText
-                    frmTeacher.tslStatus.Text = log
-                    log = Format(Now, "yyyyMMdd-HHmmss:") & vbTab & log & vbCrLf
-            End Select
-            logData &= log
-            saveLog(log)
+            objFrmTeacher.UpdateLog(logText, logType)
         End SyncLock
     End Sub
 
-    Private Sub saveLog(ByVal log As String)
+    Public Sub saveLog(ByVal log As String)
         If Not Directory.Exists(Application.StartupPath & "\logs") Then
+            logData = ""
             Directory.CreateDirectory(Application.StartupPath & "\logs")
         End If
         File.AppendAllText(logFilePath, log)
