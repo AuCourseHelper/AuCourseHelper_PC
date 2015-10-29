@@ -7,7 +7,7 @@ Module DbConnect
     Dim sqlExeLock As New Object
 
     Public Function openDb() As Boolean
-        log("連接系統資料庫...", LogType_NORMAL)
+        log("連接系統資料庫...TESTUMIUMI", LogType_NORMAL)
         Try
             sqlConn = New SqlConnection(sqlConnString)
             sqlConn.Open()
