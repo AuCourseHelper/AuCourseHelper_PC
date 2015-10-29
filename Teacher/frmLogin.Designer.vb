@@ -48,7 +48,7 @@ Partial Class frmLogin
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("新細明體", 14.0!)
-        Me.Label2.Location = New System.Drawing.Point(20, 80)
+        Me.Label2.Location = New System.Drawing.Point(20, 70)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(66, 19)
         Me.Label2.TabIndex = 1
@@ -73,7 +73,7 @@ Partial Class frmLogin
         Me.txtPwd.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.txtPwd.Font = New System.Drawing.Font("新細明體", 12.0!)
-        Me.txtPwd.Location = New System.Drawing.Point(100, 79)
+        Me.txtPwd.Location = New System.Drawing.Point(100, 69)
         Me.txtPwd.MaxLength = 20
         Me.txtPwd.Name = "txtPwd"
         Me.txtPwd.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
@@ -122,7 +122,7 @@ Partial Class frmLogin
         Me.lblPwdHint.BackColor = System.Drawing.Color.White
         Me.lblPwdHint.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.lblPwdHint.ForeColor = System.Drawing.SystemColors.GrayText
-        Me.lblPwdHint.Location = New System.Drawing.Point(110, 85)
+        Me.lblPwdHint.Location = New System.Drawing.Point(110, 75)
         Me.lblPwdHint.Name = "lblPwdHint"
         Me.lblPwdHint.Size = New System.Drawing.Size(113, 12)
         Me.lblPwdHint.TabIndex = 7
@@ -131,7 +131,7 @@ Partial Class frmLogin
         'chkShowPwd
         '
         Me.chkShowPwd.AutoSize = True
-        Me.chkShowPwd.Location = New System.Drawing.Point(183, 107)
+        Me.chkShowPwd.Location = New System.Drawing.Point(183, 98)
         Me.chkShowPwd.Name = "chkShowPwd"
         Me.chkShowPwd.Size = New System.Drawing.Size(72, 16)
         Me.chkShowPwd.TabIndex = 8
