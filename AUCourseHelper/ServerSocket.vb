@@ -161,18 +161,13 @@ Module ServerSocket
                     log(clientSocket.RemoteEndPoint.ToString & ": 要求DBQUERY", LogType_NORMAL)
                     clientSocket.Receive(byteData)
                     Dim sql = Encoding.UTF8.GetString(byteData).Split(";")(0)
+                    clientSocket.Send(Encoding.UTF8.GetBytes("DATATABLE;"))
                     Dim result = selectCmd(sql)
                     ' 序列化DataTable
                     Dim bf As New BinaryFormatter()
                     Dim ms As New MemoryStream
                     bf.Serialize(ms, result)
                     Dim ObjectBytes() = ms.ToArray()
-                    Dim s = ""
-                    For Each b In ObjectBytes
-                        s &= b & " "
-                    Next
-                    MsgBox(s)
-                    clientSocket.Send(Encoding.UTF8.GetBytes("DATATABLE;"))
                     clientSocket.Send(ObjectBytes)
             End Select
 

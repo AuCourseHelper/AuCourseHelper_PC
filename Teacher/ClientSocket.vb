@@ -7,7 +7,7 @@ Imports System.IO
 
 Module SocketProcess
     Public objFrmTeacher As frmTeacher
-    Public serverIp As String = "127.0.0.1"
+    Public serverIp As String = "192.192.122.202"
     Public clientSocket As Socket
     Private byteData(8191) As Byte
     Private pong As Boolean = False
@@ -79,28 +79,25 @@ Module SocketProcess
                     Dim i = clientSocket.Receive(byteData)
                     ' 反序列化DataTable
                     Dim bf As New BinaryFormatter()
-                    Dim ms As New MemoryStream()
+                    Dim ms As New MemoryStream(65534)
                     ms.Write(byteData, 0, i)
-                    If i = 8192 Then
-                        While True
-                            i = clientSocket.Receive(byteData)
+                    ms.Flush()
+                    Thread.Sleep(200)
+                    While i = 8192
+                        i = clientSocket.Receive(byteData)
+                        If i > 0 Then
                             ms.Write(byteData, 0, i)
-                            If i < 8192 Then
-                                Exit While
-                            End If
-                        End While
-                    End If
-                    Dim s = ""
-                    For Each b In ms.ToArray
-                        s &= b & " "
-                    Next
-                    MsgBox(s)
-
-                    resultDataTable = CType(bf.Deserialize(ms), DataTable)
+                            ms.Flush()
+                            Thread.Sleep(200)
+                        End If
+                    End While
+                    ms.Seek(0, SeekOrigin.Begin)
+                    resultDataTable = bf.Deserialize(ms)
             End Select
 
             clientSocket.BeginReceive(byteData, 0, byteData.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), clientSocket)
         Catch ex As Exception
+            resultDataTable = New DataTable
             log("接收資料異常! " & ex.Message, LogType_ERROR)
             Exit Sub
         End Try
@@ -162,10 +159,11 @@ Module SocketProcess
 
     Public Function doSqlQuery(ByVal sql As String) As DataTable
         Try
+            resultDataTable = Nothing
             clientSocket.Send(Encoding.UTF8.GetBytes("DBQUERY;"))
             clientSocket.Send(Encoding.UTF8.GetBytes(sql))
-            While resultDataTable IsNot Nothing
-                Thread.Sleep(200)
+            While resultDataTable Is Nothing
+                Thread.Sleep(500)
             End While
         Catch ex As Exception
             log("傳送DBQUERY出錯: " & ex.Message, LogType_ERROR)
