@@ -30,6 +30,8 @@ Partial Class frmLogin
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.lblUidHint = New System.Windows.Forms.Label()
         Me.lblPwdHint = New System.Windows.Forms.Label()
+        Me.chkShowPwd = New System.Windows.Forms.CheckBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label1
@@ -56,11 +58,15 @@ Partial Class frmLogin
         '
         Me.txtUid.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtUid.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtUid.Font = New System.Drawing.Font("新細明體", 12.0!)
+        Me.txtUid.ImeMode = System.Windows.Forms.ImeMode.Alpha
         Me.txtUid.Location = New System.Drawing.Point(100, 29)
+        Me.txtUid.MaxLength = 5
         Me.txtUid.Name = "txtUid"
         Me.txtUid.Size = New System.Drawing.Size(155, 27)
         Me.txtUid.TabIndex = 2
+        Me.txtUid.WordWrap = False
         '
         'txtPwd
         '
@@ -73,15 +79,16 @@ Partial Class frmLogin
         Me.txtPwd.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPwd.Size = New System.Drawing.Size(155, 27)
         Me.txtPwd.TabIndex = 3
+        Me.txtPwd.WordWrap = False
         '
         'btnLogin
         '
-        Me.btnLogin.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.btnLogin.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnLogin.Font = New System.Drawing.Font("新細明體", 11.0!)
-        Me.btnLogin.Location = New System.Drawing.Point(180, 132)
+        Me.btnLogin.Location = New System.Drawing.Point(155, 127)
         Me.btnLogin.Name = "btnLogin"
-        Me.btnLogin.Size = New System.Drawing.Size(75, 23)
+        Me.btnLogin.Size = New System.Drawing.Size(100, 30)
         Me.btnLogin.TabIndex = 4
         Me.btnLogin.Text = "登入"
         Me.btnLogin.UseVisualStyleBackColor = False
@@ -90,9 +97,9 @@ Partial Class frmLogin
         '
         Me.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnCancel.Font = New System.Drawing.Font("新細明體", 11.0!)
-        Me.btnCancel.Location = New System.Drawing.Point(24, 132)
+        Me.btnCancel.Location = New System.Drawing.Point(24, 127)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancel.Size = New System.Drawing.Size(100, 30)
         Me.btnCancel.TabIndex = 5
         Me.btnCancel.Text = "取消"
         Me.btnCancel.UseVisualStyleBackColor = True
@@ -105,9 +112,9 @@ Partial Class frmLogin
         Me.lblUidHint.ForeColor = System.Drawing.SystemColors.GrayText
         Me.lblUidHint.Location = New System.Drawing.Point(110, 35)
         Me.lblUidHint.Name = "lblUidHint"
-        Me.lblUidHint.Size = New System.Drawing.Size(101, 12)
+        Me.lblUidHint.Size = New System.Drawing.Size(119, 12)
         Me.lblUidHint.TabIndex = 6
-        Me.lblUidHint.Text = "請使用教職員編號"
+        Me.lblUidHint.Text = "請使用4碼教職員編號"
         '
         'lblPwdHint
         '
@@ -121,6 +128,26 @@ Partial Class frmLogin
         Me.lblPwdHint.TabIndex = 7
         Me.lblPwdHint.Text = "首次登入密碼同帳號"
         '
+        'chkShowPwd
+        '
+        Me.chkShowPwd.AutoSize = True
+        Me.chkShowPwd.Location = New System.Drawing.Point(183, 105)
+        Me.chkShowPwd.Name = "chkShowPwd"
+        Me.chkShowPwd.Size = New System.Drawing.Size(72, 16)
+        Me.chkShowPwd.TabIndex = 8
+        Me.chkShowPwd.Text = "顯示密碼"
+        Me.chkShowPwd.UseVisualStyleBackColor = True
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.ForeColor = System.Drawing.SystemColors.GrayText
+        Me.Label3.Location = New System.Drawing.Point(12, 167)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(261, 12)
+        Me.Label3.TabIndex = 9
+        Me.Label3.Text = "與伺服器連線可能會需要一點時間，請耐心等待!"
+        '
         'frmLogin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -128,6 +155,8 @@ Partial Class frmLogin
         Me.BackColor = System.Drawing.SystemColors.Info
         Me.ClientSize = New System.Drawing.Size(284, 181)
         Me.ControlBox = False
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.chkShowPwd)
         Me.Controls.Add(Me.lblPwdHint)
         Me.Controls.Add(Me.lblUidHint)
         Me.Controls.Add(Me.btnCancel)
@@ -155,4 +184,6 @@ Partial Class frmLogin
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents lblUidHint As System.Windows.Forms.Label
     Friend WithEvents lblPwdHint As System.Windows.Forms.Label
+    Friend WithEvents chkShowPwd As System.Windows.Forms.CheckBox
+    Friend WithEvents Label3 As System.Windows.Forms.Label
 End Class

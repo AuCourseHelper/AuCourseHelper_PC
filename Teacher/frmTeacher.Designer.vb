@@ -82,31 +82,32 @@ Partial Class frmTeacher
         'mnuLogin
         '
         Me.mnuLogin.Name = "mnuLogin"
-        Me.mnuLogin.Size = New System.Drawing.Size(110, 24)
+        Me.mnuLogin.Size = New System.Drawing.Size(174, 24)
         Me.mnuLogin.Text = "登入"
         '
         'mnuSignUp
         '
+        Me.mnuSignUp.Enabled = False
         Me.mnuSignUp.Name = "mnuSignUp"
-        Me.mnuSignUp.Size = New System.Drawing.Size(110, 24)
-        Me.mnuSignUp.Text = "註冊"
+        Me.mnuSignUp.Size = New System.Drawing.Size(174, 24)
+        Me.mnuSignUp.Text = "助教帳號註冊"
         '
         'mnuLogout
         '
         Me.mnuLogout.Enabled = False
         Me.mnuLogout.Name = "mnuLogout"
-        Me.mnuLogout.Size = New System.Drawing.Size(110, 24)
+        Me.mnuLogout.Size = New System.Drawing.Size(174, 24)
         Me.mnuLogout.Text = "登出"
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(107, 6)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(171, 6)
         '
         'mnuExit
         '
         Me.mnuExit.Name = "mnuExit"
-        Me.mnuExit.Size = New System.Drawing.Size(110, 24)
+        Me.mnuExit.Size = New System.Drawing.Size(174, 24)
         Me.mnuExit.Text = "結束"
         '
         'tsmAccount
@@ -199,7 +200,7 @@ Partial Class frmTeacher
         Me.tslStatus.BackColor = System.Drawing.SystemColors.GrayText
         Me.tslStatus.ForeColor = System.Drawing.SystemColors.Info
         Me.tslStatus.Name = "tslStatus"
-        Me.tslStatus.Size = New System.Drawing.Size(553, 18)
+        Me.tslStatus.Size = New System.Drawing.Size(584, 18)
         Me.tslStatus.Spring = True
         Me.tslStatus.Text = "~狀態訊息~"
         Me.tslStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft

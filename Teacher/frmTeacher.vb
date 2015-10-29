@@ -54,54 +54,56 @@
         Dim frmLog As New Form
         Dim log As New RichTextBox()
         log.Text = logData
-        log.Enabled = False
+        log.ReadOnly = True
         log.ScrollBars = RichTextBoxScrollBars.Both
         log.Dock = DockStyle.Fill
         frmLog.Text = Me.Text & " | 程式執行紀錄"
         frmLog.Size = New Size(400, 500)
         frmLog.Controls.Add(log)
-        frmLog.ShowDialog()
+        frmLog.StartPosition = FormStartPosition.CenterParent
+        frmLog.ShowDialog(Me)
     End Sub
 
     Private Sub mnuLogin_Click(sender As Object, e As EventArgs) Handles mnuLogin.Click
         log("開啟登入視窗", LogType_NORMAL)
-        frmLogin.ShowDialog()
+        frmLogin.ShowDialog(Me)
     End Sub
 
     Private Sub tmrServerPing_Tick(sender As Object, e As EventArgs) Handles tmrServerPing.Tick
         ' 每30秒檢查一次伺服器連線狀態
-        log("呼叫連線檢查", LogType_NORMAL)
+        log("==連線檢查", LogType_SYSTEM)
         If Not connectStatusTest() Then
             ' 斷線處理
-            log("斷線處理", LogType_NORMAL)
-            uiLogout()
+            uiLogout("BREAK")
         End If
     End Sub
 
-    Delegate Sub _uiLogout()
-    Public Sub uiLogout()
+    Delegate Sub _uiLogout(ByVal type As String)
+    Public Sub uiLogout(ByVal type As String)
         If InvokeRequired Then
-            Invoke(New _uiLogout(AddressOf uiLogout))
+            Invoke(New _uiLogout(AddressOf uiLogout), type)
             Exit Sub
         End If
 
-        log("斷線處理開始", LogType_NORMAL)
         tmrServerPing.Enabled = False
-        MsgBox("與伺服器失去連線!" & vbCrLf & "請重新登入!!!", MsgBoxStyle.OkOnly, "斷線")
-        isLogin = False
+        Select Case type
+            Case "LOGOUT"
+                MsgBox("已成功登出!", MsgBoxStyle.OkOnly, "登出")
+                log(myName & " 已成功登出", LogType_NORMAL)
+            Case "BREAK"
+                MsgBox("與伺服器失去連線!" & vbCrLf & "請重新登入!!!", MsgBoxStyle.OkOnly, "斷線")
+                log("與伺服器失去連線!", LogType_ERROR)
+        End Select
         myId = ""
         myName = ""
         myUid = ""
         myPwd = ""
-        clientSocket.Close()
-        clientSocket.Dispose()
         tsmAccount.Enabled = False
         tsmCourse.Enabled = False
         mnuLogin.Enabled = True
-        mnuSignUp.Enabled = True
+        mnuSignUp.Enabled = False
         mnuLogout.Enabled = False
         tslUserName.Text = "尚未登入"
-        log("斷線處理完畢", LogType_NORMAL)
     End Sub
 
     Private Sub mnuLogout_Click(sender As Object, e As EventArgs) Handles mnuLogout.Click
