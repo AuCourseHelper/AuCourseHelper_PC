@@ -81,17 +81,20 @@ Module SocketProcess
                     Dim bf As New BinaryFormatter()
                     Dim ms As New MemoryStream()
                     ms.Write(byteData, 0, i)
-                    MsgBox(i)
                     If i = 8192 Then
                         While True
                             i = clientSocket.Receive(byteData)
-                            MsgBox(i)
                             ms.Write(byteData, 0, i)
                             If i < 8192 Then
                                 Exit While
                             End If
                         End While
                     End If
+                    Dim s = ""
+                    For Each b In ms.ToArray
+                        s &= b & " "
+                    Next
+                    MsgBox(s)
                     resultDataTable = CType(bf.Deserialize(ms), DataTable)
             End Select
 
@@ -157,12 +160,12 @@ Module SocketProcess
     End Sub
 
     Public Function doSqlQuery(ByVal sql As String) As DataTable
-        Dim result As DataTable = Nothing
-
         Try
             clientSocket.Send(Encoding.UTF8.GetBytes("DBQUERY;"))
             clientSocket.Send(Encoding.UTF8.GetBytes(sql))
-            Thread.Sleep("1000")
+            While resultDataTable IsNot Nothing
+                Thread.Sleep(200)
+            End While
         Catch ex As Exception
             log("傳送DBQUERY出錯: " & ex.Message, LogType_ERROR)
         End Try

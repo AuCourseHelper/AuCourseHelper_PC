@@ -167,7 +167,11 @@ Module ServerSocket
                     Dim ms As New MemoryStream
                     bf.Serialize(ms, result)
                     Dim ObjectBytes() = ms.ToArray()
-                    MsgBox(ObjectBytes.Length)
+                    Dim s = ""
+                    For Each b In ObjectBytes
+                        s &= b & " "
+                    Next
+                    MsgBox(s)
                     clientSocket.Send(Encoding.UTF8.GetBytes("DATATABLE;"))
                     clientSocket.Send(ObjectBytes)
             End Select
