@@ -131,7 +131,7 @@ Partial Class frmLogin
         'chkShowPwd
         '
         Me.chkShowPwd.AutoSize = True
-        Me.chkShowPwd.Location = New System.Drawing.Point(183, 105)
+        Me.chkShowPwd.Location = New System.Drawing.Point(183, 107)
         Me.chkShowPwd.Name = "chkShowPwd"
         Me.chkShowPwd.Size = New System.Drawing.Size(72, 16)
         Me.chkShowPwd.TabIndex = 8
