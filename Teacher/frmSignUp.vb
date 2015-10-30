@@ -46,10 +46,10 @@ Public Class frmSignUp
     End Sub
 
     ' ====SELECT 方法範例
-    ' Dim sql = "我是SELECT語法"
+    ' Dim sql = "我是SELECT語法" <<最後記得一定要加上分號
     ' Dim result As DataTable = doSqlQuery(Sql & ";")
 
     ' ====CMD 方法範例
-    ' Dim sql = "我是UPDATE、DELETE語法"
+    ' Dim sql = "我是INSERT、UPDATE、DELETE語法" <<最後記得一定要加上分號
     ' Dim result As Boolean = doSqlCmd(Sql & ";")
 End Class

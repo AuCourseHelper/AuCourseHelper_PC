@@ -32,8 +32,8 @@ Partial Class frmTeacher
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmAccount = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuEditPwd = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuEditPublic = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewProfile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditProfile = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmCourse = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmLog = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewLog = New System.Windows.Forms.ToolStripMenuItem()
@@ -112,23 +112,23 @@ Partial Class frmTeacher
         '
         'tsmAccount
         '
-        Me.tsmAccount.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditPwd, Me.mnuEditPublic})
+        Me.tsmAccount.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewProfile, Me.mnuEditProfile})
         Me.tsmAccount.Enabled = False
         Me.tsmAccount.Name = "tsmAccount"
         Me.tsmAccount.Size = New System.Drawing.Size(85, 24)
         Me.tsmAccount.Text = "帳號資訊"
         '
-        'mnuEditPwd
+        'mnuViewProfile
         '
-        Me.mnuEditPwd.Name = "mnuEditPwd"
-        Me.mnuEditPwd.Size = New System.Drawing.Size(174, 24)
-        Me.mnuEditPwd.Text = "修改密碼"
+        Me.mnuViewProfile.Name = "mnuViewProfile"
+        Me.mnuViewProfile.Size = New System.Drawing.Size(174, 24)
+        Me.mnuViewProfile.Text = "檢視個人資訊"
         '
-        'mnuEditPublic
+        'mnuEditProfile
         '
-        Me.mnuEditPublic.Name = "mnuEditPublic"
-        Me.mnuEditPublic.Size = New System.Drawing.Size(174, 24)
-        Me.mnuEditPublic.Text = "修改公開資訊"
+        Me.mnuEditProfile.Name = "mnuEditProfile"
+        Me.mnuEditProfile.Size = New System.Drawing.Size(174, 24)
+        Me.mnuEditProfile.Text = "修改個人資訊"
         '
         'tsmCourse
         '
@@ -334,8 +334,8 @@ Partial Class frmTeacher
     Friend WithEvents mnuSignUp As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuLogout As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tsmAccount As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents mnuEditPwd As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents mnuEditPublic As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuViewProfile As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuEditProfile As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tsmLog As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuViewLog As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuViewHistory As System.Windows.Forms.ToolStripMenuItem

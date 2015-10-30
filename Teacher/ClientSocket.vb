@@ -15,10 +15,8 @@ Module SocketProcess
     Private resultDataTable As New DataTable
     Public resultDbCmd As String = ""
     Public isLogin As Boolean = False
-    Public myId As String
-    Public myName As String
-    Public myUid As String
-    Public myPwd As String
+
+    Public myProfile As New TeacherProfile
 
     Public Function GetIPaddress() As String
         Dim myHost As String = System.Net.Dns.GetHostName
@@ -75,6 +73,7 @@ Module SocketProcess
                     isLogin = False
                     isLogoutIng = False
                     clientSocket.Close()
+                    myProfile = New TeacherProfile
                     Exit Sub
                 Case "DATATABLE" ' 承接回傳的DB查詢
                     clientSocket.Receive(byteData)
@@ -139,9 +138,9 @@ Module SocketProcess
             End If
 
             isLogin = True
-            myId = returns(0)
-            myName = returns(1)
-            log("帳號" & uid & " " & myName & "登入成功", LogType_NORMAL)
+            myProfile.Id = returns(0)
+            myProfile.Name = returns(1)
+            log("帳號" & uid & " " & myProfile.Name & "登入成功", LogType_NORMAL)
 
             clientSocket.BeginReceive(byteData, 0, byteData.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), clientSocket)
         Catch ex As Exception
@@ -198,3 +197,14 @@ Module SocketProcess
     End Function
 
 End Module
+
+Public Class TeacherProfile
+    Property Id As String
+    Property Num As String
+    Property Name As String
+    Property Pwd As String
+    Property LastLogin As String
+    Property LastIp As String
+    Property WebSite As String
+    Property OfficeTime As String
+End Class

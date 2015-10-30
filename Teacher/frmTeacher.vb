@@ -89,15 +89,11 @@
         Select Case type
             Case "LOGOUT"
                 MsgBox("已成功登出!", MsgBoxStyle.OkOnly, "登出")
-                log(myName & " 已成功登出", LogType_NORMAL)
+                log(myProfile.Name & " 已成功登出", LogType_NORMAL)
             Case "BREAK"
                 MsgBox("與伺服器失去連線!" & vbCrLf & "請重新登入!!!", MsgBoxStyle.OkOnly, "斷線")
                 log("與伺服器失去連線!", LogType_ERROR)
         End Select
-        myId = ""
-        myName = ""
-        myUid = ""
-        myPwd = ""
         tsmAccount.Enabled = False
         tsmCourse.Enabled = False
         mnuLogin.Enabled = True
@@ -164,4 +160,90 @@
         Dim result = doSqlCmd(sql & ";")
     End Sub
 
+    Private Sub mnuViewProfile_Click(sender As Object, e As EventArgs) Handles mnuViewProfile.Click
+        Dim frmProfile As New Form
+        frmProfile.Size = New Size(500, 300)
+        frmProfile.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedSingle
+        frmProfile.Text = Me.Text & " | 檢視個人資訊"
+        frmProfile.StartPosition = FormStartPosition.CenterParent
+        frmProfile.Font = New Font("", 14)
+
+        Dim pnlTable As New TableLayoutPanel()
+        pnlTable.ColumnCount = 2
+        pnlTable.RowCount = 6
+        pnlTable.Dock = DockStyle.Fill
+        pnlTable.Padding = New Padding(15)
+
+        Dim lbl As Label
+        Dim txt As TextBox
+
+        lbl = New Label()
+        lbl.Dock = DockStyle.Fill
+        lbl.Margin = New Padding(8)
+        lbl.Text = "帳號:"
+        pnlTable.Controls.Add(lbl, 0, 0)
+        txt = New TextBox()
+        txt.Dock = DockStyle.Fill
+        txt.ReadOnly = True
+        txt.Text = myProfile.Num
+        pnlTable.Controls.Add(txt, 1, 0)
+
+        lbl = New Label()
+        lbl.Dock = DockStyle.Fill
+        lbl.Margin = New Padding(8)
+        lbl.Text = "姓名:"
+        pnlTable.Controls.Add(lbl, 0, 1)
+        txt = New TextBox()
+        txt.Dock = DockStyle.Fill
+        txt.ReadOnly = True
+        txt.Text = myProfile.Name
+        pnlTable.Controls.Add(txt, 1, 1)
+
+        lbl = New Label()
+        lbl.Dock = DockStyle.Fill
+        lbl.Margin = New Padding(8)
+        lbl.Text = "上次登入時間:"
+        pnlTable.Controls.Add(lbl, 0, 2)
+        txt = New TextBox()
+        txt.Dock = DockStyle.Fill
+        txt.ReadOnly = True
+        txt.Text = myProfile.LastLogin
+        pnlTable.Controls.Add(txt, 1, 2)
+
+        lbl = New Label()
+        lbl.Dock = DockStyle.Fill
+        lbl.Margin = New Padding(8)
+        lbl.Text = "上次登入位置:"
+        pnlTable.Controls.Add(lbl, 0, 3)
+        txt = New TextBox()
+        txt.Dock = DockStyle.Fill
+        txt.ReadOnly = True
+        txt.Text = myProfile.LastIp
+        pnlTable.Controls.Add(txt, 1, 3)
+
+        lbl = New Label()
+        lbl.Dock = DockStyle.Fill
+        lbl.Margin = New Padding(8)
+        lbl.Text = "個人網站:"
+        pnlTable.Controls.Add(lbl, 0, 4)
+        txt = New TextBox()
+        txt.Dock = DockStyle.Fill
+        txt.ReadOnly = True
+        txt.Text = myProfile.WebSite
+        pnlTable.Controls.Add(txt, 1, 4)
+
+        lbl = New Label()
+        lbl.Dock = DockStyle.Fill
+        lbl.Margin = New Padding(8)
+        lbl.Text = "OfficeHour:"
+        pnlTable.Controls.Add(lbl, 0, 5)
+        txt = New TextBox()
+        txt.Dock = DockStyle.Fill
+        txt.ReadOnly = True
+        txt.Text = myProfile.OfficeTime
+        pnlTable.Controls.Add(txt, 1, 5)
+
+        frmProfile.Controls.Add(pnlTable)
+        frmProfile.ShowDialog(Me)
+    End Sub
 End Class

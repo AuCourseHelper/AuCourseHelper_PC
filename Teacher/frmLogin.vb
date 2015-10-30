@@ -73,10 +73,26 @@ Public Class frmLogin
         Me.Cursor = Cursors.WaitCursor
         Select Case connectAndLogin(txtUid.Text, txtPwd.Text)
             Case "SUCCESS"
-                ' 帳號資訊
-                ' 課程資訊
+                ' 取得帳號資訊
+                Dim sqlGetProfile = "SELECT * FROM Teacher WHERE Id=" & myProfile.Id & ";"
+                Dim tblProfile = doSqlQuery(sqlGetProfile)
+                If tblProfile.Rows.Count > 0 Then
+                    myProfile.Num = RTrim(tblProfile.Rows(0).Item(1))
+                    myProfile.Name = RTrim(tblProfile.Rows(0).Item(2))
+                    myProfile.Pwd = RTrim(tblProfile.Rows(0).Item(3))
+                    myProfile.LastLogin = RTrim(tblProfile.Rows(0).Item(4))
+                    myProfile.LastIp = RTrim(tblProfile.Rows(0).Item(5))
+                    myProfile.WebSite = RTrim(tblProfile.Rows(0).Item(6).ToString)
+                    myProfile.OfficeTime = RTrim(tblProfile.Rows(0).Item(7).ToString)
+                Else
+                    Me.Cursor = Cursors.Default
+                    MsgBox("登入失敗! 無法取得帳號詳細資訊")
+                    logout()
+                    Exit Sub
+                End If
+                ' 取得課程資訊
 
-                objFrmTeacher.tslUserName.Text = myName & " 你好!"
+                objFrmTeacher.tslUserName.Text = myProfile.Name & " 你好!"
                 objFrmTeacher.tmrServerPing.Enabled = True
                 objFrmTeacher.tsmAccount.Enabled = True
                 objFrmTeacher.tsmCourse.Enabled = True
