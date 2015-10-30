@@ -3,6 +3,7 @@ Imports System.Net.Sockets
 Imports System.Text
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.IO
+Imports System.Threading
 
 Module ServerSocket
     Public objFrmServer As frmServer
@@ -165,10 +166,22 @@ Module ServerSocket
                     Dim result = selectCmd(sql)
                     ' 序列化DataTable
                     Dim bf As New BinaryFormatter()
-                    Dim ms As New MemoryStream
+                    Dim ms As New MemoryStream()
                     bf.Serialize(ms, result)
                     Dim ObjectBytes() = ms.ToArray()
+                    clientSocket.Send(Encoding.UTF8.GetBytes(ObjectBytes.Length & ";"))
+                    Thread.Sleep(500)
                     clientSocket.Send(ObjectBytes)
+                Case "DBCMD"
+                    log(clientSocket.RemoteEndPoint.ToString & ": 要求DBCMD", LogType_NORMAL)
+                    clientSocket.Receive(byteData)
+                    Dim sql = Encoding.UTF8.GetString(byteData).Split(";")(0)
+                    clientSocket.Send(Encoding.UTF8.GetBytes("DBCMDRESULT;"))
+                    If exeCmd(sql) Then
+                        clientSocket.Send(Encoding.UTF8.GetBytes("SUCCESS;"))
+                    Else
+                        clientSocket.Send(Encoding.UTF8.GetBytes("FAIL;" & sqlCmdErr & ";"))
+                    End If
             End Select
 
             If clientSocket.Connected Then
@@ -203,7 +216,12 @@ Module ServerSocket
     Public Function checkIfLogined(ByVal id As String, ByVal type As String) As Boolean
         For Each client In clients
             If client._id = id And client._type = type Then
-                Return True
+                If client._socket.Connected Then
+                    Return True
+                Else
+                    objFrmServer.RemoveClient(client)
+                    Return False
+                End If
             End If
         Next
         Return False

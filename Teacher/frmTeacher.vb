@@ -136,8 +136,15 @@
         saveLog(logText)
     End Sub
 
+    Private Sub mnuSignUp_Click(sender As Object, e As EventArgs) Handles mnuSignUp.Click
+        log("開啟助教帳號註冊視窗", LogType_NORMAL)
+        frmSignUp.ShowDialog(Me)
+    End Sub
+
+    ' SELECT 方法範例
     Private Sub tslSysTime_Click(sender As Object, e As EventArgs) Handles tslSysTime.Click
-        Dim result = doSqlQuery("SELECT * FROM Course;")
+        Dim sql = InputBox("SELECT SQL:")
+        Dim result = doSqlQuery(sql & ";")
         Dim d As New DataGridView()
         d.Dock = DockStyle.Fill
         d.DataSource = result
@@ -150,4 +157,11 @@
         frmLog.StartPosition = FormStartPosition.CenterParent
         frmLog.ShowDialog(Me)
     End Sub
+
+    ' CMD 方法範例
+    Private Sub tslUserName_Click(sender As Object, e As EventArgs) Handles tslUserName.Click
+        Dim sql = InputBox("SQL COMMAND:")
+        Dim result = doSqlCmd(sql & ";")
+    End Sub
+
 End Class

@@ -5,6 +5,7 @@ Module DbConnect
     Private sqlConn As SqlConnection
     Private sqlConnString As String = "Data Source=192.192.122.202;Initial Catalog=AUCourse;Persist Security Info=True;User ID=NDML-202;Password=714b"
     Dim sqlExeLock As New Object
+    Public sqlCmdErr As String
 
     Public Function openDb() As Boolean
         log("連接系統資料庫...", LogType_NORMAL)
@@ -40,10 +41,12 @@ Module DbConnect
         Dim sqlCmd As New SqlCommand(sql, sqlConn)
         Try
             SyncLock sqlExeLock
+                sqlCmdErr = ""
                 sqlCmd.ExecuteNonQuery()
             End SyncLock
         Catch ex As Exception
             log("資料庫命令執行失敗! " & ex.Message, LogType_ERROR)
+            sqlCmdErr = ex.Message
             Return False
         End Try
         Return True

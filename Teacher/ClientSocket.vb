@@ -13,6 +13,7 @@ Module SocketProcess
     Private pong As Boolean = False
     Private isLogoutIng As Boolean = False
     Private resultDataTable As New DataTable
+    Public resultDbCmd As String = ""
     Public isLogin As Boolean = False
     Public myId As String
     Public myName As String
@@ -76,10 +77,12 @@ Module SocketProcess
                     clientSocket.Close()
                     Exit Sub
                 Case "DATATABLE" ' 承接回傳的DB查詢
+                    clientSocket.Receive(byteData)
+                    Dim size = Encoding.UTF8.GetString(byteData).Split(";")(0)
                     Dim i = clientSocket.Receive(byteData)
                     ' 反序列化DataTable
                     Dim bf As New BinaryFormatter()
-                    Dim ms As New MemoryStream(65534)
+                    Dim ms As New MemoryStream(CInt(size))
                     ms.Write(byteData, 0, i)
                     ms.Flush()
                     Thread.Sleep(200)
@@ -93,6 +96,9 @@ Module SocketProcess
                     End While
                     ms.Seek(0, SeekOrigin.Begin)
                     resultDataTable = bf.Deserialize(ms)
+                Case "DBCMDRESULT" ' 判斷資料庫命令執行狀態
+                    clientSocket.Receive(byteData)
+                    resultDbCmd = Encoding.UTF8.GetString(byteData)
             End Select
 
             clientSocket.BeginReceive(byteData, 0, byteData.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), clientSocket)
@@ -163,13 +169,32 @@ Module SocketProcess
             clientSocket.Send(Encoding.UTF8.GetBytes("DBQUERY;"))
             clientSocket.Send(Encoding.UTF8.GetBytes(sql))
             While resultDataTable Is Nothing
-                Thread.Sleep(500)
+                Thread.Sleep(200)
             End While
         Catch ex As Exception
             log("傳送DBQUERY出錯: " & ex.Message, LogType_ERROR)
         End Try
 
         Return resultDataTable
+    End Function
+
+    Public Function doSqlCmd(ByVal sql As String) As Boolean
+        Try
+            resultDbCmd = ""
+            clientSocket.Send(Encoding.UTF8.GetBytes("DBCMD;"))
+            clientSocket.Send(Encoding.UTF8.GetBytes(sql))
+            While resultDbCmd = ""
+                Thread.Sleep(200)
+            End While
+            If resultDbCmd.StartsWith("FAIL") Then
+                log("執行DBCMD出錯: " & resultDbCmd.Split(";")(1), LogType_ERROR)
+                Return False
+            End If
+        Catch ex As Exception
+            log("傳送DBCMD出錯: " & ex.Message, LogType_ERROR)
+        End Try
+
+        Return True
     End Function
 
 End Module

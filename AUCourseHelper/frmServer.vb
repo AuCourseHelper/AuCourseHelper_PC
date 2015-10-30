@@ -82,7 +82,7 @@ Public Class frmServer
 
     Private Sub tmrSysTime_Tick(sender As Object, e As EventArgs) Handles tmrSysTime.Tick
         tslSysTime.Text = Now
-        If Now.Hour = 5 And Now.Minute = 0 Then ' 早上五點定時排程
+        If Now.Hour = 5 And Now.Minute = 0 And Now.Second = 0 Then ' 早上五點定時排程
             log("==執行系統排程", LogType_SYSTEM)
             ' 重開server，藉此排除登入狀態卡死導致使用者無法再登入
             stopServer()
