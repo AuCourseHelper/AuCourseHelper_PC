@@ -39,6 +39,10 @@ Partial Class frmServer
         Me.mnuViewHistory = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmIp = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmDataMang = New System.Windows.Forms.ToolStripMenuItem()
+        Me.教師帳號資訊ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.學生帳號資訊ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.課程資訊ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tmrSysTime = New System.Windows.Forms.Timer(Me.components)
         Me.tlpMain = New System.Windows.Forms.TableLayoutPanel()
         Me.lvTeacher = New System.Windows.Forms.ListView()
@@ -53,10 +57,6 @@ Partial Class frmServer
         Me.cmuRMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuKickClient = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.教師帳號資訊ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.學生帳號資訊ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.課程資訊ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stpMain.SuspendLayout()
         Me.mnuMain.SuspendLayout()
         Me.tlpMain.SuspendLayout()
@@ -117,6 +117,7 @@ Partial Class frmServer
         '
         Me.tsmFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuExit})
         Me.tsmFile.Name = "tsmFile"
+        Me.tsmFile.ShortcutKeyDisplayString = ""
         Me.tsmFile.Size = New System.Drawing.Size(53, 24)
         Me.tsmFile.Text = "檔案"
         '
@@ -182,6 +183,29 @@ Partial Class frmServer
         Me.tsmDataMang.Size = New System.Drawing.Size(117, 24)
         Me.tsmDataMang.Text = "系統資料管理"
         '
+        '教師帳號資訊ToolStripMenuItem
+        '
+        Me.教師帳號資訊ToolStripMenuItem.Name = "教師帳號資訊ToolStripMenuItem"
+        Me.教師帳號資訊ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
+        Me.教師帳號資訊ToolStripMenuItem.Text = "教師帳號資訊"
+        '
+        '學生帳號資訊ToolStripMenuItem
+        '
+        Me.學生帳號資訊ToolStripMenuItem.Name = "學生帳號資訊ToolStripMenuItem"
+        Me.學生帳號資訊ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
+        Me.學生帳號資訊ToolStripMenuItem.Text = "學生帳號資訊"
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(171, 6)
+        '
+        '課程資訊ToolStripMenuItem
+        '
+        Me.課程資訊ToolStripMenuItem.Name = "課程資訊ToolStripMenuItem"
+        Me.課程資訊ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
+        Me.課程資訊ToolStripMenuItem.Text = "課程資訊"
+        '
         'tmrSysTime
         '
         Me.tmrSysTime.Enabled = True
@@ -242,6 +266,7 @@ Partial Class frmServer
         '
         Me.Label2.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.Label2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label2.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
         Me.Label2.Location = New System.Drawing.Point(395, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(386, 20)
@@ -284,47 +309,25 @@ Partial Class frmServer
         '
         Me.cmuRMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuKickClient})
         Me.cmuRMenu.Name = "cmLsvClient"
-        Me.cmuRMenu.Size = New System.Drawing.Size(125, 26)
+        Me.cmuRMenu.Size = New System.Drawing.Size(123, 26)
         '
         'mnuKickClient
         '
         Me.mnuKickClient.Name = "mnuKickClient"
-        Me.mnuKickClient.Size = New System.Drawing.Size(124, 22)
+        Me.mnuKickClient.Size = New System.Drawing.Size(122, 22)
         Me.mnuKickClient.Text = "踢除連線"
         '
         'Label1
         '
         Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.Label1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label1.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
         Me.Label1.Location = New System.Drawing.Point(3, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(386, 20)
         Me.Label1.TabIndex = 3
         Me.Label1.Text = "- 教師上線清單 -"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        '教師帳號資訊ToolStripMenuItem
-        '
-        Me.教師帳號資訊ToolStripMenuItem.Name = "教師帳號資訊ToolStripMenuItem"
-        Me.教師帳號資訊ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
-        Me.教師帳號資訊ToolStripMenuItem.Text = "教師帳號資訊"
-        '
-        '學生帳號資訊ToolStripMenuItem
-        '
-        Me.學生帳號資訊ToolStripMenuItem.Name = "學生帳號資訊ToolStripMenuItem"
-        Me.學生帳號資訊ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
-        Me.學生帳號資訊ToolStripMenuItem.Text = "學生帳號資訊"
-        '
-        'ToolStripMenuItem1
-        '
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(171, 6)
-        '
-        '課程資訊ToolStripMenuItem
-        '
-        Me.課程資訊ToolStripMenuItem.Name = "課程資訊ToolStripMenuItem"
-        Me.課程資訊ToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
-        Me.課程資訊ToolStripMenuItem.Text = "課程資訊"
         '
         'frmServer
         '

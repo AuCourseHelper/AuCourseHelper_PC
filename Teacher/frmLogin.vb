@@ -80,8 +80,8 @@ Public Class frmLogin
                     myProfile.Num = RTrim(tblProfile.Rows(0).Item(1))
                     myProfile.Name = RTrim(tblProfile.Rows(0).Item(2))
                     myProfile.Pwd = RTrim(tblProfile.Rows(0).Item(3))
-                    myProfile.LastLogin = RTrim(tblProfile.Rows(0).Item(4))
-                    myProfile.LastIp = RTrim(tblProfile.Rows(0).Item(5))
+                    myProfile.LastLogin = RTrim(tblProfile.Rows(0).Item(4).ToString)
+                    myProfile.LastIp = RTrim(tblProfile.Rows(0).Item(5).ToString)
                     myProfile.WebSite = RTrim(tblProfile.Rows(0).Item(6).ToString)
                     myProfile.OfficeTime = RTrim(tblProfile.Rows(0).Item(7).ToString)
                 Else
@@ -90,7 +90,14 @@ Public Class frmLogin
                     logout()
                     Exit Sub
                 End If
+
                 ' 取得課程資訊
+                Dim sqlGetCourses = "SELECT * FROM Course WHERE Teacher LIKE '%" & myProfile.Name & "%';"
+                myCourses = doSqlQuery(sqlGetCourses)
+                objFrmTeacher.tsmCourse.DropDownItems.Clear()
+                For Each row As DataRow In myCourses.Rows
+                    objFrmTeacher.tsmCourse.DropDownItems.Add(row.Item(1) & " " & row.Item(4))
+                Next
 
                 objFrmTeacher.tslUserName.Text = myProfile.Name & " 你好!"
                 objFrmTeacher.tmrServerPing.Enabled = True
@@ -100,6 +107,7 @@ Public Class frmLogin
                 objFrmTeacher.mnuSignUp.Enabled = True
                 objFrmTeacher.mnuLogout.Enabled = True
                 Me.Cursor = Cursors.Default
+                MsgBox(myProfile.Name & " 歡迎你!" & vbCrLf & "請至'我的課程'選取課程來授課!!")
                 Me.Hide()
             Case "FAIL"
                 Me.Cursor = Cursors.Default

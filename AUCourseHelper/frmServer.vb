@@ -82,6 +82,9 @@ Public Class frmServer
 
     Private Sub tmrSysTime_Tick(sender As Object, e As EventArgs) Handles tmrSysTime.Tick
         tslSysTime.Text = Now
+        If Now.Hour = 0 And Now.Minute = 0 And Now.Second = 0 Then ' 早上零點更新Log檔名
+            logFilePath = Application.StartupPath & "\logs\log-server-" & Format(Now, "yyyyMMdd") & ".txt"
+        End If
         If Now.Hour = 5 And Now.Minute = 0 And Now.Second = 0 Then ' 早上五點定時排程
             log("==執行系統排程", LogType_SYSTEM)
             ' 重開server，藉此排除登入狀態卡死導致使用者無法再登入
@@ -128,10 +131,10 @@ Public Class frmServer
         Dim logs() = getHistoryLogList()
         mnuViewHistory.DropDownItems.Clear()
         Dim logCount As Integer = 0
-        For Each logFilePath In logs
-            Dim logFileName = logFilePath.Substring(logFilePath.LastIndexOf("\") + 1)
+        For Each logPath In logs
+            Dim logFileName = logPath.Substring(logPath.LastIndexOf("\") + 1)
             mnuViewHistory.DropDownItems.Add(logFileName)
-            mnuViewHistory.DropDownItems.Item(logCount).Tag = logFilePath
+            mnuViewHistory.DropDownItems.Item(logCount).Tag = logPath
             AddHandler mnuViewHistory.DropDownItems.Item(logCount).Click, AddressOf historyLog_View
             logCount += 1
         Next
@@ -139,12 +142,13 @@ Public Class frmServer
 
     Public Sub historyLog_View(sender As Object, e As EventArgs)
         Dim historyLog As ToolStripDropDownItem = sender
+        log("檢視歷史紀錄: " & historyLog.Text, LogType_SYSTEM)
         Dim filePath As String = historyLog.Tag
         System.Diagnostics.Process.Start(filePath)
-        log("檢視歷史紀錄: " & historyLog.Text, LogType_SYSTEM)
     End Sub
 
     Private Sub mnuViewLog_Click(sender As Object, e As EventArgs) Handles mnuViewLog.Click
+        log("檢視執行紀錄", LogType_SYSTEM)
         Dim frmLog As New Form
         Dim txtLog As New RichTextBox()
         txtLog.Text = logData
@@ -155,7 +159,6 @@ Public Class frmServer
         frmLog.Size = New Size(400, 500)
         frmLog.Controls.Add(txtLog)
         frmLog.ShowDialog()
-        log("檢視執行紀錄", LogType_SYSTEM)
     End Sub
 
     Delegate Sub _AddClient(ByVal client As Client)
@@ -181,23 +184,18 @@ Public Class frmServer
         tslOnlineCount.Text = "伺服器：開啟  人數：" & clients.Count & "人"
     End Sub
 
-    Delegate Sub _RemoveAllClient()
-    Public Sub RemoveAllClient()
-        If InvokeRequired Then
-            Invoke(New _RemoveAllClient(AddressOf RemoveAllClient))
-            Exit Sub
-        End If
-
-        lvTeacher.Items.Clear()
-        lvStudent.Items.Clear()
-        tslOnlineCount.Text = "伺服器：開啟  人數：0人"
-    End Sub
-
     Delegate Sub _RemoveClient(ByVal client As Client)
     Public Sub RemoveClient(ByVal client As Client)
         If InvokeRequired Then
             Invoke(New _RemoveClient(AddressOf RemoveClient), client)
             Exit Sub
+        End If
+
+        ' 更新資料庫內登入紀錄
+        If client._type = "T" Then
+            exeCmd(String.Format("UPDATE Teacher SET LastLogin='{0}',LastIp='{1}' WHERE Id='{2}'", client._loginTime, client._ip, client._id))
+        Else
+            exeCmd(String.Format("UPDATE Student SET LastLogin='{0}',LastIp='{1}' WHERE Id='{2}'", client._loginTime, client._ip, client._id))
         End If
 
         For Each item In lvTeacher.Items

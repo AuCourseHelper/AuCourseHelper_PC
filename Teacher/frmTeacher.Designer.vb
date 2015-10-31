@@ -65,7 +65,7 @@ Partial Class frmTeacher
         'mnuMain
         '
         Me.mnuMain.Font = New System.Drawing.Font("微軟正黑體", 12.0!)
-        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmConnection, Me.tsmAccount, Me.tsmCourse, Me.tsmLog, Me.tsmIp})
+        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmConnection, Me.tsmCourse, Me.tsmAccount, Me.tsmLog, Me.tsmIp})
         Me.mnuMain.Location = New System.Drawing.Point(0, 0)
         Me.mnuMain.Name = "mnuMain"
         Me.mnuMain.Size = New System.Drawing.Size(784, 28)
@@ -135,7 +135,7 @@ Partial Class frmTeacher
         Me.tsmCourse.Enabled = False
         Me.tsmCourse.Name = "tsmCourse"
         Me.tsmCourse.Size = New System.Drawing.Size(85, 24)
-        Me.tsmCourse.Text = "課程資訊"
+        Me.tsmCourse.Text = "我的課程"
         '
         'tsmLog
         '

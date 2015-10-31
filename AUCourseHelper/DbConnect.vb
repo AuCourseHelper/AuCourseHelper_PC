@@ -32,7 +32,6 @@ Module DbConnect
             sqlAdapter.Fill(result)
         Catch ex As Exception
             log("資料庫查詢失敗! " & ex.Message, LogType_ERROR)
-            Return Nothing
         End Try
         Return result
     End Function

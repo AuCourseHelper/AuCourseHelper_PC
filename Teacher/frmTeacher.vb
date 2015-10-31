@@ -6,6 +6,7 @@
             e.Cancel = True
             Exit Sub
         End If
+        logout()
         log("====關閉系統====" & vbCrLf, LogType_SYSTEM)
     End Sub
 
@@ -25,6 +26,9 @@
 
     Private Sub tmrSysTime_Tick(sender As Object, e As EventArgs) Handles tmrSysTime.Tick
         tslSysTime.Text = Now
+        If Now.Hour = 0 And Now.Minute = 0 And Now.Second = 0 Then ' 早上零點更新Log檔名
+            logFilePath = Application.StartupPath & "\logs\log-server-" & Format(Now, "yyyyMMdd") & ".txt"
+        End If
     End Sub
 
     Private Sub mnuExit_Click(sender As Object, e As EventArgs) Handles mnuExit.Click
@@ -35,10 +39,10 @@
         Dim logs() = getHistoryLogList()
         mnuViewHistory.DropDownItems.Clear()
         Dim logCount As Integer = 0
-        For Each logFilePath In logs
-            Dim logFileName = logFilePath.Substring(logFilePath.LastIndexOf("\") + 1)
+        For Each logPath In logs
+            Dim logFileName = logPath.Substring(logPath.LastIndexOf("\") + 1)
             mnuViewHistory.DropDownItems.Add(logFileName)
-            mnuViewHistory.DropDownItems.Item(logCount).Tag = logFilePath
+            mnuViewHistory.DropDownItems.Item(logCount).Tag = logPath
             AddHandler mnuViewHistory.DropDownItems.Item(logCount).Click, AddressOf historyLog_View
             logCount += 1
         Next
@@ -46,22 +50,23 @@
 
     Public Sub historyLog_View(sender As Object, e As EventArgs)
         Dim historyLog As ToolStripDropDownItem = sender
+        log("檢視歷史紀錄: " & historyLog.Text, LogType_SYSTEM)
         Dim filePath As String = historyLog.Tag
         System.Diagnostics.Process.Start(filePath)
     End Sub
 
     Private Sub mnuViewLog_Click(sender As Object, e As EventArgs) Handles mnuViewLog.Click
+        log("檢視執行紀錄", LogType_SYSTEM)
         Dim frmLog As New Form
-        Dim log As New RichTextBox()
-        log.Text = logData
-        log.ReadOnly = True
-        log.ScrollBars = RichTextBoxScrollBars.Both
-        log.Dock = DockStyle.Fill
+        Dim txtLog As New RichTextBox()
+        txtLog.Text = logData
+        txtLog.ReadOnly = True
+        txtLog.ScrollBars = RichTextBoxScrollBars.Both
+        txtLog.Dock = DockStyle.Fill
         frmLog.Text = Me.Text & " | 程式執行紀錄"
         frmLog.Size = New Size(400, 500)
-        frmLog.Controls.Add(log)
-        frmLog.StartPosition = FormStartPosition.CenterParent
-        frmLog.ShowDialog(Me)
+        frmLog.Controls.Add(txtLog)
+        frmLog.ShowDialog()
     End Sub
 
     Private Sub mnuLogin_Click(sender As Object, e As EventArgs) Handles mnuLogin.Click
@@ -161,89 +166,6 @@
     End Sub
 
     Private Sub mnuViewProfile_Click(sender As Object, e As EventArgs) Handles mnuViewProfile.Click
-        Dim frmProfile As New Form
-        frmProfile.Size = New Size(500, 300)
-        frmProfile.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedSingle
-        frmProfile.Text = Me.Text & " | 檢視個人資訊"
-        frmProfile.StartPosition = FormStartPosition.CenterParent
-        frmProfile.Font = New Font("", 14)
-
-        Dim pnlTable As New TableLayoutPanel()
-        pnlTable.ColumnCount = 2
-        pnlTable.RowCount = 6
-        pnlTable.Dock = DockStyle.Fill
-        pnlTable.Padding = New Padding(15)
-
-        Dim lbl As Label
-        Dim txt As TextBox
-
-        lbl = New Label()
-        lbl.Dock = DockStyle.Fill
-        lbl.Margin = New Padding(8)
-        lbl.Text = "帳號:"
-        pnlTable.Controls.Add(lbl, 0, 0)
-        txt = New TextBox()
-        txt.Dock = DockStyle.Fill
-        txt.ReadOnly = True
-        txt.Text = myProfile.Num
-        pnlTable.Controls.Add(txt, 1, 0)
-
-        lbl = New Label()
-        lbl.Dock = DockStyle.Fill
-        lbl.Margin = New Padding(8)
-        lbl.Text = "姓名:"
-        pnlTable.Controls.Add(lbl, 0, 1)
-        txt = New TextBox()
-        txt.Dock = DockStyle.Fill
-        txt.ReadOnly = True
-        txt.Text = myProfile.Name
-        pnlTable.Controls.Add(txt, 1, 1)
-
-        lbl = New Label()
-        lbl.Dock = DockStyle.Fill
-        lbl.Margin = New Padding(8)
-        lbl.Text = "上次登入時間:"
-        pnlTable.Controls.Add(lbl, 0, 2)
-        txt = New TextBox()
-        txt.Dock = DockStyle.Fill
-        txt.ReadOnly = True
-        txt.Text = myProfile.LastLogin
-        pnlTable.Controls.Add(txt, 1, 2)
-
-        lbl = New Label()
-        lbl.Dock = DockStyle.Fill
-        lbl.Margin = New Padding(8)
-        lbl.Text = "上次登入位置:"
-        pnlTable.Controls.Add(lbl, 0, 3)
-        txt = New TextBox()
-        txt.Dock = DockStyle.Fill
-        txt.ReadOnly = True
-        txt.Text = myProfile.LastIp
-        pnlTable.Controls.Add(txt, 1, 3)
-
-        lbl = New Label()
-        lbl.Dock = DockStyle.Fill
-        lbl.Margin = New Padding(8)
-        lbl.Text = "個人網站:"
-        pnlTable.Controls.Add(lbl, 0, 4)
-        txt = New TextBox()
-        txt.Dock = DockStyle.Fill
-        txt.ReadOnly = True
-        txt.Text = myProfile.WebSite
-        pnlTable.Controls.Add(txt, 1, 4)
-
-        lbl = New Label()
-        lbl.Dock = DockStyle.Fill
-        lbl.Margin = New Padding(8)
-        lbl.Text = "OfficeHour:"
-        pnlTable.Controls.Add(lbl, 0, 5)
-        txt = New TextBox()
-        txt.Dock = DockStyle.Fill
-        txt.ReadOnly = True
-        txt.Text = myProfile.OfficeTime
-        pnlTable.Controls.Add(txt, 1, 5)
-
-        frmProfile.Controls.Add(pnlTable)
-        frmProfile.ShowDialog(Me)
+        frmMyProfile.ShowDialog(Me)
     End Sub
 End Class

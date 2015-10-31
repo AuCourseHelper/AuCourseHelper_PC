@@ -5,7 +5,7 @@ Module LogFunc
     Public Const LogType_ERROR = 2
     Public Const LogType_SYSTEM = 3
 
-    Private logFilePath As String = Application.StartupPath & "\logs\log-T-" & Format(Now, "yyyyMMdd") & ".txt"
+    Public logFilePath As String = Application.StartupPath & "\logs\log-T-" & Format(Now, "yyyyMMdd") & ".txt"
     Public logData As String = ""
     Private historyLogList() As String
     Private logLock As New Object

@@ -51,12 +51,16 @@ Module ServerSocket
         isServerOn = False
         Try
             For Each client In clients
-                Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("BYE;")
-                client._socket.Send(sendBytes)
+                Try
+                    Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("BYE;")
+                    client._socket.Send(sendBytes)
+                    client._socket.Shutdown(SocketShutdown.Both)
+                    client._socket.Close()
+                    objFrmServer.RemoveClient(client)
+                Catch ex As Exception
+                    log("stopServer異常! IP:" & client._ip & "-" & ex.Message, LogType_ERROR)
+                End Try
                 log("強制踢除: " & client._ip & "-" & client._name, LogType_SYSTEM)
-                client._socket.Shutdown(SocketShutdown.Both)
-                client._socket.Close()
-                objFrmServer.RemoveClient(client)
             Next
             serverSocket.Close()
             serverSocket = Nothing
@@ -89,21 +93,18 @@ Module ServerSocket
 
             If loginStatus <> "" Then
                 returns = loginStatus.Split(";")
-                If checkIfLogined(returns(0), clientUserType) Then ' =====重複登入=====
+
+                ' =====重複登入=====
+                If checkIfLogined(returns(0), clientUserType) Then
                     log(clientIp & ": 帳號" & clientUid & "登入失敗", LogType_NORMAL)
                     ' 重複登入，回傳"RELOGIN"
                     Dim sendBytes_RE As Byte() = Encoding.UTF8.GetBytes("RELOGIN;")
                     clientSocket.Send(sendBytes_RE)
                     ' 關閉連線，結束此socket所有動作
                     clientSocket.Close()
+
                 Else ' =====登入成功=====
-                    ' 更新資料庫內登入紀錄
                     Dim loginTime = Format(Now, "yyyyMMdd-HHmmss")
-                    If clientUserType = "T" Then
-                        exeCmd(String.Format("UPDATE Teacher SET LastLogin='{0}',LastIp='{1}' WHERE Id='{2}'", loginTime, clientIp, returns(0)))
-                    Else
-                        exeCmd(String.Format("UPDATE Student SET LastLogin='{0}',LastIp='{1}' WHERE Id='{2}'", loginTime, clientIp, returns(0)))
-                    End If
 
                     ' 回傳(ID;姓名)
                     Dim sendBytes As Byte() = Encoding.UTF8.GetBytes(returns(0) & ";" & returns(1))
@@ -116,6 +117,7 @@ Module ServerSocket
                     clientSocket.BeginReceive(byteData, 0, byteData.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), clientSocket)
                     log(clientIp & ": " & returns(1) & "登入成功", LogType_NORMAL)
                 End If
+
             Else ' =====登入失敗=====
                 log(clientIp & ": 帳號" & clientUid & "登入失敗", LogType_NORMAL)
                 ' 回傳"loginFail"
@@ -147,6 +149,7 @@ Module ServerSocket
                     log(clientSocket.RemoteEndPoint.ToString & ": 要求測試連線PING", LogType_NORMAL)
                     Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("PONG;")
                     clientSocket.Send(sendBytes)
+
                 Case "LOGOUT" ' 登出
                     log(clientSocket.RemoteEndPoint.ToString & ": 要求LOGOUT", LogType_NORMAL)
                     Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("BYE;")
@@ -155,10 +158,12 @@ Module ServerSocket
                     log(client._ip & ": " & client._name & "已登出", LogType_NORMAL)
 
                     objFrmServer.RemoveClient(client)
+                    clients.Remove(client)
                     clientSocket.Shutdown(SocketShutdown.Both)
                     clientSocket.Close()
                     Exit Sub
-                Case "DBQUERY"
+
+                Case "DBQUERY" ' 資料庫查詢
                     log(clientSocket.RemoteEndPoint.ToString & ": 要求DBQUERY", LogType_NORMAL)
                     clientSocket.Receive(byteData)
                     Dim sql = Encoding.UTF8.GetString(byteData).Split(";")(0)
@@ -172,7 +177,8 @@ Module ServerSocket
                     clientSocket.Send(Encoding.UTF8.GetBytes(ObjectBytes.Length & ";"))
                     Thread.Sleep(500)
                     clientSocket.Send(ObjectBytes)
-                Case "DBCMD"
+
+                Case "DBCMD" ' 資料庫命令
                     log(clientSocket.RemoteEndPoint.ToString & ": 要求DBCMD", LogType_NORMAL)
                     clientSocket.Receive(byteData)
                     Dim sql = Encoding.UTF8.GetString(byteData).Split(";")(0)

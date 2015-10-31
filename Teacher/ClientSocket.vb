@@ -17,6 +17,7 @@ Module SocketProcess
     Public isLogin As Boolean = False
 
     Public myProfile As New TeacherProfile
+    Public myCourses As New DataTable
 
     Public Function GetIPaddress() As String
         Dim myHost As String = System.Net.Dns.GetHostName
@@ -74,27 +75,33 @@ Module SocketProcess
                     isLogoutIng = False
                     clientSocket.Close()
                     myProfile = New TeacherProfile
+                    myCourses = New DataTable
                     Exit Sub
                 Case "DATATABLE" ' 承接回傳的DB查詢
-                    clientSocket.Receive(byteData)
-                    Dim size = Encoding.UTF8.GetString(byteData).Split(";")(0)
-                    Dim i = clientSocket.Receive(byteData)
-                    ' 反序列化DataTable
-                    Dim bf As New BinaryFormatter()
-                    Dim ms As New MemoryStream(CInt(size))
-                    ms.Write(byteData, 0, i)
-                    ms.Flush()
-                    Thread.Sleep(200)
-                    While i = 8192
-                        i = clientSocket.Receive(byteData)
-                        If i > 0 Then
-                            ms.Write(byteData, 0, i)
-                            ms.Flush()
-                            Thread.Sleep(200)
-                        End If
-                    End While
-                    ms.Seek(0, SeekOrigin.Begin)
-                    resultDataTable = bf.Deserialize(ms)
+                    Try
+                        clientSocket.Receive(byteData)
+                        Dim size = Encoding.UTF8.GetString(byteData).Split(";")(0)
+                        Dim i = clientSocket.Receive(byteData)
+                        ' 反序列化DataTable
+                        Dim bf As New BinaryFormatter()
+                        Dim ms As New MemoryStream(CInt(size))
+                        ms.Write(byteData, 0, i)
+                        ms.Flush()
+                        Thread.Sleep(200)
+                        While i = 8192
+                            i = clientSocket.Receive(byteData)
+                            If i > 0 Then
+                                ms.Write(byteData, 0, i)
+                                ms.Flush()
+                                Thread.Sleep(200)
+                            End If
+                        End While
+                        ms.Seek(0, SeekOrigin.Begin)
+                        resultDataTable = bf.Deserialize(ms)
+                    Catch ex As Exception
+                        resultDataTable = New DataTable
+                        log("接收DB回傳資料異常! " & ex.Message, LogType_ERROR)
+                    End Try
                 Case "DBCMDRESULT" ' 判斷資料庫命令執行狀態
                     clientSocket.Receive(byteData)
                     resultDbCmd = Encoding.UTF8.GetString(byteData)
@@ -102,7 +109,6 @@ Module SocketProcess
 
             clientSocket.BeginReceive(byteData, 0, byteData.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), clientSocket)
         Catch ex As Exception
-            resultDataTable = New DataTable
             log("接收資料異常! " & ex.Message, LogType_ERROR)
             Exit Sub
         End Try
