@@ -6,7 +6,7 @@ Imports System.Management
 Imports System.Text
 
 Public Class frmServer
-    Public version = "1.0.151028"
+    Public version = "1.0.151101"
     'Dim p As Process
 
     Private Sub frmServer_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -59,13 +59,6 @@ Public Class frmServer
 
         openDb()
         mnuStart.PerformClick()
-
-        'Me.MaximizeBox = False
-        'Me.MinimizeBox = False
-        'Me.TopMost = True
-        'Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
-        'Me.WindowState = FormWindowState.Maximized
-
         'p = System.Diagnostics.Process.Start(Application.StartupPath & "\KCProxy.exe")
         'Dim strKey As String
         'strKey = "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings"
@@ -82,14 +75,33 @@ Public Class frmServer
 
     Private Sub tmrSysTime_Tick(sender As Object, e As EventArgs) Handles tmrSysTime.Tick
         tslSysTime.Text = Now
-        If Now.Hour = 0 And Now.Minute = 0 And Now.Second = 0 Then ' 早上零點更新Log檔名
+
+        ' 早上零點更新Log檔名
+        If Now.Hour = 0 And Now.Minute = 0 And Now.Second = 0 Then
             logFilePath = Application.StartupPath & "\logs\log-server-" & Format(Now, "yyyyMMdd") & ".txt"
         End If
-        If Now.Hour = 5 And Now.Minute = 0 And Now.Second = 0 Then ' 早上五點定時排程
-            log("==執行系統排程", LogType_SYSTEM)
+
+        ' 早上五點定時排程，重開伺服器
+        If Now.Hour = 5 And Now.Minute = 0 And Now.Second = 0 Then
+            log("==執行系統排程，重啟伺服器", LogType_SYSTEM)
             ' 重開server，藉此排除登入狀態卡死導致使用者無法再登入
             stopServer()
             startServer()
+        End If
+
+        ' 每10分鐘踢除閒置超過10分鐘的連線
+        log("==執行系統排程，踢除閒置10分鐘連線", LogType_SYSTEM)
+        If Now.Minute Mod 10 = 0 And Now.Second = 0 Then
+            For i As Integer = 0 To clients.Count - 1
+                Dim client = clients.ElementAt(i)
+                If Now.Subtract(client._eventTime).Minutes >= 10 Then
+                    client._socket.Close()
+                    RemoveClient(client)
+                    clients.Remove(client)
+                Else
+                    i += 1
+                End If
+            Next
         End If
     End Sub
 

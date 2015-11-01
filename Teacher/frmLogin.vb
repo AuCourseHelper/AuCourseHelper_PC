@@ -70,7 +70,13 @@ Public Class frmLogin
             Exit Sub
         End If
 
-        Me.Cursor = Cursors.WaitCursor
+        Dim t As New Thread(AddressOf doLogin)
+        t.Start()
+        frmProgress.ShowDialog(Me)
+        Me.Hide()
+    End Sub
+
+    Private Sub doLogin()
         Select Case connectAndLogin(txtUid.Text, txtPwd.Text)
             Case "SUCCESS"
                 ' 取得帳號資訊
@@ -94,33 +100,28 @@ Public Class frmLogin
                 ' 取得課程資訊
                 Dim sqlGetCourses = "SELECT * FROM Course WHERE Teacher LIKE '%" & myProfile.Name & "%';"
                 myCourses = doSqlQuery(sqlGetCourses)
-                objFrmTeacher.tsmCourse.DropDownItems.Clear()
-                For Each row As DataRow In myCourses.Rows
-                    objFrmTeacher.tsmCourse.DropDownItems.Add(row.Item(1) & " " & row.Item(4))
-                Next
+                Dim c() = {myCourses.Columns(0)}
+                myCourses.PrimaryKey = c
 
-                objFrmTeacher.tslUserName.Text = myProfile.Name & " 你好!"
-                objFrmTeacher.tmrServerPing.Enabled = True
-                objFrmTeacher.tsmAccount.Enabled = True
-                objFrmTeacher.tsmCourse.Enabled = True
-                objFrmTeacher.mnuLogin.Enabled = False
-                objFrmTeacher.mnuSignUp.Enabled = True
-                objFrmTeacher.mnuLogout.Enabled = True
-                Me.Cursor = Cursors.Default
                 MsgBox(myProfile.Name & " 歡迎你!" & vbCrLf & "請至'我的課程'選取課程來授課!!")
-                Me.Hide()
             Case "FAIL"
-                Me.Cursor = Cursors.Default
                 MsgBox("登入失敗! 帳號或密碼錯誤")
             Case "RELOGIN"
-                Me.Cursor = Cursors.Default
                 MsgBox("登入失敗! 帳號重覆登入")
             Case "TIMEOUT"
-                Me.Cursor = Cursors.Default
                 MsgBox("無法連線!" & vbCrLf & "伺服器可能斷線或未開啟")
         End Select
+        doUiLogin()
+    End Sub
+
+    Delegate Sub _doUiLogin()
+    Private Sub doUiLogin()
+        If InvokeRequired Then
+            Invoke(New _doUiLogin(AddressOf doUiLogin))
+        End If
 
         txtPwd.Text = ""
+        frmProgress.Dispose()
     End Sub
 
     Private Sub chkShowPwd_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowPwd.CheckedChanged

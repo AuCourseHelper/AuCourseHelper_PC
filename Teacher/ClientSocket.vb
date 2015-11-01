@@ -18,6 +18,7 @@ Module SocketProcess
 
     Public myProfile As New TeacherProfile
     Public myCourses As New DataTable
+    Public nowCourse As DataRow
 
     Public Function GetIPaddress() As String
         Dim myHost As String = System.Net.Dns.GetHostName
@@ -54,8 +55,8 @@ Module SocketProcess
 
     Private Sub OnRecieve(ByVal ar As IAsyncResult)
         Dim clientSocket As Socket = ar.AsyncState
-        clientSocket.EndReceive(ar)
         Try
+            clientSocket.EndReceive(ar)
             ' 讀取對方要求
             Dim returnFunc = Encoding.UTF8.GetString(byteData).Split(";")(0)
 
@@ -76,6 +77,7 @@ Module SocketProcess
                     clientSocket.Close()
                     myProfile = New TeacherProfile
                     myCourses = New DataTable
+                    nowCourse = Nothing
                     Exit Sub
                 Case "DATATABLE" ' 承接回傳的DB查詢
                     Try
@@ -115,11 +117,10 @@ Module SocketProcess
     End Sub
 
     Public Function connectAndLogin(ByVal uid As String, ByVal pwd As String) As String
-        Dim ip As New IPEndPoint(Net.IPAddress.Parse(serverIp), 5566)
-        clientSocket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-        Dim dataLength = 0
-
         Try
+            Dim ip As New IPEndPoint(Net.IPAddress.Parse(serverIp), 5566)
+            clientSocket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+            Dim dataLength = 0
             clientSocket.ReceiveTimeout = 7000
             clientSocket.SendTimeout = 7000
             clientSocket.Connect(ip)

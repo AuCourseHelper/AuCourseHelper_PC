@@ -139,6 +139,7 @@ Module ServerSocket
 
     Private Sub OnRecieve(ByVal ar As IAsyncResult)
         Dim clientSocket As Socket = ar.AsyncState
+        getClientInfo(clientSocket)._eventTime = Now
         Try
             clientSocket.EndReceive(ar)
             ' 讀取對方要求
@@ -242,6 +243,7 @@ Public Class Client
     Property _name As String
     Property _type As String
     Property _loginTime As String
+    Property _eventTime As Date
 
     Public Sub New(ByVal socket As Socket, ByVal ip As String, ByVal id As String, ByVal name As String, ByVal type As String, ByVal loginTime As String)
         _socket = socket
@@ -250,5 +252,6 @@ Public Class Client
         _name = name
         _type = type
         _loginTime = loginTime
+        _eventTime = Now
     End Sub
 End Class

@@ -31,10 +31,10 @@ Partial Class frmTeacher
         Me.mnuLogout = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuExit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmCourse = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmAccount = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewProfile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditProfile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tsmCourse = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmLog = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewLog = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewHistory = New System.Windows.Forms.ToolStripMenuItem()
@@ -46,7 +46,7 @@ Partial Class frmTeacher
         Me.tslStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tslUserName = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tslSysTime = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.mnuCourseTool = New System.Windows.Forms.ToolStrip()
         Me.tslCourseName = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.tslAttend = New System.Windows.Forms.ToolStripButton()
@@ -59,7 +59,7 @@ Partial Class frmTeacher
         Me.tmrServerPing = New System.Windows.Forms.Timer(Me.components)
         Me.mnuMain.SuspendLayout()
         Me.stpMain.SuspendLayout()
-        Me.ToolStrip1.SuspendLayout()
+        Me.mnuCourseTool.SuspendLayout()
         Me.SuspendLayout()
         '
         'mnuMain
@@ -110,6 +110,13 @@ Partial Class frmTeacher
         Me.mnuExit.Size = New System.Drawing.Size(174, 24)
         Me.mnuExit.Text = "結束"
         '
+        'tsmCourse
+        '
+        Me.tsmCourse.Enabled = False
+        Me.tsmCourse.Name = "tsmCourse"
+        Me.tsmCourse.Size = New System.Drawing.Size(85, 24)
+        Me.tsmCourse.Text = "我的課程"
+        '
         'tsmAccount
         '
         Me.tsmAccount.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewProfile, Me.mnuEditProfile})
@@ -129,13 +136,6 @@ Partial Class frmTeacher
         Me.mnuEditProfile.Name = "mnuEditProfile"
         Me.mnuEditProfile.Size = New System.Drawing.Size(174, 24)
         Me.mnuEditProfile.Text = "修改個人資訊"
-        '
-        'tsmCourse
-        '
-        Me.tsmCourse.Enabled = False
-        Me.tsmCourse.Name = "tsmCourse"
-        Me.tsmCourse.Size = New System.Drawing.Size(85, 24)
-        Me.tsmCourse.Text = "我的課程"
         '
         'tsmLog
         '
@@ -218,19 +218,21 @@ Partial Class frmTeacher
         Me.tslSysTime.Size = New System.Drawing.Size(82, 18)
         Me.tslSysTime.Text = "#系統時間#"
         '
-        'ToolStrip1
+        'mnuCourseTool
         '
-        Me.ToolStrip1.Enabled = False
-        Me.ToolStrip1.Font = New System.Drawing.Font("微軟正黑體", 14.0!)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslCourseName, Me.ToolStripSeparator1, Me.tslAttend, Me.tslScore, Me.tslHomeWork, Me.tslExam, Me.tslReport})
-        Me.ToolStrip1.Location = New System.Drawing.Point(0, 28)
-        Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(784, 31)
-        Me.ToolStrip1.TabIndex = 3
-        Me.ToolStrip1.Text = "tlsMain"
+        Me.mnuCourseTool.Enabled = False
+        Me.mnuCourseTool.Font = New System.Drawing.Font("微軟正黑體", 14.0!)
+        Me.mnuCourseTool.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslCourseName, Me.ToolStripSeparator1, Me.tslAttend, Me.tslScore, Me.tslHomeWork, Me.tslExam, Me.tslReport})
+        Me.mnuCourseTool.Location = New System.Drawing.Point(0, 28)
+        Me.mnuCourseTool.Name = "mnuCourseTool"
+        Me.mnuCourseTool.Size = New System.Drawing.Size(784, 31)
+        Me.mnuCourseTool.TabIndex = 3
+        Me.mnuCourseTool.Text = "tlsMain"
         '
         'tslCourseName
         '
+        Me.tslCourseName.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.tslCourseName.ForeColor = System.Drawing.Color.Green
         Me.tslCourseName.Name = "tslCourseName"
         Me.tslCourseName.Size = New System.Drawing.Size(86, 28)
         Me.tslCourseName.Text = "課程名稱"
@@ -296,7 +298,7 @@ Partial Class frmTeacher
         '
         'tmrServerPing
         '
-        Me.tmrServerPing.Interval = 30000
+        Me.tmrServerPing.Interval = 60000
         '
         'frmTeacher
         '
@@ -304,7 +306,7 @@ Partial Class frmTeacher
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(784, 562)
         Me.Controls.Add(Me.pnlMain)
-        Me.Controls.Add(Me.ToolStrip1)
+        Me.Controls.Add(Me.mnuCourseTool)
         Me.Controls.Add(Me.stpMain)
         Me.Controls.Add(Me.mnuMain)
         Me.MainMenuStrip = Me.mnuMain
@@ -316,8 +318,8 @@ Partial Class frmTeacher
         Me.mnuMain.PerformLayout()
         Me.stpMain.ResumeLayout(False)
         Me.stpMain.PerformLayout()
-        Me.ToolStrip1.ResumeLayout(False)
-        Me.ToolStrip1.PerformLayout()
+        Me.mnuCourseTool.ResumeLayout(False)
+        Me.mnuCourseTool.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -328,7 +330,7 @@ Partial Class frmTeacher
     Friend WithEvents tslStatus As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents tslUserName As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents tslSysTime As System.Windows.Forms.ToolStripStatusLabel
-    Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
+    Friend WithEvents mnuCourseTool As System.Windows.Forms.ToolStrip
     Friend WithEvents tsmConnection As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuLogin As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuSignUp As System.Windows.Forms.ToolStripMenuItem

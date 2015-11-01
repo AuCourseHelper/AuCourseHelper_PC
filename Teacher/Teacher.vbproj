@@ -74,6 +74,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientSocket.vb" />
+    <Compile Include="frmAttend.Designer.vb">
+      <DependentUpon>frmAttend.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAttend.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmLogin.Designer.vb">
       <DependentUpon>frmLogin.vb</DependentUpon>
     </Compile>
@@ -84,6 +90,12 @@
       <DependentUpon>frmMyProfile.vb</DependentUpon>
     </Compile>
     <Compile Include="frmMyProfile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProgress.Designer.vb">
+      <DependentUpon>frmProgress.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmProgress.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmSignUp.Designer.vb">
@@ -117,11 +129,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmAttend.resx">
+      <DependentUpon>frmAttend.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMyProfile.resx">
       <DependentUpon>frmMyProfile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProgress.resx">
+      <DependentUpon>frmProgress.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSignUp.resx">
       <DependentUpon>frmSignUp.vb</DependentUpon>

@@ -15,12 +15,18 @@
         log("====執行系統====", LogType_SYSTEM)
         log("==教師端", LogType_SYSTEM)
         log("==版本號:" & version, LogType_SYSTEM)
-        If GetRealIPaddress() <> GetIPaddress() Then
-            tsmIp.Text = "區網IP: " & GetIPaddress() & " - 對外IP: " & GetRealIPaddress()
-        Else
-            tsmIp.Text = "IP: " & GetRealIPaddress()
-        End If
+        Try
+            If GetRealIPaddress() <> GetIPaddress() Then
+                tsmIp.Text = "區網IP: " & GetIPaddress() & " - 對外IP: " & GetRealIPaddress()
+            Else
+                tsmIp.Text = "IP: " & GetRealIPaddress()
+            End If
+        Catch ex As Exception
+            MsgBox("請確認電腦的網際網路連線狀態!!!")
+            Application.Exit()
+        End Try
         log("==" & tsmIp.Text, LogType_SYSTEM)
+        Me.Text &= "(" & version & ")"
         tslSysTime.Text = Now
     End Sub
 
@@ -48,7 +54,7 @@
         Next
     End Sub
 
-    Public Sub historyLog_View(sender As Object, e As EventArgs)
+    Private Sub historyLog_View(sender As Object, e As EventArgs)
         Dim historyLog As ToolStripDropDownItem = sender
         log("檢視歷史紀錄: " & historyLog.Text, LogType_SYSTEM)
         Dim filePath As String = historyLog.Tag
@@ -63,7 +69,7 @@
         txtLog.ReadOnly = True
         txtLog.ScrollBars = RichTextBoxScrollBars.Both
         txtLog.Dock = DockStyle.Fill
-        frmLog.Text = Me.Text & " | 程式執行紀錄"
+        frmLog.Text = "課堂輔助系統-教師端 | 程式執行紀錄"
         frmLog.Size = New Size(400, 500)
         frmLog.Controls.Add(txtLog)
         frmLog.ShowDialog()
@@ -72,10 +78,37 @@
     Private Sub mnuLogin_Click(sender As Object, e As EventArgs) Handles mnuLogin.Click
         log("開啟登入視窗", LogType_NORMAL)
         frmLogin.ShowDialog(Me)
+        If isLogin Then
+            objFrmTeacher.tsmCourse.DropDownItems.Clear()
+            Dim index = 0
+            For Each row As DataRow In myCourses.Rows
+                tsmCourse.DropDownItems.Add(row.Item(1) & " " & row.Item(4))
+                tsmCourse.DropDownItems(index).Tag = row.Item(0) ' 課程ID
+                AddHandler tsmCourse.DropDownItems.Item(index).Click, AddressOf course_Choose
+                index += 1
+            Next
+
+            tslUserName.Text = myProfile.Name & " 你好!"
+            tmrServerPing.Enabled = True
+            tsmAccount.Enabled = True
+            tsmCourse.Enabled = True
+            mnuLogin.Enabled = False
+            mnuSignUp.Enabled = True
+            mnuLogout.Enabled = True
+        End If
+    End Sub
+
+    Private Sub course_Choose(sender As Object, e As EventArgs)
+        Dim courseItem As ToolStripDropDownItem = sender
+        Dim courseRow As DataRow = myCourses.Rows.Find(courseItem.Tag)
+        tslCourseName.Text = Trim(courseRow.Item(4))
+        tslCourseName.Tag = courseRow
+        nowCourse = courseRow
+        mnuCourseTool.Enabled = True
     End Sub
 
     Private Sub tmrServerPing_Tick(sender As Object, e As EventArgs) Handles tmrServerPing.Tick
-        ' 每30秒檢查一次伺服器連線狀態
+        ' 每60秒檢查一次伺服器連線狀態
         log("==連線檢查", LogType_SYSTEM)
         If Not connectStatusTest() Then
             ' 斷線處理
@@ -152,7 +185,7 @@
         d.Refresh()
         d.AutoResizeColumns()
         Dim frmLog As New Form
-        frmLog.Text = Me.Text & " | 程式執行紀錄"
+        frmLog.Text = "課程輔助系統-教師端 | 程式執行紀錄"
         frmLog.Size = New Size(400, 500)
         frmLog.Controls.Add(d)
         frmLog.StartPosition = FormStartPosition.CenterParent
@@ -167,5 +200,14 @@
 
     Private Sub mnuViewProfile_Click(sender As Object, e As EventArgs) Handles mnuViewProfile.Click
         frmMyProfile.ShowDialog(Me)
+    End Sub
+
+    Private Sub tslAttend_Click(sender As Object, e As EventArgs) Handles tslAttend.Click
+        tslAttend.BackColor = Color.BurlyWood
+        tslAttend.Checked = True
+        frmAttend.TopLevel = False
+        frmAttend.Dock = DockStyle.Fill
+        pnlMain.Controls.Add(frmAttend)
+        frmAttend.Show()
     End Sub
 End Class
