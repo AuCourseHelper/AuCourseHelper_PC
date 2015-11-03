@@ -42,7 +42,16 @@ Public Class frmSignUp
 
 
 
-        Dim sql = "SELECT "
+        Dim sql = "SELECT MAX(Num) FROM Teacher WHERE Num LIKE '%TA%');"
+        Dim result As DataTable = doSqlQuery(sql & ";")
+        Dim newNum As Integer = 0
+        'If result = Null Then
+        '    newNum = 1
+        'Else
+        '    Dim newNum As Integer = Replace((result.ToString), "TA", "")
+        '    newNum += newNum
+        'End If
+        
 
 
 
