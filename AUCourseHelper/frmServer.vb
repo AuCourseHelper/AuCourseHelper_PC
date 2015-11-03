@@ -90,11 +90,12 @@ Public Class frmServer
         End If
 
         ' 每10分鐘踢除閒置超過10分鐘的連線
-        log("==執行系統排程，踢除閒置10分鐘連線", LogType_SYSTEM)
-        If Now.Minute Mod 10 = 0 And Now.Second = 0 Then
+        If (Now.Minute Mod 10) = 0 And Now.Second = 0 Then
+            log("==執行系統排程，踢除閒置10分鐘連線", LogType_SYSTEM)
             For i As Integer = 0 To clients.Count - 1
                 Dim client = clients.ElementAt(i)
                 If Now.Subtract(client._eventTime).Minutes >= 10 Then
+                    log("踢除閒置連線: " & client._ip & client._name, LogType_NORMAL)
                     client._socket.Close()
                     RemoveClient(client)
                     clients.Remove(client)
