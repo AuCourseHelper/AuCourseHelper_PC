@@ -14,9 +14,10 @@ Module SocketProcess
     Private byteData(8191) As Byte
     Private pong As Boolean = False
     Private isLogoutIng As Boolean = False
-    Private resultDataTable As New DataTable
+    Private resultDataTable As DataTable = Nothing
     Public resultDbCmd As String = ""
     Public isLogin As Boolean = False
+    Public isDeserializeFail = False
 
     Public myProfile As New TeacherProfile
     Public myCourses As New DataTable
@@ -86,6 +87,7 @@ Module SocketProcess
                         clientSocket.Receive(byteData)
                         Dim size = Encoding.UTF8.GetString(byteData).Split(";")(0)
                         Dim i = clientSocket.Receive(byteData)
+                        byteData.Initialize()
                         ' 反序列化DataTable
                         Dim bf As New BinaryFormatter()
                         Dim ms As New MemoryStream(CInt(size))
@@ -94,6 +96,7 @@ Module SocketProcess
                         Thread.Sleep(200)
                         While i = 8192
                             i = clientSocket.Receive(byteData)
+                            byteData.Initialize()
                             If i > 0 Then
                                 ms.Write(byteData, 0, i)
                                 ms.Flush()
@@ -104,6 +107,7 @@ Module SocketProcess
                         resultDataTable = bf.Deserialize(ms)
                     Catch ex As Exception
                         resultDataTable = New DataTable
+                        isDeserializeFail = True
                         log("接收DB回傳資料異常! " & ex.Message, LogType_ERROR)
                     End Try
                 Case "DBCMDRESULT" ' 判斷資料庫命令執行狀態
@@ -173,13 +177,24 @@ Module SocketProcess
 
     Public Function doSqlQuery(ByVal sql As String) As DataTable
         Dim tryCount = 0
-RE:     Try
-            resultDataTable = Nothing
+        Try
+RE:         resultDataTable = Nothing
+            isDeserializeFail = False
             clientSocket.Send(Encoding.UTF8.GetBytes("DBQUERY;"))
             clientSocket.Send(Encoding.UTF8.GetBytes(sql))
             While resultDataTable Is Nothing
                 Thread.Sleep(100)
             End While
+            If isDeserializeFail Then
+                If tryCount < RETRYTIMES Then
+                    log("重新傳送DBQUERY", LogType_NORMAL)
+                    tryCount += 1
+                    GoTo RE
+                Else
+                    log("傳送DBQUERY出錯3次，斷線處理!!", LogType_ERROR)
+                    logout()
+                End If
+            End If
         Catch ex As Exception
             log("傳送DBQUERY出錯: " & ex.Message, LogType_ERROR)
             If tryCount < RETRYTIMES Then

@@ -2,8 +2,10 @@
 
 Public Class frmAttend
     Dim students As DataTable = Nothing
+    Dim isEdited As Boolean = False
 
     Private Sub frmAttend_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Dim resizer As New Resizer(Me, True, 0)
         Dim t As New Thread(AddressOf doGetStudents)
         t.Start()
         frmProgress.ShowDialog(Me)
