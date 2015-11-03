@@ -91,7 +91,6 @@ Public Class frmLogin
                     myProfile.WebSite = RTrim(tblProfile.Rows(0).Item(6).ToString)
                     myProfile.OfficeTime = RTrim(tblProfile.Rows(0).Item(7).ToString)
                 Else
-                    Me.Cursor = Cursors.Default
                     MsgBox("登入失敗! 無法取得帳號詳細資訊")
                     logout()
                     Exit Sub

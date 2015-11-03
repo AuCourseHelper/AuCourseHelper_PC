@@ -23,26 +23,26 @@ Partial Class frmAttend
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.tabMain = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.tabTable = New System.Windows.Forms.TabPage()
         Me.pnlMain = New System.Windows.Forms.Panel()
         Me.tblMain = New System.Windows.Forms.DataGridView()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.tabSeat = New System.Windows.Forms.TabPage()
         Me.pnlMain_seat = New System.Windows.Forms.Panel()
         Me.pnlButtons = New System.Windows.Forms.Panel()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.tabMain.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
+        Me.tabTable.SuspendLayout()
         Me.pnlMain.SuspendLayout()
         CType(Me.tblMain, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage2.SuspendLayout()
+        Me.tabSeat.SuspendLayout()
         Me.pnlButtons.SuspendLayout()
         Me.SuspendLayout()
         '
         'tabMain
         '
-        Me.tabMain.Controls.Add(Me.TabPage1)
-        Me.tabMain.Controls.Add(Me.TabPage2)
+        Me.tabMain.Controls.Add(Me.tabTable)
+        Me.tabMain.Controls.Add(Me.tabSeat)
         Me.tabMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabMain.Location = New System.Drawing.Point(0, 0)
         Me.tabMain.Name = "tabMain"
@@ -50,17 +50,17 @@ Partial Class frmAttend
         Me.tabMain.Size = New System.Drawing.Size(768, 391)
         Me.tabMain.TabIndex = 0
         '
-        'TabPage1
+        'tabTable
         '
-        Me.TabPage1.Controls.Add(Me.pnlMain)
-        Me.TabPage1.Font = New System.Drawing.Font("新細明體", 12.0!)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(760, 365)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "表格檢視"
-        Me.TabPage1.UseVisualStyleBackColor = True
+        Me.tabTable.Controls.Add(Me.pnlMain)
+        Me.tabTable.Font = New System.Drawing.Font("新細明體", 12.0!)
+        Me.tabTable.Location = New System.Drawing.Point(4, 22)
+        Me.tabTable.Name = "tabTable"
+        Me.tabTable.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabTable.Size = New System.Drawing.Size(760, 365)
+        Me.tabTable.TabIndex = 0
+        Me.tabTable.Text = "表格檢視"
+        Me.tabTable.UseVisualStyleBackColor = True
         '
         'pnlMain
         '
@@ -83,17 +83,17 @@ Partial Class frmAttend
         Me.tblMain.Size = New System.Drawing.Size(754, 359)
         Me.tblMain.TabIndex = 0
         '
-        'TabPage2
+        'tabSeat
         '
-        Me.TabPage2.Controls.Add(Me.pnlMain_seat)
-        Me.TabPage2.Font = New System.Drawing.Font("新細明體", 12.0!)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(760, 365)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "座位表檢視"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        Me.tabSeat.Controls.Add(Me.pnlMain_seat)
+        Me.tabSeat.Font = New System.Drawing.Font("新細明體", 12.0!)
+        Me.tabSeat.Location = New System.Drawing.Point(4, 22)
+        Me.tabSeat.Name = "tabSeat"
+        Me.tabSeat.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabSeat.Size = New System.Drawing.Size(760, 365)
+        Me.tabSeat.TabIndex = 1
+        Me.tabSeat.Text = "座位表檢視"
+        Me.tabSeat.UseVisualStyleBackColor = True
         '
         'pnlMain_seat
         '
@@ -143,18 +143,18 @@ Partial Class frmAttend
         Me.Name = "frmAttend"
         Me.Text = "frmAttend"
         Me.tabMain.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
+        Me.tabTable.ResumeLayout(False)
         Me.pnlMain.ResumeLayout(False)
         CType(Me.tblMain, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage2.ResumeLayout(False)
+        Me.tabSeat.ResumeLayout(False)
         Me.pnlButtons.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents tabMain As System.Windows.Forms.TabControl
-    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
+    Friend WithEvents tabTable As System.Windows.Forms.TabPage
     Friend WithEvents pnlMain As System.Windows.Forms.Panel
-    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
+    Friend WithEvents tabSeat As System.Windows.Forms.TabPage
     Friend WithEvents pnlMain_seat As System.Windows.Forms.Panel
     Friend WithEvents pnlButtons As System.Windows.Forms.Panel
     Friend WithEvents tblMain As System.Windows.Forms.DataGridView

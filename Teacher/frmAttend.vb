@@ -1,7 +1,7 @@
 ﻿Imports System.Threading
 
 Public Class frmAttend
-    Dim students As New DataTable
+    Dim students As DataTable = Nothing
 
     Private Sub frmAttend_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim t As New Thread(AddressOf doGetStudents)
@@ -14,6 +14,9 @@ Public Class frmAttend
                                  & "FROM Student s,CourseStudent cs " _
                                  & "WHERE cs.CourseId={0} AND cs.StudentNum=s.Num;", nowCourse.Item(0))
         students = doSqlQuery(sqlGetCourseStudents)
+        If students Is Nothing Then
+            logout()
+        End If
         doUiGetStudents()
     End Sub
 
@@ -27,4 +30,14 @@ Public Class frmAttend
         frmProgress.Dispose()
     End Sub
 
+    Private Sub tabMain_Selected(sender As Object, e As TabControlEventArgs) Handles tabMain.Selected
+        Select Case e.TabPage.Name
+            Case "tabTable"
+                Dim t As New Thread(AddressOf doGetStudents)
+                t.Start()
+                frmProgress.ShowDialog(Me)
+            Case "tabSeat"
+
+        End Select
+    End Sub
 End Class

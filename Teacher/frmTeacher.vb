@@ -79,7 +79,7 @@
         log("開啟登入視窗", LogType_NORMAL)
         frmLogin.ShowDialog(Me)
         If isLogin Then
-            objFrmTeacher.tsmCourse.DropDownItems.Clear()
+            tsmCourse.DropDownItems.Clear()
             Dim index = 0
             For Each row As DataRow In myCourses.Rows
                 tsmCourse.DropDownItems.Add(row.Item(1) & " " & row.Item(4))
@@ -138,6 +138,12 @@
         mnuSignUp.Enabled = False
         mnuLogout.Enabled = False
         tslUserName.Text = "尚未登入"
+        tslCourseName.Text = "請先選擇課程"
+        mnuCourseTool.Enabled = False
+        For Each tsi As ToolStripItem In mnuCourseTool.Items
+            tsi.BackColor = Nothing
+        Next
+        pnlMain.Controls.Clear()
     End Sub
 
     Private Sub mnuLogout_Click(sender As Object, e As EventArgs) Handles mnuLogout.Click
@@ -204,7 +210,7 @@
 
     Private Sub tslAttend_Click(sender As Object, e As EventArgs) Handles tslAttend.Click
         tslAttend.BackColor = Color.BurlyWood
-        tslAttend.Checked = True
+        frmAttend.Dispose()
         frmAttend.TopLevel = False
         frmAttend.Dock = DockStyle.Fill
         pnlMain.Controls.Add(frmAttend)

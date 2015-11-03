@@ -6,6 +6,8 @@ Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.IO
 
 Module SocketProcess
+    Public Const RETRYTIMES = 3
+
     Public objFrmTeacher As frmTeacher
     Public serverIp As String = "192.192.122.202"
     Public clientSocket As Socket
@@ -170,15 +172,24 @@ Module SocketProcess
     End Sub
 
     Public Function doSqlQuery(ByVal sql As String) As DataTable
-        Try
+        Dim tryCount = 0
+RE:     Try
             resultDataTable = Nothing
             clientSocket.Send(Encoding.UTF8.GetBytes("DBQUERY;"))
             clientSocket.Send(Encoding.UTF8.GetBytes(sql))
             While resultDataTable Is Nothing
-                Thread.Sleep(200)
+                Thread.Sleep(100)
             End While
         Catch ex As Exception
             log("傳送DBQUERY出錯: " & ex.Message, LogType_ERROR)
+            If tryCount < RETRYTIMES Then
+                log("重新傳送DBQUERY: " & ex.Message, LogType_NORMAL)
+                tryCount += 1
+                GoTo RE
+            Else
+                log("傳送DBQUERY出錯3次，斷線處理!!", LogType_ERROR)
+                logout()
+            End If
         End Try
 
         Return resultDataTable

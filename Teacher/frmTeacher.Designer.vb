@@ -234,8 +234,8 @@ Partial Class frmTeacher
         Me.tslCourseName.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.tslCourseName.ForeColor = System.Drawing.Color.Green
         Me.tslCourseName.Name = "tslCourseName"
-        Me.tslCourseName.Size = New System.Drawing.Size(86, 28)
-        Me.tslCourseName.Text = "課程名稱"
+        Me.tslCourseName.Size = New System.Drawing.Size(124, 28)
+        Me.tslCourseName.Text = "請先選擇課程"
         '
         'ToolStripSeparator1
         '
