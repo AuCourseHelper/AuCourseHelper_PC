@@ -39,6 +39,35 @@ Public Class frmSignUp
     End Sub
 
     Private Sub btnSign_Click(sender As Object, e As EventArgs) Handles btnSign.Click
+
+
+
+        Dim sql = "SELECT "
+
+
+
+        'Dim userInfo As String = ""
+        'Select Case userType
+        '    Case "T" ' 老師
+        '        Dim sql = String.Format("SELECT Id,RTRIM(Name) FROM Teacher WHERE Num='{0}' AND Pwd='{1}'", uid, pwd)
+        '        Dim result = selectCmd(sql)
+        '        If result.Rows.Count > 0 Then
+        '            userInfo = result.Rows(0).Item(0) & ";" & result.Rows(0).Item(1)
+        '        End If
+        '    Case "S" ' 學生
+        '        Dim sql = String.Format("SELECT Id,RTRIM(Name) FROM Student WHERE Num='{0}' AND Pwd='{1}'", uid, pwd)
+        '        Dim result = selectCmd(sql)
+        '        If result.Rows.Count > 0 Then
+        '            userInfo = result.Rows(0).Item(0) & ";" & result.Rows(0).Item(1)
+        '        End If
+        'End Select
+        'Return userInfo
+
+
+
+
+
+
         ' 按下註冊要做的事
         ' 記得返回帳號給使用者看
         ' 帳號命名規則: TA開頭 + 3位數字
