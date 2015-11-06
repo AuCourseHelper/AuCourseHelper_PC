@@ -10,6 +10,14 @@
         log("====關閉系統====" & vbCrLf, LogType_SYSTEM)
     End Sub
 
+    Private Sub frmTeacher_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+        If e.KeyCode = Keys.F2 Then
+            frmLogin.txtUid.Text = "4327"
+            frmLogin.txtPwd.Text = "4327"
+            mnuLogin.PerformClick()
+        End If
+    End Sub
+
     Private Sub frmTeacher_Load(sender As Object, e As EventArgs) Handles Me.Load
         objFrmTeacher = Me
         log("====執行系統====", LogType_SYSTEM)

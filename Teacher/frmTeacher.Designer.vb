@@ -68,7 +68,7 @@ Partial Class frmTeacher
         Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmConnection, Me.tsmCourse, Me.tsmAccount, Me.tsmLog, Me.tsmIp})
         Me.mnuMain.Location = New System.Drawing.Point(0, 0)
         Me.mnuMain.Name = "mnuMain"
-        Me.mnuMain.Size = New System.Drawing.Size(784, 28)
+        Me.mnuMain.Size = New System.Drawing.Size(1008, 28)
         Me.mnuMain.TabIndex = 0
         Me.mnuMain.Text = "MenuStrip1"
         '
@@ -182,9 +182,9 @@ Partial Class frmTeacher
         '
         Me.stpMain.Font = New System.Drawing.Font("微軟正黑體", 10.0!)
         Me.stpMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslLabel1, Me.tslStatus, Me.tslUserName, Me.tslSysTime})
-        Me.stpMain.Location = New System.Drawing.Point(0, 539)
+        Me.stpMain.Location = New System.Drawing.Point(0, 707)
         Me.stpMain.Name = "stpMain"
-        Me.stpMain.Size = New System.Drawing.Size(784, 23)
+        Me.stpMain.Size = New System.Drawing.Size(1008, 23)
         Me.stpMain.TabIndex = 2
         Me.stpMain.Text = "StatusStrip1"
         '
@@ -200,7 +200,7 @@ Partial Class frmTeacher
         Me.tslStatus.BackColor = System.Drawing.SystemColors.GrayText
         Me.tslStatus.ForeColor = System.Drawing.SystemColors.Info
         Me.tslStatus.Name = "tslStatus"
-        Me.tslStatus.Size = New System.Drawing.Size(584, 18)
+        Me.tslStatus.Size = New System.Drawing.Size(808, 18)
         Me.tslStatus.Spring = True
         Me.tslStatus.Text = "~狀態訊息~"
         Me.tslStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -225,7 +225,7 @@ Partial Class frmTeacher
         Me.mnuCourseTool.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslCourseName, Me.ToolStripSeparator1, Me.tslAttend, Me.tslScore, Me.tslHomeWork, Me.tslExam, Me.tslReport})
         Me.mnuCourseTool.Location = New System.Drawing.Point(0, 28)
         Me.mnuCourseTool.Name = "mnuCourseTool"
-        Me.mnuCourseTool.Size = New System.Drawing.Size(784, 31)
+        Me.mnuCourseTool.Size = New System.Drawing.Size(1008, 31)
         Me.mnuCourseTool.TabIndex = 3
         Me.mnuCourseTool.Text = "tlsMain"
         '
@@ -288,7 +288,7 @@ Partial Class frmTeacher
         Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMain.Location = New System.Drawing.Point(0, 59)
         Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(784, 480)
+        Me.pnlMain.Size = New System.Drawing.Size(1008, 648)
         Me.pnlMain.TabIndex = 4
         '
         'tmrSysTime
@@ -304,7 +304,7 @@ Partial Class frmTeacher
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(784, 562)
+        Me.ClientSize = New System.Drawing.Size(1008, 730)
         Me.Controls.Add(Me.pnlMain)
         Me.Controls.Add(Me.mnuCourseTool)
         Me.Controls.Add(Me.stpMain)

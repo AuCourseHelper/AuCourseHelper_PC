@@ -72,6 +72,7 @@ Public Class frmLogin
 
         Dim t As New Thread(AddressOf doLogin)
         t.Start()
+        frmProgress.title = "與伺服器連線中..."
         frmProgress.ShowDialog(Me)
         Me.Hide()
     End Sub
@@ -79,6 +80,7 @@ Public Class frmLogin
     Private Sub doLogin()
         Select Case connectAndLogin(txtUid.Text, txtPwd.Text)
             Case "SUCCESS"
+                frmProgress.title = "取得帳號資訊.."
                 ' 取得帳號資訊
                 Dim sqlGetProfile = "SELECT * FROM Teacher WHERE Id=" & myProfile.Id & ";"
                 Dim tblProfile = doSqlQuery(sqlGetProfile)
@@ -96,6 +98,7 @@ Public Class frmLogin
                     Exit Sub
                 End If
 
+                frmProgress.title = "取得課程資訊.."
                 ' 取得課程資訊
                 Dim sqlGetCourses = "SELECT * FROM Course WHERE Teacher LIKE '%" & myProfile.Name & "%';"
                 myCourses = doSqlQuery(sqlGetCourses)

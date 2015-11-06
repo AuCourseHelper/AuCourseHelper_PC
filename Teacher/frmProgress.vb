@@ -1,9 +1,10 @@
 ﻿Public Class frmProgress
     Dim a As Integer = 0
+    Public Shared title As String = "..."
 
     Private Sub frmProgress_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
         'e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality
-        DrawProgress(e.Graphics, New Rectangle(5, 5, 60, 60), a)
+        DrawProgress(e.Graphics, New Rectangle(6, 6, 137, 137), a)
     End Sub
 
     Private Sub DrawProgress(g As Graphics, rect As Rectangle, percentage As Single)
@@ -12,7 +13,7 @@
         Dim remainderAngle = 360 - progressAngle
 
         'create pens to use for the arcs
-        Using progressPen As New Pen(Color.DimGray, 8), remainderPen As New Pen(Color.DeepSkyBlue, 8)
+        Using progressPen As New Pen(Color.DimGray, 13), remainderPen As New Pen(Color.DeepSkyBlue, 13)
             'set the smoothing to high quality for better output
             g.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
             'draw the blue and white arcs
@@ -20,6 +21,12 @@
             g.DrawArc(remainderPen, rect, progressAngle - 90, remainderAngle)
         End Using
 
+        Dim font As New Font("", 12, FontStyle.Bold)
+        Dim msr = g.MeasureString(title, font)
+        Dim pt As New Point((150 - msr.Width) / 2, (150 - msr.Height) / 2)
+        msr.Width += 2
+        g.FillRectangle(Brushes.LightGreen, pt.X, pt.Y, msr.Width, msr.Height)
+        g.DrawString(title, font, Brushes.Black, pt)
         'draw the text in the centre by working out how big it is and adjusting the co-ordinates accordingly
         'Using fnt As New Font(Me.Font.FontFamily, 14)
         '    Dim text As String = percentage.ToString + "%"

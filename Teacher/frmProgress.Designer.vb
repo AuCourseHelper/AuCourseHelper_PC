@@ -35,10 +35,10 @@ Partial Class frmProgress
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(80, 80)
+        Me.ClientSize = New System.Drawing.Size(150, 150)
+        Me.DoubleBuffered = True
+        Me.ForeColor = System.Drawing.SystemColors.ControlText
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.MaximumSize = New System.Drawing.Size(80, 80)
-        Me.MinimumSize = New System.Drawing.Size(80, 80)
         Me.Name = "frmProgress"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent

@@ -5,9 +5,34 @@ Public Class frmAttend
     Dim isEdited As Boolean = False
 
     Private Sub frmAttend_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Dim resizer As New Resizer(Me, True, 0)
+        'Dim resizer As New Resizer(Me, True, 0)
+        Dim table As New TableLayoutPanel()
+        table.Dock = DockStyle.Fill
+        table.ColumnCount = 14
+        table.RowCount = 7
+
+        For col As Integer = 0 To table.ColumnCount - 1
+            For row As Integer = 0 To table.RowCount - 1
+                If row = 0 Then
+                    table.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100))
+                End If
+                If col = 0 Then
+                    table.RowStyles.Add(New RowStyle(SizeType.Percent, 100))
+                End If
+
+                If (col + 1) Mod 5 <> 0 And Not (row = 6 And col < 4) Then
+                    Dim b As New Button()
+                    b.Dock = DockStyle.Fill
+                    b.Text = row & "," & col
+                    table.Controls.Add(b, col, row)
+                End If
+            Next
+        Next
+        tabSeat.Controls.Add(table)
+
         Dim t As New Thread(AddressOf doGetStudents)
         t.Start()
+        frmProgress.title = "讀取出席狀況..."
         frmProgress.ShowDialog(Me)
     End Sub
 
@@ -39,7 +64,11 @@ Public Class frmAttend
                 t.Start()
                 frmProgress.ShowDialog(Me)
             Case "tabSeat"
-
+                
         End Select
+    End Sub
+
+    Private Sub frmAttend_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        'Resizer.setGridColWidth(tblMain)
     End Sub
 End Class
