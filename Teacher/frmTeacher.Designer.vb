@@ -141,8 +141,8 @@ Partial Class frmTeacher
         '
         Me.tsmLog.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewLog, Me.mnuViewHistory, Me.ToolStripMenuItem1, Me.mnuUploadLog})
         Me.tsmLog.Name = "tsmLog"
-        Me.tsmLog.Size = New System.Drawing.Size(53, 24)
-        Me.tsmLog.Text = "紀錄"
+        Me.tsmLog.Size = New System.Drawing.Size(117, 24)
+        Me.tsmLog.Text = "程式執行紀錄"
         '
         'mnuViewLog
         '

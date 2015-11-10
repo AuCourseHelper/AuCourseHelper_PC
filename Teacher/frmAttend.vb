@@ -28,22 +28,27 @@ Public Class frmAttend
                 End If
             Next
         Next
-        tabSeat.Controls.Add(table)
+        pnlMain2.Controls.Add(table)
 
         Dim t As New Thread(AddressOf doGetStudents)
         t.Start()
-        frmProgress.title = "讀取出席狀況..."
+        frmProgress.title = "讀取學生資訊..."
         frmProgress.ShowDialog(Me)
     End Sub
 
     Private Sub doGetStudents()
-        Dim sqlGetCourseStudents = String.Format("SELECT s.Id,s.Num,s.Name " _
+        Dim sqlGetCourseStudents = String.Format("SELECT cs.StudentCourseId,s.Num,s.Name " _
                                  & "FROM Student s,CourseStudent cs " _
                                  & "WHERE cs.CourseId={0} AND cs.StudentNum=s.Num;", nowCourse.Item(0))
         students = doSqlQuery(sqlGetCourseStudents)
         If students Is Nothing Then
             logout()
         End If
+        students.Columns(0).ColumnName = "序號"
+        students.Columns(1).ColumnName = "學號"
+        students.Columns(2).ColumnName = "姓名"
+        students.Columns.Add()
+        students.Columns(3).ColumnName = "出席狀況"
         doUiGetStudents()
     End Sub
 

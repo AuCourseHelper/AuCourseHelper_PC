@@ -1,5 +1,6 @@
 ﻿Public Class frmTeacher
     Public version = "1.0.151027"
+    Private nowCourseMenuItem As New ToolStripButton
 
     Private Sub frmTeacher_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         If MessageBox.Show("是否確定要關閉本系統", "關閉程式", MessageBoxButtons.YesNo) = DialogResult.No Then
@@ -110,9 +111,9 @@
         Dim courseItem As ToolStripDropDownItem = sender
         Dim courseRow As DataRow = myCourses.Rows.Find(courseItem.Tag)
         tslCourseName.Text = Trim(courseRow.Item(4))
-        tslCourseName.Tag = courseRow
         nowCourse = courseRow
         mnuCourseTool.Enabled = True
+        tsmCourse.Enabled = False
     End Sub
 
     Private Sub tmrServerPing_Tick(sender As Object, e As EventArgs) Handles tmrServerPing.Tick
@@ -217,7 +218,11 @@
     End Sub
 
     Private Sub tslAttend_Click(sender As Object, e As EventArgs) Handles tslAttend.Click
-        tslAttend.BackColor = Color.BurlyWood
+        nowCourseMenuItem.BackColor = Nothing
+        nowCourseMenuItem = tslAttend
+        nowCourseMenuItem.BackColor = Color.BurlyWood
+        pnlMain.Controls.Clear()
+
         frmAttend.Dispose()
         frmAttend.TopLevel = False
         frmAttend.Dock = DockStyle.Fill
@@ -226,22 +231,67 @@
     End Sub
 
     Private Sub tslScore_Click(sender As Object, e As EventArgs) Handles tslScore.Click
+        nowCourseMenuItem.BackColor = Nothing
+        nowCourseMenuItem = tslScore
+        nowCourseMenuItem.BackColor = Color.BurlyWood
+        pnlMain.Controls.Clear()
 
+        frmScore.Dispose()
+        frmScore.TopLevel = False
+        frmScore.Dock = DockStyle.Fill
+        pnlMain.Controls.Add(frmScore)
+        frmScore.Show()
     End Sub
 
     Private Sub tslHomeWork_Click(sender As Object, e As EventArgs) Handles tslHomeWork.Click
+        nowCourseMenuItem.BackColor = Nothing
+        nowCourseMenuItem = tslHomeWork
+        nowCourseMenuItem.BackColor = Color.BurlyWood
+        pnlMain.Controls.Clear()
 
+        frmHomeWork.Dispose()
+        frmHomeWork.TopLevel = False
+        frmHomeWork.Dock = DockStyle.Fill
+        pnlMain.Controls.Add(frmHomeWork)
+        frmHomeWork.Show()
     End Sub
 
     Private Sub tslExam_Click(sender As Object, e As EventArgs) Handles tslExam.Click
+        nowCourseMenuItem.BackColor = Nothing
+        nowCourseMenuItem = tslExam
+        nowCourseMenuItem.BackColor = Color.BurlyWood
+        pnlMain.Controls.Clear()
 
+        frmExam.Dispose()
+        frmExam.TopLevel = False
+        frmExam.Dock = DockStyle.Fill
+        pnlMain.Controls.Add(frmExam)
+        frmExam.Show()
     End Sub
 
     Private Sub tslReport_Click(sender As Object, e As EventArgs) Handles tslReport.Click
+        nowCourseMenuItem.BackColor = Nothing
+        nowCourseMenuItem = tslReport
+        nowCourseMenuItem.BackColor = Color.BurlyWood
+        pnlMain.Controls.Clear()
 
+        frmReport.Dispose()
+        frmReport.TopLevel = False
+        frmReport.Dock = DockStyle.Fill
+        pnlMain.Controls.Add(frmReport)
+        frmReport.Show()
     End Sub
 
     Private Sub tslEnd_Click(sender As Object, e As EventArgs) Handles tslEnd.Click
-
+        nowCourseMenuItem.BackColor = Nothing
+        pnlMain.Controls.Clear()
+        frmAttend.Dispose()
+        frmScore.Dispose()
+        frmHomeWork.Dispose()
+        frmExam.Dispose()
+        frmReport.Dispose()
+        tslCourseName.Text = "請選擇課程"
+        mnuCourseTool.Enabled = False
+        tsmCourse.Enabled = True
     End Sub
 End Class

@@ -83,6 +83,18 @@
     <Compile Include="frmAttend.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmExam.Designer.vb">
+      <DependentUpon>frmExam.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmExam.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHomeWork.Designer.vb">
+      <DependentUpon>frmHomeWork.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmHomeWork.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmLogin.Designer.vb">
       <DependentUpon>frmLogin.vb</DependentUpon>
     </Compile>
@@ -99,6 +111,18 @@
       <DependentUpon>frmProgress.vb</DependentUpon>
     </Compile>
     <Compile Include="frmProgress.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReport.Designer.vb">
+      <DependentUpon>frmReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmScore.Designer.vb">
+      <DependentUpon>frmScore.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmScore.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmSignUp.Designer.vb">
@@ -188,6 +212,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
