@@ -224,4 +224,24 @@
         pnlMain.Controls.Add(frmAttend)
         frmAttend.Show()
     End Sub
+
+    Private Sub tslScore_Click(sender As Object, e As EventArgs) Handles tslScore.Click
+
+    End Sub
+
+    Private Sub tslHomeWork_Click(sender As Object, e As EventArgs) Handles tslHomeWork.Click
+
+    End Sub
+
+    Private Sub tslExam_Click(sender As Object, e As EventArgs) Handles tslExam.Click
+
+    End Sub
+
+    Private Sub tslReport_Click(sender As Object, e As EventArgs) Handles tslReport.Click
+
+    End Sub
+
+    Private Sub tslEnd_Click(sender As Object, e As EventArgs) Handles tslEnd.Click
+
+    End Sub
 End Class

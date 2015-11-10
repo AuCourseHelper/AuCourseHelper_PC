@@ -23,7 +23,6 @@ Partial Class frmTeacher
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmTeacher))
         Me.mnuMain = New System.Windows.Forms.MenuStrip()
         Me.tsmConnection = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogin = New System.Windows.Forms.ToolStripMenuItem()
@@ -49,14 +48,15 @@ Partial Class frmTeacher
         Me.mnuCourseTool = New System.Windows.Forms.ToolStrip()
         Me.tslCourseName = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.pnlMain = New System.Windows.Forms.Panel()
+        Me.tmrSysTime = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrServerPing = New System.Windows.Forms.Timer(Me.components)
         Me.tslAttend = New System.Windows.Forms.ToolStripButton()
         Me.tslScore = New System.Windows.Forms.ToolStripButton()
         Me.tslHomeWork = New System.Windows.Forms.ToolStripButton()
         Me.tslExam = New System.Windows.Forms.ToolStripButton()
         Me.tslReport = New System.Windows.Forms.ToolStripButton()
-        Me.pnlMain = New System.Windows.Forms.Panel()
-        Me.tmrSysTime = New System.Windows.Forms.Timer(Me.components)
-        Me.tmrServerPing = New System.Windows.Forms.Timer(Me.components)
+        Me.tslEnd = New System.Windows.Forms.ToolStripButton()
         Me.mnuMain.SuspendLayout()
         Me.stpMain.SuspendLayout()
         Me.mnuCourseTool.SuspendLayout()
@@ -220,75 +220,37 @@ Partial Class frmTeacher
         '
         'mnuCourseTool
         '
+        Me.mnuCourseTool.AutoSize = False
         Me.mnuCourseTool.Enabled = False
         Me.mnuCourseTool.Font = New System.Drawing.Font("微軟正黑體", 14.0!)
-        Me.mnuCourseTool.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslCourseName, Me.ToolStripSeparator1, Me.tslAttend, Me.tslScore, Me.tslHomeWork, Me.tslExam, Me.tslReport})
+        Me.mnuCourseTool.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslCourseName, Me.ToolStripSeparator1, Me.tslAttend, Me.tslScore, Me.tslHomeWork, Me.tslExam, Me.tslReport, Me.tslEnd})
         Me.mnuCourseTool.Location = New System.Drawing.Point(0, 28)
         Me.mnuCourseTool.Name = "mnuCourseTool"
-        Me.mnuCourseTool.Size = New System.Drawing.Size(1008, 31)
+        Me.mnuCourseTool.Size = New System.Drawing.Size(1008, 50)
         Me.mnuCourseTool.TabIndex = 3
         Me.mnuCourseTool.Text = "tlsMain"
         '
         'tslCourseName
         '
         Me.tslCourseName.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.tslCourseName.Font = New System.Drawing.Font("微軟正黑體", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
         Me.tslCourseName.ForeColor = System.Drawing.Color.Green
         Me.tslCourseName.Name = "tslCourseName"
-        Me.tslCourseName.Size = New System.Drawing.Size(124, 28)
+        Me.tslCourseName.Size = New System.Drawing.Size(124, 47)
         Me.tslCourseName.Text = "請先選擇課程"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 31)
-        '
-        'tslAttend
-        '
-        Me.tslAttend.Image = CType(resources.GetObject("tslAttend.Image"), System.Drawing.Image)
-        Me.tslAttend.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tslAttend.Name = "tslAttend"
-        Me.tslAttend.Size = New System.Drawing.Size(68, 28)
-        Me.tslAttend.Text = "點名"
-        '
-        'tslScore
-        '
-        Me.tslScore.Image = CType(resources.GetObject("tslScore.Image"), System.Drawing.Image)
-        Me.tslScore.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tslScore.Name = "tslScore"
-        Me.tslScore.Size = New System.Drawing.Size(68, 28)
-        Me.tslScore.Text = "評分"
-        '
-        'tslHomeWork
-        '
-        Me.tslHomeWork.Image = CType(resources.GetObject("tslHomeWork.Image"), System.Drawing.Image)
-        Me.tslHomeWork.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tslHomeWork.Name = "tslHomeWork"
-        Me.tslHomeWork.Size = New System.Drawing.Size(106, 28)
-        Me.tslHomeWork.Text = "建立作業"
-        '
-        'tslExam
-        '
-        Me.tslExam.Image = CType(resources.GetObject("tslExam.Image"), System.Drawing.Image)
-        Me.tslExam.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tslExam.Name = "tslExam"
-        Me.tslExam.Size = New System.Drawing.Size(106, 28)
-        Me.tslExam.Text = "建立考試"
-        '
-        'tslReport
-        '
-        Me.tslReport.Image = CType(resources.GetObject("tslReport.Image"), System.Drawing.Image)
-        Me.tslReport.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tslReport.Name = "tslReport"
-        Me.tslReport.Size = New System.Drawing.Size(106, 28)
-        Me.tslReport.Text = "統計報表"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 50)
         '
         'pnlMain
         '
         Me.pnlMain.AutoScroll = True
         Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlMain.Location = New System.Drawing.Point(0, 59)
+        Me.pnlMain.Location = New System.Drawing.Point(0, 78)
         Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(1008, 648)
+        Me.pnlMain.Size = New System.Drawing.Size(1008, 629)
         Me.pnlMain.TabIndex = 4
         '
         'tmrSysTime
@@ -299,6 +261,61 @@ Partial Class frmTeacher
         'tmrServerPing
         '
         Me.tmrServerPing.Interval = 60000
+        '
+        'tslAttend
+        '
+        Me.tslAttend.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.school
+        Me.tslAttend.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tslAttend.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tslAttend.Name = "tslAttend"
+        Me.tslAttend.Size = New System.Drawing.Size(84, 47)
+        Me.tslAttend.Text = "點名"
+        '
+        'tslScore
+        '
+        Me.tslScore.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.verified
+        Me.tslScore.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tslScore.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tslScore.Name = "tslScore"
+        Me.tslScore.Size = New System.Drawing.Size(84, 47)
+        Me.tslScore.Text = "評分"
+        '
+        'tslHomeWork
+        '
+        Me.tslHomeWork.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.books
+        Me.tslHomeWork.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tslHomeWork.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tslHomeWork.Name = "tslHomeWork"
+        Me.tslHomeWork.Size = New System.Drawing.Size(122, 47)
+        Me.tslHomeWork.Text = "建立作業"
+        '
+        'tslExam
+        '
+        Me.tslExam.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.exam
+        Me.tslExam.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tslExam.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tslExam.Name = "tslExam"
+        Me.tslExam.Size = New System.Drawing.Size(122, 47)
+        Me.tslExam.Text = "建立考試"
+        '
+        'tslReport
+        '
+        Me.tslReport.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.list
+        Me.tslReport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tslReport.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tslReport.Name = "tslReport"
+        Me.tslReport.Size = New System.Drawing.Size(122, 47)
+        Me.tslReport.Text = "統計報表"
+        '
+        'tslEnd
+        '
+        Me.tslEnd.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.tslEnd.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.logout
+        Me.tslEnd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tslEnd.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tslEnd.Name = "tslEnd"
+        Me.tslEnd.Size = New System.Drawing.Size(122, 47)
+        Me.tslEnd.Text = "結束課程"
         '
         'frmTeacher
         '
@@ -357,5 +374,6 @@ Partial Class frmTeacher
     Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mnuExit As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tmrServerPing As System.Windows.Forms.Timer
+    Friend WithEvents tslEnd As System.Windows.Forms.ToolStripButton
 
 End Class
