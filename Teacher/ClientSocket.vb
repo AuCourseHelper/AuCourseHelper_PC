@@ -22,6 +22,7 @@ Module SocketProcess
     Public myProfile As New TeacherProfile
     Public myCourses As New DataTable
     Public nowCourse As DataRow
+    Public nowTerm As String
 
     Public Function GetIPaddress() As String
         Dim myHost As String = System.Net.Dns.GetHostName

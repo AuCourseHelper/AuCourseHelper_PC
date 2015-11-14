@@ -26,27 +26,28 @@ Partial Class frmAttend
         Me.tabMain = New System.Windows.Forms.TabControl()
         Me.tabTable = New System.Windows.Forms.TabPage()
         Me.pnlMain = New System.Windows.Forms.Panel()
+        Me.tblMain = New System.Windows.Forms.DataGridView()
         Me.pnlBtn = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnLat = New System.Windows.Forms.Button()
         Me.btnAtt = New System.Windows.Forms.Button()
         Me.btnAbs = New System.Windows.Forms.Button()
-        Me.tblMain = New System.Windows.Forms.DataGridView()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.tabSeat = New System.Windows.Forms.TabPage()
         Me.cmsSeat = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.rotate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnLat = New System.Windows.Forms.Button()
-        Me.btnSave = New System.Windows.Forms.Button()
-        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.pnlMain2 = New System.Windows.Forms.Panel()
         Me.pnlBtn2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.pnlMain2 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.tabMain.SuspendLayout()
         Me.tabTable.SuspendLayout()
         Me.pnlMain.SuspendLayout()
-        Me.pnlBtn.SuspendLayout()
         CType(Me.tblMain, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlBtn.SuspendLayout()
         Me.tabSeat.SuspendLayout()
         Me.cmsSeat.SuspendLayout()
         Me.pnlBtn2.SuspendLayout()
@@ -89,6 +90,21 @@ Partial Class frmAttend
         Me.pnlMain.Size = New System.Drawing.Size(686, 564)
         Me.pnlMain.TabIndex = 0
         '
+        'tblMain
+        '
+        Me.tblMain.AllowUserToAddRows = False
+        Me.tblMain.AllowUserToDeleteRows = False
+        Me.tblMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblMain.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblMain.Location = New System.Drawing.Point(0, 0)
+        Me.tblMain.MultiSelect = False
+        Me.tblMain.Name = "tblMain"
+        Me.tblMain.ReadOnly = True
+        Me.tblMain.RowTemplate.Height = 24
+        Me.tblMain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.tblMain.Size = New System.Drawing.Size(686, 564)
+        Me.tblMain.TabIndex = 0
+        '
         'pnlBtn
         '
         Me.pnlBtn.ColumnCount = 1
@@ -98,6 +114,7 @@ Partial Class frmAttend
         Me.pnlBtn.Controls.Add(Me.btnAbs, 0, 2)
         Me.pnlBtn.Controls.Add(Me.btnSave, 0, 4)
         Me.pnlBtn.Controls.Add(Me.btnCancel, 0, 5)
+        Me.pnlBtn.Controls.Add(Me.Label3, 0, 3)
         Me.pnlBtn.Dock = System.Windows.Forms.DockStyle.Right
         Me.pnlBtn.Location = New System.Drawing.Point(689, 3)
         Me.pnlBtn.Name = "pnlBtn"
@@ -105,11 +122,23 @@ Partial Class frmAttend
         Me.pnlBtn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.0!))
         Me.pnlBtn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.0!))
         Me.pnlBtn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.0!))
+        Me.pnlBtn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
         Me.pnlBtn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.0!))
-        Me.pnlBtn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
-        Me.pnlBtn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.pnlBtn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.0!))
         Me.pnlBtn.Size = New System.Drawing.Size(100, 564)
         Me.pnlBtn.TabIndex = 2
+        '
+        'btnLat
+        '
+        Me.btnLat.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnLat.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnLat.Font = New System.Drawing.Font("新細明體", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.btnLat.Location = New System.Drawing.Point(3, 87)
+        Me.btnLat.Name = "btnLat"
+        Me.btnLat.Size = New System.Drawing.Size(94, 78)
+        Me.btnLat.TabIndex = 2
+        Me.btnLat.Text = "遲　到"
+        Me.btnLat.UseVisualStyleBackColor = False
         '
         'btnAtt
         '
@@ -135,20 +164,31 @@ Partial Class frmAttend
         Me.btnAbs.Text = "缺　席"
         Me.btnAbs.UseVisualStyleBackColor = False
         '
-        'tblMain
+        'btnSave
         '
-        Me.tblMain.AllowUserToAddRows = False
-        Me.tblMain.AllowUserToDeleteRows = False
-        Me.tblMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblMain.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblMain.Location = New System.Drawing.Point(0, 0)
-        Me.tblMain.MultiSelect = False
-        Me.tblMain.Name = "tblMain"
-        Me.tblMain.ReadOnly = True
-        Me.tblMain.RowTemplate.Height = 24
-        Me.tblMain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblMain.Size = New System.Drawing.Size(686, 564)
-        Me.tblMain.TabIndex = 0
+        Me.btnSave.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnSave.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.btnSave.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.save
+        Me.btnSave.Location = New System.Drawing.Point(3, 396)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(94, 78)
+        Me.btnSave.TabIndex = 3
+        Me.btnSave.Text = "儲存"
+        Me.btnSave.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnCancel.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.btnCancel.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.cancel
+        Me.btnCancel.Location = New System.Drawing.Point(3, 480)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(94, 81)
+        Me.btnCancel.TabIndex = 4
+        Me.btnCancel.Text = "放棄"
+        Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnCancel.UseVisualStyleBackColor = True
         '
         'tabSeat
         '
@@ -178,43 +218,15 @@ Partial Class frmAttend
         Me.rotate.Size = New System.Drawing.Size(142, 24)
         Me.rotate.Text = "座位反轉"
         '
-        'btnLat
+        'pnlMain2
         '
-        Me.btnLat.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.btnLat.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnLat.Font = New System.Drawing.Font("新細明體", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.btnLat.Location = New System.Drawing.Point(3, 87)
-        Me.btnLat.Name = "btnLat"
-        Me.btnLat.Size = New System.Drawing.Size(94, 78)
-        Me.btnLat.TabIndex = 2
-        Me.btnLat.Text = "遲　到"
-        Me.btnLat.UseVisualStyleBackColor = False
-        '
-        'btnSave
-        '
-        Me.btnSave.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnSave.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.btnSave.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.save
-        Me.btnSave.Location = New System.Drawing.Point(3, 339)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(94, 106)
-        Me.btnSave.TabIndex = 3
-        Me.btnSave.Text = "儲存"
-        Me.btnSave.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnSave.UseVisualStyleBackColor = True
-        '
-        'btnCancel
-        '
-        Me.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnCancel.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.btnCancel.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.cancel
-        Me.btnCancel.Location = New System.Drawing.Point(3, 451)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(94, 110)
-        Me.btnCancel.TabIndex = 4
-        Me.btnCancel.Text = "放棄"
-        Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnCancel.UseVisualStyleBackColor = True
+        Me.pnlMain2.AutoScroll = True
+        Me.pnlMain2.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.pnlMain2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlMain2.Location = New System.Drawing.Point(3, 3)
+        Me.pnlMain2.Name = "pnlMain2"
+        Me.pnlMain2.Size = New System.Drawing.Size(786, 514)
+        Me.pnlMain2.TabIndex = 1
         '
         'pnlBtn2
         '
@@ -260,15 +272,6 @@ Partial Class frmAttend
         Me.Button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button2.UseVisualStyleBackColor = True
         '
-        'pnlMain2
-        '
-        Me.pnlMain2.AutoScroll = True
-        Me.pnlMain2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlMain2.Location = New System.Drawing.Point(3, 3)
-        Me.pnlMain2.Name = "pnlMain2"
-        Me.pnlMain2.Size = New System.Drawing.Size(786, 514)
-        Me.pnlMain2.TabIndex = 1
-        '
         'Label1
         '
         Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
@@ -290,6 +293,18 @@ Partial Class frmAttend
         Me.Label2.Text = "尚有 0 位學生" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "未編排座位"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'Label3
+        '
+        Me.Label3.BackColor = System.Drawing.SystemColors.Info
+        Me.Label3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label3.Font = New System.Drawing.Font("新細明體", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.Label3.Location = New System.Drawing.Point(3, 252)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(94, 141)
+        Me.Label3.TabIndex = 5
+        Me.Label3.Text = "11/10" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "第 XX 週"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'frmAttend
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -302,8 +317,8 @@ Partial Class frmAttend
         Me.tabMain.ResumeLayout(False)
         Me.tabTable.ResumeLayout(False)
         Me.pnlMain.ResumeLayout(False)
-        Me.pnlBtn.ResumeLayout(False)
         CType(Me.tblMain, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlBtn.ResumeLayout(False)
         Me.tabSeat.ResumeLayout(False)
         Me.cmsSeat.ResumeLayout(False)
         Me.pnlBtn2.ResumeLayout(False)
@@ -329,4 +344,5 @@ Partial Class frmAttend
     Friend WithEvents pnlMain2 As System.Windows.Forms.Panel
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
 End Class

@@ -48,15 +48,16 @@ Partial Class frmTeacher
         Me.mnuCourseTool = New System.Windows.Forms.ToolStrip()
         Me.tslCourseName = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.pnlMain = New System.Windows.Forms.Panel()
-        Me.tmrSysTime = New System.Windows.Forms.Timer(Me.components)
-        Me.tmrServerPing = New System.Windows.Forms.Timer(Me.components)
         Me.tslAttend = New System.Windows.Forms.ToolStripButton()
         Me.tslScore = New System.Windows.Forms.ToolStripButton()
         Me.tslHomeWork = New System.Windows.Forms.ToolStripButton()
         Me.tslExam = New System.Windows.Forms.ToolStripButton()
         Me.tslReport = New System.Windows.Forms.ToolStripButton()
         Me.tslEnd = New System.Windows.Forms.ToolStripButton()
+        Me.pnlMain = New System.Windows.Forms.Panel()
+        Me.tmrSysTime = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrServerPing = New System.Windows.Forms.Timer(Me.components)
+        Me.tslTerm = New System.Windows.Forms.ToolStripLabel()
         Me.mnuMain.SuspendLayout()
         Me.stpMain.SuspendLayout()
         Me.mnuCourseTool.SuspendLayout()
@@ -223,7 +224,7 @@ Partial Class frmTeacher
         Me.mnuCourseTool.AutoSize = False
         Me.mnuCourseTool.Enabled = False
         Me.mnuCourseTool.Font = New System.Drawing.Font("微軟正黑體", 14.0!)
-        Me.mnuCourseTool.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslCourseName, Me.ToolStripSeparator1, Me.tslAttend, Me.tslScore, Me.tslHomeWork, Me.tslExam, Me.tslReport, Me.tslEnd})
+        Me.mnuCourseTool.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslTerm, Me.tslCourseName, Me.ToolStripSeparator1, Me.tslAttend, Me.tslScore, Me.tslHomeWork, Me.tslExam, Me.tslReport, Me.tslEnd})
         Me.mnuCourseTool.Location = New System.Drawing.Point(0, 28)
         Me.mnuCourseTool.Name = "mnuCourseTool"
         Me.mnuCourseTool.Size = New System.Drawing.Size(1008, 50)
@@ -243,24 +244,6 @@ Partial Class frmTeacher
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 50)
-        '
-        'pnlMain
-        '
-        Me.pnlMain.AutoScroll = True
-        Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlMain.Location = New System.Drawing.Point(0, 78)
-        Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(1008, 629)
-        Me.pnlMain.TabIndex = 4
-        '
-        'tmrSysTime
-        '
-        Me.tmrSysTime.Enabled = True
-        Me.tmrSysTime.Interval = 1000
-        '
-        'tmrServerPing
-        '
-        Me.tmrServerPing.Interval = 60000
         '
         'tslAttend
         '
@@ -316,6 +299,29 @@ Partial Class frmTeacher
         Me.tslEnd.Name = "tslEnd"
         Me.tslEnd.Size = New System.Drawing.Size(122, 47)
         Me.tslEnd.Text = "結束課程"
+        '
+        'pnlMain
+        '
+        Me.pnlMain.AutoScroll = True
+        Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlMain.Location = New System.Drawing.Point(0, 78)
+        Me.pnlMain.Name = "pnlMain"
+        Me.pnlMain.Size = New System.Drawing.Size(1008, 629)
+        Me.pnlMain.TabIndex = 4
+        '
+        'tmrSysTime
+        '
+        Me.tmrSysTime.Enabled = True
+        Me.tmrSysTime.Interval = 1000
+        '
+        'tmrServerPing
+        '
+        Me.tmrServerPing.Interval = 60000
+        '
+        'tslTerm
+        '
+        Me.tslTerm.Name = "tslTerm"
+        Me.tslTerm.Size = New System.Drawing.Size(0, 47)
         '
         'frmTeacher
         '
@@ -375,5 +381,6 @@ Partial Class frmTeacher
     Friend WithEvents mnuExit As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tmrServerPing As System.Windows.Forms.Timer
     Friend WithEvents tslEnd As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tslTerm As System.Windows.Forms.ToolStripLabel
 
 End Class

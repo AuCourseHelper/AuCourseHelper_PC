@@ -98,6 +98,7 @@
             Next
 
             tslUserName.Text = myProfile.Name & " 你好!"
+            tslTerm.Text = nowTerm
             tmrServerPing.Enabled = True
             tsmAccount.Enabled = True
             tsmCourse.Enabled = True
@@ -148,6 +149,7 @@
         mnuLogout.Enabled = False
         tslUserName.Text = "尚未登入"
         tslCourseName.Text = "請先選擇課程"
+        tslTerm.Text = ""
         mnuCourseTool.Enabled = False
         For Each tsi As ToolStripItem In mnuCourseTool.Items
             tsi.BackColor = Nothing

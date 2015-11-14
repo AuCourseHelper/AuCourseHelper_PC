@@ -38,6 +38,10 @@ Module ServerSocket
             serverSocket.Bind(IpEndPoint)
             serverSocket.Listen(511) ' 最多提供512人同時連線
             serverSocket.BeginAccept(New AsyncCallback(AddressOf OnAccept), Nothing)
+
+            Dim sqlStart = String.Format("UPDATE Sys SET Term='{0}',ServerIp='{1}',ServerStart='{2}',ServerVersion='{3}' WHERE Id=1;", _
+                                         frmServer.nowTerm, GetRealIPaddress(), Format(Now, "yyyyMMdd-hhmmss"), frmServer.version)
+            exeCmd(sqlStart)
         Catch ex As Exception
             log("伺服器啟動失敗! " & ex.Message, LogType_ERROR)
             Return False
@@ -65,11 +69,12 @@ Module ServerSocket
             serverSocket.Close()
             serverSocket = Nothing
             clients.Clear()
+
+            log("伺服器已關閉", LogType_NORMAL)
         Catch ex As Exception
             log("stopServer異常! " & ex.Message, LogType_ERROR)
         End Try
         'objFrmServer.RemoveAllClient()
-        log("伺服器已關閉", LogType_NORMAL)
     End Sub
 
     Private Sub OnAccept(ByVal ar As IAsyncResult)

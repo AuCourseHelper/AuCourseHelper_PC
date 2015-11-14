@@ -23,6 +23,7 @@ Partial Class frmServer
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmServer))
         Me.stpMain = New System.Windows.Forms.StatusStrip()
         Me.tslLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tslStatus = New System.Windows.Forms.ToolStripStatusLabel()
@@ -57,10 +58,15 @@ Partial Class frmServer
         Me.cmuRMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuKickClient = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.btnEditTerm = New System.Windows.Forms.ToolStripButton()
+        Me.lblTerm = New System.Windows.Forms.ToolStripLabel()
         Me.stpMain.SuspendLayout()
         Me.mnuMain.SuspendLayout()
         Me.tlpMain.SuspendLayout()
         Me.cmuRMenu.SuspendLayout()
+        Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'stpMain
@@ -224,12 +230,12 @@ Partial Class frmServer
         Me.tlpMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpMain.Enabled = False
         Me.tlpMain.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.tlpMain.Location = New System.Drawing.Point(0, 28)
+        Me.tlpMain.Location = New System.Drawing.Point(0, 53)
         Me.tlpMain.Name = "tlpMain"
         Me.tlpMain.RowCount = 2
         Me.tlpMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlpMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlpMain.Size = New System.Drawing.Size(784, 411)
+        Me.tlpMain.Size = New System.Drawing.Size(784, 386)
         Me.tlpMain.TabIndex = 2
         '
         'lvTeacher
@@ -242,7 +248,7 @@ Partial Class frmServer
         Me.lvTeacher.Location = New System.Drawing.Point(3, 23)
         Me.lvTeacher.MultiSelect = False
         Me.lvTeacher.Name = "lvTeacher"
-        Me.lvTeacher.Size = New System.Drawing.Size(386, 385)
+        Me.lvTeacher.Size = New System.Drawing.Size(386, 360)
         Me.lvTeacher.TabIndex = 5
         Me.lvTeacher.UseCompatibleStateImageBehavior = False
         Me.lvTeacher.View = System.Windows.Forms.View.Details
@@ -285,7 +291,7 @@ Partial Class frmServer
         Me.lvStudent.Location = New System.Drawing.Point(395, 23)
         Me.lvStudent.MultiSelect = False
         Me.lvStudent.Name = "lvStudent"
-        Me.lvStudent.Size = New System.Drawing.Size(386, 385)
+        Me.lvStudent.Size = New System.Drawing.Size(386, 360)
         Me.lvStudent.TabIndex = 2
         Me.lvStudent.UseCompatibleStateImageBehavior = False
         Me.lvStudent.View = System.Windows.Forms.View.Details
@@ -309,12 +315,12 @@ Partial Class frmServer
         '
         Me.cmuRMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuKickClient})
         Me.cmuRMenu.Name = "cmLsvClient"
-        Me.cmuRMenu.Size = New System.Drawing.Size(123, 26)
+        Me.cmuRMenu.Size = New System.Drawing.Size(125, 26)
         '
         'mnuKickClient
         '
         Me.mnuKickClient.Name = "mnuKickClient"
-        Me.mnuKickClient.Size = New System.Drawing.Size(122, 22)
+        Me.mnuKickClient.Size = New System.Drawing.Size(124, 22)
         Me.mnuKickClient.Text = "踢除連線"
         '
         'Label1
@@ -329,12 +335,45 @@ Partial Class frmServer
         Me.Label1.Text = "- 教師上線清單 -"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.lblTerm, Me.btnEditTerm})
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 28)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(784, 25)
+        Me.ToolStrip1.TabIndex = 3
+        Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'ToolStripLabel1
+        '
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        Me.ToolStripLabel1.Size = New System.Drawing.Size(80, 22)
+        Me.ToolStripLabel1.Text = "當前學期別："
+        '
+        'btnEditTerm
+        '
+        Me.btnEditTerm.BackColor = System.Drawing.SystemColors.Info
+        Me.btnEditTerm.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnEditTerm.Image = CType(resources.GetObject("btnEditTerm.Image"), System.Drawing.Image)
+        Me.btnEditTerm.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnEditTerm.Name = "btnEditTerm"
+        Me.btnEditTerm.Size = New System.Drawing.Size(60, 22)
+        Me.btnEditTerm.Text = "修改學期"
+        '
+        'lblTerm
+        '
+        Me.lblTerm.Font = New System.Drawing.Font("微軟正黑體", 12.0!)
+        Me.lblTerm.Name = "lblTerm"
+        Me.lblTerm.Size = New System.Drawing.Size(45, 22)
+        Me.lblTerm.Text = "1041"
+        '
         'frmServer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(784, 462)
         Me.Controls.Add(Me.tlpMain)
+        Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.stpMain)
         Me.Controls.Add(Me.mnuMain)
         Me.MainMenuStrip = Me.mnuMain
@@ -348,6 +387,8 @@ Partial Class frmServer
         Me.mnuMain.PerformLayout()
         Me.tlpMain.ResumeLayout(False)
         Me.cmuRMenu.ResumeLayout(False)
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -386,5 +427,9 @@ Partial Class frmServer
     Friend WithEvents 學生帳號資訊ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents 課程資訊ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
+    Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
+    Friend WithEvents lblTerm As System.Windows.Forms.ToolStripLabel
+    Friend WithEvents btnEditTerm As System.Windows.Forms.ToolStripButton
 
 End Class

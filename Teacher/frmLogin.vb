@@ -98,6 +98,11 @@ Public Class frmLogin
                     Exit Sub
                 End If
 
+                frmProgress.title = "取得系統資訊.."
+                ' 取得當前系統學期別
+                Dim sqlGetSysInfo = "SELECT Term FROM Sys;"
+                nowTerm = doSqlQuery(sqlGetSysInfo).Rows(0).Item(0).ToString
+
                 frmProgress.title = "取得課程資訊.."
                 ' 取得課程資訊
                 Dim sqlGetCourses = "SELECT * FROM Course WHERE Teacher LIKE '%" & myProfile.Name & "%';"

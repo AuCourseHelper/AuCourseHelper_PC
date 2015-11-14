@@ -6,7 +6,8 @@ Imports System.Management
 Imports System.Text
 
 Public Class frmServer
-    Public version = "1.0.151101"
+    Public Shared version = "1.0.151110"
+    Public Shared nowTerm = ""
     'Dim p As Process
 
     Private Sub frmServer_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -51,8 +52,15 @@ Public Class frmServer
             tsmIp.Text = "IP: " & GetRealIPaddress()
         End If
         log("==" & tsmIp.Text, LogType_SYSTEM)
-
         Me.Text &= "(" & version & ")"
+
+        If Now.Month > 8 Then
+            nowTerm = (Now.Year - 1911) & "1"
+        Else
+            nowTerm = (Now.Year - 1911 - 1) & "2"
+        End If
+
+        lblTerm.Text = nowTerm
         tslSysTime.Text = Now
         lvTeacher.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
         lvStudent.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
@@ -124,6 +132,7 @@ Public Class frmServer
             mnuStart.Enabled = False
             mnuStop.Enabled = True
             tslOnlineCount.Text = "伺服器：開啟  人數：0人"
+            btnEditTerm.Enabled = False
         End If
     End Sub
 
@@ -138,6 +147,7 @@ Public Class frmServer
         mnuStart.Enabled = True
         mnuStop.Enabled = False
         tslOnlineCount.Text = "伺服器：關閉  人數：0人"
+        btnEditTerm.Enabled = True
     End Sub
 
     Private Sub tsmReport_DropDownOpened(sender As Object, e As EventArgs) Handles tsmReport.DropDownOpened
@@ -285,4 +295,7 @@ Public Class frmServer
         saveLog(logText)
     End Sub
 
+    Private Sub btnEditTerm_Click(sender As Object, e As EventArgs) Handles btnEditTerm.Click
+
+    End Sub
 End Class

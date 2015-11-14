@@ -23,7 +23,7 @@
 
         Dim font As New Font("", 12, FontStyle.Bold)
         Dim msr = g.MeasureString(title, font)
-        Dim pt As New Point((150 - msr.Width) / 2, (150 - msr.Height) / 2)
+        Dim pt As New Point((150 - msr.Width) / 2 - 2, (150 - msr.Height) / 2)
         msr.Width += 2
         g.FillRectangle(Brushes.LightGreen, pt.X, pt.Y, msr.Width, msr.Height)
         g.DrawString(title, font, Brushes.Black, pt)
