@@ -20,6 +20,7 @@
     End Sub
 
     Private Sub frmTeacher_Load(sender As Object, e As EventArgs) Handles Me.Load
+        
         objFrmTeacher = Me
         log("====執行系統====", LogType_SYSTEM)
         log("==教師端", LogType_SYSTEM)
@@ -296,4 +297,5 @@
         mnuCourseTool.Enabled = False
         tsmCourse.Enabled = True
     End Sub
+
 End Class
