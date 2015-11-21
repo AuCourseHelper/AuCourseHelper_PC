@@ -94,6 +94,7 @@ Public Class frmServer
             log("==執行系統排程，重啟伺服器", LogType_SYSTEM)
             ' 重開server，藉此排除登入狀態卡死導致使用者無法再登入
             stopServer()
+            Thread.Sleep(1000)
             startServer()
         End If
 

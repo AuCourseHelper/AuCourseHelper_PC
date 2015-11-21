@@ -1,5 +1,7 @@
-﻿Public Class frmTeacher
-    Public version = "1.0.151027"
+﻿Imports System.Net.NetworkInformation
+
+Public Class frmTeacher
+    Public version = "1.0.151120"
     Private nowCourseMenuItem As New ToolStripButton
 
     Private Sub frmTeacher_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -20,7 +22,6 @@
     End Sub
 
     Private Sub frmTeacher_Load(sender As Object, e As EventArgs) Handles Me.Load
-        
         objFrmTeacher = Me
         log("====執行系統====", LogType_SYSTEM)
         log("==教師端", LogType_SYSTEM)

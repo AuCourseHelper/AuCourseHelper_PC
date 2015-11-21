@@ -104,8 +104,11 @@
             <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.DecreaseIndentation" ToolTip="向左縮排">
                 <Image Source="{DynamicResource ParagraphDecreaseIndentation}"/>
             </Button>
-            <Button Style="{StaticResource formatTextStyle}" ToolTip="說明" Margin="50,2,0,3" BorderBrush="{x:Null}" Cursor="Hand" HorizontalAlignment="Center" HorizontalContentAlignment="Center">
-                <TextBlock FontWeight="Bold" FontSize="18" Background="Yellow" Foreground="Blue"><Run Text="？"/></TextBlock>
+            <Button Style="{StaticResource formatTextStyle}" Command="" ToolTip="字型色彩" Margin="0,2,0,3" Width="70" Click="Button_Click" Focusable="False">
+                <TextBlock FontWeight="Bold" FontSize="18"><Run Text="TColor"/></TextBlock>
+            </Button>
+            <Button Style="{StaticResource formatTextStyle}" Command="" ToolTip="字型背景色彩" Margin="0,2,0,3" Width="80" Click="Button2_Click" Focusable="False">
+                <TextBlock FontWeight="Bold" FontSize="18"><Run Text="BkColor"/></TextBlock>
             </Button>
         </ToolBar>
 
