@@ -83,9 +83,99 @@ Namespace My.Resources
         '''<summary>
         '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         '''</summary>
+        Friend ReadOnly Property charactergrowfont() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("charactergrowfont", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
+        Friend ReadOnly Property charactershrinkfont() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("charactershrinkfont", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
+        Friend ReadOnly Property editcopy() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("editcopy", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
+        Friend ReadOnly Property editcut() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("editcut", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
+        Friend ReadOnly Property editpaste() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("editpaste", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
+        Friend ReadOnly Property editredo() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("editredo", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
+        Friend ReadOnly Property editundo() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("editundo", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
         Friend ReadOnly Property exam() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("exam", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
+        Friend ReadOnly Property fileopen() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("fileopen", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
+        Friend ReadOnly Property filesave() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("filesave", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -103,9 +193,89 @@ Namespace My.Resources
         '''<summary>
         '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         '''</summary>
+        Friend ReadOnly Property listbullets() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("listbullets", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
+        Friend ReadOnly Property listnumbering() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("listnumbering", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
         Friend ReadOnly Property logout() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("logout", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
+        Friend ReadOnly Property paragraphcenterjustify() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("paragraphcenterjustify", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
+        Friend ReadOnly Property paragraphdecreaseindentation() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("paragraphdecreaseindentation", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
+        Friend ReadOnly Property paragraphfulljustify() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("paragraphfulljustify", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
+        Friend ReadOnly Property paragraphincreaseindentation() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("paragraphincreaseindentation", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
+        Friend ReadOnly Property paragraphleftjustify() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("paragraphleftjustify", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
+        Friend ReadOnly Property paragraphrightjustify() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("paragraphrightjustify", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

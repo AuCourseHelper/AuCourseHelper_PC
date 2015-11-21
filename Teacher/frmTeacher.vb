@@ -1,5 +1,7 @@
-﻿Public Class frmTeacher
-    Public version = "1.0.151027"
+﻿Imports System.Net.NetworkInformation
+
+Public Class frmTeacher
+    Public version = "1.0.151120"
     Private nowCourseMenuItem As New ToolStripButton
 
     Private Sub frmTeacher_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -296,4 +298,5 @@
         mnuCourseTool.Enabled = False
         tsmCourse.Enabled = True
     End Sub
+
 End Class

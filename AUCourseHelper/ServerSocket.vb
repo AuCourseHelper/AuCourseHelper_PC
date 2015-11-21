@@ -66,6 +66,7 @@ Module ServerSocket
                 End Try
                 log("強制踢除: " & client._ip & "-" & client._name, LogType_SYSTEM)
             Next
+            serverSocket.Shutdown(SocketShutdown.Both)
             serverSocket.Close()
             serverSocket = Nothing
             clients.Clear()
@@ -73,6 +74,8 @@ Module ServerSocket
             log("伺服器已關閉", LogType_NORMAL)
         Catch ex As Exception
             log("stopServer異常! " & ex.Message, LogType_ERROR)
+            serverSocket = Nothing
+            clients = New List(Of Client)
         End Try
         'objFrmServer.RemoveAllClient()
     End Sub

@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="ctrlNotepad"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="800">
+    <UserControl.Resources>
+
+        <Style TargetType="{x:Type Button}" x:Key="formatImageStyle">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="CommandTarget" Value="{Binding ElementName=mainRTB}"/>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="formatTextStyle">
+            <Setter Property="FontFamily" Value="Palatino Linotype"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="FontSize" Value ="14"/>
+            <Setter Property="CommandTarget" Value="{Binding ElementName=mainRTB}"/>
+        </Style>
+        <BitmapImage x:Key="EditCut" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="D:\#Github\AuCourseHelper_PC\Teacher\Resources\editcut.png"/>
+        <BitmapImage x:Key="EditCopy" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="D:\#Github\AuCourseHelper_PC\Teacher\Resources\editcopy.png"/>
+        <BitmapImage x:Key="EditPaste" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="D:\#Github\AuCourseHelper_PC\Teacher\Resources\editpaste.png"/>
+        <BitmapImage x:Key="EditUndo" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="D:\#Github\AuCourseHelper_PC\Teacher\Resources\editundo.png"/>
+        <BitmapImage x:Key="EditRedo" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="D:\#Github\AuCourseHelper_PC\Teacher\Resources\editredo.png"/>
+        <BitmapImage x:Key="CharacterGrowFont" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="D:\#Github\AuCourseHelper_PC\Teacher\Resources\charactergrowfont.png"/>
+        <BitmapImage x:Key="CharacterShrinkFont" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="D:\#Github\AuCourseHelper_PC\Teacher\Resources\charactershrinkfont.png"/>
+        <BitmapImage x:Key="ListBullets" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="D:\#Github\AuCourseHelper_PC\Teacher\Resources\listbullets.png"/>
+        <BitmapImage x:Key="ListNumbering" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="D:\#Github\AuCourseHelper_PC\Teacher\Resources\listnumbering.png"/>
+        <BitmapImage x:Key="ParagraphLeftJustify" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="D:\#Github\AuCourseHelper_PC\Teacher\Resources\paragraphleftjustify.png"/>
+        <BitmapImage x:Key="ParagraphCenterJustify" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="D:\#Github\AuCourseHelper_PC\Teacher\Resources\paragraphcenterjustify.png"/>
+        <BitmapImage x:Key="ParagraphRightJustify" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="D:\#Github\AuCourseHelper_PC\Teacher\Resources\paragraphrightjustify.png"/>
+        <BitmapImage x:Key="ParagraphFullJustify" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="D:\#Github\AuCourseHelper_PC\Teacher\Resources\paragraphfulljustify.png"/>
+        <BitmapImage x:Key="ParagraphIncreaseIndentation" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="D:\#Github\AuCourseHelper_PC\Teacher\Resources\paragraphincreaseindentation.png"/>
+        <BitmapImage x:Key="ParagraphDecreaseIndentation" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="D:\#Github\AuCourseHelper_PC\Teacher\Resources\paragraphdecreaseindentation.png"/>
+
+    </UserControl.Resources>
+    <Grid>
+        <!-- This tool bar contains all the editing buttons. -->
+        <ToolBar x:Name="mainToolBar" VerticalAlignment="Top" Height="40" Margin="0,0,0,0" FontSize="17">
+            <ToolBar.ItemBindingGroup>
+                <BindingGroup/>
+            </ToolBar.ItemBindingGroup>
+            <ToolBar.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="White" Offset="0"/>
+                    <GradientStop Color="#FFFFFBFF" Offset="0.5"/>
+                    <GradientStop Color="#FF66D6E8" Offset="1"/>
+                </LinearGradientBrush>
+            </ToolBar.Background>
+
+            <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Cut" ToolTip="剪下">
+                <Image Source="{DynamicResource EditCut}"/>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Copy" ToolTip="複製">
+                <Image Source="{DynamicResource EditCopy}"/>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Paste" ToolTip="貼上">
+                <Image Source="{DynamicResource EditPaste}"/>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Undo" ToolTip="復原">
+                <Image Source="{DynamicResource EditUndo}"/>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Redo" ToolTip="重做">
+                <Image Source="{DynamicResource EditRedo}"/>
+            </Button>
+
+            <Button Style="{StaticResource formatTextStyle}" Command="EditingCommands.ToggleBold" ToolTip="粗體">
+                <TextBlock FontWeight="Bold" FontSize="18"><Run Text="B"/></TextBlock>
+            </Button>
+            <Button Style="{StaticResource formatTextStyle}" Command="EditingCommands.ToggleItalic" ToolTip="斜體">
+                <TextBlock FontStyle="Italic" FontWeight="Bold" FontSize="18"><Run Text="I"/></TextBlock>
+            </Button>
+            <Button Style="{StaticResource formatTextStyle}" Command="EditingCommands.ToggleUnderline" ToolTip="底線">
+                <TextBlock TextDecorations="Underline" FontWeight="Bold" FontSize="18"><Run Text="U"/></TextBlock>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.IncreaseFontSize" ToolTip="放大字型">
+                <Image Source="{DynamicResource CharacterGrowFont}"/>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.DecreaseFontSize" ToolTip="縮小字型">
+                <Image Source="{DynamicResource CharacterShrinkFont}"/>
+            </Button>
+
+            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.ToggleBullets" ToolTip="符號清單">
+                <Image Source="{DynamicResource ListBullets}"/>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.ToggleNumbering" ToolTip="數字清單">
+                <Image Source="{DynamicResource ListNumbering}"/>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.AlignLeft" ToolTip="靠左對齊">
+                <Image Source="{DynamicResource ParagraphLeftJustify}"/>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.AlignCenter" ToolTip="置中對齊">
+                <Image Source="{DynamicResource ParagraphCenterJustify}"/>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.AlignRight" ToolTip="靠右對齊">
+                <Image Source="{DynamicResource ParagraphRightJustify}"/>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.AlignJustify" ToolTip="左右對齊">
+                <Image Source="{DynamicResource ParagraphFullJustify}"/>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.IncreaseIndentation" ToolTip="向右縮排">
+                <Image Source="{DynamicResource ParagraphIncreaseIndentation}"/>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.DecreaseIndentation" ToolTip="向左縮排">
+                <Image Source="{DynamicResource ParagraphDecreaseIndentation}"/>
+            </Button>
+            <Button Style="{StaticResource formatTextStyle}" Command="" ToolTip="字型色彩" Margin="0,2,0,3" Width="70" Click="Button_Click" Focusable="False">
+                <TextBlock FontWeight="Bold" FontSize="18"><Run Text="TColor"/></TextBlock>
+            </Button>
+            <Button Style="{StaticResource formatTextStyle}" Command="" ToolTip="字型背景色彩" Margin="0,2,0,3" Width="80" Click="Button2_Click" Focusable="False">
+                <TextBlock FontWeight="Bold" FontSize="18"><Run Text="BkColor"/></TextBlock>
+            </Button>
+        </ToolBar>
+
+        <!-- By default pressing tab moves focus to the next control. Setting AcceptsTab to true allows the 
+           RichTextBox to accept tab characters. -->
+        <RichTextBox x:Name="mainRTB" AcceptsTab="True" Margin="0,40
+                     ,0,0" FontFamily="Times New Roman" FontSize="14pt" SelectionBrush="#FF67ABEE" UseLayoutRounding="False" VerticalScrollBarVisibility="Visible">
+            <FlowDocument>
+                <Paragraph LineHeight="2pt"/>
+            </FlowDocument>
+        </RichTextBox>
+
+    </Grid>
+</UserControl>
