@@ -81,8 +81,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientSocket.vb" />
-    <Compile Include="ctrlNotepad.xaml.vb">
-      <DependentUpon>ctrlNotepad.xaml</DependentUpon>
+    <Compile Include="ctrlRTBTool.Designer.vb">
+      <DependentUpon>ctrlRTBTool.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ctrlRTBTool.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="frmAttend.Designer.vb">
       <DependentUpon>frmAttend.vb</DependentUpon>
@@ -164,6 +167,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ctrlRTBTool.resx">
+      <DependentUpon>ctrlRTBTool.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAttend.resx">
       <DependentUpon>frmAttend.vb</DependentUpon>
     </EmbeddedResource>
@@ -278,10 +284,7 @@
     <None Include="Resources\paragraphrightjustify.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ctrlNotepad.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <None Include="Resources\A.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

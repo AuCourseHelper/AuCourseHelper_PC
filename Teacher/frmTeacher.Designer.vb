@@ -58,8 +58,7 @@ Partial Class frmTeacher
         Me.pnlMain = New System.Windows.Forms.Panel()
         Me.tmrSysTime = New System.Windows.Forms.Timer(Me.components)
         Me.tmrServerPing = New System.Windows.Forms.Timer(Me.components)
-        Me.ElementHost1 = New System.Windows.Forms.Integration.ElementHost()
-        Me.CtrlNotepad1 = New AUCourseHelper_Teacher.ctrlNotepad()
+        Me.CtrlRTBTool1 = New AUCourseHelper_Teacher.ctrlRTBTool()
         Me.mnuMain.SuspendLayout()
         Me.stpMain.SuspendLayout()
         Me.mnuCourseTool.SuspendLayout()
@@ -312,7 +311,7 @@ Partial Class frmTeacher
         'pnlMain
         '
         Me.pnlMain.AutoScroll = True
-        Me.pnlMain.Controls.Add(Me.ElementHost1)
+        Me.pnlMain.Controls.Add(Me.CtrlRTBTool1)
         Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMain.Location = New System.Drawing.Point(0, 78)
         Me.pnlMain.Name = "pnlMain"
@@ -328,15 +327,16 @@ Partial Class frmTeacher
         '
         Me.tmrServerPing.Interval = 60000
         '
-        'ElementHost1
+        'CtrlRTBTool1
         '
-        Me.ElementHost1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ElementHost1.Location = New System.Drawing.Point(0, 0)
-        Me.ElementHost1.Name = "ElementHost1"
-        Me.ElementHost1.Size = New System.Drawing.Size(1008, 629)
-        Me.ElementHost1.TabIndex = 0
-        Me.ElementHost1.Text = "ElementHost1"
-        Me.ElementHost1.Child = Me.CtrlNotepad1
+        Me.CtrlRTBTool1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CtrlRTBTool1.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.CtrlRTBTool1.Location = New System.Drawing.Point(0, 0)
+        Me.CtrlRTBTool1.Margin = New System.Windows.Forms.Padding(4)
+        Me.CtrlRTBTool1.Name = "CtrlRTBTool1"
+        Me.CtrlRTBTool1.Size = New System.Drawing.Size(1008, 629)
+        Me.CtrlRTBTool1.TabIndex = 0
+        Me.CtrlRTBTool1.控制列 = True
         '
         'frmTeacher
         '
@@ -398,7 +398,6 @@ Partial Class frmTeacher
     Friend WithEvents tmrServerPing As System.Windows.Forms.Timer
     Friend WithEvents tslEnd As System.Windows.Forms.ToolStripButton
     Friend WithEvents tslTerm As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents ElementHost1 As System.Windows.Forms.Integration.ElementHost
-    Friend CtrlNotepad1 As AUCourseHelper_Teacher.ctrlNotepad
+    Friend WithEvents CtrlRTBTool1 As AUCourseHelper_Teacher.ctrlRTBTool
 
 End Class
