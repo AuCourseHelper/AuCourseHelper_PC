@@ -1,6 +1,4 @@
-﻿Imports System.Resources
-
-Imports System
+﻿Imports System
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 
@@ -10,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' 檢閱組件屬性的值
 
-<Assembly: AssemblyTitle("課堂輔助系統-教師端")> 
+<Assembly: AssemblyTitle("課堂輔助系統-伺服端")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("嶢海龍")> 
-<Assembly: AssemblyProduct("課堂輔助系統")> 
-<Assembly: AssemblyCopyright("嶢海龍 ©  2015")> 
-<Assembly: AssemblyTrademark("嶢海龍")> 
+<Assembly: AssemblyCompany("Microsoft")> 
+<Assembly: AssemblyProduct("Teacher_n")> 
+<Assembly: AssemblyCopyright("Copyright © Microsoft 2015")> 
+<Assembly: AssemblyTrademark("")> 
 
-<Assembly: ComVisible(False)> 
+<Assembly: ComVisible(False)>
 
 '下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-<Assembly: Guid("09e1dbbc-53d7-4e27-8b7a-36f8acd5d1eb")> 
+<Assembly: Guid("eb447b25-7bd9-4237-84f6-8419681b0a50")> 
 
 ' 組件的版本資訊是由下列四項值構成: 
 '
@@ -35,5 +33,3 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyVersion("1.0.0.0")> 
 <Assembly: AssemblyFileVersion("1.0.0.0")> 
-
-<Assembly: NeutralResourcesLanguageAttribute("zh-Hant")> 

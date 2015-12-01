@@ -4,13 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{762611CB-4AEB-430E-8C0E-77FB2567243C}</ProjectGuid>
+    <ProjectGuid>{DEB38DF7-8AB7-42DF-8688-8D67E715E3FE}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>Sub Main</StartupObject>
+    <StartupObject>AUCourseHelper_Teacher.My.MyApplication</StartupObject>
     <RootNamespace>AUCourseHelper_Teacher</RootNamespace>
     <AssemblyName>課堂輔助系統-教師端</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -22,7 +22,6 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>課堂輔助系統-教師端.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,7 +32,6 @@
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>課堂輔助系統-教師端.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -54,20 +52,15 @@
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="UIAutomationProvider" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="System.Data.DataSetExtensions" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -150,20 +143,15 @@
     <Compile Include="frmSignUp.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTeacher.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmTeacher.Designer.vb">
       <DependentUpon>frmTeacher.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmTeacher.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LogFunc.vb" />
     <Compile Include="modAutoResize.vb" />
     <Compile Include="modDefine.vb" />
-    <Compile Include="My Project\Application.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Application.myapp</DependentUpon>
-    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -226,92 +214,40 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\school.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\verified.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\books.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\exam.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\list.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\logout.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\save.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\cancel.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\charactergrowfont.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\charactershrinkfont.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\editcopy.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\editcut.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\editpaste.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\editredo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\editundo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\fileopen.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\filesave.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\listbullets.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\listnumbering.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\paragraphcenterjustify.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\paragraphdecreaseindentation.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\paragraphfulljustify.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\paragraphincreaseindentation.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\paragraphleftjustify.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\paragraphrightjustify.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\update.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="setting.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Controls\" />
     <Folder Include="Forms\" />
     <Folder Include="Modules\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paragraphrightjustify.png" />
+    <None Include="Resources\paragraphleftjustify.png" />
+    <None Include="Resources\paragraphincreaseindentation.png" />
+    <None Include="Resources\paragraphfulljustify.png" />
+    <None Include="Resources\paragraphdecreaseindentation.png" />
+    <None Include="Resources\paragraphcenterjustify.png" />
+    <None Include="Resources\listnumbering.png" />
+    <None Include="Resources\listbullets.png" />
+    <None Include="Resources\filesave.png" />
+    <None Include="Resources\fileopen.png" />
+    <None Include="Resources\editundo.png" />
+    <None Include="Resources\editredo.png" />
+    <None Include="Resources\editpaste.png" />
+    <None Include="Resources\editcut.png" />
+    <None Include="Resources\editcopy.png" />
+    <None Include="Resources\charactershrinkfont.png" />
+    <None Include="Resources\charactergrowfont.png" />
+    <None Include="Resources\verified.png" />
+    <None Include="Resources\update.png" />
+    <None Include="Resources\school.png" />
+    <None Include="Resources\save.png" />
+    <None Include="Resources\logout.png" />
+    <None Include="Resources\list.png" />
+    <None Include="Resources\exam.png" />
+    <None Include="Resources\cancel.png" />
+    <None Include="Resources\books.png" />
+    <Content Include="setting.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
