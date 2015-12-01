@@ -34,6 +34,8 @@ Public Class frmAttend
         If InvokeRequired Then
             Invoke(New _doUiGetStudents(AddressOf doUiGetStudents))
         End If
+        lblDate.Text = Now.Month & "/" & Now.Day & vbCrLf & "第 " & nowWeek & " 週"
+        lblDate2.Text = Now.Month & "/" & Now.Day & vbCrLf & "第 " & nowWeek & " 週"
 
         ' 表格部分
         tblMain.DataSource = students
@@ -77,6 +79,17 @@ Public Class frmAttend
     Private Sub btnAtt_Click(sender As Object, e As EventArgs) Handles btnAtt.Click
         Dim index = tblMain.SelectedRows(0).Index
         tblMain.Rows(index).Cells(4).Value = "出席"
+        tblMain.Rows(index).Cells(4).Style.BackColor = Color.LightGreen
+        If index < tblMain.RowCount - 1 Then
+            tblMain.Rows(index + 1).Selected = True
+            tblMain.FirstDisplayedScrollingRowIndex = index
+        End If
+    End Sub
+
+    Private Sub btnOff_Click(sender As Object, e As EventArgs) Handles btnOff.Click
+        Dim index = tblMain.SelectedRows(0).Index
+        tblMain.Rows(index).Cells(4).Value = "請假"
+        tblMain.Rows(index).Cells(4).Style.BackColor = Color.LightGray
         If index < tblMain.RowCount - 1 Then
             tblMain.Rows(index + 1).Selected = True
             tblMain.FirstDisplayedScrollingRowIndex = index
@@ -102,4 +115,27 @@ Public Class frmAttend
             tblMain.FirstDisplayedScrollingRowIndex = index
         End If
     End Sub
+
+    Private Sub tblMain_Sorted(sender As Object, e As EventArgs) Handles tblMain.Sorted
+        For Each row As DataGridViewRow In tblMain.Rows
+            If row.Cells(4).Value.Equals("出席") Then
+                row.Cells(4).Style.BackColor = Color.LightGreen
+            ElseIf row.Cells(4).Value.Equals("請假") Then
+                row.Cells(4).Style.BackColor = Color.LightGray
+            ElseIf row.Cells(4).Value.Equals("遲到") Then
+                row.Cells(4).Style.BackColor = Color.LightBlue
+            ElseIf row.Cells(4).Value.Equals("缺席") Then
+                row.Cells(4).Style.BackColor = Color.PaleVioletRed
+            End If
+        Next
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+
+    End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+
+    End Sub
+
 End Class

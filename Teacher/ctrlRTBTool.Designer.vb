@@ -49,15 +49,15 @@ Partial Class ctrlRTBTool
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnCol = New System.Windows.Forms.ToolStripButton()
         Me.btnColBk = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnOpen = New System.Windows.Forms.ToolStripButton()
+        Me.btnSave = New System.Windows.Forms.ToolStripButton()
         Me.tmrMain = New System.Windows.Forms.Timer(Me.components)
         Me.staMain = New System.Windows.Forms.StatusStrip()
         Me.tssLeft = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblPoint = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblLength = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblZoom = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
-        Me.btnOpen = New System.Windows.Forms.ToolStripButton()
-        Me.btnSave = New System.Windows.Forms.ToolStripButton()
         Me.tosMain.SuspendLayout()
         Me.staMain.SuspendLayout()
         Me.SuspendLayout()
@@ -78,7 +78,7 @@ Partial Class ctrlRTBTool
         '
         Me.tosMain.AutoSize = False
         Me.tosMain.BackColor = System.Drawing.SystemColors.GradientActiveCaption
-        Me.tosMain.Font = New System.Drawing.Font("Microsoft JhengHei UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.tosMain.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
         Me.tosMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.tosMain.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.tosMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnCut, Me.btnCopy, Me.btnPaste, Me.btnPasteText, Me.ToolStripSeparator1, Me.btnUndo, Me.btnRedo, Me.ToolStripSeparator2, Me.btnB, Me.btnI, Me.btnU, Me.btnUp, Me.btnDown, Me.ToolStripSeparator3, Me.btnList, Me.btnLeft, Me.btnCenter, Me.btnRight, Me.btnTabR, Me.btnTabL, Me.ToolStripSeparator4, Me.btnCol, Me.btnColBk, Me.ToolStripSeparator5, Me.btnOpen, Me.btnSave})
@@ -307,52 +307,6 @@ Partial Class ctrlRTBTool
         Me.btnColBk.Text = "背景顏色"
         Me.btnColBk.ToolTipText = "字型背景顏色"
         '
-        'tmrMain
-        '
-        Me.tmrMain.Enabled = True
-        Me.tmrMain.Interval = 1000
-        '
-        'staMain
-        '
-        Me.staMain.Font = New System.Drawing.Font("Microsoft JhengHei UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.staMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tssLeft, Me.lblPoint, Me.lblLength, Me.lblZoom})
-        Me.staMain.Location = New System.Drawing.Point(0, 374)
-        Me.staMain.Name = "staMain"
-        Me.staMain.Size = New System.Drawing.Size(800, 26)
-        Me.staMain.SizingGrip = False
-        Me.staMain.TabIndex = 2
-        Me.staMain.Text = "StatusStrip1"
-        '
-        'tssLeft
-        '
-        Me.tssLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.tssLeft.Name = "tssLeft"
-        Me.tssLeft.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.tssLeft.Size = New System.Drawing.Size(594, 21)
-        Me.tssLeft.Spring = True
-        '
-        'lblPoint
-        '
-        Me.lblPoint.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
-            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
-        Me.lblPoint.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken
-        Me.lblPoint.Name = "lblPoint"
-        Me.lblPoint.Size = New System.Drawing.Size(93, 21)
-        Me.lblPoint.Text = "第0列，第0行"
-        '
-        'lblLength
-        '
-        Me.lblLength.Name = "lblLength"
-        Me.lblLength.Size = New System.Drawing.Size(55, 21)
-        Me.lblLength.Text = "0個字元"
-        '
-        'lblZoom
-        '
-        Me.lblZoom.Name = "lblZoom"
-        Me.lblZoom.Size = New System.Drawing.Size(43, 21)
-        Me.lblZoom.Text = "100%"
-        '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
@@ -366,6 +320,7 @@ Partial Class ctrlRTBTool
         Me.btnOpen.Name = "btnOpen"
         Me.btnOpen.Size = New System.Drawing.Size(28, 27)
         Me.btnOpen.Text = "ToolStripButton1"
+        Me.btnOpen.ToolTipText = "開啟RTF檔案"
         '
         'btnSave
         '
@@ -375,6 +330,53 @@ Partial Class ctrlRTBTool
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(28, 27)
         Me.btnSave.Text = "ToolStripButton2"
+        Me.btnSave.ToolTipText = "儲存RTF檔案"
+        '
+        'tmrMain
+        '
+        Me.tmrMain.Enabled = True
+        Me.tmrMain.Interval = 1000
+        '
+        'staMain
+        '
+        Me.staMain.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.staMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tssLeft, Me.lblPoint, Me.lblLength, Me.lblZoom})
+        Me.staMain.Location = New System.Drawing.Point(0, 375)
+        Me.staMain.Name = "staMain"
+        Me.staMain.Size = New System.Drawing.Size(800, 25)
+        Me.staMain.SizingGrip = False
+        Me.staMain.TabIndex = 2
+        Me.staMain.Text = "StatusStrip1"
+        '
+        'tssLeft
+        '
+        Me.tssLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.tssLeft.Name = "tssLeft"
+        Me.tssLeft.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.tssLeft.Size = New System.Drawing.Size(583, 20)
+        Me.tssLeft.Spring = True
+        '
+        'lblPoint
+        '
+        Me.lblPoint.BorderSides = CType((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) _
+            Or System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom), System.Windows.Forms.ToolStripStatusLabelBorderSides)
+        Me.lblPoint.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken
+        Me.lblPoint.Name = "lblPoint"
+        Me.lblPoint.Size = New System.Drawing.Size(101, 20)
+        Me.lblPoint.Text = "第0列，第0行"
+        '
+        'lblLength
+        '
+        Me.lblLength.Name = "lblLength"
+        Me.lblLength.Size = New System.Drawing.Size(60, 20)
+        Me.lblLength.Text = "0個字元"
+        '
+        'lblZoom
+        '
+        Me.lblZoom.Name = "lblZoom"
+        Me.lblZoom.Size = New System.Drawing.Size(41, 20)
+        Me.lblZoom.Text = "100%"
         '
         'ctrlRTBTool
         '

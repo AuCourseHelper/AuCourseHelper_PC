@@ -48,7 +48,7 @@ Public Class frmLogin
         If Regex.IsMatch(txtPwd.Text, "[^\w_]+") Then
             tip.Hide(sender)
             tip.IsBalloon = True
-            tip.Show("不能輸入(^%!&+'""?<>/\\)等符號喔", sender, New Point(30, -50), 1000)
+            tip.Show("不能輸入(^%!&+'""?<>/\)等符號喔", sender, New Point(30, -50), 1000)
             txtPwd.Text = Regex.Replace(txtPwd.Text, "[\W_]+", "")
             txtPwd.SelectionStart = txtPwd.Text.Length
         End If
@@ -102,6 +102,10 @@ Public Class frmLogin
                 ' 取得當前系統學期別
                 Dim sqlGetSysInfo = "SELECT Term FROM Sys;"
                 nowTerm = doSqlQuery(sqlGetSysInfo).Rows(0).Item(0).ToString
+                ' 取得當前系統學期開始日
+                Dim sqlGetSysDateInfo = "SELECT StartDate FROM Sys_Date WHERE Term='" & nowTerm & "';"
+                nowTermStart = Date.Parse(doSqlQuery(sqlGetSysDateInfo).Rows(0).Item(0).ToString).AddDays(-1)
+                nowWeek = Math.Ceiling(Now.Subtract(nowTermStart).Days / 7)
 
                 frmProgress.title = "取得課程資訊.."
                 ' 取得課程資訊

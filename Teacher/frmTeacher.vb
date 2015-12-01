@@ -107,6 +107,7 @@ Public Class frmTeacher
             mnuLogin.Enabled = False
             mnuSignUp.Enabled = True
             mnuLogout.Enabled = True
+            lblWeek.Text = "第 " & nowWeek & " 週"
         End If
     End Sub
 

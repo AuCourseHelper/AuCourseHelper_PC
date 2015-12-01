@@ -60,8 +60,9 @@ Partial Class frmServer
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.btnEditTerm = New System.Windows.Forms.ToolStripButton()
         Me.lblTerm = New System.Windows.Forms.ToolStripLabel()
+        Me.btnEditTerm = New System.Windows.Forms.ToolStripButton()
+        Me.lblStartTime = New System.Windows.Forms.ToolStripLabel()
         Me.stpMain.SuspendLayout()
         Me.mnuMain.SuspendLayout()
         Me.tlpMain.SuspendLayout()
@@ -337,7 +338,7 @@ Partial Class frmServer
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.lblTerm, Me.btnEditTerm})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.lblTerm, Me.btnEditTerm, Me.lblStartTime})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 28)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(784, 25)
@@ -350,6 +351,13 @@ Partial Class frmServer
         Me.ToolStripLabel1.Size = New System.Drawing.Size(80, 22)
         Me.ToolStripLabel1.Text = "當前學期別："
         '
+        'lblTerm
+        '
+        Me.lblTerm.Font = New System.Drawing.Font("微軟正黑體", 12.0!)
+        Me.lblTerm.Name = "lblTerm"
+        Me.lblTerm.Size = New System.Drawing.Size(45, 22)
+        Me.lblTerm.Text = "1041"
+        '
         'btnEditTerm
         '
         Me.btnEditTerm.BackColor = System.Drawing.SystemColors.Info
@@ -360,12 +368,12 @@ Partial Class frmServer
         Me.btnEditTerm.Size = New System.Drawing.Size(60, 22)
         Me.btnEditTerm.Text = "修改學期"
         '
-        'lblTerm
+        'lblStartTime
         '
-        Me.lblTerm.Font = New System.Drawing.Font("微軟正黑體", 12.0!)
-        Me.lblTerm.Name = "lblTerm"
-        Me.lblTerm.Size = New System.Drawing.Size(45, 22)
-        Me.lblTerm.Text = "1041"
+        Me.lblStartTime.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.lblStartTime.Name = "lblStartTime"
+        Me.lblStartTime.Size = New System.Drawing.Size(95, 22)
+        Me.lblStartTime.Text = "伺服器開啟時間:"
         '
         'frmServer
         '
@@ -431,5 +439,6 @@ Partial Class frmServer
     Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
     Friend WithEvents lblTerm As System.Windows.Forms.ToolStripLabel
     Friend WithEvents btnEditTerm As System.Windows.Forms.ToolStripButton
+    Friend WithEvents lblStartTime As System.Windows.Forms.ToolStripLabel
 
 End Class

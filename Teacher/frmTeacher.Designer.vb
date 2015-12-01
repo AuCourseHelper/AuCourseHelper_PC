@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmTeacher
+Partial Class frmMain
     Inherits System.Windows.Forms.Form
 
     'Form 覆寫 Dispose 以清除元件清單。
@@ -44,6 +44,7 @@ Partial Class frmTeacher
         Me.tslLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tslStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tslUserName = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.lblWeek = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tslSysTime = New System.Windows.Forms.ToolStripStatusLabel()
         Me.mnuCourseTool = New System.Windows.Forms.ToolStrip()
         Me.tslTerm = New System.Windows.Forms.ToolStripLabel()
@@ -58,11 +59,9 @@ Partial Class frmTeacher
         Me.pnlMain = New System.Windows.Forms.Panel()
         Me.tmrSysTime = New System.Windows.Forms.Timer(Me.components)
         Me.tmrServerPing = New System.Windows.Forms.Timer(Me.components)
-        Me.CtrlRTBTool1 = New AUCourseHelper_Teacher.ctrlRTBTool()
         Me.mnuMain.SuspendLayout()
         Me.stpMain.SuspendLayout()
         Me.mnuCourseTool.SuspendLayout()
-        Me.pnlMain.SuspendLayout()
         Me.SuspendLayout()
         '
         'mnuMain
@@ -184,7 +183,7 @@ Partial Class frmTeacher
         'stpMain
         '
         Me.stpMain.Font = New System.Drawing.Font("微軟正黑體", 10.0!)
-        Me.stpMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslLabel1, Me.tslStatus, Me.tslUserName, Me.tslSysTime})
+        Me.stpMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslLabel1, Me.tslStatus, Me.tslUserName, Me.lblWeek, Me.tslSysTime})
         Me.stpMain.Location = New System.Drawing.Point(0, 707)
         Me.stpMain.Name = "stpMain"
         Me.stpMain.Size = New System.Drawing.Size(1008, 23)
@@ -203,7 +202,7 @@ Partial Class frmTeacher
         Me.tslStatus.BackColor = System.Drawing.SystemColors.GrayText
         Me.tslStatus.ForeColor = System.Drawing.SystemColors.Info
         Me.tslStatus.Name = "tslStatus"
-        Me.tslStatus.Size = New System.Drawing.Size(808, 18)
+        Me.tslStatus.Size = New System.Drawing.Size(756, 18)
         Me.tslStatus.Spring = True
         Me.tslStatus.Text = "~狀態訊息~"
         Me.tslStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -213,6 +212,13 @@ Partial Class frmTeacher
         Me.tslUserName.Name = "tslUserName"
         Me.tslUserName.Size = New System.Drawing.Size(64, 18)
         Me.tslUserName.Text = "尚未登入"
+        '
+        'lblWeek
+        '
+        Me.lblWeek.BackColor = System.Drawing.SystemColors.Info
+        Me.lblWeek.Name = "lblWeek"
+        Me.lblWeek.Size = New System.Drawing.Size(52, 18)
+        Me.lblWeek.Text = "第 0 週"
         '
         'tslSysTime
         '
@@ -311,7 +317,6 @@ Partial Class frmTeacher
         'pnlMain
         '
         Me.pnlMain.AutoScroll = True
-        Me.pnlMain.Controls.Add(Me.CtrlRTBTool1)
         Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMain.Location = New System.Drawing.Point(0, 78)
         Me.pnlMain.Name = "pnlMain"
@@ -326,17 +331,6 @@ Partial Class frmTeacher
         'tmrServerPing
         '
         Me.tmrServerPing.Interval = 60000
-        '
-        'CtrlRTBTool1
-        '
-        Me.CtrlRTBTool1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CtrlRTBTool1.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.CtrlRTBTool1.Location = New System.Drawing.Point(0, 0)
-        Me.CtrlRTBTool1.Margin = New System.Windows.Forms.Padding(4)
-        Me.CtrlRTBTool1.Name = "CtrlRTBTool1"
-        Me.CtrlRTBTool1.Size = New System.Drawing.Size(1008, 629)
-        Me.CtrlRTBTool1.TabIndex = 0
-        Me.CtrlRTBTool1.控制列 = True
         '
         'frmTeacher
         '
@@ -358,7 +352,6 @@ Partial Class frmTeacher
         Me.stpMain.PerformLayout()
         Me.mnuCourseTool.ResumeLayout(False)
         Me.mnuCourseTool.PerformLayout()
-        Me.pnlMain.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -398,6 +391,6 @@ Partial Class frmTeacher
     Friend WithEvents tmrServerPing As System.Windows.Forms.Timer
     Friend WithEvents tslEnd As System.Windows.Forms.ToolStripButton
     Friend WithEvents tslTerm As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents CtrlRTBTool1 As AUCourseHelper_Teacher.ctrlRTBTool
+    Friend WithEvents lblWeek As System.Windows.Forms.ToolStripStatusLabel
 
 End Class

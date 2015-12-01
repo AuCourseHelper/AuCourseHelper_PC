@@ -134,6 +134,7 @@ Public Class frmServer
             mnuStop.Enabled = True
             tslOnlineCount.Text = "伺服器：開啟  人數：0人"
             btnEditTerm.Enabled = False
+            lblStartTime.Text &= Now
         End If
     End Sub
 
@@ -149,6 +150,7 @@ Public Class frmServer
         mnuStop.Enabled = False
         tslOnlineCount.Text = "伺服器：關閉  人數：0人"
         btnEditTerm.Enabled = True
+        lblStartTime.Text = "伺服器開啟時間:"
     End Sub
 
     Private Sub tsmReport_DropDownOpened(sender As Object, e As EventArgs) Handles tsmReport.DropDownOpened

@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{762611CB-4AEB-430E-8C0E-77FB2567243C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>AUCourseHelper_Teacher.My.MyApplication</StartupObject>
+    <StartupObject>Sub Main</StartupObject>
     <RootNamespace>AUCourseHelper_Teacher</RootNamespace>
     <AssemblyName>課堂輔助系統-教師端</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -22,6 +22,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>課堂輔助系統-教師端.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +33,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>課堂輔助系統-教師端.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -56,6 +58,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
@@ -85,6 +88,12 @@
       <DependentUpon>ctrlRTBTool.vb</DependentUpon>
     </Compile>
     <Compile Include="ctrlRTBTool.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ctrlSeat.Designer.vb">
+      <DependentUpon>ctrlSeat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ctrlSeat.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="frmAttend.Designer.vb">
@@ -150,6 +159,11 @@
     </Compile>
     <Compile Include="LogFunc.vb" />
     <Compile Include="modAutoResize.vb" />
+    <Compile Include="modDefine.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -169,6 +183,9 @@
   <ItemGroup>
     <EmbeddedResource Include="ctrlRTBTool.resx">
       <DependentUpon>ctrlRTBTool.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctrlSeat.resx">
+      <DependentUpon>ctrlSeat.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAttend.resx">
       <DependentUpon>frmAttend.vb</DependentUpon>
@@ -199,7 +216,7 @@
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
-      <LastGenOutput>Application1.Designer.vb</LastGenOutput>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -284,7 +301,17 @@
     <None Include="Resources\paragraphrightjustify.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\A.png" />
+    <None Include="Resources\update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="setting.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
+    <Folder Include="Forms\" />
+    <Folder Include="Modules\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

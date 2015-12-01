@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<setting>
+	<server ip="192.192.122.202" port="5566" />
+	<const retryTimes="3" />
+</setting>

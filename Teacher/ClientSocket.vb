@@ -6,23 +6,10 @@ Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.IO
 
 Module SocketProcess
-    Public Const RETRYTIMES = 3
-
-    Public objFrmTeacher As frmTeacher
-    Public serverIp As String = "192.192.122.202"
-    Public clientSocket As Socket
     Private byteData(8191) As Byte
     Private pong As Boolean = False
     Private isLogoutIng As Boolean = False
     Private resultDataTable As DataTable = Nothing
-    Public resultDbCmd As String = ""
-    Public isLogin As Boolean = False
-    Public isDeserializeFail = False
-
-    Public myProfile As New TeacherProfile
-    Public myCourses As New DataTable
-    Public nowCourse As DataRow
-    Public nowTerm As String
 
     Public Function GetIPaddress() As String
         Dim myHost As String = System.Net.Dns.GetHostName
