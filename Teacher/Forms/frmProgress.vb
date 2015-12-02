@@ -1,9 +1,14 @@
 ﻿Public Class frmProgress
-    Dim a As Integer = 0
+    Private a As Integer = 0
     Public Shared title As String = "..."
+    Public Shared isOff As Boolean = False
 
     Private Sub frmProgress_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
         'e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality
+        If isOff Then
+            Me.Dispose()
+            isOff = False
+        End If
         DrawProgress(e.Graphics, New Rectangle(6, 6, 137, 137), a)
     End Sub
 

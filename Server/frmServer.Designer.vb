@@ -355,8 +355,8 @@ Partial Class frmServer
         '
         Me.lblTerm.Font = New System.Drawing.Font("微軟正黑體", 12.0!)
         Me.lblTerm.Name = "lblTerm"
-        Me.lblTerm.Size = New System.Drawing.Size(45, 22)
-        Me.lblTerm.Text = "1041"
+        Me.lblTerm.Size = New System.Drawing.Size(52, 22)
+        Me.lblTerm.Text = "104-1"
         '
         'btnEditTerm
         '

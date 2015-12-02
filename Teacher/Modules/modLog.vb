@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 
-Module LogFunc
+Module modLog
     Public Const LogType_NORMAL = 1
     Public Const LogType_ERROR = 2
     Public Const LogType_SYSTEM = 3

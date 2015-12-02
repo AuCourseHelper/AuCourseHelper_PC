@@ -55,9 +55,9 @@ Public Class frmServer
         Me.Text &= "(" & version & ")"
 
         If Now.Month > 8 Then
-            nowTerm = (Now.Year - 1911) & "1"
+            nowTerm = (Now.Year - 1911) & "-1"
         Else
-            nowTerm = (Now.Year - 1911 - 1) & "2"
+            nowTerm = (Now.Year - 1911 - 1) & "-2"
         End If
 
         lblTerm.Text = nowTerm

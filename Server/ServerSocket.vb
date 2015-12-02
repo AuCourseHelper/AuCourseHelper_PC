@@ -104,7 +104,7 @@ Module ServerSocket
 
                 ' =====重複登入=====
                 If checkIfLogined(returns(0), clientUserType) Then
-                    log(clientIp & ": 帳號" & clientUid & "登入失敗", LogType_NORMAL)
+                    log(clientIp & ": 帳號" & clientUid & " 登入失敗(重複登入)", LogType_NORMAL)
                     ' 重複登入，回傳"RELOGIN"
                     Dim sendBytes_RE As Byte() = Encoding.UTF8.GetBytes("RELOGIN;")
                     clientSocket.Send(sendBytes_RE)
@@ -123,11 +123,11 @@ Module ServerSocket
                     clients.Add(client)
                     objFrmServer.AddClient(client)
                     clientSocket.BeginReceive(byteData, 0, byteData.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), clientSocket)
-                    log(clientIp & ": " & returns(1) & "登入成功", LogType_NORMAL)
+                    log(clientIp & ": " & returns(1) & " 登入成功", LogType_NORMAL)
                 End If
 
             Else ' =====登入失敗=====
-                log(clientIp & ": 帳號" & clientUid & "登入失敗", LogType_NORMAL)
+                log(clientIp & ": 帳號" & clientUid & " 登入失敗(帳密錯誤)", LogType_NORMAL)
                 ' 回傳"loginFail"
                 Dim sendBytes As Byte() = Encoding.UTF8.GetBytes("LOGINFAIL;")
                 clientSocket.Send(sendBytes)
@@ -173,9 +173,9 @@ Module ServerSocket
                     Exit Sub
 
                 Case "DBQUERY" ' 資料庫查詢
-                    log(clientSocket.RemoteEndPoint.ToString & ": 要求DBQUERY", LogType_NORMAL)
                     clientSocket.Receive(byteData)
                     Dim sql = Encoding.UTF8.GetString(byteData).Split(";")(0)
+                    log(clientSocket.RemoteEndPoint.ToString & ": 要求DBQUERY(" & sql & ")", LogType_NORMAL)
                     clientSocket.Send(Encoding.UTF8.GetBytes("DATATABLE;"))
                     Dim result = selectCmd(sql)
                     ' 序列化DataTable
@@ -188,9 +188,9 @@ Module ServerSocket
                     clientSocket.Send(ObjectBytes)
 
                 Case "DBCMD" ' 資料庫命令
-                    log(clientSocket.RemoteEndPoint.ToString & ": 要求DBCMD", LogType_NORMAL)
                     clientSocket.Receive(byteData)
                     Dim sql = Encoding.UTF8.GetString(byteData).Split(";")(0)
+                    log(clientSocket.RemoteEndPoint.ToString & ": 要求DBCMD(" & sql & ")", LogType_NORMAL)
                     clientSocket.Send(Encoding.UTF8.GetBytes("DBCMDRESULT;"))
                     If exeCmd(sql) Then
                         clientSocket.Send(Encoding.UTF8.GetBytes("SUCCESS;"))

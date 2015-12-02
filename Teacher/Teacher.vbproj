@@ -76,82 +76,82 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientSocket.vb" />
-    <Compile Include="ctrlRTBTool.Designer.vb">
+    <Compile Include="Modules\modSocket.vb" />
+    <Compile Include="Controls\ctrlRTBTool.Designer.vb">
       <DependentUpon>ctrlRTBTool.vb</DependentUpon>
     </Compile>
-    <Compile Include="ctrlRTBTool.vb">
+    <Compile Include="Controls\ctrlRTBTool.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ctrlSeat.Designer.vb">
+    <Compile Include="Controls\ctrlSeat.Designer.vb">
       <DependentUpon>ctrlSeat.vb</DependentUpon>
     </Compile>
-    <Compile Include="ctrlSeat.vb">
+    <Compile Include="Controls\ctrlSeat.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="frmAttend.Designer.vb">
+    <Compile Include="Forms\frmAttend.Designer.vb">
       <DependentUpon>frmAttend.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmAttend.vb">
+    <Compile Include="Forms\frmAttend.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmExam.Designer.vb">
+    <Compile Include="Forms\frmExam.Designer.vb">
       <DependentUpon>frmExam.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmExam.vb">
+    <Compile Include="Forms\frmExam.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmHomeWork.Designer.vb">
+    <Compile Include="Forms\frmHomeWork.Designer.vb">
       <DependentUpon>frmHomeWork.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmHomeWork.vb">
+    <Compile Include="Forms\frmHomeWork.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLogin.Designer.vb">
+    <Compile Include="Forms\frmLogin.Designer.vb">
       <DependentUpon>frmLogin.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmLogin.vb">
+    <Compile Include="Forms\frmLogin.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMyProfile.Designer.vb">
+    <Compile Include="Forms\frmMyProfile.Designer.vb">
       <DependentUpon>frmMyProfile.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmMyProfile.vb">
+    <Compile Include="Forms\frmMyProfile.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmProgress.Designer.vb">
+    <Compile Include="Forms\frmProgress.Designer.vb">
       <DependentUpon>frmProgress.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmProgress.vb">
+    <Compile Include="Forms\frmProgress.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmReport.Designer.vb">
+    <Compile Include="Forms\frmReport.Designer.vb">
       <DependentUpon>frmReport.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmReport.vb">
+    <Compile Include="Forms\frmReport.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmScore.Designer.vb">
+    <Compile Include="Forms\frmScore.Designer.vb">
       <DependentUpon>frmScore.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmScore.vb">
+    <Compile Include="Forms\frmScore.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSignUp.Designer.vb">
+    <Compile Include="Forms\frmSignUp.Designer.vb">
       <DependentUpon>frmSignUp.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmSignUp.vb">
+    <Compile Include="Forms\frmSignUp.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTeacher.Designer.vb">
+    <Compile Include="Forms\frmTeacher.Designer.vb">
       <DependentUpon>frmTeacher.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmTeacher.vb">
+    <Compile Include="Forms\frmTeacher.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LogFunc.vb" />
-    <Compile Include="modAutoResize.vb" />
-    <Compile Include="modDefine.vb" />
+    <Compile Include="Modules\modLog.vb" />
+    <Compile Include="Modules\modAutoResize.vb" />
+    <Compile Include="Modules\modDefine.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -169,28 +169,28 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ctrlRTBTool.resx">
+    <EmbeddedResource Include="Controls\ctrlRTBTool.resx">
       <DependentUpon>ctrlRTBTool.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ctrlSeat.resx">
+    <EmbeddedResource Include="Controls\ctrlSeat.resx">
       <DependentUpon>ctrlSeat.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAttend.resx">
+    <EmbeddedResource Include="Forms\frmAttend.resx">
       <DependentUpon>frmAttend.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLogin.resx">
+    <EmbeddedResource Include="Forms\frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMyProfile.resx">
+    <EmbeddedResource Include="Forms\frmMyProfile.resx">
       <DependentUpon>frmMyProfile.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmProgress.resx">
+    <EmbeddedResource Include="Forms\frmProgress.resx">
       <DependentUpon>frmProgress.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSignUp.resx">
+    <EmbeddedResource Include="Forms\frmSignUp.resx">
       <DependentUpon>frmSignUp.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTeacher.resx">
+    <EmbeddedResource Include="Forms\frmTeacher.resx">
       <DependentUpon>frmTeacher.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -213,11 +213,7 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
-    <Folder Include="Forms\" />
-    <Folder Include="Modules\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\paragraphrightjustify.png" />
     <None Include="Resources\paragraphleftjustify.png" />
