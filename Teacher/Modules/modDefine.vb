@@ -29,6 +29,8 @@ Module modDefine
 
     Public doCourse As DataRow = Nothing
     Public doCourseStudents As DataTable = Nothing
+    Public doCourseAttend As New CourseAttend
+    Public doCourseDtAttend As New DataTable
 
     Public Structure TeacherProfile
         Property Id As String

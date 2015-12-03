@@ -26,6 +26,7 @@ Module SocketProcess
         Catch ex As Exception
             Return ""
         End Try
+        Return ""
     End Function
 
     Public Function GetRealIPaddress() As String

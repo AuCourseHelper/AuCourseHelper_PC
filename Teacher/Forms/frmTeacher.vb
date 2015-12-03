@@ -135,7 +135,7 @@ Public Class frmTeacher
     Private Sub doGetCourseStudents()
         Dim sqlGetCourseStudents = String.Format("SELECT cs.StudentCourseId,cs.Seat,s.Num,s.Name " _
                                  & "FROM Student s,CourseStudent cs " _
-                                 & "WHERE cs.CourseId={0} AND cs.StudentNum=s.Num;", doCourse.Item(0))
+                                 & "WHERE cs.CourseId={0} AND cs.StudentNum=s.Num;", doCourse.Item("Id"))
         doCourseStudents = doSqlQuery(sqlGetCourseStudents)
         If doCourseStudents Is Nothing Then
             frmProgress.isOff = True
@@ -145,6 +145,13 @@ Public Class frmTeacher
         doCourseStudents.Columns(1).ColumnName = "座位"
         doCourseStudents.Columns(2).ColumnName = "學號"
         doCourseStudents.Columns(3).ColumnName = "姓名"
+
+        doCourseAttend.Id = -1
+        doCourseAttend.CourseId = doCourse.Item("Id")
+        doCourseAttend.Dates = Format(Now, "yyyy/MM/dd")
+        doCourseAttend.Off = ""
+        doCourseAttend.Lat = ""
+        doCourseAttend.Abs = ""
         frmProgress.isOff = True
     End Sub
 
