@@ -44,7 +44,7 @@ Partial Class ctrlSeat
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(96, 76)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(100, 80)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'btnSeat
@@ -53,12 +53,12 @@ Partial Class ctrlSeat
         Me.btnSeat.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnSeat.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnSeat.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnSeat.Font = New System.Drawing.Font("新細明體", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.btnSeat.ForeColor = System.Drawing.Color.Blue
+        Me.btnSeat.Font = New System.Drawing.Font("新細明體", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.btnSeat.ForeColor = System.Drawing.Color.RoyalBlue
         Me.btnSeat.Location = New System.Drawing.Point(0, 0)
         Me.btnSeat.Margin = New System.Windows.Forms.Padding(0)
         Me.btnSeat.Name = "btnSeat"
-        Me.btnSeat.Size = New System.Drawing.Size(96, 25)
+        Me.btnSeat.Size = New System.Drawing.Size(100, 26)
         Me.btnSeat.TabIndex = 0
         Me.btnSeat.Text = "SEAT"
         Me.btnSeat.UseVisualStyleBackColor = False
@@ -67,10 +67,10 @@ Partial Class ctrlSeat
         '
         Me.lblId.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblId.Font = New System.Drawing.Font("微軟正黑體", 9.0!)
-        Me.lblId.Location = New System.Drawing.Point(0, 25)
+        Me.lblId.Location = New System.Drawing.Point(0, 26)
         Me.lblId.Margin = New System.Windows.Forms.Padding(0)
         Me.lblId.Name = "lblId"
-        Me.lblId.Size = New System.Drawing.Size(96, 25)
+        Me.lblId.Size = New System.Drawing.Size(100, 26)
         Me.lblId.TabIndex = 1
         Me.lblId.Text = "AM000000"
         Me.lblId.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -79,10 +79,10 @@ Partial Class ctrlSeat
         '
         Me.lblName.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblName.Font = New System.Drawing.Font("微軟正黑體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.lblName.Location = New System.Drawing.Point(0, 50)
+        Me.lblName.Location = New System.Drawing.Point(0, 52)
         Me.lblName.Margin = New System.Windows.Forms.Padding(0)
         Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(96, 26)
+        Me.lblName.Size = New System.Drawing.Size(100, 28)
         Me.lblName.TabIndex = 2
         Me.lblName.Text = "ＸＸＸ"
         Me.lblName.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -96,7 +96,7 @@ Partial Class ctrlSeat
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ctrlSeat"
-        Me.Size = New System.Drawing.Size(96, 76)
+        Me.Size = New System.Drawing.Size(100, 80)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.ResumeLayout(False)
 

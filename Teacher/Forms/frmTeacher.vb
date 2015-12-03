@@ -90,7 +90,12 @@ Public Class frmTeacher
         frmLog.Text = "課堂輔助系統-教師端 | 程式執行紀錄"
         frmLog.Size = New Size(400, 500)
         frmLog.Controls.Add(txtLog)
-        frmLog.ShowDialog()
+        frmLog.StartPosition = FormStartPosition.CenterParent
+        frmLog.ShowInTaskbar = False
+        frmLog.FormBorderStyle = Windows.Forms.FormBorderStyle.FixedDialog
+        frmLog.MinimizeBox = False
+        frmLog.MaximizeBox = False
+        frmLog.ShowDialog(Me)
     End Sub
 
     Private Sub mnuLogin_Click(sender As Object, e As EventArgs) Handles mnuLogin.Click
@@ -259,81 +264,105 @@ Public Class frmTeacher
     End Sub
 
     Private Sub tslAttend_Click(sender As Object, e As EventArgs) Handles tslAttend.Click
-        nowCourseMenuItem.BackColor = Nothing
-        nowCourseMenuItem = tslAttend
-        nowCourseMenuItem.BackColor = Color.BurlyWood
-        pnlMain.Controls.Clear()
+        If isSaved Then
+            nowCourseMenuItem.BackColor = Nothing
+            nowCourseMenuItem = tslAttend
+            nowCourseMenuItem.BackColor = Color.BurlyWood
+            pnlMain.Controls.Clear()
 
-        frmAttend.Dispose()
-        frmAttend.TopLevel = False
-        frmAttend.Dock = DockStyle.Fill
-        pnlMain.Controls.Add(frmAttend)
-        frmAttend.Show()
+            frmAttend.Dispose()
+            frmAttend.TopLevel = False
+            frmAttend.Dock = DockStyle.Fill
+            pnlMain.Controls.Add(frmAttend)
+            frmAttend.Show()
+        Else
+            MsgBox("變更的內容尚未儲存！")
+        End If
     End Sub
 
     Private Sub tslScore_Click(sender As Object, e As EventArgs) Handles tslScore.Click
-        nowCourseMenuItem.BackColor = Nothing
-        nowCourseMenuItem = tslScore
-        nowCourseMenuItem.BackColor = Color.BurlyWood
-        pnlMain.Controls.Clear()
+        If isSaved Then
+            nowCourseMenuItem.BackColor = Nothing
+            nowCourseMenuItem = tslScore
+            nowCourseMenuItem.BackColor = Color.BurlyWood
+            pnlMain.Controls.Clear()
 
-        frmScore.Dispose()
-        frmScore.TopLevel = False
-        frmScore.Dock = DockStyle.Fill
-        pnlMain.Controls.Add(frmScore)
-        frmScore.Show()
+            frmScore.Dispose()
+            frmScore.TopLevel = False
+            frmScore.Dock = DockStyle.Fill
+            pnlMain.Controls.Add(frmScore)
+            frmScore.Show()
+        Else
+            MsgBox("變更的內容尚未儲存！")
+        End If
     End Sub
 
     Private Sub tslHomeWork_Click(sender As Object, e As EventArgs) Handles tslHomeWork.Click
-        nowCourseMenuItem.BackColor = Nothing
-        nowCourseMenuItem = tslHomeWork
-        nowCourseMenuItem.BackColor = Color.BurlyWood
-        pnlMain.Controls.Clear()
+        If isSaved Then
+            nowCourseMenuItem.BackColor = Nothing
+            nowCourseMenuItem = tslHomeWork
+            nowCourseMenuItem.BackColor = Color.BurlyWood
+            pnlMain.Controls.Clear()
 
-        frmHomeWork.Dispose()
-        frmHomeWork.TopLevel = False
-        frmHomeWork.Dock = DockStyle.Fill
-        pnlMain.Controls.Add(frmHomeWork)
-        frmHomeWork.Show()
+            frmHomeWork.Dispose()
+            frmHomeWork.TopLevel = False
+            frmHomeWork.Dock = DockStyle.Fill
+            pnlMain.Controls.Add(frmHomeWork)
+            frmHomeWork.Show()
+        Else
+            MsgBox("變更的內容尚未儲存！")
+        End If
     End Sub
 
     Private Sub tslExam_Click(sender As Object, e As EventArgs) Handles tslExam.Click
-        nowCourseMenuItem.BackColor = Nothing
-        nowCourseMenuItem = tslExam
-        nowCourseMenuItem.BackColor = Color.BurlyWood
-        pnlMain.Controls.Clear()
+        If isSaved Then
+            nowCourseMenuItem.BackColor = Nothing
+            nowCourseMenuItem = tslExam
+            nowCourseMenuItem.BackColor = Color.BurlyWood
+            pnlMain.Controls.Clear()
 
-        frmExam.Dispose()
-        frmExam.TopLevel = False
-        frmExam.Dock = DockStyle.Fill
-        pnlMain.Controls.Add(frmExam)
-        frmExam.Show()
+            frmExam.Dispose()
+            frmExam.TopLevel = False
+            frmExam.Dock = DockStyle.Fill
+            pnlMain.Controls.Add(frmExam)
+            frmExam.Show()
+        Else
+            MsgBox("變更的內容尚未儲存！")
+        End If
     End Sub
 
     Private Sub tslReport_Click(sender As Object, e As EventArgs) Handles tslReport.Click
-        nowCourseMenuItem.BackColor = Nothing
-        nowCourseMenuItem = tslReport
-        nowCourseMenuItem.BackColor = Color.BurlyWood
-        pnlMain.Controls.Clear()
+        If isSaved Then
+            nowCourseMenuItem.BackColor = Nothing
+            nowCourseMenuItem = tslReport
+            nowCourseMenuItem.BackColor = Color.BurlyWood
+            pnlMain.Controls.Clear()
 
-        frmReport.Dispose()
-        frmReport.TopLevel = False
-        frmReport.Dock = DockStyle.Fill
-        pnlMain.Controls.Add(frmReport)
-        frmReport.Show()
+            frmReport.Dispose()
+            frmReport.TopLevel = False
+            frmReport.Dock = DockStyle.Fill
+            pnlMain.Controls.Add(frmReport)
+            frmReport.Show()
+        Else
+            MsgBox("變更的內容尚未儲存！")
+        End If
     End Sub
 
     Private Sub tslEnd_Click(sender As Object, e As EventArgs) Handles tslEnd.Click
-        nowCourseMenuItem.BackColor = Nothing
-        pnlMain.Controls.Clear()
-        frmAttend.Dispose()
-        frmScore.Dispose()
-        frmHomeWork.Dispose()
-        frmExam.Dispose()
-        frmReport.Dispose()
-        tslCourseName.Text = "請選擇課程"
-        mnuCourseTool.Enabled = False
-        tsmCourse.Enabled = True
+        If isSaved Then
+            nowCourseMenuItem.BackColor = Nothing
+            pnlMain.Controls.Clear()
+            frmAttend.Dispose()
+            frmScore.Dispose()
+            frmHomeWork.Dispose()
+            frmExam.Dispose()
+            frmReport.Dispose()
+            tslCourseName.Text = "請選擇課程"
+            mnuCourseTool.Enabled = False
+            tsmCourse.Enabled = True
+        Else
+            MsgBox("變更的內容尚未儲存！")
+        End If
     End Sub
 
     Private Sub tsmIp_Click(sender As Object, e As EventArgs) Handles tsmIp.Click
@@ -346,5 +375,20 @@ Public Class frmTeacher
         Else
             tsmIp.Text = "伺服器IP: " & SERVERIP & " , PORT: " & SERVERPORT
         End If
+    End Sub
+
+    Private Sub tslCourseName_Click(sender As Object, e As EventArgs) Handles tslCourseName.Click
+        Dim sResult = ""
+        sResult &= "選課代號：" & doCourse.Item("ChooseNum") & vbCrLf
+        sResult &= "開課班級：" & doCourse.Item("Class") & vbCrLf
+        sResult &= "學　　分：" & doCourse.Item("Credit") & vbCrLf
+        sResult &= "上課時間：" & doCourse.Item("Time") & vbCrLf
+        sResult &= "上課教室：" & doCourse.Item("Classroom") & vbCrLf
+        sResult &= "修課學生：" & doCourseStudents.Rows.Count & "人" & vbCrLf
+        MsgBox(sResult, MsgBoxStyle.Information, doCourse.Item("Name"))
+    End Sub
+
+    Private Sub tslEdit_Click(sender As Object, e As EventArgs) Handles tslEdit.Click
+
     End Sub
 End Class

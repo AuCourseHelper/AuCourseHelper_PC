@@ -13,6 +13,7 @@
         lblName.Text = Trim(sName)
         If Trim(sId) = "" And Trim(sName) = "" Then
             Me.Enabled = False
+            Me.BackColor = Color.DimGray
         End If
     End Sub
 
@@ -48,7 +49,7 @@
         Me.Enabled = True
     End Sub
 
-    Private Sub ctrlSeat_MouseHover(sender As Object, e As EventArgs) Handles lblId.MouseHover, lblName.MouseHover
+    Private Sub ctrlSeat_MouseHover(sender As Object, e As EventArgs) Handles btnSeat.MouseHover, lblId.MouseHover, lblName.MouseHover
         tip.Hide(Me)
         Select Case now
             Case 4
@@ -61,8 +62,8 @@
     End Sub
 
     Private Sub ctrlSeat_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
-        If Me.Width <= 150 Then
-            btnSeat.Font = New Font(btnSeat.Font.FontFamily.Name, 14, FontStyle.Bold)
+        If Me.Width <= 100 Then
+            btnSeat.Font = New Font(btnSeat.Font.FontFamily.Name, 11, FontStyle.Bold)
             lblId.Font = New Font(lblId.Font.FontFamily.Name, 9)
             lblName.Font = New Font(lblName.Font.FontFamily.Name, 12)
         Else
@@ -108,5 +109,6 @@
                 Me.BackColor = CL_BK_GRAY
                 tip.Show("公假", Me, New Point(0, -30), 1500)
         End Select
+        isSaved = False
     End Sub
 End Class

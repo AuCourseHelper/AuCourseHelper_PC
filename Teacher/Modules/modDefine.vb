@@ -19,6 +19,7 @@ Module modDefine
 
     Public objFrmTeacher As frmTeacher
     Public isLogin As Boolean = False
+    Public isSaved As Boolean = True
 
     Public myProfile As New TeacherProfile
     Public myCourses As DataTable = Nothing

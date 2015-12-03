@@ -1,8 +1,12 @@
 ﻿Imports System.Threading
 
 Public Class frmAttend
-    Dim isEdited As Boolean = False
-    Dim seatLayout As TableLayoutPanel
+    Private seatLayout As TableLayoutPanel
+    Private seats() As ctrlSeat
+    Private seatView As Integer = 0
+    Private nRow As Integer = 0
+    Private nCol As Integer = 0
+    Private nAisle As Integer = 0
 
     Private Sub frmAttend_Load(sender As Object, e As EventArgs) Handles Me.Load
         lblDate.Text = nowWeekDetail
@@ -18,9 +22,15 @@ Public Class frmAttend
             tblMain.Rows(0).Selected = True
             ' 座位部分
             If Not doCourse.Item("Seat").ToString.StartsWith("0,0") Then
-                Dim nRow As Integer = CInt(doCourse.Item("Seat").ToString.Split(",")(0))
-                Dim nCol As Integer = CInt(doCourse.Item("Seat").ToString.Split(",")(1))
-                Dim nAisle As Integer = CInt(doCourse.Item("Seat").ToString.Split(",")(2))
+                nRow = CInt(doCourse.Item("Seat").ToString.Split(",")(0))
+                nCol = CInt(doCourse.Item("Seat").ToString.Split(",")(1))
+                nAisle = CInt(doCourse.Item("Seat").ToString.Split(",")(2))
+                If nAisle > 0 Then
+                    ReDim seats(nRow * (nCol - Math.Floor(nCol / nAisle)) - 1)
+                Else
+                    ReDim seats(nRow * nCol - 1)
+                End If
+                Dim nSeatCount = 0
 
                 seatLayout = New TableLayoutPanel
                 seatLayout.Dock = DockStyle.Fill
@@ -48,11 +58,15 @@ Public Class frmAttend
                                 Dim seat As New ctrlSeat
                                 seat.init(Chr(row + 65) & Format(col + 1 - Math.Floor((col + 1) / nAisle), "00"))
                                 seatLayout.Controls.Add(seat, col, row)
+                                seats(nSeatCount) = seat
+                                nSeatCount += 1
                             End If
                         Else
                             Dim seat As New ctrlSeat
                             seat.init(Chr(row + 65) & Format(col + 1 - Math.Floor((col + 1) / nAisle), "00"))
                             seatLayout.Controls.Add(seat, col, row)
+                            seats(nSeatCount) = seat
+                            nSeatCount += 1
                         End If
                     Next
                 Next
@@ -132,6 +146,7 @@ Public Class frmAttend
                 tblMain.FirstDisplayedScrollingRowIndex = index - tblMain.DisplayedRowCount(False) + 3
             End If
         End If
+        isSaved = False
     End Sub
 
     Private Sub tblMain_Sorted(sender As Object, e As EventArgs) Handles tblMain.Sorted
@@ -181,14 +196,49 @@ Public Class frmAttend
     End Sub
 
     Private Sub btnSave2_Click(sender As Object, e As EventArgs) Handles btnSave2.Click
-
+        btnSave.PerformClick()
     End Sub
 
     Private Sub btnCancel2_Click(sender As Object, e As EventArgs) Handles btnCancel2.Click
-
+        btnCancel.PerformClick()
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
+    Private Sub btnChangeView_Click(sender As Object, e As EventArgs) Handles btnChangeView.Click
+        Dim nSeatCount = 0
+        If seatView = 0 Then
+            seatView = 1
+            seatLayout.Controls.Clear()
+            nSeatCount = seats.Length - 1
+            For col As Integer = 0 To seatLayout.ColumnCount - 1
+                For row As Integer = 0 To seatLayout.RowCount - 1
+                    If nAisle <> 0 Then
+                        If Not (col + 1) Mod nAisle = 0 Then
+                            seatLayout.Controls.Add(seats(nSeatCount), col, row)
+                            nSeatCount -= 1
+                        End If
+                    Else
+                        seatLayout.Controls.Add(seats(nSeatCount), col, row)
+                        nSeatCount -= 1
+                    End If
+                Next
+            Next
+        Else
+            seatView = 0
+            seatLayout.Controls.Clear()
+            nSeatCount = 0
+            For col As Integer = 0 To seatLayout.ColumnCount - 1
+                For row As Integer = 0 To seatLayout.RowCount - 1
+                    If nAisle <> 0 Then
+                        If Not (col + 1) Mod nAisle = 0 Then
+                            seatLayout.Controls.Add(seats(nSeatCount), col, row)
+                            nSeatCount += 1
+                        End If
+                    Else
+                        seatLayout.Controls.Add(seats(nSeatCount), col, row)
+                        nSeatCount += 1
+                    End If
+                Next
+            Next
+        End If
     End Sub
 End Class

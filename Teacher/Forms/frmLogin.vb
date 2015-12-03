@@ -116,7 +116,7 @@ Public Class frmLogin
                     Dim c() = {myCourses.Columns(0)}
                     myCourses.PrimaryKey = c
 
-                    MsgBox(myProfile.Name & " 歡迎你!" & vbCrLf & "請至'我的課程'選取課程來授課!!")
+                    MsgBox(myProfile.Name & " 歡迎你!" & vbCrLf & "請至'我的課程'選取課程來授課!!", MsgBoxStyle.Information)
                 Case "FAIL"
                     MsgBox("登入失敗! 帳號或密碼錯誤")
                 Case "RELOGIN"

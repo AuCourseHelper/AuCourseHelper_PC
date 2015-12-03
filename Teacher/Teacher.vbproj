@@ -241,6 +241,7 @@
     <None Include="Resources\exam.png" />
     <None Include="Resources\cancel.png" />
     <None Include="Resources\books.png" />
+    <None Include="Resources\edit.png" />
     <Content Include="setting.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -50,7 +50,7 @@ Partial Class frmAttend
         Me.btnSave2 = New System.Windows.Forms.Button()
         Me.btnCancel2 = New System.Windows.Forms.Button()
         Me.lblNonSeat = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnChangeView = New System.Windows.Forms.Button()
         Me.tabMain.SuspendLayout()
         Me.tabTable.SuspendLayout()
         Me.pnlMain.SuspendLayout()
@@ -343,10 +343,10 @@ Partial Class frmAttend
         '
         'Button2
         '
-        Me.Button2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Button2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Button2.Location = New System.Drawing.Point(265, 345)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(256, 166)
+        Me.Button2.Size = New System.Drawing.Size(256, 66)
         Me.Button2.TabIndex = 1
         Me.Button2.Text = "建立座位表"
         Me.Button2.UseVisualStyleBackColor = True
@@ -363,7 +363,7 @@ Partial Class frmAttend
         Me.pnlBtn2.Controls.Add(Me.btnSave2, 3, 0)
         Me.pnlBtn2.Controls.Add(Me.btnCancel2, 4, 0)
         Me.pnlBtn2.Controls.Add(Me.lblNonSeat, 1, 0)
-        Me.pnlBtn2.Controls.Add(Me.Button1, 2, 0)
+        Me.pnlBtn2.Controls.Add(Me.btnChangeView, 2, 0)
         Me.pnlBtn2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.pnlBtn2.Enabled = False
         Me.pnlBtn2.Location = New System.Drawing.Point(3, 517)
@@ -420,19 +420,18 @@ Partial Class frmAttend
         Me.lblNonSeat.Text = "尚有 0 位學生" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "未編排座位"
         Me.lblNonSeat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Button1
+        'btnChangeView
         '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Button1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Button1.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.update
-        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(317, 3)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(151, 44)
-        Me.Button1.TabIndex = 7
-        Me.Button1.Text = "切換視角"
-        Me.Button1.TextAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.btnChangeView.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btnChangeView.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnChangeView.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.update
+        Me.btnChangeView.Location = New System.Drawing.Point(317, 3)
+        Me.btnChangeView.Name = "btnChangeView"
+        Me.btnChangeView.Size = New System.Drawing.Size(151, 44)
+        Me.btnChangeView.TabIndex = 7
+        Me.btnChangeView.Text = "切換" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "視角"
+        Me.btnChangeView.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnChangeView.UseVisualStyleBackColor = False
         '
         'frmAttend
         '
@@ -476,7 +475,7 @@ Partial Class frmAttend
     Friend WithEvents lblNonSeat As System.Windows.Forms.Label
     Friend WithEvents lblDate As System.Windows.Forms.Label
     Friend WithEvents lblDate2 As System.Windows.Forms.Label
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents btnChangeView As System.Windows.Forms.Button
     Friend WithEvents pnlBtnSub As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnLat As System.Windows.Forms.Button
     Friend WithEvents btnOffPublic As System.Windows.Forms.Button
