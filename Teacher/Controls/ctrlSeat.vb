@@ -21,6 +21,7 @@
         lblId.Text = Trim(sId)
         lblName.Text = Trim(sName)
         lblName.Tag = sAttend
+        Me.BackColor = Color.White
         Select Case sAttend
             Case "出席"
                 now = 1
@@ -34,15 +35,12 @@
             Case "病假"
                 now = 4
                 Me.BackColor = CL_BK_GRAY
-                tip.Show("病假", Me, New Point(0, -30), 3000)
             Case "事假"
                 now = 5
                 Me.BackColor = CL_BK_GRAY
-                tip.Show("事假", Me, New Point(0, -30), 3000)
             Case "公假"
                 now = 6
                 Me.BackColor = CL_BK_GRAY
-                tip.Show("公假", Me, New Point(0, -30), 3000)
             Case Else
                 now = 0
         End Select
@@ -110,5 +108,17 @@
                 tip.Show("公假", Me, New Point(0, -30), 1500)
         End Select
         isSaved = False
+    End Sub
+
+    Public Sub showInfo()
+        tip.Hide(Me)
+        Select Case now
+            Case 4
+                tip.Show("病假", Me, New Point(0, -30), 3000)
+            Case 5
+                tip.Show("事假", Me, New Point(0, -30), 3000)
+            Case 6
+                tip.Show("公假", Me, New Point(0, -30), 3000)
+        End Select
     End Sub
 End Class

@@ -66,7 +66,6 @@ Module ServerSocket
                 End Try
                 log("強制踢除: " & client._ip & "-" & client._name, LogType_SYSTEM)
             Next
-            serverSocket.Shutdown(SocketShutdown.Both)
             serverSocket.Close()
             serverSocket = Nothing
             clients.Clear()

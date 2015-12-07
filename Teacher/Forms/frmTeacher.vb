@@ -270,7 +270,8 @@ Public Class frmTeacher
             nowCourseMenuItem.BackColor = Color.BurlyWood
             pnlMain.Controls.Clear()
 
-            frmAttend.Dispose()
+            doForm.Close()
+            doForm = frmAttend
             frmAttend.TopLevel = False
             frmAttend.Dock = DockStyle.Fill
             pnlMain.Controls.Add(frmAttend)
@@ -287,7 +288,8 @@ Public Class frmTeacher
             nowCourseMenuItem.BackColor = Color.BurlyWood
             pnlMain.Controls.Clear()
 
-            frmScore.Dispose()
+            doForm.Close()
+            doForm = frmScore
             frmScore.TopLevel = False
             frmScore.Dock = DockStyle.Fill
             pnlMain.Controls.Add(frmScore)
@@ -304,7 +306,8 @@ Public Class frmTeacher
             nowCourseMenuItem.BackColor = Color.BurlyWood
             pnlMain.Controls.Clear()
 
-            frmHomeWork.Dispose()
+            doForm.Close()
+            doForm = frmHomeWork
             frmHomeWork.TopLevel = False
             frmHomeWork.Dock = DockStyle.Fill
             pnlMain.Controls.Add(frmHomeWork)
@@ -321,7 +324,8 @@ Public Class frmTeacher
             nowCourseMenuItem.BackColor = Color.BurlyWood
             pnlMain.Controls.Clear()
 
-            frmExam.Dispose()
+            doForm.Close()
+            doForm = frmExam
             frmExam.TopLevel = False
             frmExam.Dock = DockStyle.Fill
             pnlMain.Controls.Add(frmExam)
@@ -338,7 +342,8 @@ Public Class frmTeacher
             nowCourseMenuItem.BackColor = Color.BurlyWood
             pnlMain.Controls.Clear()
 
-            frmReport.Dispose()
+            doForm.Close()
+            doForm = frmReport
             frmReport.TopLevel = False
             frmReport.Dock = DockStyle.Fill
             pnlMain.Controls.Add(frmReport)
@@ -351,15 +356,13 @@ Public Class frmTeacher
     Private Sub tslEnd_Click(sender As Object, e As EventArgs) Handles tslEnd.Click
         If isSaved Then
             nowCourseMenuItem.BackColor = Nothing
+            doForm.Close()
             pnlMain.Controls.Clear()
-            frmAttend.Dispose()
-            frmScore.Dispose()
-            frmHomeWork.Dispose()
-            frmExam.Dispose()
-            frmReport.Dispose()
             tslCourseName.Text = "請選擇課程"
             mnuCourseTool.Enabled = False
             tsmCourse.Enabled = True
+
+            bAttendHasData = False
         Else
             MsgBox("變更的內容尚未儲存！")
         End If

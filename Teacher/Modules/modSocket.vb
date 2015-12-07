@@ -74,11 +74,19 @@ Module SocketProcess
                         objFrmTeacher.uiLogout("BREAK")
                     End If
                     isLogin = False
+                    isSaved = True
                     isLogoutIng = False
                     clientSocket.Close()
                     myProfile = New TeacherProfile
-                    myCourses = New DataTable
+                    myCourses = Nothing
+                    nowTerm = Nothing
+                    nowTermStart = Nothing
+                    nowWeek = Nothing
+                    nowWeekDetail = Nothing
                     doCourse = Nothing
+                    doCourseStudents = Nothing
+                    doCourseAttend = New CourseAttend
+                    doCourseDtAttend = New DataTable
                     Exit Sub
                 Case "DATATABLE" ' 承接回傳的DB查詢
                     Try
