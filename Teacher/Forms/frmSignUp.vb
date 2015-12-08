@@ -42,16 +42,20 @@ Public Class frmSignUp
 
 
 
-        Dim sql = "SELECT MAX(Num) FROM Teacher WHERE Num LIKE '%TA%');"
+        Dim sql = "SELECT MAX(Num) FROM Teacher WHERE Num LIKE '%TA%');"    'get user name starts with TA
         Dim result As DataTable = doSqlQuery(sql & ";")
-        Dim newNum As Integer = 0
-        If IsDBNull(result) Then
-            newNum = 1
-        ElseIf
-            Dim newNum As Integer = Replace((result.ToString), "TA", "")
-            newNum += newNum
+        Dim newNum As Integer = 0                                           'int for storing TA number
+        If IsDBNull(result) Then                                            'if there's no TA account
+            newNum = 1                                                      'set TA number as 1
+        Else                                                                'if there's TA account
+            newNum = Replace((result.ToString), "TA", "")                   'get previous TA number
+            newNum = newNum + 1                                             'add 1 to TA number
         End If
 
+        Dim TAuser As String = ("TA" + string(3-len(nuwNum),"0") & newNum)  'set user name
+        'show on textfield
+        'get password
+        'store to db
         
         
 
