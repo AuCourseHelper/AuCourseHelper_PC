@@ -1,4 +1,5 @@
 ﻿Imports System.Threading
+Imports System.IO
 
 Public Class frmAttend
     Private seatLayout As TableLayoutPanel
@@ -88,6 +89,7 @@ Public Class frmAttend
         End If
     End Sub
 
+#Region "--表格點名"
     Private Sub btnAtt_Click(sender As Object, e As EventArgs) Handles btnAtt.Click
         addAttend("出席")
     End Sub
@@ -133,6 +135,7 @@ Public Class frmAttend
         End If
         isSaved = False
     End Sub
+#End Region
 
     Private Sub tblMain_Paint(sender As Object, e As PaintEventArgs) Handles tblMain.Paint
         updateGrid()
@@ -155,16 +158,34 @@ Public Class frmAttend
     End Sub
 
     Private Sub updateSeat()
+        Dim nNoSeat As Integer = 0
         For Each row As DataRow In doCourseDtAttend.Rows
             If row.Item("座位").ToString.Length > 1 Then
                 Dim seat As ctrlSeat = seatLayout.Controls.Find(row.Item("座位"), True)(0)
                 seat.updateAttend(row.Item("學號"), row.Item("姓名"), row.Item("出席狀況"))
+            Else
+                nNoSeat += 1
             End If
         Next
+        If nNoSeat > 0 Then
+            lblNoSeat.Text = "尚有 " & nNoSeat & " 位學生" & vbCrLf & "未編排座位"
+        Else
+            lblNoSeat.Text = ""
+        End If
     End Sub
 
     Private Sub btnSave_Click() Handles btnSave.Click
+        Dim doCourseAttend As New CourseAttend
         Dim bAsAbs As Boolean = False
+
+        doCourseAttend.Id = -1
+        doCourseAttend.CourseId = doCourse.Item("Id")
+        doCourseAttend.Dates = Format(Now, "yyyy/MM/dd")
+        doCourseAttend.Week = nowWeek
+        doCourseAttend.Off = ""
+        doCourseAttend.Lat = ""
+        doCourseAttend.Abs = ""
+
         For Each row As DataRow In doCourseDtAttend.Rows
             Select Case row.Item("出席狀況")
                 Case "出席"
@@ -186,9 +207,6 @@ Public Class frmAttend
                             doCourseAttend.Abs &= row.Item("學號") & ","
                             bAsAbs = True
                         Else
-                            doCourseAttend.Off = ""
-                            doCourseAttend.Lat = ""
-                            doCourseAttend.Abs = ""
                             Exit Sub
                         End If
                     End If
@@ -204,9 +222,41 @@ Public Class frmAttend
         For Each seat As ctrlSeat In seats
             seat.btnSeat.Enabled = False
         Next
-        MsgBox(doCourseAttend.Off)
-        MsgBox(doCourseAttend.Lat)
-        MsgBox(doCourseAttend.Abs)
+        Dim sSql = "INSERT INTO Attend(CourseId,[Date],Week,[Off],Lat,Abs) VALUES('{0}','{1}','{2}','{3}','{4}','{5}');"
+        sSql = String.Format(sSql, doCourseAttend.CourseId, doCourseAttend.Dates, doCourseAttend.Week, doCourseAttend.Off, doCourseAttend.Lat, doCourseAttend.Abs)
+RE:     Dim nCount As Integer = 0
+        While Not doSqlCmd(sSql)
+            If nCount = RETRYTIMES Then
+                MsgBox("存檔失敗！" & vbCrLf & "資料庫命令未執行。")
+                If MsgBox("重試存檔請按 <重試>" & vbCrLf & "以離線方式保存檔案請按 <否>", MsgBoxStyle.RetryCancel) = MsgBoxResult.Retry Then
+                    GoTo RE
+                Else
+                    Dim sfdSave As New SaveFileDialog
+                    sfdSave.FileName = doCourse.Item("Name") & Format(Now, "yyyyMMdd") & ".txt"
+                    sfdSave.Filter = "TEXT|*.txt"
+                    If sfdSave.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                        Dim sFile = doCourseAttend.Id & vbCrLf
+                        sFile &= doCourseAttend.CourseId & vbCrLf
+                        sFile &= doCourseAttend.Dates & vbCrLf
+                        sFile &= doCourseAttend.Week & vbCrLf
+                        sFile &= doCourseAttend.Off & vbCrLf
+                        sFile &= doCourseAttend.Lat & vbCrLf
+                        sFile &= doCourseAttend.Abs
+                        Try
+                            File.WriteAllText(sfdSave.FileName, sFile)
+                        Catch ex As Exception
+                            MsgBox("存檔失敗！ " & ex.Message, MsgBoxStyle.Critical)
+                        End Try
+                    Else
+                        MsgBox("本次點名資料尚未以任何形式儲存！", MsgBoxStyle.Critical)
+                        Exit Sub
+                    End If
+                End If
+            End If
+            nCount += 1
+        End While
+        MsgBox(doCourse.Item("Name") & vbCrLf & doCourseAttend.Dates & " 第" & nowWeek & "週" & vbCrLf _
+               & "點名資料已儲存至資料庫" & vbCrLf & "若欲修改請使用 <<修改資料>> 功能", MsgBoxStyle.Information)
         isSaved = True
         bAttendHasData = True
     End Sub
@@ -216,9 +266,6 @@ Public Class frmAttend
             For Each row As DataRow In doCourseDtAttend.Rows
                 row.Item("出席狀況") = ""
             Next
-            doCourseAttend.Off = ""
-            doCourseAttend.Lat = ""
-            doCourseAttend.Abs = ""
             updateGrid()
             updateSeat()
         End If
@@ -289,5 +336,14 @@ Public Class frmAttend
         If bAttendHasData Then
             lblHelp.Text = sHelp3
         End If
+    End Sub
+
+    Private Sub lblNoSeat_Click(sender As Object, e As EventArgs) Handles lblNoSeat.Click
+        Dim allAutoCompletes = From row In doCourseStudents.Select("座位=''").AsEnumerable()
+                       Let autoComplete = New String(row.Item("學號") & "  " & Trim(row.Item("姓名")))
+                       Select autoComplete
+        Dim autoCompleteString As String() = allAutoCompletes.ToArray()
+        Dim x As String = ""
+        MsgBox(String.Join(vbCrLf, autoCompleteString))
     End Sub
 End Class

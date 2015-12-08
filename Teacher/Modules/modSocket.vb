@@ -85,7 +85,6 @@ Module SocketProcess
                     nowWeekDetail = Nothing
                     doCourse = Nothing
                     doCourseStudents = Nothing
-                    doCourseAttend = New CourseAttend
                     doCourseDtAttend = New DataTable
                     Exit Sub
                 Case "DATATABLE" ' 承接回傳的DB查詢
@@ -93,7 +92,6 @@ Module SocketProcess
                         clientSocket.Receive(byteData)
                         Dim size = Encoding.UTF8.GetString(byteData).Split(";")(0)
                         Dim count = 0
-                        'Array.Clear(byteData, 0, byteData.Length)
                         Dim i = clientSocket.Receive(byteData)
                         count += i
                         ' 反序列化DataTable
@@ -101,16 +99,12 @@ Module SocketProcess
                         Dim ms As New MemoryStream(CInt(size))
                         ms.Write(byteData, 0, i)
                         ms.Flush()
-                        'Array.Clear(byteData, 0, byteData.Length)
-                        'Thread.Sleep(200)
                         While count < size
                             i = clientSocket.Receive(byteData)
                             count += i
                             If i > 0 Then
                                 ms.Write(byteData, 0, i)
                                 ms.Flush()
-                                'Array.Clear(byteData, 0, byteData.Length)
-                                'Thread.Sleep(200)
                             End If
                         End While
                         ms.Flush()

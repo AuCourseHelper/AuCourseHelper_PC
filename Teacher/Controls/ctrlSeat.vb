@@ -1,6 +1,7 @@
 ﻿Public Class ctrlSeat
     Private now As Integer = 0 ' 綠藍紅灰灰灰
     Private tip As New ToolTip()
+    Private tipImg As New ctrlImageTip()
 
     Public Sub init(sSeat As String, Optional sId As String = "", Optional sName As String = "")
         Me.Tag = sSeat
@@ -49,6 +50,7 @@
 
     Private Sub ctrlSeat_MouseHover(sender As Object, e As EventArgs) Handles btnSeat.MouseHover, lblId.MouseHover, lblName.MouseHover
         tip.Hide(Me)
+        tipImg.Hide(Me)
         Select Case now
             Case 4
                 tip.Show("病假", Me, New Point(0, -30), 1500)
@@ -57,6 +59,7 @@
             Case 6
                 tip.Show("公假", Me, New Point(0, -30), 1500)
         End Select
+        tipImg.Show("0", Me, New Point(Me.Width, Me.Height / 2), 10000)
     End Sub
 
     Private Sub ctrlSeat_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
@@ -120,5 +123,9 @@
             Case 6
                 tip.Show("公假", Me, New Point(0, -30), 3000)
         End Select
+    End Sub
+
+    Private Sub ctrlSeat_MouseLeave(sender As Object, e As EventArgs) Handles btnSeat.MouseLeave, lblId.MouseLeave, lblName.MouseLeave
+        tipImg.Hide(Me)
     End Sub
 End Class

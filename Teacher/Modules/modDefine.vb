@@ -17,6 +17,8 @@ Module modDefine
     Public CL_BK_BLUE As Color = Color.FromArgb(192, 192, 255)
     Public CL_BK_GRAY As Color = Color.LightGray
 
+    Public IMG_NULL As Image = Image.FromFile(Application.StartupPath & "\img\NULL.jpg")
+
     Public objFrmTeacher As frmTeacher
     Public isLogin As Boolean = False
     Public isSaved As Boolean = True
@@ -31,7 +33,6 @@ Module modDefine
     Public doForm As New Form
     Public doCourse As DataRow = Nothing
     Public doCourseStudents As DataTable = Nothing
-    Public doCourseAttend As New CourseAttend
     Public doCourseDtAttend As New DataTable
     Public bAttendHasData = False
 
@@ -50,6 +51,7 @@ Module modDefine
         Property Id As String
         Property CourseId As String
         Property Dates As String ' 點名日期 格式: 2015/12/01
+        Property Week As String ' 週次
         Property Off As String ' 請假 格式: AM000000-病,AM000001-事...
         Property Lat As String ' 遲到 格式: AM000000,AM000001...
         Property Abs As String ' 曠課 格式: AM000000,AM000001...

@@ -18,6 +18,7 @@ Public Class frmTeacher
             frmLogin.txtUid.Text = "4327"
             frmLogin.txtPwd.Text = "4327"
             mnuLogin.PerformClick()
+        ElseIf e.KeyCode = Keys.F1 Then
         End If
     End Sub
 
@@ -151,12 +152,6 @@ Public Class frmTeacher
         doCourseStudents.Columns(2).ColumnName = "學號"
         doCourseStudents.Columns(3).ColumnName = "姓名"
 
-        doCourseAttend.Id = -1
-        doCourseAttend.CourseId = doCourse.Item("Id")
-        doCourseAttend.Dates = Format(Now, "yyyy/MM/dd")
-        doCourseAttend.Off = ""
-        doCourseAttend.Lat = ""
-        doCourseAttend.Abs = ""
         frmProgress.isOff = True
     End Sub
 
