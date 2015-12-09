@@ -39,10 +39,10 @@ Public Class frmSignUp
     End Sub
 
     Private Sub btnSign_Click(sender As Object, e As EventArgs) Handles btnSign.Click
-        Dim sql = "SELECT MAX(Num) FROM Teacher WHERE Num LIKE '%TA%';"        'get user name starts with TA
-        Dim result As DataTable = doSqlQuery(sql & ";")
+        Dim sqlGet = "SELECT MAX(Num) FROM Teacher WHERE Num LIKE '%TA%';"        'get user name starts with TA
+        Dim result As DataTable = doSqlQuery(sqlGet & ";")
         Dim newNum As Integer = 0                                               'int for storing TA number
-        Dim taUser As String = ""
+        Dim taNum As String = ""
         Dim taName As String = ""
         Dim taPwd As String = ""
         If result Is Nothing Then
@@ -53,21 +53,17 @@ Public Class frmSignUp
         Else                                                                    'if there's TA account
             newNum = Val(Replace((result.ToString), "TA", ""))                  'get previous TA number
             newNum = newNum + 1                                                 'add 1 to TA number
-            taUser = ("TA" & newNum.ToString("000"))                            'set user name
-            txtUid.Text = TAuser
+            taNum = ("TA" & newNum.ToString("000"))                             'set user name
+            txtUid.Text = taNum
         End If
 
         taName = txtName.Text
         taPwd = txtPwd.Text
-        ' INSERT INTO Teacher ( Num, Name, Pwd)
-        'VALUES ('Test', 'TEST', 'ESSS')
+        Dim sqlInsert = "INSERT INTO Teacher ( Num, Name, Pwd) VALUES (taNum, taName, taPwd);"
+         
         ' Dim sql = "我是INSERT、UPDATE、DELETE語法" <<最後記得一定要加上分號
         ' Dim result As Boolean = doSqlCmd(Sql & ";")
 
-
-
-        'get password
-        'store to db
 
         ' -*-*-*-*-*-*-*-*-*-DATATABLE 的基礎用法
         If result Is Nothing Then
