@@ -61,7 +61,7 @@ Public Class frmSignUp
         End If
 
         txtUid.Text = "AAAAAAAAAAAAAAAAA"
-        frmSignUp.lblNameHint.Text = "AAAAAAAAAAAAAAAAAAAAAAAAA"
+        'frmSignUp.lblNameHint.Text = "AAAAAAAAAAAAAAAAAAAAAAAAA"
 
 
         'show on textfield
