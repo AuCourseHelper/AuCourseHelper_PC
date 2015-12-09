@@ -52,12 +52,20 @@ Public Class frmSignUp
             newNum = newNum + 1                                             'add 1 to TA number
         End If
 
-        Dim TAuser As String = ("TA" + string(3-len(nuwNum),"0") & newNum)  'set user name
+        'Dim TAuser As String = ("TA" + string(3-len(nuwNum),"0") & newNum)  'set user name
         'show on textfield
         'get password
         'store to db
         
-        
+        ' -*-*-*-*-*-*-*-*-*-DATATABLE 的基礎用法
+        If result.Rows.Count < 1 Then
+            ' 該SQL語法找不到資料
+        End If
+
+        For Each row As DataRow In result.Rows
+            ' 取得每個row裡的某個欄位 並用彈出視窗顯示
+            MsgBox(row.Item("欄位名稱"))
+        Next
 
 
 
