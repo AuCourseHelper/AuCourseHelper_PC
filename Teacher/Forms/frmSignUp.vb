@@ -58,6 +58,26 @@ Public Class frmSignUp
         'store to db
         
         ' -*-*-*-*-*-*-*-*-*-DATATABLE 的基礎用法
+        If result Is Nothing Then
+            ' 查詢錯誤，可能是網路問題導致資料不完全
+            ' 建議接在 doSqlQuery 後判斷，沒拿到datatable不要再繼續動作，看是要重試或跳離
+            ' ↓======範例
+            'Dim sqlGetCourseStudents = String.Format("SELECT cs.StudentCourseId,cs.Seat,s.Num,s.Name " _
+            '                     & "FROM Student s,CourseStudent cs " _
+            '                     & "WHERE cs.CourseId={0} AND cs.StudentNum=s.Num;", doCourse.Item("Id"))
+            'doCourseStudents = doSqlQuery(sqlGetCourseStudents)
+            'If doCourseStudents Is Nothing Then
+            '    frmProgress.isOff = True
+            '    Exit Sub
+            'End If
+            'doCourseStudents.Columns(0).ColumnName = "序號"
+            'doCourseStudents.Columns(1).ColumnName = "座位"
+            'doCourseStudents.Columns(2).ColumnName = "學號"
+            'doCourseStudents.Columns(3).ColumnName = "姓名"
+
+            'frmProgress.isOff = True
+        End If
+
         If result.Rows.Count < 1 Then
             ' 該SQL語法找不到資料
         End If
