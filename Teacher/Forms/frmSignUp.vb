@@ -48,6 +48,8 @@ Public Class frmSignUp
         If result Is Nothing Then
             MsgBox("使用者資訊讀取錯誤!!")
             '要怎麼重連?
+            ' doSqlQuery這個方法其實我就已經有寫自動重試3次
+            ' 這邊可能就跳個訊息然後exit sub吧
         ElseIf result.Rows.Count < 1 Then                                       'if there's no TA account
             newNum = 1                                                          'set TA number as 1
         Else                                                                    'if there's TA account
