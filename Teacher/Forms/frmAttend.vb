@@ -86,6 +86,7 @@ Public Class frmAttend
         If bAttendHasData Then
             pnlBtn.Enabled = False
             pnlBtn2.Enabled = False
+            seatLayout.Enabled = False
         End If
     End Sub
 
