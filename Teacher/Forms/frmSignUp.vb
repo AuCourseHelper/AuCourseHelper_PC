@@ -39,13 +39,12 @@ Public Class frmSignUp
     End Sub
 
     Private Sub btnSign_Click(sender As Object, e As EventArgs) Handles btnSign.Click
-
-
-
         Dim sql = "SELECT MAX(Num) FROM Teacher WHERE Num LIKE '%TA%';"        'get user name starts with TA
         Dim result As DataTable = doSqlQuery(sql & ";")
         Dim newNum As Integer = 0                                               'int for storing TA number
-        Dim TAuser As String = ""
+        Dim taUser As String = ""
+        Dim taName As String = ""
+        Dim taPwd As String = ""
         If result Is Nothing Then
             MsgBox("使用者資訊讀取錯誤!!")
             Exit Sub
@@ -54,17 +53,18 @@ Public Class frmSignUp
         Else                                                                    'if there's TA account
             newNum = Val(Replace((result.ToString), "TA", ""))                  'get previous TA number
             newNum = newNum + 1                                                 'add 1 to TA number
-            TAuser = ("TA" & newNum.ToString("000"))                            'set user name
+            taUser = ("TA" & newNum.ToString("000"))                            'set user name
             txtUid.Text = TAuser
-
-
         End If
 
+        taName = txtName.Text
+        taPwd = txtPwd.Text
+
+        ' Dim sql = "我是INSERT、UPDATE、DELETE語法" <<最後記得一定要加上分號
+        ' Dim result As Boolean = doSqlCmd(Sql & ";")
 
 
 
-
-        'show on textfield
         'get password
         'store to db
 
