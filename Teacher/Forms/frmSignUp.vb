@@ -42,21 +42,26 @@ Public Class frmSignUp
 
 
 
-        Dim sql = "SELECT MAX(Num) FROM Teacher WHERE Num LIKE '%TA%');"    'get user name starts with TA
+        Dim sql = "SELECT MAX(Num) FROM Teacher WHERE Num LIKE '%TA%');"        'get user name starts with TA
         Dim result As DataTable = doSqlQuery(sql & ";")
-        Dim newNum As Integer = 0                                           'int for storing TA number
-        If IsDBNull(result) Then                                            'if there's no TA account
-            newNum = 1                                                      'set TA number as 1
-        Else                                                                'if there's TA account
-            newNum = Replace((result.ToString), "TA", "")                   'get previous TA number
-            newNum = newNum + 1                                             'add 1 to TA number
+        Dim newNum As Integer = 0                                               'int for storing TA number
+        If result Is Nothing Then
+            MsgBox("使用者資訊讀取錯誤!!")
+            '要怎麼重連?
+        ElseIf result.Rows.Count < 1 Then                                       'if there's no TA account
+            newNum = 1                                                          'set TA number as 1
+        Else                                                                    'if there's TA account
+            newNum = Replace((result.ToString), "TA", "")                       'get previous TA number
+            newNum = newNum + 1                                                 'add 1 to TA number
         End If
+
+
 
         'Dim TAuser As String = ("TA" + string(3-len(nuwNum),"0") & newNum)  'set user name
         'show on textfield
         'get password
         'store to db
-        
+
         ' -*-*-*-*-*-*-*-*-*-DATATABLE 的基礎用法
         If result Is Nothing Then
             ' 查詢錯誤，可能是網路問題導致資料不完全
