@@ -59,7 +59,8 @@ Public Class frmSignUp
 
         taName = txtName.Text
         taPwd = txtPwd.Text
-
+        ' INSERT INTO Teacher ( Num, Name, Pwd)
+        'VALUES ('Test', 'TEST', 'ESSS')
         ' Dim sql = "我是INSERT、UPDATE、DELETE語法" <<最後記得一定要加上分號
         ' Dim result As Boolean = doSqlCmd(Sql & ";")
 
