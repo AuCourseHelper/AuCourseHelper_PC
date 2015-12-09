@@ -68,6 +68,7 @@ Public Class frmSignUp
             'doCourseStudents = doSqlQuery(sqlGetCourseStudents)
             'If doCourseStudents Is Nothing Then
             '    frmProgress.isOff = True
+            '    MsgBox("學生資訊讀取錯誤!!")
             '    Exit Sub
             'End If
             'doCourseStudents.Columns(0).ColumnName = "序號"
