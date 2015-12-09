@@ -389,4 +389,12 @@ Public Class frmTeacher
     Private Sub tslEdit_Click(sender As Object, e As EventArgs) Handles tslEdit.Click
 
     End Sub
+
+    Private Sub tslCourseName_MouseEnter(sender As Object, e As EventArgs) Handles tslCourseName.MouseEnter
+        Cursor = Cursors.Help
+    End Sub
+
+    Private Sub tslCourseName_MouseLeave(sender As Object, e As EventArgs) Handles tslCourseName.MouseLeave
+        Cursor = Cursors.Default
+    End Sub
 End Class

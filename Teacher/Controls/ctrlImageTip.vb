@@ -4,9 +4,11 @@
 
     Public Sub New(Optional img As Image = Nothing)
         MyBase.New()
+
         If img IsNot Nothing Then
             imgMain = img
         End If
+
         Me.OwnerDraw = True 'Must be set otherwise will not draw the image properly
         Me.IsBalloon = False
     End Sub

@@ -76,6 +76,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ctrlCodeHelper.designer.vb">
+      <DependentUpon>ctrlCodeHelper.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ctrlCodeHelper.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\ctrlImageTip.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -172,6 +178,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\ctrlCodeHelper.resx">
+      <DependentUpon>ctrlCodeHelper.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ctrlRTBTool.resx">
       <DependentUpon>ctrlRTBTool.vb</DependentUpon>
     </EmbeddedResource>

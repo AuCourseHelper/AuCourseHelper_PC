@@ -5,6 +5,7 @@
 
     Private Sub frmProgress_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
         'e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality
+        Cursor = Cursors.WaitCursor
         If isOff Then
             Me.Dispose()
             isOff = False

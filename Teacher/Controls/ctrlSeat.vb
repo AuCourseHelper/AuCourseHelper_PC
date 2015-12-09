@@ -1,18 +1,20 @@
 ﻿Public Class ctrlSeat
+    Private type As Integer ' 0=Normal,1=EditSeat
     Private now As Integer = 0 ' 綠藍紅灰灰灰
     Private tip As New ToolTip()
     Private tipImg As New ctrlImageTip()
 
-    Public Sub init(sSeat As String, Optional sId As String = "", Optional sName As String = "")
+    Public Sub init(sSeat As String, Optional sId As String = "", Optional sName As String = "", Optional nType As Integer = 0)
         Me.Tag = sSeat
         Me.Name = sSeat
         Me.Dock = DockStyle.Fill
         tip.IsBalloon = True
 
+        type = nType
         btnSeat.Text = sSeat
         lblId.Text = Trim(sId)
         lblName.Text = Trim(sName)
-        If Trim(sId) = "" And Trim(sName) = "" Then
+        If Trim(sId) = "" And Trim(sName) = "" And type = 0 Then
             Me.Enabled = False
             Me.BackColor = Color.DimGray
         End If
@@ -46,9 +48,17 @@
                 now = 0
         End Select
         Me.Enabled = True
+
+        If type = 1 Then
+            Me.BackColor = CL_BK_GRAY
+        End If
     End Sub
 
     Private Sub ctrlSeat_MouseHover(sender As Object, e As EventArgs) Handles btnSeat.MouseHover, lblId.MouseHover, lblName.MouseHover
+        If type = 1 And Trim(lblId.Text) = "" And Trim(lblName.Text) = "" Then
+            Exit Sub
+        End If
+
         tip.Hide(Me)
         tipImg.Hide(Me)
         Select Case now
@@ -75,42 +85,47 @@
     End Sub
 
     Private Sub btnSeat_Click(sender As Object, e As EventArgs) Handles btnSeat.Click
-        If now = 6 Then
-            now = 1
-        Else
-            now += 1
-        End If
+        If type = 0 Then
+            If now = 6 Then
+                now = 1
+            Else
+                now += 1
+            End If
 
-        tip.Hide(Me)
-        Select Case now
-            Case 1
-                doCourseDtAttend.Select(String.Format("學號='{0}'", lblId.Text))(0).Item("出席狀況") = "出席"
-                Me.BackColor = CL_BK_GREEN
-            Case 2
-                doCourseDtAttend.Select(String.Format("學號='{0}'", lblId.Text))(0).Item("出席狀況") = "遲到"
-                Me.BackColor = CL_BK_BLUE
-                tip.Show("遲到", Me, New Point(0, -30), 1500)
-                'doCourseAttend.Lat
-            Case 3
-                doCourseDtAttend.Select(String.Format("學號='{0}'", lblId.Text))(0).Item("出席狀況") = "缺席"
-                Me.BackColor = CL_BK_RED
-                tip.Show("缺席", Me, New Point(0, -30), 1500)
-                'doCourseAttend.Abs
-            Case 4
-                doCourseDtAttend.Select(String.Format("學號='{0}'", lblId.Text))(0).Item("出席狀況") = "病假"
-                Me.BackColor = CL_BK_GRAY
-                tip.Show("病假", Me, New Point(0, -30), 1500)
-                'doCourseAttend.Off
-            Case 5
-                doCourseDtAttend.Select(String.Format("學號='{0}'", lblId.Text))(0).Item("出席狀況") = "事假"
-                Me.BackColor = CL_BK_GRAY
-                tip.Show("事假", Me, New Point(0, -30), 1500)
-            Case 6
-                doCourseDtAttend.Select(String.Format("學號='{0}'", lblId.Text))(0).Item("出席狀況") = "公假"
-                Me.BackColor = CL_BK_GRAY
-                tip.Show("公假", Me, New Point(0, -30), 1500)
-        End Select
-        isSaved = False
+            tip.Hide(Me)
+            Select Case now
+                Case 1
+                    doCourseDtAttend.Select(String.Format("學號='{0}'", lblId.Text))(0).Item("出席狀況") = "出席"
+                    Me.BackColor = CL_BK_GREEN
+                Case 2
+                    doCourseDtAttend.Select(String.Format("學號='{0}'", lblId.Text))(0).Item("出席狀況") = "遲到"
+                    Me.BackColor = CL_BK_BLUE
+                    tip.Show("遲到", Me, New Point(0, -30), 1500)
+                    'doCourseAttend.Lat
+                Case 3
+                    doCourseDtAttend.Select(String.Format("學號='{0}'", lblId.Text))(0).Item("出席狀況") = "缺席"
+                    Me.BackColor = CL_BK_RED
+                    tip.Show("缺席", Me, New Point(0, -30), 1500)
+                    'doCourseAttend.Abs
+                Case 4
+                    doCourseDtAttend.Select(String.Format("學號='{0}'", lblId.Text))(0).Item("出席狀況") = "病假"
+                    Me.BackColor = CL_BK_GRAY
+                    tip.Show("病假", Me, New Point(0, -30), 1500)
+                    'doCourseAttend.Off
+                Case 5
+                    doCourseDtAttend.Select(String.Format("學號='{0}'", lblId.Text))(0).Item("出席狀況") = "事假"
+                    Me.BackColor = CL_BK_GRAY
+                    tip.Show("事假", Me, New Point(0, -30), 1500)
+                Case 6
+                    doCourseDtAttend.Select(String.Format("學號='{0}'", lblId.Text))(0).Item("出席狀況") = "公假"
+                    Me.BackColor = CL_BK_GRAY
+                    tip.Show("公假", Me, New Point(0, -30), 1500)
+            End Select
+            isSaved = False
+        Else
+            Dim ctrlCodeHelper As New ctrlCodeHelper
+            ctrlCodeHelper.setInit(Me)
+        End If
     End Sub
 
     Public Sub showInfo()

@@ -213,17 +213,22 @@ Public Class frmAttend
             End Select
         Next
         updateGrid()
-        lblHelp.Text = sHelp3
-        Dim nOff As Integer = doCourseAttend.Off.Split(",").Length
-        Dim nLat As Integer = doCourseAttend.Lat.Split(",").Length
-        Dim nAbs As Integer = doCourseAttend.Abs.Split(",").Length
-        pnlBtn.Enabled = False
-        pnlBtn2.Enabled = False
-        For Each seat As ctrlSeat In seats
-            seat.btnSeat.Enabled = False
-        Next
-        Dim sSql = "INSERT INTO Attend(CourseId,[Date],Week,[Off],Lat,Abs) VALUES('{0}','{1}','{2}','{3}','{4}','{5}');"
+
+        Dim sSql = String.Format("SELECT Id FROM Attend WHERE CourseId='{0}' AND Week='{1}';", doCourseAttend.CourseId, doCourseAttend.Week)
+        Dim dtResult As DataTable = doSqlQuery(sSql)
+
+        sSql = "INSERT INTO Attend(CourseId,[Date],Week,[Off],Lat,Abs) VALUES('{0}','{1}','{2}','{3}','{4}','{5}');"
         sSql = String.Format(sSql, doCourseAttend.CourseId, doCourseAttend.Dates, doCourseAttend.Week, doCourseAttend.Off, doCourseAttend.Lat, doCourseAttend.Abs)
+        If dtResult IsNot Nothing And dtResult.Rows.Count > 0 Then
+            If MsgBox("系統已有本週點名紀錄，是否覆蓋該記錄？", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                sSql = "UPDATE Attend SET [Date]='{0}',[Off]='{1}',Lat='{2}',Abs='{3}' WHERE Id='{4}';"
+                sSql = String.Format(sSql, doCourseAttend.Dates, doCourseAttend.Off, doCourseAttend.Lat, doCourseAttend.Abs, dtResult.Rows(0).Item("Id"))
+            Else
+                MsgBox("本次點名資料尚未以任何形式儲存！", MsgBoxStyle.Critical)
+                Exit Sub
+            End If
+        End If
+        
 RE:     Dim nCount As Integer = 0
         While Not doSqlCmd(sSql)
             If nCount = RETRYTIMES Then
@@ -244,9 +249,11 @@ RE:     Dim nCount As Integer = 0
                         sFile &= doCourseAttend.Abs
                         Try
                             File.WriteAllText(sfdSave.FileName, sFile)
+                            MsgBox("下次登入請記得將匯出的點名紀錄於 <<修改資料>> 功能匯入，否則系統將不會儲存本次點名紀錄！", MsgBoxStyle.Information)
                         Catch ex As Exception
                             MsgBox("存檔失敗！ " & ex.Message, MsgBoxStyle.Critical)
                         End Try
+                        Exit Sub
                     Else
                         MsgBox("本次點名資料尚未以任何形式儲存！", MsgBoxStyle.Critical)
                         Exit Sub
@@ -259,6 +266,16 @@ RE:     Dim nCount As Integer = 0
                & "點名資料已儲存至資料庫" & vbCrLf & "若欲修改請使用 <<修改資料>> 功能", MsgBoxStyle.Information)
         isSaved = True
         bAttendHasData = True
+
+        lblHelp.Text = sHelp3
+        Dim nOff As Integer = doCourseAttend.Off.Split(",").Length
+        Dim nLat As Integer = doCourseAttend.Lat.Split(",").Length
+        Dim nAbs As Integer = doCourseAttend.Abs.Split(",").Length
+        pnlBtn.Enabled = False
+        pnlBtn2.Enabled = False
+        For Each seat As ctrlSeat In seats
+            seat.btnSeat.Enabled = False
+        Next
     End Sub
 
     Private Sub btnCancel_Click() Handles btnCancel.Click
@@ -344,6 +361,6 @@ RE:     Dim nCount As Integer = 0
                        Select autoComplete
         Dim autoCompleteString As String() = allAutoCompletes.ToArray()
         Dim x As String = ""
-        MsgBox(String.Join(vbCrLf, autoCompleteString))
+        MsgBox("編輯座位請使用 <<修改資料>> 功能" & vbCrLf & String.Join(vbCrLf, autoCompleteString))
     End Sub
 End Class
