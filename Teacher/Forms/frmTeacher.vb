@@ -121,6 +121,15 @@ Public Class frmTeacher
             mnuSignUp.Enabled = True
             mnuLogout.Enabled = True
             lblWeek.Text = nowTerm & " 第 " & nowWeek & " 週"
+
+            pnlMain.Controls.Clear()
+            Dim lblWelcome As New Label
+            lblWelcome.AutoSize = False
+            lblWelcome.Dock = DockStyle.Fill
+            lblWelcome.TextAlign = ContentAlignment.MiddleCenter
+            lblWelcome.Font = New Font("", 24)
+            lblWelcome.Text = myProfile.Name & " 老師你好！" & vbCrLf & "請至 <<我的課程>> 選取課程來授課!!"
+            pnlMain.Controls.Add(lblWelcome)
         End If
     End Sub
 
@@ -136,6 +145,22 @@ Public Class frmTeacher
         t.Start()
         frmProgress.title = "讀取學生資訊..."
         frmProgress.ShowDialog(Me)
+
+        pnlMain.Controls.Clear()
+        Dim lblWelcome As New Label
+        'lblWelcome.AutoSize = False
+        lblWelcome.Dock = DockStyle.Fill
+        lblWelcome.TextAlign = ContentAlignment.MiddleLeft
+        lblWelcome.Font = New Font("", 18)
+        Dim sResult = ""
+        sResult &= "選課代號：" & doCourse.Item("ChooseNum") & vbCrLf
+        sResult &= "開課班級：" & doCourse.Item("Class") & vbCrLf
+        sResult &= "學　　分：" & doCourse.Item("Credit") & vbCrLf
+        sResult &= "上課時間：" & doCourse.Item("Time") & vbCrLf
+        sResult &= "上課教室：" & doCourse.Item("Classroom") & vbCrLf
+        sResult &= "修課學生：" & doCourseStudents.Rows.Count & "人" & vbCrLf
+        lblWelcome.Text = "<<" & Trim(doCourse.Item("Name")) & ">>" & vbCrLf & vbCrLf & sResult
+        pnlMain.Controls.Add(lblWelcome)
     End Sub
 
     Private Sub doGetCourseStudents()
@@ -259,108 +284,129 @@ Public Class frmTeacher
     End Sub
 
     Private Sub tslAttend_Click(sender As Object, e As EventArgs) Handles tslAttend.Click
-        If isSaved Then
-            nowCourseMenuItem.BackColor = Nothing
-            nowCourseMenuItem = tslAttend
-            nowCourseMenuItem.BackColor = Color.BurlyWood
-            pnlMain.Controls.Clear()
-
-            doForm.Close()
-            doForm = frmAttend
-            frmAttend.TopLevel = False
-            frmAttend.Dock = DockStyle.Fill
-            pnlMain.Controls.Add(frmAttend)
-            frmAttend.Show()
-        Else
-            MsgBox("變更的內容尚未儲存！")
+        If Not isSaved Then
+            If MsgBox("變更的內容尚未儲存！" & vbCrLf & "是否放棄本次變更？", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
+                Exit Sub
+            End If
+            isSaved = True
+            bAttendHasData = False
         End If
+        nowCourseMenuItem.BackColor = Nothing
+        nowCourseMenuItem = tslAttend
+        nowCourseMenuItem.BackColor = Color.BurlyWood
+        pnlMain.Controls.Clear()
+
+        doForm.Close()
+        doForm = frmAttend
+        frmAttend.TopLevel = False
+        frmAttend.Dock = DockStyle.Fill
+        pnlMain.Controls.Add(frmAttend)
+        frmAttend.Show()
     End Sub
 
     Private Sub tslScore_Click(sender As Object, e As EventArgs) Handles tslScore.Click
-        If isSaved Then
-            nowCourseMenuItem.BackColor = Nothing
-            nowCourseMenuItem = tslScore
-            nowCourseMenuItem.BackColor = Color.BurlyWood
-            pnlMain.Controls.Clear()
-
-            doForm.Close()
-            doForm = frmScore
-            frmScore.TopLevel = False
-            frmScore.Dock = DockStyle.Fill
-            pnlMain.Controls.Add(frmScore)
-            frmScore.Show()
-        Else
-            MsgBox("變更的內容尚未儲存！")
+        If Not isSaved Then
+            If MsgBox("變更的內容尚未儲存！" & vbCrLf & "是否放棄本次變更？", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
+                Exit Sub
+            End If
+            isSaved = True
         End If
+        nowCourseMenuItem.BackColor = Nothing
+        nowCourseMenuItem = tslScore
+        nowCourseMenuItem.BackColor = Color.BurlyWood
+        pnlMain.Controls.Clear()
+
+        doForm.Close()
+        doForm = frmScore
+        frmScore.TopLevel = False
+        frmScore.Dock = DockStyle.Fill
+        pnlMain.Controls.Add(frmScore)
+        frmScore.Show()
     End Sub
 
     Private Sub tslHomeWork_Click(sender As Object, e As EventArgs) Handles tslHomeWork.Click
-        If isSaved Then
-            nowCourseMenuItem.BackColor = Nothing
-            nowCourseMenuItem = tslHomeWork
-            nowCourseMenuItem.BackColor = Color.BurlyWood
-            pnlMain.Controls.Clear()
-
-            doForm.Close()
-            doForm = frmHomeWork
-            frmHomeWork.TopLevel = False
-            frmHomeWork.Dock = DockStyle.Fill
-            pnlMain.Controls.Add(frmHomeWork)
-            frmHomeWork.Show()
-        Else
-            MsgBox("變更的內容尚未儲存！")
+        If Not isSaved Then
+            If MsgBox("變更的內容尚未儲存！" & vbCrLf & "是否放棄本次變更？", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
+                Exit Sub
+            End If
+            isSaved = True
         End If
+        nowCourseMenuItem.BackColor = Nothing
+        nowCourseMenuItem = tslHomeWork
+        nowCourseMenuItem.BackColor = Color.BurlyWood
+        pnlMain.Controls.Clear()
+
+        doForm.Close()
+        doForm = frmHomeWork
+        frmHomeWork.TopLevel = False
+        frmHomeWork.Dock = DockStyle.Fill
+        pnlMain.Controls.Add(frmHomeWork)
+        frmHomeWork.Show()
     End Sub
 
     Private Sub tslExam_Click(sender As Object, e As EventArgs) Handles tslExam.Click
-        If isSaved Then
-            nowCourseMenuItem.BackColor = Nothing
-            nowCourseMenuItem = tslExam
-            nowCourseMenuItem.BackColor = Color.BurlyWood
-            pnlMain.Controls.Clear()
-
-            doForm.Close()
-            doForm = frmExam
-            frmExam.TopLevel = False
-            frmExam.Dock = DockStyle.Fill
-            pnlMain.Controls.Add(frmExam)
-            frmExam.Show()
-        Else
-            MsgBox("變更的內容尚未儲存！")
+        If Not isSaved Then
+            If MsgBox("變更的內容尚未儲存！" & vbCrLf & "是否放棄本次變更？", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
+                Exit Sub
+            End If
+            isSaved = True
         End If
+        nowCourseMenuItem.BackColor = Nothing
+        nowCourseMenuItem = tslExam
+        nowCourseMenuItem.BackColor = Color.BurlyWood
+        pnlMain.Controls.Clear()
+
+        doForm.Close()
+        doForm = frmExam
+        frmExam.TopLevel = False
+        frmExam.Dock = DockStyle.Fill
+        pnlMain.Controls.Add(frmExam)
+        frmExam.Show()
     End Sub
 
     Private Sub tslReport_Click(sender As Object, e As EventArgs) Handles tslReport.Click
-        If isSaved Then
-            nowCourseMenuItem.BackColor = Nothing
-            nowCourseMenuItem = tslReport
-            nowCourseMenuItem.BackColor = Color.BurlyWood
-            pnlMain.Controls.Clear()
-
-            doForm.Close()
-            doForm = frmReport
-            frmReport.TopLevel = False
-            frmReport.Dock = DockStyle.Fill
-            pnlMain.Controls.Add(frmReport)
-            frmReport.Show()
-        Else
-            MsgBox("變更的內容尚未儲存！")
+        If Not isSaved Then
+            If MsgBox("變更的內容尚未儲存！" & vbCrLf & "是否放棄本次變更？", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
+                Exit Sub
+            End If
+            isSaved = True
         End If
+        nowCourseMenuItem.BackColor = Nothing
+        nowCourseMenuItem = tslReport
+        nowCourseMenuItem.BackColor = Color.BurlyWood
+        pnlMain.Controls.Clear()
+
+        doForm.Close()
+        doForm = frmReport
+        frmReport.TopLevel = False
+        frmReport.Dock = DockStyle.Fill
+        pnlMain.Controls.Add(frmReport)
+        frmReport.Show()
     End Sub
 
     Private Sub tslEnd_Click(sender As Object, e As EventArgs) Handles tslEnd.Click
-        If isSaved Then
-            nowCourseMenuItem.BackColor = Nothing
-            doForm.Close()
-            pnlMain.Controls.Clear()
-            tslCourseName.Text = "請選擇課程"
-            mnuCourseTool.Enabled = False
-            tsmCourse.Enabled = True
-
-            bAttendHasData = False
-        Else
-            MsgBox("變更的內容尚未儲存！")
+        If Not isSaved Then
+            If MsgBox("變更的內容尚未儲存！" & vbCrLf & "是否放棄本次變更？", MsgBoxStyle.YesNo) = MsgBoxResult.No Then
+                Exit Sub
+            End If
+            isSaved = True
         End If
+        nowCourseMenuItem.BackColor = Nothing
+        doForm.Close()
+        pnlMain.Controls.Clear()
+        tslCourseName.Text = "請選擇課程"
+        mnuCourseTool.Enabled = False
+        tsmCourse.Enabled = True
+        bAttendHasData = False
+
+        pnlMain.Controls.Clear()
+        Dim lblWelcome As New Label
+        lblWelcome.AutoSize = False
+        lblWelcome.Dock = DockStyle.Fill
+        lblWelcome.TextAlign = ContentAlignment.MiddleCenter
+        lblWelcome.Font = New Font("", 24)
+        lblWelcome.Text = myProfile.Name & " 老師你好！" & vbCrLf & "請至 <<我的課程>> 選取課程來授課!!"
+        pnlMain.Controls.Add(lblWelcome)
     End Sub
 
     Private Sub tsmIp_Click(sender As Object, e As EventArgs) Handles tsmIp.Click
