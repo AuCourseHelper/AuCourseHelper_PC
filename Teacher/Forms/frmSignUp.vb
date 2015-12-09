@@ -42,7 +42,7 @@ Public Class frmSignUp
 
 
 
-        Dim sql = "SELECT MAX(Num) FROM Teacher WHERE Num LIKE '%TA%');"        'get user name starts with TA
+        Dim sql = "SELECT MAX(Num) FROM Teacher WHERE Num LIKE '%TA%';"        'get user name starts with TA
         Dim result As DataTable = doSqlQuery(sql & ";")
         Dim newNum As Integer = 0                                               'int for storing TA number
         Dim TAuser As String = ""
@@ -52,16 +52,16 @@ Public Class frmSignUp
         ElseIf result.Rows.Count < 1 Then                                       'if there's no TA account
             newNum = 1                                                          'set TA number as 1
         Else                                                                    'if there's TA account
-            newNum = Replace((result.ToString), "TA", "")                       'get previous TA number
+            newNum = Val(Replace((result.ToString), "TA", ""))                  'get previous TA number
             newNum = newNum + 1                                                 'add 1 to TA number
             TAuser = ("TA" & newNum.ToString("000"))                            'set user name
-            txtUid.Text = "AAAAAAAAAAAAAAAAA"
-            lblNameHint.Text = "AAAAAAAAAAAAAAAAAAAAAAAAA"
+            txtUid.Text = TAuser
+
 
         End If
 
-        txtUid.Text = "AAAAAAAAAAAAAAAAA"
-        'frmSignUp.lblNameHint.Text = "AAAAAAAAAAAAAAAAAAAAAAAAA"
+
+
 
 
         'show on textfield
@@ -96,7 +96,7 @@ Public Class frmSignUp
 
         For Each row As DataRow In result.Rows
             ' 取得每個row裡的某個欄位 並用彈出視窗顯示
-            MsgBox(row.Item("欄位名稱"))
+            'MsgBox(row.Item("欄位名稱"))
         Next
 
 
