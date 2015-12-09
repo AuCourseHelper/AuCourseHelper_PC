@@ -45,21 +45,25 @@ Public Class frmSignUp
         Dim sql = "SELECT MAX(Num) FROM Teacher WHERE Num LIKE '%TA%');"        'get user name starts with TA
         Dim result As DataTable = doSqlQuery(sql & ";")
         Dim newNum As Integer = 0                                               'int for storing TA number
+        Dim TAuser As String = ""
         If result Is Nothing Then
             MsgBox("使用者資訊讀取錯誤!!")
-            '要怎麼重連?
-            ' doSqlQuery這個方法其實我就已經有寫自動重試3次
-            ' 這邊可能就跳個訊息然後exit sub吧
+            Exit Sub
         ElseIf result.Rows.Count < 1 Then                                       'if there's no TA account
             newNum = 1                                                          'set TA number as 1
         Else                                                                    'if there's TA account
             newNum = Replace((result.ToString), "TA", "")                       'get previous TA number
             newNum = newNum + 1                                                 'add 1 to TA number
+            TAuser = ("TA" & newNum.ToString("000"))                            'set user name
+            txtUid.Text = "AAAAAAAAAAAAAAAAA"
+            lblNameHint.Text = "AAAAAAAAAAAAAAAAAAAAAAAAA"
+
         End If
 
+        txtUid.Text = "AAAAAAAAAAAAAAAAA"
+        frmSignUp.lblNameHint.Text = "AAAAAAAAAAAAAAAAAAAAAAAAA"
 
 
-        'Dim TAuser As String = ("TA" + string(3-len(nuwNum),"0") & newNum)  'set user name
         'show on textfield
         'get password
         'store to db
