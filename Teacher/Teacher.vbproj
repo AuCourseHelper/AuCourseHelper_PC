@@ -52,6 +52,10 @@
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="PdfSharp, Version=1.0.898.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\PdfSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -91,6 +95,7 @@
     <Compile Include="Forms\frmList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Modules\modExport.vb" />
     <Compile Include="Modules\modSocket.vb" />
     <Compile Include="Controls\ctrlRTBTool.Designer.vb">
       <DependentUpon>ctrlRTBTool.vb</DependentUpon>
@@ -196,6 +201,9 @@
     <EmbeddedResource Include="Forms\frmAttend.resx">
       <DependentUpon>frmAttend.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmList.resx">
+      <DependentUpon>frmList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
     </EmbeddedResource>
@@ -263,6 +271,7 @@
     <None Include="Resources\cancel.png" />
     <None Include="Resources\books.png" />
     <None Include="Resources\edit.png" />
+    <Content Include="DLL\PdfSharp.dll" />
     <Content Include="img\NULL.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -82,7 +82,6 @@ Public Class frmLogin
             Select Case connectAndLogin(txtUid.Text, txtPwd.Text)
                 Case "SUCCESS"
                     frmProgress.title = "取得帳號資訊.."
-                    ' 取得帳號資訊
                     Dim sqlGetProfile = "SELECT * FROM Teacher WHERE Id=" & myProfile.Id & ";"
                     Dim tblProfile = doSqlQuery(sqlGetProfile)
                     If tblProfile.Rows.Count > 0 Then
