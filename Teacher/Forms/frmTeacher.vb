@@ -19,6 +19,9 @@ Public Class frmTeacher
             frmLogin.txtPwd.Text = "4327"
             mnuLogin.PerformClick()
         ElseIf e.KeyCode = Keys.F1 Then
+            Dim bm As New Bitmap(Me.Width, Me.Height)
+            Me.DrawToBitmap(bm, New Rectangle(0, 0, Me.Width, Me.Height))
+            exportSeatToPdf(bm, "D:\20151210.pdf")
         End If
     End Sub
 
