@@ -49,9 +49,7 @@ Partial Class frmTeacher
         Me.mnuCourseTool = New System.Windows.Forms.ToolStrip()
         Me.tslCourseName = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.pnlMain = New System.Windows.Forms.Panel()
-        Me.tmrSysTime = New System.Windows.Forms.Timer(Me.components)
-        Me.tmrServerPing = New System.Windows.Forms.Timer(Me.components)
+        Me.tslList = New System.Windows.Forms.ToolStripButton()
         Me.tslAttend = New System.Windows.Forms.ToolStripButton()
         Me.tslScore = New System.Windows.Forms.ToolStripButton()
         Me.tslHomeWork = New System.Windows.Forms.ToolStripButton()
@@ -59,6 +57,9 @@ Partial Class frmTeacher
         Me.tslReport = New System.Windows.Forms.ToolStripButton()
         Me.tslEnd = New System.Windows.Forms.ToolStripButton()
         Me.tslEdit = New System.Windows.Forms.ToolStripButton()
+        Me.pnlMain = New System.Windows.Forms.Panel()
+        Me.tmrSysTime = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrServerPing = New System.Windows.Forms.Timer(Me.components)
         Me.mnuMain.SuspendLayout()
         Me.stpMain.SuspendLayout()
         Me.mnuCourseTool.SuspendLayout()
@@ -150,7 +151,7 @@ Partial Class frmTeacher
         '
         Me.mnuViewLog.Name = "mnuViewLog"
         Me.mnuViewLog.Size = New System.Drawing.Size(206, 24)
-        Me.mnuViewLog.Text = "檢視今日紀錄"
+        Me.mnuViewLog.Text = "檢視本次紀錄"
         '
         'mnuViewHistory
         '
@@ -230,10 +231,11 @@ Partial Class frmTeacher
         'mnuCourseTool
         '
         Me.mnuCourseTool.AutoSize = False
+        Me.mnuCourseTool.BackColor = System.Drawing.SystemColors.Info
         Me.mnuCourseTool.Enabled = False
         Me.mnuCourseTool.Font = New System.Drawing.Font("微軟正黑體", 14.0!)
         Me.mnuCourseTool.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.mnuCourseTool.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslCourseName, Me.ToolStripSeparator1, Me.tslAttend, Me.tslScore, Me.tslHomeWork, Me.tslExam, Me.tslReport, Me.tslEnd, Me.tslEdit})
+        Me.mnuCourseTool.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslCourseName, Me.ToolStripSeparator1, Me.tslList, Me.tslAttend, Me.tslScore, Me.tslHomeWork, Me.tslExam, Me.tslReport, Me.tslEnd, Me.tslEdit})
         Me.mnuCourseTool.Location = New System.Drawing.Point(0, 28)
         Me.mnuCourseTool.Name = "mnuCourseTool"
         Me.mnuCourseTool.Size = New System.Drawing.Size(1008, 50)
@@ -256,23 +258,14 @@ Partial Class frmTeacher
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 50)
         '
-        'pnlMain
+        'tslList
         '
-        Me.pnlMain.AutoScroll = True
-        Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlMain.Location = New System.Drawing.Point(0, 78)
-        Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(1008, 629)
-        Me.pnlMain.TabIndex = 4
-        '
-        'tmrSysTime
-        '
-        Me.tmrSysTime.Enabled = True
-        Me.tmrSysTime.Interval = 1000
-        '
-        'tmrServerPing
-        '
-        Me.tmrServerPing.Interval = 60000
+        Me.tslList.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.contact
+        Me.tslList.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.tslList.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tslList.Name = "tslList"
+        Me.tslList.Size = New System.Drawing.Size(122, 47)
+        Me.tslList.Text = "學生名單"
         '
         'tslAttend
         '
@@ -298,8 +291,8 @@ Partial Class frmTeacher
         Me.tslHomeWork.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tslHomeWork.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tslHomeWork.Name = "tslHomeWork"
-        Me.tslHomeWork.Size = New System.Drawing.Size(122, 47)
-        Me.tslHomeWork.Text = "建立作業"
+        Me.tslHomeWork.Size = New System.Drawing.Size(84, 47)
+        Me.tslHomeWork.Text = "作業"
         '
         'tslExam
         '
@@ -307,8 +300,8 @@ Partial Class frmTeacher
         Me.tslExam.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tslExam.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tslExam.Name = "tslExam"
-        Me.tslExam.Size = New System.Drawing.Size(122, 47)
-        Me.tslExam.Text = "建立考試"
+        Me.tslExam.Size = New System.Drawing.Size(84, 47)
+        Me.tslExam.Text = "考試"
         '
         'tslReport
         '
@@ -316,8 +309,8 @@ Partial Class frmTeacher
         Me.tslReport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tslReport.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tslReport.Name = "tslReport"
-        Me.tslReport.Size = New System.Drawing.Size(122, 47)
-        Me.tslReport.Text = "報表匯出"
+        Me.tslReport.Size = New System.Drawing.Size(84, 47)
+        Me.tslReport.Text = "報表"
         '
         'tslEnd
         '
@@ -338,6 +331,25 @@ Partial Class frmTeacher
         Me.tslEdit.Name = "tslEdit"
         Me.tslEdit.Size = New System.Drawing.Size(122, 47)
         Me.tslEdit.Text = "修改資料"
+        '
+        'pnlMain
+        '
+        Me.pnlMain.AutoScroll = True
+        Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlMain.Location = New System.Drawing.Point(0, 78)
+        Me.pnlMain.Margin = New System.Windows.Forms.Padding(0)
+        Me.pnlMain.Name = "pnlMain"
+        Me.pnlMain.Size = New System.Drawing.Size(1008, 629)
+        Me.pnlMain.TabIndex = 4
+        '
+        'tmrSysTime
+        '
+        Me.tmrSysTime.Enabled = True
+        Me.tmrSysTime.Interval = 1000
+        '
+        'tmrServerPing
+        '
+        Me.tmrServerPing.Interval = 60000
         '
         'frmTeacher
         '
@@ -399,5 +411,6 @@ Partial Class frmTeacher
     Friend WithEvents tslEnd As System.Windows.Forms.ToolStripButton
     Friend WithEvents lblWeek As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents tslEdit As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tslList As System.Windows.Forms.ToolStripButton
 
 End Class

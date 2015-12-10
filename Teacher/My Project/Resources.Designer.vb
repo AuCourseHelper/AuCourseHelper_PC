@@ -63,6 +63,16 @@ Namespace My.Resources
         '''<summary>
         '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         '''</summary>
+        Friend ReadOnly Property bk_progress() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("bk_progress", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
         Friend ReadOnly Property books() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("books", resourceCulture)
@@ -96,6 +106,16 @@ Namespace My.Resources
         Friend ReadOnly Property charactershrinkfont() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("charactershrinkfont", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
+        Friend ReadOnly Property contact() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("contact", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

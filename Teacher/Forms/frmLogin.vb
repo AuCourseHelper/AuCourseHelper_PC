@@ -99,19 +99,18 @@ Public Class frmLogin
                         Exit Try
                     End If
 
-                    frmProgress.title = "取得系統資訊.."
-                    ' 取得當前系統學期別
+                    frmProgress.title = "取得當前學期別.."
                     Dim sqlGetSysInfo = "SELECT Term FROM Sys;"
                     nowTerm = doSqlQuery(sqlGetSysInfo).Rows(0).Item(0).ToString
-                    ' 取得當前系統學期開始日
+
+                    frmProgress.title = "取得當前學期開始日.."
                     Dim sqlGetSysDateInfo = "SELECT StartDate FROM Sys_Date WHERE Term='" & nowTerm & "';"
                     nowTermStart = Date.Parse(doSqlQuery(sqlGetSysDateInfo).Rows(0).Item(0).ToString).AddDays(-1)
                     nowWeek = Math.Ceiling(Now.Subtract(nowTermStart).Days / 7)
                     nowWeekDetail = nowTerm & vbCrLf & "第 " & nowWeek & " 週"
 
-                    frmProgress.title = "取得課程資訊.."
-                    ' 取得課程資訊
-                    Dim sqlGetCourses = "SELECT * FROM Course WHERE Teacher LIKE '%" & myProfile.Name & "%';"
+                    frmProgress.title = "取得本學期課程資訊.."
+                    Dim sqlGetCourses = "SELECT * FROM Course WHERE Teacher LIKE '%" & myProfile.Name & "%' AND Term='" & nowTerm & "';"
                     myCourses = doSqlQuery(sqlGetCourses)
                     Dim c() = {myCourses.Columns(0)}
                     myCourses.PrimaryKey = c

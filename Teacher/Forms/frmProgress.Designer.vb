@@ -35,7 +35,8 @@ Partial Class frmProgress
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(150, 150)
+        Me.BackgroundImage = Global.AUCourseHelper_Teacher.My.Resources.Resources.bk_progress
+        Me.ClientSize = New System.Drawing.Size(200, 200)
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         Me.DoubleBuffered = True
         Me.ForeColor = System.Drawing.SystemColors.ControlText
@@ -44,7 +45,7 @@ Partial Class frmProgress
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "frmProgress"
-        Me.TransparencyKey = System.Drawing.SystemColors.Control
+        Me.TransparencyKey = System.Drawing.Color.White
         Me.ResumeLayout(False)
 
     End Sub

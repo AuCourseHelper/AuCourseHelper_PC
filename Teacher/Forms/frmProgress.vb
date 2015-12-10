@@ -4,13 +4,12 @@
     Public Shared isOff As Boolean = False
 
     Private Sub frmProgress_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
-        'e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality
         Cursor = Cursors.WaitCursor
         If isOff Then
             Me.Dispose()
             isOff = False
         End If
-        DrawProgress(e.Graphics, New Rectangle(6, 6, 137, 137), a)
+        DrawProgress(e.Graphics, New Rectangle(31, 31, 137, 137), a)
     End Sub
 
     Private Sub DrawProgress(g As Graphics, rect As Rectangle, percentage As Single)
@@ -29,18 +28,10 @@
 
         Dim font As New Font("", 12, FontStyle.Bold)
         Dim msr = g.MeasureString(title, font)
-        Dim pt As New Point((150 - msr.Width) / 2 - 2, (150 - msr.Height) / 2)
+        Dim pt As New Point((Me.Width - msr.Width) / 2 - 2, (Me.Height - msr.Height) / 2)
         msr.Width += 2
-        g.FillRectangle(Brushes.LightGreen, pt.X, pt.Y, msr.Width, msr.Height)
-        g.DrawString(title, font, Brushes.Black, pt)
-        'draw the text in the centre by working out how big it is and adjusting the co-ordinates accordingly
-        'Using fnt As New Font(Me.Font.FontFamily, 14)
-        '    Dim text As String = percentage.ToString + "%"
-        '    Dim textSize = g.MeasureString(text, fnt)
-        '    Dim textPoint As New Point(CInt(rect.Left + (rect.Width / 2) - (textSize.Width / 2)), CInt(rect.Top + (rect.Height / 2) - (textSize.Height / 2)))
-        '    'now we have all the values draw the text
-        '    g.DrawString(text, fnt, Brushes.Black, textPoint)
-        'End Using
+        g.FillRectangle(Brushes.LightYellow, pt.X, pt.Y, msr.Width, msr.Height)
+        g.DrawString(title, font, Brushes.Blue, pt)
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick

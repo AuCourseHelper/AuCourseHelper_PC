@@ -85,6 +85,12 @@
     <Compile Include="Controls\ctrlImageTip.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\frmList.Designer.vb">
+      <DependentUpon>frmList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Modules\modSocket.vb" />
     <Compile Include="Controls\ctrlRTBTool.Designer.vb">
       <DependentUpon>ctrlRTBTool.vb</DependentUpon>
@@ -199,6 +205,9 @@
     <EmbeddedResource Include="Forms\frmProgress.resx">
       <DependentUpon>frmProgress.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmScore.resx">
+      <DependentUpon>frmScore.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmSignUp.resx">
       <DependentUpon>frmSignUp.vb</DependentUpon>
     </EmbeddedResource>
@@ -257,6 +266,8 @@
     <Content Include="img\NULL.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\contact.png" />
+    <None Include="Resources\bk_progress.png" />
     <Content Include="setting.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
