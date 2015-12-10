@@ -60,6 +60,12 @@ Partial Class frmTeacher
         Me.pnlMain = New System.Windows.Forms.Panel()
         Me.tmrSysTime = New System.Windows.Forms.Timer(Me.components)
         Me.tmrServerPing = New System.Windows.Forms.Timer(Me.components)
+        Me.說明ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.帳號相關說明ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.課程相關說明ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.關於課程輔助系統ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmSch = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuMain.SuspendLayout()
         Me.stpMain.SuspendLayout()
         Me.mnuCourseTool.SuspendLayout()
@@ -68,7 +74,7 @@ Partial Class frmTeacher
         'mnuMain
         '
         Me.mnuMain.Font = New System.Drawing.Font("微軟正黑體", 12.0!)
-        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmConnection, Me.tsmCourse, Me.tsmAccount, Me.tsmLog, Me.tsmIp})
+        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmConnection, Me.tsmCourse, Me.tsmSch, Me.tsmAccount, Me.tsmLog, Me.tsmIp, Me.說明ToolStripMenuItem})
         Me.mnuMain.Location = New System.Drawing.Point(0, 0)
         Me.mnuMain.Name = "mnuMain"
         Me.mnuMain.Size = New System.Drawing.Size(1008, 28)
@@ -351,6 +357,43 @@ Partial Class frmTeacher
         '
         Me.tmrServerPing.Interval = 60000
         '
+        '說明ToolStripMenuItem
+        '
+        Me.說明ToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.帳號相關說明ToolStripMenuItem, Me.課程相關說明ToolStripMenuItem, Me.ToolStripMenuItem3, Me.關於課程輔助系統ToolStripMenuItem})
+        Me.說明ToolStripMenuItem.Name = "說明ToolStripMenuItem"
+        Me.說明ToolStripMenuItem.Size = New System.Drawing.Size(53, 24)
+        Me.說明ToolStripMenuItem.Text = "說明"
+        '
+        '帳號相關說明ToolStripMenuItem
+        '
+        Me.帳號相關說明ToolStripMenuItem.Name = "帳號相關說明ToolStripMenuItem"
+        Me.帳號相關說明ToolStripMenuItem.Size = New System.Drawing.Size(206, 24)
+        Me.帳號相關說明ToolStripMenuItem.Text = "帳號相關說明"
+        '
+        '課程相關說明ToolStripMenuItem
+        '
+        Me.課程相關說明ToolStripMenuItem.Name = "課程相關說明ToolStripMenuItem"
+        Me.課程相關說明ToolStripMenuItem.Size = New System.Drawing.Size(206, 24)
+        Me.課程相關說明ToolStripMenuItem.Text = "課程相關說明"
+        '
+        'ToolStripMenuItem3
+        '
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(203, 6)
+        '
+        '關於課程輔助系統ToolStripMenuItem
+        '
+        Me.關於課程輔助系統ToolStripMenuItem.Name = "關於課程輔助系統ToolStripMenuItem"
+        Me.關於課程輔助系統ToolStripMenuItem.Size = New System.Drawing.Size(206, 24)
+        Me.關於課程輔助系統ToolStripMenuItem.Text = "關於課程輔助系統"
+        '
+        'tsmSch
+        '
+        Me.tsmSch.Enabled = False
+        Me.tsmSch.Name = "tsmSch"
+        Me.tsmSch.Size = New System.Drawing.Size(85, 24)
+        Me.tsmSch.Text = "我的課表"
+        '
         'frmTeacher
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -412,5 +455,11 @@ Partial Class frmTeacher
     Friend WithEvents lblWeek As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents tslEdit As System.Windows.Forms.ToolStripButton
     Friend WithEvents tslList As System.Windows.Forms.ToolStripButton
+    Friend WithEvents 說明ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents 帳號相關說明ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents 課程相關說明ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem3 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents 關於課程輔助系統ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsmSch As System.Windows.Forms.ToolStripMenuItem
 
 End Class
