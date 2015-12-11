@@ -52,8 +52,9 @@ Module SchoolSystemConnection
         
         For Each n In num
             Dim wc As New WebClient()
-            wc.Headers.Add(HttpRequestHeader.Cookie, "JSESSIONID=AACInU6qVlGym0LCd1tuQw; _ga=GA1.3.1063912275.1445912638; _gat=1; _gali=chk; aus_cookie_persis-47873-aus-group-http=BPMIBAKMFAAA; __utmc=246785684; __utma=246785684.1063912275.1445912638.1446104066.1446104066.1; __utmb=246785684.2.10.1446104066; __utmz=246785684.1446104066.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)")
-            wc.DownloadFile("https://aus.au.edu.tw/au/ag_pro/ag_pdf/1041" & n & ".pdf", "D:\點名單\1041" & n & ".pdf")
+            'wc.Headers.Add(HttpRequestHeader.Cookie, "JSESSIONID=AACInU6qVlGym0LCd1tuQw; _ga=GA1.3.1063912275.1445912638; _gat=1; _gali=chk; aus_cookie_persis-47873-aus-group-http=BPMIBAKMFAAA; __utmc=246785684; __utma=246785684.1063912275.1445912638.1446104066.1446104066.1; __utmb=246785684.2.10.1446104066; __utmz=246785684.1446104066.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)")
+            'wc.DownloadFile("https://aus.au.edu.tw/au/ag_pro/ag_pdf/1041" & n & ".pdf", "D:\點名單\1041" & n & ".pdf")
+            wc.DownloadFile("https://aus.au.edu.tw/au/ag_pro/ag_xls/1041" & n & ".xls", "D:\1041" & n & ".xls")
         Next
 
         Return True

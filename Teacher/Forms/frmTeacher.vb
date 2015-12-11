@@ -19,9 +19,8 @@ Public Class frmTeacher
             frmLogin.txtPwd.Text = "4327"
             mnuLogin.PerformClick()
         ElseIf e.KeyCode = Keys.F1 Then
-            Dim bm As New Bitmap(Me.Width, Me.Height)
-            Me.DrawToBitmap(bm, New Rectangle(0, 0, Me.Width, Me.Height))
-            exportSeatToPdf(bm, "D:\20151210.pdf")
+            auSysLogin("4327", "bill0701")
+            auSysGetCourseStudents("104", "1", "1326", "D:\111.xls")
         End If
     End Sub
 
@@ -162,7 +161,15 @@ Public Class frmTeacher
             MsgBox("該課程學生資料取得失敗！請再試一次！", MsgBoxStyle.Critical)
             tslEnd.PerformClick()
         Else
-            tslList.PerformClick()
+            If doCourseStudents.Rows.Count < 1 Then
+                frmCreateList.ShowDialog(Me)
+            End If
+            If doCourseStudents.Rows.Count < 1 Then
+                tslEnd.PerformClick()
+                MsgBox("請先建立本課程學生名單才能夠繼續執行！", MsgBoxStyle.Critical)
+            Else
+                tslList.PerformClick()
+            End If
         End If
     End Sub
     Private Sub doGetCourseStudents()
@@ -275,7 +282,6 @@ Public Class frmTeacher
         sResult &= "修課人數：" & doCourseStudents.Rows.Count & "人" & vbCrLf
         MsgBox(sResult, MsgBoxStyle.Information, doCourse.Item("Name"))
     End Sub
-
 
     ' 學生名單
     Private Sub tslList_Click(sender As Object, e As EventArgs) Handles tslList.Click

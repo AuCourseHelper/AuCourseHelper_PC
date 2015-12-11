@@ -89,13 +89,26 @@
     <Compile Include="Controls\ctrlImageTip.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\frmCreateList.Designer.vb">
+      <DependentUpon>frmCreateList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCreateList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmList.Designer.vb">
       <DependentUpon>frmList.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmLoginWeb.designer.vb">
+      <DependentUpon>frmLoginWeb.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLoginWeb.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Modules\modExport.vb" />
+    <Compile Include="Modules\modImport.vb" />
     <Compile Include="Modules\modSocket.vb" />
     <Compile Include="Controls\ctrlRTBTool.Designer.vb">
       <DependentUpon>ctrlRTBTool.vb</DependentUpon>
@@ -172,6 +185,7 @@
     <Compile Include="Modules\modLog.vb" />
     <Compile Include="Modules\modAutoResize.vb" />
     <Compile Include="Modules\modDefine.vb" />
+    <Compile Include="Modules\modWeb.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -201,11 +215,17 @@
     <EmbeddedResource Include="Forms\frmAttend.resx">
       <DependentUpon>frmAttend.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCreateList.resx">
+      <DependentUpon>frmCreateList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmList.resx">
       <DependentUpon>frmList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLoginWeb.resx">
+      <DependentUpon>frmLoginWeb.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMyProfile.resx">
       <DependentUpon>frmMyProfile.vb</DependentUpon>
@@ -277,6 +297,10 @@
     </Content>
     <None Include="Resources\contact.png" />
     <None Include="Resources\bk_progress.png" />
+    <None Include="Resources\print.png" />
+    <None Include="Resources\export.png" />
+    <None Include="Resources\web.png" />
+    <None Include="Resources\xls.png" />
     <Content Include="setting.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

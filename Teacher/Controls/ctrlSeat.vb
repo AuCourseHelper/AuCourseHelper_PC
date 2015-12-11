@@ -44,6 +44,9 @@
             Case "公假"
                 now = 6
                 Me.BackColor = CL_BK_GRAY
+            Case "顯示"
+                now = 0
+                btnSeat.Enabled = False
             Case Else
                 now = 0
         End Select

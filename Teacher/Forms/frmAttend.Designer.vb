@@ -29,8 +29,6 @@ Partial Class frmAttend
         Me.pnlBtn = New System.Windows.Forms.TableLayoutPanel()
         Me.btnAtt = New System.Windows.Forms.Button()
         Me.btnAbs = New System.Windows.Forms.Button()
-        Me.btnSave = New System.Windows.Forms.Button()
-        Me.btnCancel = New System.Windows.Forms.Button()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.pnlBtnSub = New System.Windows.Forms.TableLayoutPanel()
         Me.btnOffPublic = New System.Windows.Forms.Button()
@@ -41,16 +39,18 @@ Partial Class frmAttend
         Me.pnlMain2 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnCreateSeat = New System.Windows.Forms.Button()
         Me.pnlControl2 = New System.Windows.Forms.TableLayoutPanel()
         Me.lblDate2 = New System.Windows.Forms.Label()
         Me.lblNoSeat = New System.Windows.Forms.Label()
         Me.pnlBtn2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.lblHelp = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnCancel2 = New System.Windows.Forms.Button()
         Me.btnSave2 = New System.Windows.Forms.Button()
         Me.btnChangeView = New System.Windows.Forms.Button()
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.lblHelp = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tabMain.SuspendLayout()
         Me.tabTable.SuspendLayout()
         Me.pnlMain.SuspendLayout()
@@ -164,32 +164,6 @@ Partial Class frmAttend
         Me.btnAbs.TabIndex = 1
         Me.btnAbs.Text = "缺　席"
         Me.btnAbs.UseVisualStyleBackColor = False
-        '
-        'btnSave
-        '
-        Me.btnSave.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnSave.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.btnSave.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.save
-        Me.btnSave.Location = New System.Drawing.Point(3, 381)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(94, 75)
-        Me.btnSave.TabIndex = 3
-        Me.btnSave.Text = "儲存"
-        Me.btnSave.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnSave.UseVisualStyleBackColor = True
-        '
-        'btnCancel
-        '
-        Me.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnCancel.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.btnCancel.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.cancel
-        Me.btnCancel.Location = New System.Drawing.Point(3, 462)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(94, 77)
-        Me.btnCancel.TabIndex = 4
-        Me.btnCancel.Text = "放棄"
-        Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnCancel.UseVisualStyleBackColor = True
         '
         'lblDate
         '
@@ -306,7 +280,7 @@ Partial Class frmAttend
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.TableLayoutPanel1.Controls.Add(Me.Label1, 1, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.Button2, 1, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.btnCreateSeat, 1, 2)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -328,15 +302,15 @@ Partial Class frmAttend
         Me.Label1.Text = "本課程尚未建立學生座位表"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Button2
+        'btnCreateSeat
         '
-        Me.Button2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Button2.Location = New System.Drawing.Point(265, 331)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(256, 66)
-        Me.Button2.TabIndex = 1
-        Me.Button2.Text = "建立座位表"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnCreateSeat.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnCreateSeat.Location = New System.Drawing.Point(265, 331)
+        Me.btnCreateSeat.Name = "btnCreateSeat"
+        Me.btnCreateSeat.Size = New System.Drawing.Size(256, 66)
+        Me.btnCreateSeat.TabIndex = 1
+        Me.btnCreateSeat.Text = "建立座位表"
+        Me.btnCreateSeat.UseVisualStyleBackColor = True
         '
         'pnlControl2
         '
@@ -399,6 +373,48 @@ Partial Class frmAttend
         Me.pnlBtn2.Size = New System.Drawing.Size(315, 50)
         Me.pnlBtn2.TabIndex = 2
         '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblHelp})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 578)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(800, 22)
+        Me.StatusStrip1.SizingGrip = False
+        Me.StatusStrip1.TabIndex = 3
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'lblHelp
+        '
+        Me.lblHelp.Name = "lblHelp"
+        Me.lblHelp.Size = New System.Drawing.Size(32, 17)
+        Me.lblHelp.Text = "說明"
+        '
+        'btnSave
+        '
+        Me.btnSave.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnSave.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.btnSave.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.save
+        Me.btnSave.Location = New System.Drawing.Point(3, 381)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(94, 75)
+        Me.btnSave.TabIndex = 3
+        Me.btnSave.Text = "儲存"
+        Me.btnSave.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnCancel.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.btnCancel.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.cancel
+        Me.btnCancel.Location = New System.Drawing.Point(3, 462)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(94, 77)
+        Me.btnCancel.TabIndex = 4
+        Me.btnCancel.Text = "放棄"
+        Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnCancel.UseVisualStyleBackColor = True
+        '
         'btnCancel2
         '
         Me.btnCancel2.Dock = System.Windows.Forms.DockStyle.Fill
@@ -435,22 +451,6 @@ Partial Class frmAttend
         Me.btnChangeView.Text = "切換" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "視角"
         Me.btnChangeView.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnChangeView.UseVisualStyleBackColor = False
-        '
-        'StatusStrip1
-        '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblHelp})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 578)
-        Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(800, 22)
-        Me.StatusStrip1.SizingGrip = False
-        Me.StatusStrip1.TabIndex = 3
-        Me.StatusStrip1.Text = "StatusStrip1"
-        '
-        'lblHelp
-        '
-        Me.lblHelp.Name = "lblHelp"
-        Me.lblHelp.Size = New System.Drawing.Size(32, 17)
-        Me.lblHelp.Text = "說明"
         '
         'frmAttend
         '
@@ -502,7 +502,7 @@ Partial Class frmAttend
     Friend WithEvents btnOffSick As System.Windows.Forms.Button
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents btnCreateSeat As System.Windows.Forms.Button
     Friend WithEvents pnlBtn2 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnCancel2 As System.Windows.Forms.Button
     Friend WithEvents btnSave2 As System.Windows.Forms.Button

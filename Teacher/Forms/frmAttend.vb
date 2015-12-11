@@ -362,6 +362,14 @@ RE:     Dim nCount As Integer = 0
                        Select autoComplete
         Dim autoCompleteString As String() = allAutoCompletes.ToArray()
         Dim x As String = ""
-        MsgBox("編輯座位請使用 <<修改資料>> 功能" & vbCrLf & String.Join(vbCrLf, autoCompleteString))
+        MsgBox("編輯座位請使用 <<修改資料>> 功能" & vbCrLf & String.Join(vbCrLf, autoCompleteString), MsgBoxStyle.OkOnly, "未編排座位名單")
+    End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+
     End Sub
 End Class
