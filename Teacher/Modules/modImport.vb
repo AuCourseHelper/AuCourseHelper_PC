@@ -2,7 +2,7 @@
 
 Module modImport
 
-    Public Function readXlsAsCourseStudent(sPath As String, Optional nNum As Integer = -1, Optional nId As Integer = 3, Optional nName As Integer = 4) As DataTable
+    Public Function readXlsAsCourseStudent(sPath As String, nNum As Integer, nId As Integer, nName As Integer) As DataTable
         Dim dtResult As New DataTable()
         dtResult.Columns.Add("序號")
         dtResult.Columns.Add("學號")

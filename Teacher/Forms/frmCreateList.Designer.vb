@@ -22,16 +22,19 @@ Partial Class frmCreateList
     '請不要使用程式碼編輯器進行修改。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlBtn = New System.Windows.Forms.TableLayoutPanel()
         Me.btnImportXls = New System.Windows.Forms.Button()
         Me.btnImportWeb = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.tblMain = New System.Windows.Forms.DataGridView()
+        Me.pnlMain = New System.Windows.Forms.Panel()
+        Me.lblHelp = New System.Windows.Forms.Label()
         Me.pnlBtn.SuspendLayout()
         CType(Me.tblMain, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlMain.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlBtn
@@ -110,30 +113,52 @@ Partial Class frmCreateList
         '
         'tblMain
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("新細明體", 14.0!)
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle7.Padding = New System.Windows.Forms.Padding(5, 0, 5, 0)
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblMain.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("新細明體", 14.0!)
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(5, 0, 5, 0)
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblMain.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.tblMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("新細明體", 12.0!)
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblMain.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("新細明體", 12.0!)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblMain.DefaultCellStyle = DataGridViewCellStyle2
         Me.tblMain.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblMain.Location = New System.Drawing.Point(0, 0)
+        Me.tblMain.Location = New System.Drawing.Point(0, 30)
         Me.tblMain.Name = "tblMain"
         Me.tblMain.RowTemplate.Height = 24
-        Me.tblMain.Size = New System.Drawing.Size(784, 502)
+        Me.tblMain.Size = New System.Drawing.Size(784, 472)
         Me.tblMain.TabIndex = 1
+        '
+        'pnlMain
+        '
+        Me.pnlMain.Controls.Add(Me.tblMain)
+        Me.pnlMain.Controls.Add(Me.lblHelp)
+        Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlMain.Location = New System.Drawing.Point(0, 0)
+        Me.pnlMain.Name = "pnlMain"
+        Me.pnlMain.Size = New System.Drawing.Size(784, 502)
+        Me.pnlMain.TabIndex = 2
+        '
+        'lblHelp
+        '
+        Me.lblHelp.BackColor = System.Drawing.Color.SpringGreen
+        Me.lblHelp.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lblHelp.Font = New System.Drawing.Font("新細明體", 12.0!)
+        Me.lblHelp.Location = New System.Drawing.Point(0, 0)
+        Me.lblHelp.Name = "lblHelp"
+        Me.lblHelp.Size = New System.Drawing.Size(784, 30)
+        Me.lblHelp.TabIndex = 0
+        Me.lblHelp.Text = "說明：點選欄位兩下可編輯，點選列頭選取整列後按下 Del 即可刪除該學生"
+        Me.lblHelp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'frmCreateList
         '
@@ -141,13 +166,14 @@ Partial Class frmCreateList
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(784, 562)
         Me.ControlBox = False
-        Me.Controls.Add(Me.tblMain)
+        Me.Controls.Add(Me.pnlMain)
         Me.Controls.Add(Me.pnlBtn)
         Me.Name = "frmCreateList"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = ">建立授課名單"
         Me.pnlBtn.ResumeLayout(False)
         CType(Me.tblMain, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlMain.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -157,4 +183,6 @@ Partial Class frmCreateList
     Friend WithEvents btnImportXls As System.Windows.Forms.Button
     Friend WithEvents btnImportWeb As System.Windows.Forms.Button
     Friend WithEvents tblMain As System.Windows.Forms.DataGridView
+    Friend WithEvents pnlMain As System.Windows.Forms.Panel
+    Friend WithEvents lblHelp As System.Windows.Forms.Label
 End Class

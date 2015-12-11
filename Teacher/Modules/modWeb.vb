@@ -109,7 +109,7 @@ Module modWeb
             'Dim data() = sendHttpRequest2("https://aus.au.edu.tw/au/ag_pro/ag062_3.jsp", "selcode=1320&year=" & termY & "&sms=" & termC & "&tidno=" & sId, "POST")
             'File.WriteAllBytes(sPath, data)
 
-            Dim sSource = sendHttpRequest("https://aus.au.edu.tw/au/ag_pro/ag062_3.jsp", "selcode=1320&year=" & termY & "&sms=" & termC & "&tidno=" & sId, "POST")
+            Dim sSource = sendHttpRequest("https://aus.au.edu.tw/au/ag_pro/ag062_3.jsp", "selcode=" & sCourseId & "&year=" & termY & "&sms=" & termC & "&tidno=" & sId, "POST")
             sSource = sSource.Replace("　", "O")
             sSource = sSource.Replace("", "O")
             sSource = Regex.Replace(sSource, "[\W_]+", " ")
@@ -128,7 +128,7 @@ Module modWeb
 
             For Each sStu As String In sClear.Split(";")
                 Dim sArr(2) As String
-                sArr(0) = nCount
+                sArr(0) = Format(nCount, "00")
                 sArr(1) = sStu.Split(" ")(3)
                 sArr(2) = sStu.Split(" ")(4)
                 dtResult.Rows.Add(sArr)

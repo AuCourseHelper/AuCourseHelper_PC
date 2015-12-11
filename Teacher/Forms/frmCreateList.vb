@@ -1,4 +1,6 @@
-﻿Public Class frmCreateList
+﻿Imports System.Text
+
+Public Class frmCreateList
     Private dtTmpCourseStudents As New DataTable
 
     Private Sub frmCreateList_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -24,7 +26,17 @@
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-
+        Dim sSql = ""
+        Dim sSql2 = ""
+        For Each row As DataRow In dtTmpCourseStudents.Rows
+            sSql = String.Format("INSERT INTO Student(Num,Name,Pwd) VALUES('{0}','{1}','{0}');", _
+                                  row.Item("學號"), row.Item("姓名"))
+            sSql2 = String.Format("INSERT INTO CourseStudent(CourseId,StudentCourseId,StudentNum) VALUES('{0}','{1}','{2}');", _
+                                   doCourse.Item("Id"), row.Item("序號"), row.Item("學號"))
+            doSqlCmd(sSql, True)
+            doSqlCmd(sSql2)
+        Next
+        Me.Dispose()
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
