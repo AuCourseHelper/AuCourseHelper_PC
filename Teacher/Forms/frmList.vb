@@ -6,10 +6,8 @@
     Private nCol As Integer = 0
     Private nAisle As Integer = 0
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnCreateSeat.Click
-        Dim bm As New Bitmap(seatLayout.Width, seatLayout.Height)
-        seatLayout.DrawToBitmap(bm, New Rectangle(0, 0, bm.Width, bm.Height))
-        exportSeatToPdf(bm, "D:\20151210.pdf")
+    Private Sub btnCreateSeat_Click(sender As Object, e As EventArgs) Handles btnCreateSeat.Click
+        
     End Sub
 
     Private Sub frmList_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -144,9 +142,21 @@
         MsgBox("編輯座位請使用 <<修改資料>> 功能" & vbCrLf & String.Join(vbCrLf, autoCompleteString), MsgBoxStyle.OkOnly, "未編排座位名單")
     End Sub
 
+    Private Sub btnPrintSeat_Click(sender As Object, e As EventArgs) Handles btnPrintSeat.Click
+
+    End Sub
+
     Private Sub btnExportSeat_Click(sender As Object, e As EventArgs) Handles btnExportSeat.Click
         Dim bm As New Bitmap(Me.Width, Me.Height)
         Me.DrawToBitmap(bm, New Rectangle(0, 0, Me.Width, Me.Height))
         exportSeatToPdf(bm, "D:\20151210.pdf")
+    End Sub
+
+    Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
+
+    End Sub
+
+    Private Sub btnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
+
     End Sub
 End Class

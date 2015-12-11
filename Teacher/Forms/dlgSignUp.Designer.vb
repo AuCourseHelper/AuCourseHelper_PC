@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmSignUp
+Partial Class dlgSignUp
     Inherits System.Windows.Forms.Form
 
     'Form 覆寫 Dispose 以清除元件清單。
@@ -170,12 +170,13 @@ Partial Class frmSignUp
         Me.lblPwdHint.TabIndex = 11
         Me.lblPwdHint.Text = "英數字二十個字以內，區分大小寫"
         '
-        'frmSignUp
+        'dlgSignUp
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.ClientSize = New System.Drawing.Size(384, 262)
+        Me.ControlBox = False
         Me.Controls.Add(Me.lblPwdHint)
         Me.Controls.Add(Me.lblNameHint)
         Me.Controls.Add(Me.lblUidHint)
@@ -188,12 +189,12 @@ Partial Class frmSignUp
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Name = "frmSignUp"
+        Me.MaximumSize = New System.Drawing.Size(400, 278)
+        Me.MinimumSize = New System.Drawing.Size(400, 278)
+        Me.Name = "dlgSignUp"
         Me.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "課程輔助系統-教師端 | 助教帳號註冊"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

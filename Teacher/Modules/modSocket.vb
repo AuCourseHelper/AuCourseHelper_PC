@@ -246,7 +246,7 @@ RE:         resultDataTable = Nothing
         Return resultDataTable
     End Function
 
-    Public Function doSqlCmd(ByVal sql As String, Optional bNoLog As Boolean = False) As Boolean
+    Public Function doSqlCmd(ByVal sql As String) As Boolean
         Try
             resultDbCmd = ""
             clientSocket.Send(Encoding.UTF8.GetBytes("DBCMD;"))
@@ -254,12 +254,32 @@ RE:         resultDataTable = Nothing
             While resultDbCmd = ""
                 Thread.Sleep(200)
             End While
-            If resultDbCmd.StartsWith("FAIL") And Not bNoLog Then
+            If resultDbCmd.StartsWith("FAIL") Then
                 log("執行DBCMD出錯: " & resultDbCmd.Split(";")(1), LogType_ERROR)
                 Return False
             End If
         Catch ex As Exception
             log("傳送DBCMD出錯: " & ex.Message, LogType_ERROR)
+            Return False
+        End Try
+
+        Return True
+    End Function
+
+    Public Function doSqlCmds(sSql As String) As Boolean
+        Try
+            resultDbCmd = ""
+            clientSocket.Send(Encoding.UTF8.GetBytes("DBCMDS;"))
+            clientSocket.Send(Encoding.UTF8.GetBytes(sSql))
+            While resultDbCmd = ""
+                Thread.Sleep(200)
+            End While
+            If resultDbCmd.StartsWith("FAIL") Then
+                log("執行DBCMD出錯: " & resultDbCmd.Split(";")(1), LogType_ERROR)
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
         End Try
 
         Return True

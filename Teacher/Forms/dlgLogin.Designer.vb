@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmLogin
+Partial Class dlgLogin
     Inherits System.Windows.Forms.Form
 
     'Form 覆寫 Dispose 以清除元件清單。
@@ -148,7 +148,7 @@ Partial Class frmLogin
         Me.Label3.TabIndex = 9
         Me.Label3.Text = "與伺服器連線可能會需要一點時間，請耐心等待!"
         '
-        'frmLogin
+        'dlgLogin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -165,13 +165,13 @@ Partial Class frmLogin
         Me.Controls.Add(Me.txtUid)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.MaximizeBox = False
+        Me.MaximumSize = New System.Drawing.Size(300, 197)
         Me.MinimizeBox = False
-        Me.Name = "frmLogin"
+        Me.MinimumSize = New System.Drawing.Size(300, 197)
+        Me.Name = "dlgLogin"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "課程輔助系統-教師端 | 登入"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

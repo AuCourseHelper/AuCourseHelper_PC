@@ -31,19 +31,19 @@ Partial Class frmList
         Me.lblDate2 = New System.Windows.Forms.Label()
         Me.lblNoSeat = New System.Windows.Forms.Label()
         Me.pnlBtn2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnPrintSeat = New System.Windows.Forms.Button()
+        Me.btnExportSeat = New System.Windows.Forms.Button()
+        Me.btnChangeView = New System.Windows.Forms.Button()
         Me.pnlMain = New System.Windows.Forms.Panel()
         Me.tblMain = New System.Windows.Forms.DataGridView()
         Me.pnlBtn = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnPrint = New System.Windows.Forms.Button()
+        Me.btnExport = New System.Windows.Forms.Button()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblHelp = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tabTable = New System.Windows.Forms.TabPage()
         Me.tabMain = New System.Windows.Forms.TabControl()
-        Me.btnPrint = New System.Windows.Forms.Button()
-        Me.btnExport = New System.Windows.Forms.Button()
-        Me.btnPrintSeat = New System.Windows.Forms.Button()
-        Me.btnExportSeat = New System.Windows.Forms.Button()
-        Me.btnChangeView = New System.Windows.Forms.Button()
         Me.tabSeat.SuspendLayout()
         Me.pnlMain2.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -183,6 +183,45 @@ Partial Class frmList
         Me.pnlBtn2.Size = New System.Drawing.Size(315, 50)
         Me.pnlBtn2.TabIndex = 2
         '
+        'btnPrintSeat
+        '
+        Me.btnPrintSeat.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnPrintSeat.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.print
+        Me.btnPrintSeat.Location = New System.Drawing.Point(3, 3)
+        Me.btnPrintSeat.Name = "btnPrintSeat"
+        Me.btnPrintSeat.Size = New System.Drawing.Size(151, 44)
+        Me.btnPrintSeat.TabIndex = 3
+        Me.btnPrintSeat.Text = "列印"
+        Me.btnPrintSeat.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnPrintSeat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnPrintSeat.UseVisualStyleBackColor = True
+        '
+        'btnExportSeat
+        '
+        Me.btnExportSeat.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnExportSeat.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.export
+        Me.btnExportSeat.Location = New System.Drawing.Point(160, 3)
+        Me.btnExportSeat.Name = "btnExportSeat"
+        Me.btnExportSeat.Size = New System.Drawing.Size(152, 44)
+        Me.btnExportSeat.TabIndex = 2
+        Me.btnExportSeat.Text = "匯出座位表"
+        Me.btnExportSeat.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExportSeat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnExportSeat.UseVisualStyleBackColor = True
+        '
+        'btnChangeView
+        '
+        Me.btnChangeView.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btnChangeView.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnChangeView.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.update
+        Me.btnChangeView.Location = New System.Drawing.Point(317, 3)
+        Me.btnChangeView.Name = "btnChangeView"
+        Me.btnChangeView.Size = New System.Drawing.Size(151, 44)
+        Me.btnChangeView.TabIndex = 7
+        Me.btnChangeView.Text = "切換" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "視角"
+        Me.btnChangeView.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnChangeView.UseVisualStyleBackColor = False
+        '
         'pnlMain
         '
         Me.pnlMain.Controls.Add(Me.tblMain)
@@ -227,6 +266,32 @@ Partial Class frmList
         Me.pnlBtn.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.pnlBtn.Size = New System.Drawing.Size(100, 542)
         Me.pnlBtn.TabIndex = 2
+        '
+        'btnPrint
+        '
+        Me.btnPrint.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnPrint.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.btnPrint.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.print
+        Me.btnPrint.Location = New System.Drawing.Point(3, 384)
+        Me.btnPrint.Name = "btnPrint"
+        Me.btnPrint.Size = New System.Drawing.Size(94, 74)
+        Me.btnPrint.TabIndex = 3
+        Me.btnPrint.Text = "列印"
+        Me.btnPrint.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnPrint.UseVisualStyleBackColor = True
+        '
+        'btnExport
+        '
+        Me.btnExport.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnExport.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.btnExport.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.export
+        Me.btnExport.Location = New System.Drawing.Point(3, 464)
+        Me.btnExport.Name = "btnExport"
+        Me.btnExport.Size = New System.Drawing.Size(94, 75)
+        Me.btnExport.TabIndex = 4
+        Me.btnExport.Text = "匯出名單"
+        Me.btnExport.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnExport.UseVisualStyleBackColor = True
         '
         'lblDate
         '
@@ -283,71 +348,6 @@ Partial Class frmList
         Me.tabMain.Size = New System.Drawing.Size(800, 578)
         Me.tabMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.tabMain.TabIndex = 6
-        '
-        'btnPrint
-        '
-        Me.btnPrint.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnPrint.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.btnPrint.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.print
-        Me.btnPrint.Location = New System.Drawing.Point(3, 384)
-        Me.btnPrint.Name = "btnPrint"
-        Me.btnPrint.Size = New System.Drawing.Size(94, 74)
-        Me.btnPrint.TabIndex = 3
-        Me.btnPrint.Text = "列印"
-        Me.btnPrint.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnPrint.UseVisualStyleBackColor = True
-        '
-        'btnExport
-        '
-        Me.btnExport.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnExport.Font = New System.Drawing.Font("新細明體", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.btnExport.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.export
-        Me.btnExport.Location = New System.Drawing.Point(3, 464)
-        Me.btnExport.Name = "btnExport"
-        Me.btnExport.Size = New System.Drawing.Size(94, 75)
-        Me.btnExport.TabIndex = 4
-        Me.btnExport.Text = "匯出名單"
-        Me.btnExport.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnExport.UseVisualStyleBackColor = True
-        '
-        'btnPrintSeat
-        '
-        Me.btnPrintSeat.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnPrintSeat.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.print
-        Me.btnPrintSeat.Location = New System.Drawing.Point(3, 3)
-        Me.btnPrintSeat.Name = "btnPrintSeat"
-        Me.btnPrintSeat.Size = New System.Drawing.Size(151, 44)
-        Me.btnPrintSeat.TabIndex = 3
-        Me.btnPrintSeat.Text = "列印"
-        Me.btnPrintSeat.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnPrintSeat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnPrintSeat.UseVisualStyleBackColor = True
-        '
-        'btnExportSeat
-        '
-        Me.btnExportSeat.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnExportSeat.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.export
-        Me.btnExportSeat.Location = New System.Drawing.Point(160, 3)
-        Me.btnExportSeat.Name = "btnExportSeat"
-        Me.btnExportSeat.Size = New System.Drawing.Size(152, 44)
-        Me.btnExportSeat.TabIndex = 2
-        Me.btnExportSeat.Text = "匯出座位表"
-        Me.btnExportSeat.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnExportSeat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnExportSeat.UseVisualStyleBackColor = True
-        '
-        'btnChangeView
-        '
-        Me.btnChangeView.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.btnChangeView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btnChangeView.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.update
-        Me.btnChangeView.Location = New System.Drawing.Point(317, 3)
-        Me.btnChangeView.Name = "btnChangeView"
-        Me.btnChangeView.Size = New System.Drawing.Size(151, 44)
-        Me.btnChangeView.TabIndex = 7
-        Me.btnChangeView.Text = "切換" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "視角"
-        Me.btnChangeView.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnChangeView.UseVisualStyleBackColor = False
         '
         'frmList
         '

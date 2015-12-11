@@ -89,10 +89,10 @@
     <Compile Include="Controls\ctrlImageTip.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Forms\frmCreateList.Designer.vb">
-      <DependentUpon>frmCreateList.vb</DependentUpon>
+    <Compile Include="Forms\dlgCreateList.Designer.vb">
+      <DependentUpon>dlgCreateList.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmCreateList.vb">
+    <Compile Include="Forms\dlgCreateList.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmList.Designer.vb">
@@ -101,10 +101,10 @@
     <Compile Include="Forms\frmList.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmLoginWeb.designer.vb">
-      <DependentUpon>frmLoginWeb.vb</DependentUpon>
+    <Compile Include="Forms\dlgLoginWeb.designer.vb">
+      <DependentUpon>dlgLoginWeb.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmLoginWeb.vb">
+    <Compile Include="Forms\dlgLoginWeb.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\modExport.vb" />
@@ -140,22 +140,22 @@
     <Compile Include="Forms\frmHomeWork.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmLogin.Designer.vb">
-      <DependentUpon>frmLogin.vb</DependentUpon>
+    <Compile Include="Forms\dlgLogin.Designer.vb">
+      <DependentUpon>dlgLogin.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmLogin.vb">
+    <Compile Include="Forms\dlgLogin.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmMyProfile.Designer.vb">
-      <DependentUpon>frmMyProfile.vb</DependentUpon>
+    <Compile Include="Forms\dlgMyProfile.Designer.vb">
+      <DependentUpon>dlgMyProfile.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmMyProfile.vb">
+    <Compile Include="Forms\dlgMyProfile.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmProgress.Designer.vb">
-      <DependentUpon>frmProgress.vb</DependentUpon>
+    <Compile Include="Forms\dlgProgress.Designer.vb">
+      <DependentUpon>dlgProgress.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmProgress.vb">
+    <Compile Include="Forms\dlgProgress.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmReport.Designer.vb">
@@ -170,10 +170,10 @@
     <Compile Include="Forms\frmScore.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmSignUp.Designer.vb">
-      <DependentUpon>frmSignUp.vb</DependentUpon>
+    <Compile Include="Forms\dlgSignUp.Designer.vb">
+      <DependentUpon>dlgSignUp.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmSignUp.vb">
+    <Compile Include="Forms\dlgSignUp.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmTeacher.Designer.vb">
@@ -215,29 +215,29 @@
     <EmbeddedResource Include="Forms\frmAttend.resx">
       <DependentUpon>frmAttend.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmCreateList.resx">
-      <DependentUpon>frmCreateList.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\dlgCreateList.resx">
+      <DependentUpon>dlgCreateList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmList.resx">
       <DependentUpon>frmList.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmLogin.resx">
-      <DependentUpon>frmLogin.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\dlgLogin.resx">
+      <DependentUpon>dlgLogin.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmLoginWeb.resx">
-      <DependentUpon>frmLoginWeb.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\dlgLoginWeb.resx">
+      <DependentUpon>dlgLoginWeb.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmMyProfile.resx">
-      <DependentUpon>frmMyProfile.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\dlgMyProfile.resx">
+      <DependentUpon>dlgMyProfile.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmProgress.resx">
-      <DependentUpon>frmProgress.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\dlgProgress.resx">
+      <DependentUpon>dlgProgress.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmScore.resx">
       <DependentUpon>frmScore.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmSignUp.resx">
-      <DependentUpon>frmSignUp.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\dlgSignUp.resx">
+      <DependentUpon>dlgSignUp.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmTeacher.resx">
       <DependentUpon>frmTeacher.vb</DependentUpon>
@@ -291,7 +291,7 @@
     <None Include="Resources\cancel.png" />
     <None Include="Resources\books.png" />
     <None Include="Resources\edit.png" />
-    <Content Include="DLL\itextsharp.dll" />
+    <Content Include="Dll\itextsharp.dll" />
     <Content Include="img\NULL.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

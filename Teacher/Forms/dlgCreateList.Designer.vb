@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmCreateList
+Partial Class dlgCreateList
     Inherits System.Windows.Forms.Form
 
     'Form 覆寫 Dispose 以清除元件清單。
@@ -150,7 +150,7 @@ Partial Class frmCreateList
         '
         'lblHelp
         '
-        Me.lblHelp.BackColor = System.Drawing.Color.SpringGreen
+        Me.lblHelp.BackColor = System.Drawing.Color.LightGreen
         Me.lblHelp.Dock = System.Windows.Forms.DockStyle.Top
         Me.lblHelp.Font = New System.Drawing.Font("新細明體", 12.0!)
         Me.lblHelp.Location = New System.Drawing.Point(0, 0)
@@ -160,7 +160,7 @@ Partial Class frmCreateList
         Me.lblHelp.Text = "說明：點選欄位兩下可編輯，點選列頭選取整列後按下 Del 即可刪除該學生"
         Me.lblHelp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'frmCreateList
+        'dlgCreateList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -168,7 +168,9 @@ Partial Class frmCreateList
         Me.ControlBox = False
         Me.Controls.Add(Me.pnlMain)
         Me.Controls.Add(Me.pnlBtn)
-        Me.Name = "frmCreateList"
+        Me.MaximumSize = New System.Drawing.Size(800, 600)
+        Me.MinimumSize = New System.Drawing.Size(800, 600)
+        Me.Name = "dlgCreateList"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = ">建立授課名單"
         Me.pnlBtn.ResumeLayout(False)

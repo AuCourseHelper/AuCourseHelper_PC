@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmProgress
+Partial Class dlgProgress
     Inherits System.Windows.Forms.Form
 
     'Form 覆寫 Dispose 以清除元件清單。
@@ -31,20 +31,23 @@ Partial Class frmProgress
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 25
         '
-        'frmProgress
+        'dlgProgress
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.AUCourseHelper_Teacher.My.Resources.Resources.bk_progress
         Me.ClientSize = New System.Drawing.Size(200, 200)
+        Me.ControlBox = False
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         Me.DoubleBuffered = True
         Me.ForeColor = System.Drawing.SystemColors.ControlText
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Name = "frmProgress"
+        Me.MaximumSize = New System.Drawing.Size(200, 200)
+        Me.MinimumSize = New System.Drawing.Size(200, 200)
+        Me.Name = "dlgProgress"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "frmProgress"
+        Me.TopMost = True
         Me.TransparencyKey = System.Drawing.Color.White
         Me.ResumeLayout(False)
 

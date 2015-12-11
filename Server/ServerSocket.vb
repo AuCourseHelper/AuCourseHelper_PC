@@ -196,6 +196,17 @@ Module ServerSocket
                     Else
                         clientSocket.Send(Encoding.UTF8.GetBytes("FAIL;" & sqlCmdErr & ";"))
                     End If
+
+                Case "DBCMDS" ' 一次多筆資料庫命令(傳入時以#號分行，執行前改回;號)
+                    clientSocket.Receive(byteData)
+                    Dim sSql = Encoding.UTF8.GetString(byteData).Split(";")(0)
+                    sSql = sSql.Replace("#", ";")
+                    clientSocket.Send(Encoding.UTF8.GetBytes("DBCMDRESULT;"))
+                    If exeCmd(sSql) Then
+                        clientSocket.Send(Encoding.UTF8.GetBytes("SUCCESS;"))
+                    Else
+                        clientSocket.Send(Encoding.UTF8.GetBytes("FAIL;" & sqlCmdErr & ";"))
+                    End If
             End Select
 
             If clientSocket.Connected Then

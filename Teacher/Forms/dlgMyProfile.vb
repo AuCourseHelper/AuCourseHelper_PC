@@ -1,4 +1,4 @@
-﻿Public Class frmMyProfile
+﻿Public Class dlgMyProfile
 
     Private Sub frmMyProfile_Load(sender As Object, e As EventArgs) Handles Me.Load
         txtUid.Text = myProfile.Num

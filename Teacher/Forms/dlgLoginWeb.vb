@@ -3,7 +3,7 @@ Imports System.Text.RegularExpressions
 Imports System.IO
 Imports Microsoft.Office.Interop
 
-Public Class frmLoginWeb
+Public Class dlgLoginWeb
     Public Shared sTodo As String
     Public dtImport As DataTable
     Private tip As New ToolTip()
@@ -76,8 +76,8 @@ Public Class frmLoginWeb
 
         Dim t As New Thread(AddressOf doLogin)
         t.Start()
-        frmProgress.title = "與校務資訊系統連線中..."
-        frmProgress.ShowDialog(Me)
+        dlgProgress.title = "與校務資訊系統連線中..."
+        dlgProgress.ShowDialog(Me)
         Me.Hide()
     End Sub
 
@@ -89,7 +89,7 @@ Public Class frmLoginWeb
 
             Select Case sTodo
                 Case "匯入學生名單"
-                    frmProgress.title = "下載學生名單..."
+                    dlgProgress.title = "下載學生名單..."
                     If Not Directory.Exists(Application.StartupPath & "\tmp") Then
                         Directory.CreateDirectory(Application.StartupPath & "\tmp")
                     End If
@@ -108,7 +108,7 @@ Public Class frmLoginWeb
         End If
 
         txtPwd.Text = ""
-        frmProgress.Dispose()
+        dlgProgress.Dispose()
     End Sub
 
     Private Sub chkShowPwd_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowPwd.CheckedChanged

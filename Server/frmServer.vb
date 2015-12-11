@@ -177,6 +177,7 @@ Public Class frmServer
         log("檢視執行紀錄", LogType_SYSTEM)
         Dim frmLog As New Form
         Dim txtLog As New RichTextBox()
+        txtLog.MaxLength = 0
         txtLog.Text = logData
         txtLog.ReadOnly = True
         txtLog.ScrollBars = RichTextBoxScrollBars.Both

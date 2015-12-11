@@ -1,4 +1,4 @@
-﻿Public Class frmProgress
+﻿Public Class dlgProgress
     Private a As Integer = 0
     Public Shared title As String = "..."
     Public Shared isOff As Boolean = False

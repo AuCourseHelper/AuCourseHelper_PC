@@ -15,8 +15,8 @@ Public Class frmTeacher
 
     Private Sub frmTeacher_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If e.KeyCode = Keys.F2 Then
-            frmLogin.txtUid.Text = "4327"
-            frmLogin.txtPwd.Text = "4327"
+            dlgLogin.txtUid.Text = "4327"
+            dlgLogin.txtPwd.Text = "4327"
             mnuLogin.PerformClick()
         ElseIf e.KeyCode = Keys.F1 Then
             auSysLogin("4327", "bill0701")
@@ -95,7 +95,7 @@ Public Class frmTeacher
     ' 登入
     Private Sub mnuLogin_Click(sender As Object, e As EventArgs) Handles mnuLogin.Click
         log("開啟登入視窗", LogType_NORMAL)
-        frmLogin.ShowDialog(Me)
+        dlgLogin.ShowDialog(Me)
         If isLogin Then
             tsmCourse.DropDownItems.Clear()
             Dim index = 0
@@ -130,7 +130,7 @@ Public Class frmTeacher
     ' 助教帳號註冊
     Private Sub mnuSignUp_Click(sender As Object, e As EventArgs) Handles mnuSignUp.Click
         log("開啟助教帳號註冊視窗", LogType_NORMAL)
-        frmSignUp.ShowDialog(Me)
+        dlgSignUp.ShowDialog(Me)
     End Sub
 
     ' 登出
@@ -154,15 +154,15 @@ Public Class frmTeacher
 
         Dim t As New Thread(AddressOf doGetCourseStudents)
         t.Start()
-        frmProgress.title = "讀取學生資訊..."
-        frmProgress.ShowDialog(Me)
+        dlgProgress.title = "讀取學生資訊..."
+        dlgProgress.ShowDialog(Me)
 
         If doCourseStudents Is Nothing Then
             MsgBox("該課程學生資料取得失敗！請再試一次！", MsgBoxStyle.Critical)
             tslEnd.PerformClick()
         Else
             If doCourseStudents.Rows.Count < 1 Then
-                frmCreateList.ShowDialog(Me)
+                dlgCreateList.ShowDialog(Me)
             End If
             If doCourseStudents.Rows.Count < 1 Then
                 tslEnd.PerformClick()
@@ -178,7 +178,7 @@ Public Class frmTeacher
                                  & "WHERE cs.CourseId={0} AND cs.StudentNum=s.Num;", doCourse.Item("Id"))
         doCourseStudents = doSqlQuery(sqlGetCourseStudents)
         If doCourseStudents Is Nothing Then
-            frmProgress.isOff = True
+            dlgProgress.isOff = True
             Exit Sub
         End If
         doCourseStudents.Columns(0).ColumnName = "序號"
@@ -186,13 +186,13 @@ Public Class frmTeacher
         doCourseStudents.Columns(2).ColumnName = "學號"
         doCourseStudents.Columns(3).ColumnName = "姓名"
 
-        frmProgress.isOff = True
+        dlgProgress.isOff = True
     End Sub
 
     ' 檢視個人資訊
     Private Sub mnuViewProfile_Click(sender As Object, e As EventArgs) Handles mnuViewProfile.Click
         log("檢視個人資訊", LogType_NORMAL)
-        frmMyProfile.ShowDialog(Me)
+        dlgMyProfile.ShowDialog(Me)
     End Sub
 
     ' 修改個人資訊
