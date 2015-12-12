@@ -123,6 +123,16 @@ Namespace My.Resources
         '''<summary>
         '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         '''</summary>
+        Friend ReadOnly Property del() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("del", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
         Friend ReadOnly Property edit() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("edit", resourceCulture)
@@ -346,6 +356,16 @@ Namespace My.Resources
         Friend ReadOnly Property school() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("school", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        '''</summary>
+        Friend ReadOnly Property seat() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("seat", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

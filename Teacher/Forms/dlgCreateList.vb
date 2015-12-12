@@ -27,6 +27,10 @@ Public Class dlgCreateList
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        If MsgBox("是否替學生建立座位表？" & vbCrLf & "你也可以於 <<學生名單、點名、評分、修改資料>> 等功能再行新增座位表", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            dlgCreateSeat.dtStudents = dtTmpCourseStudents
+            dlgCreateSeat.ShowDialog(Me)
+        End If
         Dim t As New Thread(AddressOf doSave)
         t.Start()
         dlgProgress.title = "儲存學生資訊..."

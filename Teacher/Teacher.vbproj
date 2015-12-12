@@ -89,10 +89,22 @@
     <Compile Include="Controls\ctrlImageTip.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\dlgChoose_SeatLayout.Designer.vb">
+      <DependentUpon>dlgChoose_SeatLayout.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\dlgChoose_SeatLayout.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\dlgCreateList.Designer.vb">
       <DependentUpon>dlgCreateList.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\dlgCreateList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\dlgCreateSeat.Designer.vb">
+      <DependentUpon>dlgCreateSeat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\dlgCreateSeat.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmList.Designer.vb">
@@ -212,6 +224,12 @@
     <EmbeddedResource Include="Controls\ctrlSeat.resx">
       <DependentUpon>ctrlSeat.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\dlgChoose_SeatLayout.resx">
+      <DependentUpon>dlgChoose_SeatLayout.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\dlgCreateSeat.resx">
+      <DependentUpon>dlgCreateSeat.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmAttend.resx">
       <DependentUpon>frmAttend.vb</DependentUpon>
     </EmbeddedResource>
@@ -301,6 +319,8 @@
     <None Include="Resources\export.png" />
     <None Include="Resources\web.png" />
     <None Include="Resources\xls.png" />
+    <None Include="Resources\seat.png" />
+    <None Include="Resources\del.png" />
     <Content Include="setting.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

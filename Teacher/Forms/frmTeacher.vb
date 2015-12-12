@@ -19,8 +19,7 @@ Public Class frmTeacher
             dlgLogin.txtPwd.Text = "4327"
             mnuLogin.PerformClick()
         ElseIf e.KeyCode = Keys.F1 Then
-            auSysLogin("4327", "bill0701")
-            auSysGetCourseStudents("104", "1", "1326", "D:\111.xls")
+            dlgChoose_SeatLayout.ShowDialog(Me)
         End If
     End Sub
 
