@@ -8,6 +8,7 @@
         Me.Tag = sSeat
         Me.Name = sSeat
         Me.Dock = DockStyle.Fill
+        Me.BackColor = Color.White
         tip.IsBalloon = True
 
         type = nType
@@ -76,9 +77,9 @@
     End Sub
 
     Private Sub ctrlSeat_SizeChanged(sender As Object, e As EventArgs) Handles Me.SizeChanged
-        If Me.Width <= 100 Then
+        If Me.Width <= 120 Then
             btnSeat.Font = New Font(btnSeat.Font.FontFamily.Name, 11, FontStyle.Bold)
-            lblId.Font = New Font(lblId.Font.FontFamily.Name, 9)
+            lblId.Font = New Font(lblId.Font.FontFamily.Name, 8)
             lblName.Font = New Font(lblName.Font.FontFamily.Name, 12)
         Else
             btnSeat.Font = New Font(btnSeat.Font.FontFamily.Name, 18, FontStyle.Bold)
@@ -126,8 +127,35 @@
             End Select
             isSaved = False
         Else
-            Dim ctrlCodeHelper As New ctrlCodeHelper
-            ctrlCodeHelper.setInit(Me)
+            'dlgCreateSeat.chHelper.setInit(Me)
+            dlgCreateSeat.mnuStudents.Items.Clear()
+            dlgCreateSeat.mnuStudents.Items.Add("- 無 -")
+            For Each row As DataRow In dlgCreateSeat.dtStudents.Rows
+                If Trim(row.Item("座位")).Length < 1 Then
+                    dlgCreateSeat.mnuStudents.Items.Add(row.Item("學號") & "-" & row.Item("姓名"))
+                End If
+            Next
+            For Each item As ToolStripItem In dlgCreateSeat.mnuStudents.Items
+                AddHandler item.Click, AddressOf studentChoose
+            Next
+            Dim ptLowerLeft As New Point(0, btnSeat.Height)
+            ptLowerLeft = btnSeat.PointToScreen(ptLowerLeft)
+            dlgCreateSeat.mnuStudents.Show(ptLowerLeft)
+        End If
+    End Sub
+
+    Private Sub studentChoose(sender As Object, e As EventArgs)
+        Dim item As ToolStripItem = sender
+        If lblId.Text.Length > 0 Then
+            dlgCreateSeat.dtStudents.Select("學號='" & lblId.Text & "'")(0).Item("座位") = ""
+        End If
+        If item.Text.ToString.Equals("- 無 -") Then
+            Me.init(Me.Tag, , , 1)
+        Else
+            Dim sId = item.Text.ToString.Split("-")(0)
+            Dim sName = item.Text.ToString.Split("-")(1)
+            Me.updateAttend(sId, sName, "")
+            dlgCreateSeat.dtStudents.Select("學號='" & sId & "'")(0).Item("座位") = Me.Tag
         End If
     End Sub
 

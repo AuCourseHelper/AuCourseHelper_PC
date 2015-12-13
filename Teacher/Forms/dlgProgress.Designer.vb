@@ -47,7 +47,6 @@ Partial Class dlgProgress
         Me.Name = "dlgProgress"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.TopMost = True
         Me.TransparencyKey = System.Drawing.Color.White
         Me.ResumeLayout(False)
 

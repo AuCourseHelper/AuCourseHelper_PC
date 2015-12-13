@@ -19,7 +19,7 @@ Public Class frmTeacher
             dlgLogin.txtPwd.Text = "4327"
             mnuLogin.PerformClick()
         ElseIf e.KeyCode = Keys.F1 Then
-            dlgChoose_SeatLayout.ShowDialog(Me)
+
         End If
     End Sub
 
@@ -174,7 +174,7 @@ Public Class frmTeacher
     Private Sub doGetCourseStudents()
         Dim sqlGetCourseStudents = String.Format("SELECT cs.StudentCourseId,cs.Seat,s.Num,s.Name " _
                                  & "FROM Student s,CourseStudent cs " _
-                                 & "WHERE cs.CourseId={0} AND cs.StudentNum=s.Num;", doCourse.Item("Id"))
+                                 & "WHERE cs.CourseId={0} AND cs.StudentNum=s.Num ORDER BY cs.StudentCourseId;", doCourse.Item("Id"))
         doCourseStudents = doSqlQuery(sqlGetCourseStudents)
         If doCourseStudents Is Nothing Then
             dlgProgress.isOff = True

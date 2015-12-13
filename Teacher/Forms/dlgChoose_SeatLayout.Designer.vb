@@ -22,44 +22,20 @@ Partial Class dlgChoose_SeatLayout
     '請不要使用程式碼編輯器進行修改。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.btnCancel = New System.Windows.Forms.Button()
-        Me.btnOk = New System.Windows.Forms.Button()
         Me.cboType = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.grbMain = New System.Windows.Forms.GroupBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.txtAisle = New System.Windows.Forms.TextBox()
         Me.txtRow = New System.Windows.Forms.TextBox()
         Me.txtCol = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.btnOk = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.grbMain.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'btnCancel
-        '
-        Me.btnCancel.Font = New System.Drawing.Font("新細明體", 12.0!)
-        Me.btnCancel.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.cancel
-        Me.btnCancel.Location = New System.Drawing.Point(272, 189)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(100, 60)
-        Me.btnCancel.TabIndex = 0
-        Me.btnCancel.Text = "取消"
-        Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnCancel.UseVisualStyleBackColor = True
-        '
-        'btnOk
-        '
-        Me.btnOk.Font = New System.Drawing.Font("新細明體", 12.0!)
-        Me.btnOk.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.cancel
-        Me.btnOk.Location = New System.Drawing.Point(166, 189)
-        Me.btnOk.Name = "btnOk"
-        Me.btnOk.Size = New System.Drawing.Size(100, 60)
-        Me.btnOk.TabIndex = 0
-        Me.btnOk.Text = "確定"
-        Me.btnOk.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnOk.UseVisualStyleBackColor = True
         '
         'cboType
         '
@@ -67,10 +43,10 @@ Partial Class dlgChoose_SeatLayout
         Me.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboType.Font = New System.Drawing.Font("新細明體", 12.0!)
         Me.cboType.FormattingEnabled = True
-        Me.cboType.Items.AddRange(New Object() {"自　訂", "712 電腦教室"})
+        Me.cboType.Items.AddRange(New Object() {"自　訂", "605 電腦教室", "712 電腦教室", "911、912 電腦教室", "913 電腦教室", "921 電腦教室"})
         Me.cboType.Location = New System.Drawing.Point(107, 12)
         Me.cboType.Name = "cboType"
-        Me.cboType.Size = New System.Drawing.Size(121, 24)
+        Me.cboType.Size = New System.Drawing.Size(159, 24)
         Me.cboType.TabIndex = 1
         '
         'Label1
@@ -102,13 +78,24 @@ Partial Class dlgChoose_SeatLayout
         Me.grbMain.TabStop = False
         Me.grbMain.Text = "設定值"
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("新細明體", 9.0!)
+        Me.Label5.ForeColor = System.Drawing.Color.Gray
+        Me.Label5.Location = New System.Drawing.Point(88, 120)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(262, 12)
+        Me.Label5.TabIndex = 4
+        Me.Label5.Text = "(無走道請設0，多個走道以 - 號間隔，如 5-10-15)"
+        '
         'txtAisle
         '
-        Me.txtAisle.BackColor = System.Drawing.SystemColors.Info
-        Me.txtAisle.Location = New System.Drawing.Point(170, 90)
+        Me.txtAisle.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtAisle.Location = New System.Drawing.Point(157, 90)
         Me.txtAisle.MaxLength = 2
         Me.txtAisle.Name = "txtAisle"
-        Me.txtAisle.Size = New System.Drawing.Size(60, 27)
+        Me.txtAisle.Size = New System.Drawing.Size(101, 27)
         Me.txtAisle.TabIndex = 3
         Me.txtAisle.Text = "0"
         Me.txtAisle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -145,7 +132,7 @@ Partial Class dlgChoose_SeatLayout
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(216, 16)
         Me.Label4.TabIndex = 2
-        Me.Label4.Text = "每隔　　　　列設置一個走道"
+        Me.Label4.Text = "第　　　　　　　列設置走道"
         '
         'Label3
         '
@@ -165,20 +152,34 @@ Partial Class dlgChoose_SeatLayout
         Me.Label2.Location = New System.Drawing.Point(8, 28)
         Me.Label2.Margin = New System.Windows.Forms.Padding(5)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(204, 16)
+        Me.Label2.Size = New System.Drawing.Size(268, 16)
         Me.Label2.TabIndex = 2
-        Me.Label2.Text = "行(欄)數：　　　　　(直向)"
+        Me.Label2.Text = "行(欄)數：　　　　　(直向，含走道)"
         '
-        'Label5
+        'btnOk
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("新細明體", 9.0!)
-        Me.Label5.ForeColor = System.Drawing.Color.Gray
-        Me.Label5.Location = New System.Drawing.Point(269, 114)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(79, 12)
-        Me.Label5.TabIndex = 4
-        Me.Label5.Text = "(無走道請設0)"
+        Me.btnOk.BackColor = System.Drawing.SystemColors.Info
+        Me.btnOk.Font = New System.Drawing.Font("新細明體", 12.0!)
+        Me.btnOk.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.ok
+        Me.btnOk.Location = New System.Drawing.Point(166, 189)
+        Me.btnOk.Name = "btnOk"
+        Me.btnOk.Size = New System.Drawing.Size(100, 60)
+        Me.btnOk.TabIndex = 0
+        Me.btnOk.Text = "確定"
+        Me.btnOk.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnOk.UseVisualStyleBackColor = False
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Font = New System.Drawing.Font("新細明體", 12.0!)
+        Me.btnCancel.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.cancel
+        Me.btnCancel.Location = New System.Drawing.Point(272, 189)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(100, 60)
+        Me.btnCancel.TabIndex = 0
+        Me.btnCancel.Text = "取消"
+        Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnCancel.UseVisualStyleBackColor = True
         '
         'dlgChoose_SeatLayout
         '

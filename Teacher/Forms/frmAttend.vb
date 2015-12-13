@@ -7,10 +7,14 @@ Public Class frmAttend
     Private seatView As Integer = 0
     Private nRow As Integer = 0
     Private nCol As Integer = 0
-    Private nAisle As Integer = 0
+    Private nAisle() As Integer
     Private Const sHelp1 = "說明：點擊右上角顏色按鈕對當前反白學生點名，點名後自動向下選取。"
     Private Const sHelp2 = "說明：點擊學生座位編號對該學生點名，綠色:出席  藍色:遲到  紅色:缺席  灰色:請假(病、事、公)。"
     Private Const sHelp3 = "說明：點名資料已儲存，若欲編輯資料請至 <<修改資料>> 功能。"
+
+    Public Shared Function _StringToInteger(ByVal s As String) As Integer
+        Return Val(s)
+    End Function
 
     Private Sub frmAttend_Load(sender As Object, e As EventArgs) Handles Me.Load
         lblDate.Text = nowWeekDetail
@@ -29,13 +33,20 @@ Public Class frmAttend
         If Not doCourse.Item("Seat").ToString.StartsWith("0,0") Then
             nRow = CInt(doCourse.Item("Seat").ToString.Split(",")(0))
             nCol = CInt(doCourse.Item("Seat").ToString.Split(",")(1))
-            nAisle = CInt(doCourse.Item("Seat").ToString.Split(",")(2))
-            If nAisle > 0 Then
-                ReDim seats(nRow * (nCol - Math.Floor(nCol / nAisle)) - 1)
-            Else
-                ReDim seats(nRow * nCol - 1)
-            End If
+            nAisle = Array.ConvertAll(doCourse.Item("Seat").ToString.Split(",")(2).Split("-"), _
+                                      New Converter(Of String, Integer)(AddressOf _StringToInteger))
+            ReDim seats(nRow * (nCol - nAisle.Length) - 1)
             Dim nSeatCount = 0
+
+            ' 定義欄位名稱
+            Dim sColName(nCol) As String
+            Dim nTemp As Integer = 1
+            For i As Integer = 0 To nCol - 1
+                If Array.IndexOf(nAisle, i + 1) < 0 Then
+                    sColName(i) = Format(nTemp, "00")
+                    nTemp += 1
+                End If
+            Next
 
             seatLayout = New TableLayoutPanel
             seatLayout.Dock = DockStyle.Fill
@@ -44,8 +55,8 @@ Public Class frmAttend
             For col As Integer = 0 To seatLayout.ColumnCount - 1
                 For row As Integer = 0 To seatLayout.RowCount - 1
                     If row = 0 Then
-                        If nAisle <> 0 Then
-                            If (col + 1) Mod nAisle = 0 Then
+                        If nAisle.Length > 0 Then
+                            If Array.IndexOf(nAisle, col + 1) >= 0 Then
                                 seatLayout.ColumnStyles.Add(New ColumnStyle(SizeType.Absolute, 25))
                             Else
                                 seatLayout.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50))
@@ -58,17 +69,17 @@ Public Class frmAttend
                         seatLayout.RowStyles.Add(New RowStyle(SizeType.Percent, 50))
                     End If
 
-                    If nAisle <> 0 Then
-                        If Not (col + 1) Mod nAisle = 0 Then
+                    If nAisle.Length > 0 Then
+                        If Array.IndexOf(nAisle, col + 1) < 0 Then
                             Dim seat As New ctrlSeat
-                            seat.init(Chr(row + 65) & Format(col + 1 - Math.Floor((col + 1) / nAisle), "00"))
+                            seat.init(Chr(row + 65) & sColName(col))
                             seatLayout.Controls.Add(seat, col, row)
                             seats(nSeatCount) = seat
                             nSeatCount += 1
                         End If
                     Else
                         Dim seat As New ctrlSeat
-                        seat.init(Chr(row + 65) & Format(col + 1 - Math.Floor((col + 1) / nAisle), "00"))
+                        seat.init(Chr(row + 65) & sColName(col))
                         seatLayout.Controls.Add(seat, col, row)
                         seats(nSeatCount) = seat
                         nSeatCount += 1
@@ -78,6 +89,7 @@ Public Class frmAttend
             pnlMain2.Controls.Clear()
             pnlMain2.Controls.Add(seatLayout)
             pnlControl2.Enabled = True
+            tabMain.SelectedIndex = 1
         End If
         updateGrid()
         updateSeat()
@@ -307,8 +319,8 @@ RE:     Dim nCount As Integer = 0
             nSeatCount = seats.Length - 1
             For col As Integer = 0 To seatLayout.ColumnCount - 1
                 For row As Integer = 0 To seatLayout.RowCount - 1
-                    If nAisle <> 0 Then
-                        If Not (col + 1) Mod nAisle = 0 Then
+                    If nAisle.Length > 0 Then
+                        If Array.IndexOf(nAisle, col + 1) < 0 Then
                             seatLayout.Controls.Add(seats(nSeatCount), col, row)
                             nSeatCount -= 1
                         End If
@@ -324,8 +336,8 @@ RE:     Dim nCount As Integer = 0
             nSeatCount = 0
             For col As Integer = 0 To seatLayout.ColumnCount - 1
                 For row As Integer = 0 To seatLayout.RowCount - 1
-                    If nAisle <> 0 Then
-                        If Not (col + 1) Mod nAisle = 0 Then
+                    If nAisle.Length > 0 Then
+                        If Array.IndexOf(nAisle, col + 1) < 0 Then
                             seatLayout.Controls.Add(seats(nSeatCount), col, row)
                             nSeatCount += 1
                         End If
