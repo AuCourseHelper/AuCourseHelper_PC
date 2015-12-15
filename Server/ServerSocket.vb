@@ -201,6 +201,7 @@ Module ServerSocket
                     clientSocket.Receive(byteData)
                     Dim sSql = Encoding.UTF8.GetString(byteData).Split(";")(0)
                     sSql = sSql.Replace("#", ";")
+                    log(clientSocket.RemoteEndPoint.ToString & ": 要求DBCMDS(" & sSql & ")", LogType_NORMAL)
                     clientSocket.Send(Encoding.UTF8.GetBytes("DBCMDRESULT;"))
                     If exeCmd(sSql) Then
                         clientSocket.Send(Encoding.UTF8.GetBytes("SUCCESS;"))

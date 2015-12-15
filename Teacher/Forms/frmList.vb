@@ -8,7 +8,9 @@
 
     Private Sub btnCreateSeat_Click(sender As Object, e As EventArgs) Handles btnCreateSeat.Click
         dlgCreateSeat.dtStudents = doCourseStudents
+        dlgCreateSeat.sType = "新增"
         dlgCreateSeat.ShowDialog(Me)
+        Me.frmList_Load(Nothing, Nothing)
     End Sub
 
     Public Shared Function _StringToInteger(ByVal s As String) As Integer
@@ -23,29 +25,29 @@
         tblMain.Rows(0).Selected = True
         ' 座位部分
         If Not doCourse.Item("Seat").ToString.StartsWith("0,0") Then
-            nRow = CInt(doCourse.Item("Seat").ToString.Split(",")(0))
-            nCol = CInt(doCourse.Item("Seat").ToString.Split(",")(1))
+            nCol = CInt(doCourse.Item("Seat").ToString.Split(",")(0))
+            nRow = CInt(doCourse.Item("Seat").ToString.Split(",")(1))
             nAisle = Array.ConvertAll(doCourse.Item("Seat").ToString.Split(",")(2).Split("-"), _
                                       New Converter(Of String, Integer)(AddressOf _StringToInteger))
             ReDim seats(nRow * (nCol - nAisle.Length) - 1)
             Dim nSeatCount = 0
 
             ' 定義欄位名稱
-            Dim sColName(nCol) As String
+            Dim sColName(nCol - 1) As String
             Dim nTemp As Integer = 1
             For i As Integer = 0 To nCol - 1
                 If Array.IndexOf(nAisle, i + 1) < 0 Then
                     sColName(i) = Format(nTemp, "00")
                     nTemp += 1
                 End If
-            Next
+            Next ' =-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=反轉功能需修正
 
             seatLayout = New TableLayoutPanel
             seatLayout.Dock = DockStyle.Fill
             seatLayout.ColumnCount = nCol
             seatLayout.RowCount = nRow
-            For col As Integer = 0 To seatLayout.ColumnCount - 1
-                For row As Integer = 0 To seatLayout.RowCount - 1
+            For row As Integer = 0 To seatLayout.RowCount - 1
+                For col As Integer = 0 To seatLayout.ColumnCount - 1
                     If row = 0 Then
                         If nAisle.Length > 0 Then
                             If Array.IndexOf(nAisle, col + 1) >= 0 Then
@@ -107,29 +109,80 @@
     Private Sub btnChangeView_Click(sender As Object, e As EventArgs) Handles btnChangeView.Click
         seatLayout.Visible = False
         Dim nSeatCount = 0
-        If seatView = 0 Then
+        pnlMain2.Controls.Clear()
+
+        ' 定義欄位名稱
+        Dim sColName(nCol - 1) As String
+
+        If seatView = 0 Then ' 原黑板在上
             seatView = 1
-            seatLayout.Controls.Clear()
-            nSeatCount = seats.Length - 1
-            For col As Integer = 0 To seatLayout.ColumnCount - 1
-                For row As Integer = 0 To seatLayout.RowCount - 1
+            Dim nTemp As Integer = nCol - nAisle.Length
+            For i As Integer = 0 To nCol - 1
+                If Array.IndexOf(nAisle, i + 1) < 0 Then ' 不是走道時
+                    sColName(i) = Format(nTemp, "00")
+                    nTemp -= 1
+                Else
+                    sColName(i) = "-"
+                End If
+            Next
+
+            seatLayout = New TableLayoutPanel
+            seatLayout.Dock = DockStyle.Fill
+            seatLayout.ColumnCount = nCol
+            seatLayout.RowCount = nRow
+            For row As Integer = seatLayout.RowCount - 1 To 0 Step -1
+                Dim nCount = 0
+                For col As Integer = seatLayout.ColumnCount - 1 To 0 Step -1
+                    If row = seatLayout.RowCount - 1 Then
+                        If nAisle.Length > 0 Then
+                            If Array.IndexOf(nAisle, nCount + 2) >= 0 Then
+                                seatLayout.ColumnStyles.Add(New ColumnStyle(SizeType.Absolute, 25))
+                            Else
+                                seatLayout.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50))
+                            End If
+                        Else
+                            seatLayout.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50))
+                        End If
+                    End If
+                    If col = seatLayout.ColumnCount - 1 Then
+                        seatLayout.RowStyles.Add(New RowStyle(SizeType.Percent, 50))
+                    End If
+
                     If nAisle.Length > 0 Then
-                        If Array.IndexOf(nAisle, col + 1) < 0 Then
-                            seatLayout.Controls.Add(seats(nSeatCount), col, row)
-                            nSeatCount -= 1
+                        If Array.IndexOf(nAisle, nCount + 1) < 0 Then
+                            seatLayout.Controls.Add(getSeatByName(Chr(64 + seatLayout.RowCount - row) & sColName(nCount)), col, row)
                         End If
                     Else
-                        seatLayout.Controls.Add(seats(nSeatCount), col, row)
-                        nSeatCount -= 1
+                        seatLayout.Controls.Add(getSeatByName(Chr(64 + seatLayout.RowCount - row) & sColName(nCount)), col, row)
                     End If
+                    nCount += 1
                 Next
             Next
-        Else
+            pnlMain2.Controls.Add(seatLayout)
+        Else ' 原黑板在下
             seatView = 0
-            seatLayout.Controls.Clear()
-            nSeatCount = 0
-            For col As Integer = 0 To seatLayout.ColumnCount - 1
-                For row As Integer = 0 To seatLayout.RowCount - 1
+
+            seatLayout = New TableLayoutPanel
+            seatLayout.Dock = DockStyle.Fill
+            seatLayout.ColumnCount = nCol
+            seatLayout.RowCount = nRow
+            For row As Integer = 0 To seatLayout.RowCount - 1
+                For col As Integer = 0 To seatLayout.ColumnCount - 1
+                    If row = 0 Then
+                        If nAisle.Length > 0 Then
+                            If Array.IndexOf(nAisle, col + 1) >= 0 Then
+                                seatLayout.ColumnStyles.Add(New ColumnStyle(SizeType.Absolute, 25))
+                            Else
+                                seatLayout.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50))
+                            End If
+                        Else
+                            seatLayout.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50))
+                        End If
+                    End If
+                    If col = 0 Then
+                        seatLayout.RowStyles.Add(New RowStyle(SizeType.Percent, 50))
+                    End If
+
                     If nAisle.Length > 0 Then
                         If Array.IndexOf(nAisle, col + 1) < 0 Then
                             seatLayout.Controls.Add(seats(nSeatCount), col, row)
@@ -141,9 +194,19 @@
                     End If
                 Next
             Next
+            pnlMain2.Controls.Add(seatLayout)
         End If
         seatLayout.Visible = True
     End Sub
+
+    Private Function getSeatByName(sSeatName As String) As ctrlSeat
+        For Each seat As ctrlSeat In seats
+            If seat.Tag = sSeatName Then
+                Return seat
+            End If
+        Next
+        Return Nothing
+    End Function
 
     Private Sub lblNoSeat_Click(sender As Object, e As EventArgs) Handles lblNoSeat.Click
         Dim allAutoCompletes = From row In doCourseStudents.Select("座位=''").AsEnumerable()

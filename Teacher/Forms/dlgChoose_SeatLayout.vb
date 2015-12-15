@@ -1,4 +1,5 @@
 ﻿Public Class dlgChoose_SeatLayout
+    Public Shared nStudentCount As Integer
     Public Shared nCol As Integer = 0
     Public Shared nRow As Integer = 0
     Public Shared nAisle() As Integer

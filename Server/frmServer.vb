@@ -6,7 +6,7 @@ Imports System.Management
 Imports System.Text
 
 Public Class frmServer
-    Public Shared version = "1.0.151110"
+    Public Shared version = "1.0.151215"
     Public Shared nowTerm = ""
     'Dim p As Process
 

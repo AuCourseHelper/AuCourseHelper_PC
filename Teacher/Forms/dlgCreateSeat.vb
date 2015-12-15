@@ -1,4 +1,6 @@
-﻿Public Class dlgCreateSeat
+﻿Imports System.Threading
+
+Public Class dlgCreateSeat
     Private seatLayout As TableLayoutPanel
     Private seats() As ctrlSeat
     Private seatView As Integer = 0
@@ -7,6 +9,7 @@
     Private nAisle() As Integer
 
     Public Shared dtStudents As DataTable
+    Public Shared sType As String ' 座位表新增型態: 首次、新增、編輯
 
     Private Sub dlgCreateSeat_Load(sender As Object, e As EventArgs) Handles Me.Load
         btnLayout.PerformClick()
@@ -215,10 +218,42 @@
     End Function
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Select Case sType
+            Case "首次"
+                dlgCreateList.dtTmpCourseStudents = dtStudents
+            Case "新增"
+                Me.Enabled = False
+                Dim t As New Thread(AddressOf doSave)
+                t.Start()
+                dlgProgress.title = "儲存課程座位編排..."
+                dlgProgress.ShowDialog(Me)
+                Me.Enabled = True
+            Case "編輯"
 
+        End Select
+        Me.Dispose()
+    End Sub
+
+    Private Sub doSave()
+        Dim sSeat = nCol & "," & nRow & ","
+        For Each nAis As Integer In nAisle
+            sSeat &= nAis & "-"
+        Next
+        sSeat = sSeat.Substring(0, sSeat.Length - 1)
+        Dim sSql = String.Format("UPDATE Course SET Seat='{0}' WHERE Id='{1}';", sSeat, doCourse.Item("Id"))
+        doSqlCmd(sSql)
+
+        dlgProgress.title = "儲存學生座位資訊..."
+        sSql = ""
+        For Each row As DataRow In dtStudents.Rows
+            sSql &= String.Format("UPDATE CourseStudent SET Seat='{0}' WHERE CourseId='{1}' AND StudentNum='{2}'#", _
+                                  row.Item("座位"), doCourse.Item("Id"), row.Item("學號"))
+        Next
+        doSqlCmds(sSql)
+        dlgProgress.isOff = True
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-
+        Me.Dispose()
     End Sub
 End Class
