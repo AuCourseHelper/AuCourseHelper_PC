@@ -61,4 +61,48 @@
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Dispose()
     End Sub
+
+    Private Sub All_TextChanged(sender As Object, e As EventArgs) Handles txtCol.TextChanged, txtRow.TextChanged, txtAisle.TextChanged
+        nCol = Val(txtCol.Text)
+        nRow = Val(txtRow.Text)
+        nAisle = Array.ConvertAll(txtAisle.Text.Split("-"), _
+                                  New Converter(Of String, Integer)(AddressOf _StringToInteger))
+        Dim pnlShow As New TableLayoutPanel
+        pnlShow = New TableLayoutPanel
+        pnlShow.Dock = DockStyle.Fill
+        pnlShow.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single
+        pnlShow.Margin = New Padding(0)
+        pnlShow.ColumnCount = nCol
+        pnlShow.RowCount = nRow
+        For row As Integer = 0 To pnlShow.RowCount - 1
+            For col As Integer = 0 To pnlShow.ColumnCount - 1
+                If row = 0 Then
+                    If nAisle.Length > 0 Then
+                        If Array.IndexOf(nAisle, col + 1) >= 0 Then
+                            pnlShow.ColumnStyles.Add(New ColumnStyle(SizeType.Absolute, 25))
+                        Else
+                            pnlShow.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50))
+                        End If
+                    Else
+                        pnlShow.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50))
+                    End If
+                End If
+                If col = 0 Then
+                    pnlShow.RowStyles.Add(New RowStyle(SizeType.Percent, 50))
+                End If
+
+                If nAisle.Length > 0 Then
+                    If Array.IndexOf(nAisle, col + 1) >= 0 Then
+                        Dim pnlTmp As New Panel
+                        pnlTmp.Margin = New Padding(0)
+                        pnlTmp.Dock = DockStyle.Fill
+                        pnlTmp.BackColor = Color.DarkGray
+                        pnlShow.Controls.Add(pnlTmp, col, row)
+                    End If
+                End If
+            Next
+        Next
+        pnlMain.Controls.Clear()
+        pnlMain.Controls.Add(pnlShow)
+    End Sub
 End Class

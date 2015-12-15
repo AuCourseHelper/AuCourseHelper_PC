@@ -51,7 +51,7 @@ Partial Class dlgCreateList
         Me.pnlBtn.Controls.Add(Me.btnSave, 3, 0)
         Me.pnlBtn.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.pnlBtn.Font = New System.Drawing.Font("新細明體", 12.0!)
-        Me.pnlBtn.Location = New System.Drawing.Point(0, 501)
+        Me.pnlBtn.Location = New System.Drawing.Point(0, 502)
         Me.pnlBtn.Margin = New System.Windows.Forms.Padding(0)
         Me.pnlBtn.Name = "pnlBtn"
         Me.pnlBtn.RowCount = 1
@@ -135,7 +135,7 @@ Partial Class dlgCreateList
         Me.tblMain.Location = New System.Drawing.Point(0, 30)
         Me.tblMain.Name = "tblMain"
         Me.tblMain.RowTemplate.Height = 24
-        Me.tblMain.Size = New System.Drawing.Size(784, 471)
+        Me.tblMain.Size = New System.Drawing.Size(784, 472)
         Me.tblMain.TabIndex = 1
         '
         'pnlMain
@@ -145,7 +145,7 @@ Partial Class dlgCreateList
         Me.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlMain.Location = New System.Drawing.Point(0, 0)
         Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(784, 501)
+        Me.pnlMain.Size = New System.Drawing.Size(784, 502)
         Me.pnlMain.TabIndex = 2
         '
         'lblHelp
@@ -164,7 +164,7 @@ Partial Class dlgCreateList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(784, 561)
+        Me.ClientSize = New System.Drawing.Size(784, 562)
         Me.ControlBox = False
         Me.Controls.Add(Me.pnlMain)
         Me.Controls.Add(Me.pnlBtn)

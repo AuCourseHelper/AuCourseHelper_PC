@@ -116,27 +116,16 @@
 
         If seatView = 0 Then ' 原黑板在上
             seatView = 1
-            Dim nTemp As Integer = nCol - 1
-            For i As Integer = nCol - 1 To 0 Step -1
+            Dim nTemp As Integer = nCol - nAisle.Length
+            For i As Integer = 0 To nCol - 1
                 If Array.IndexOf(nAisle, i + 1) < 0 Then ' 不是走道時
                     sColName(i) = Format(nTemp, "00")
                     nTemp -= 1
+                Else
+                    sColName(i) = "-"
                 End If
             Next
-            'nSeatCount = seats.Length - 1
-            'For col As Integer = 0 To seatLayout.ColumnCount - 1
-            '    For row As Integer = 0 To seatLayout.RowCount - 1
-            '        If nAisle.Length > 0 Then
-            '            If Array.IndexOf(nAisle, col + 1) < 0 Then
-            '                seatLayout.Controls.Add(seats(nSeatCount), col, row)
-            '                nSeatCount -= 1
-            '            End If
-            '        Else
-            '            seatLayout.Controls.Add(seats(nSeatCount), col, row)
-            '            nSeatCount -= 1
-            '        End If
-            '    Next
-            'Next
+
             lblFront.Dock = DockStyle.Bottom
             seatLayout = New TableLayoutPanel
             seatLayout.Dock = DockStyle.Fill
@@ -162,13 +151,9 @@
                     If nAisle.Length > 0 Then
                         If Array.IndexOf(nAisle, col + 1) < 0 Then
                             seatLayout.Controls.Add(getSeatByName(Chr(64 + seatLayout.RowCount - row) & sColName(col)), col, row)
-                            'seatLayout.Controls.Add(seats(nSeatCount), col, row)
-                            'nSeatCount += 1
                         End If
                     Else
                         seatLayout.Controls.Add(getSeatByName(Chr(64 + seatLayout.RowCount - row) & sColName(col)), col, row)
-                        'seatLayout.Controls.Add(seats(nSeatCount), col, row)
-                        'nSeatCount += 1
                     End If
                 Next
             Next
@@ -182,21 +167,7 @@
                     nTemp += 1
                 End If
             Next
-            'seatLayout.Controls.Clear()
-            'nSeatCount = 0
-            'For col As Integer = 0 To seatLayout.ColumnCount - 1
-            '    For row As Integer = 0 To seatLayout.RowCount - 1
-            '        If nAisle.Length > 0 Then
-            '            If Array.IndexOf(nAisle, col + 1) < 0 Then
-            '                seatLayout.Controls.Add(seats(nSeatCount), col, row)
-            '                nSeatCount += 1
-            '            End If
-            '        Else
-            '            seatLayout.Controls.Add(seats(nSeatCount), col, row)
-            '            nSeatCount += 1
-            '        End If
-            '    Next
-            'Next
+
             lblFront.Dock = DockStyle.Top
             seatLayout = New TableLayoutPanel
             seatLayout.Dock = DockStyle.Fill

@@ -34,6 +34,7 @@ Partial Class dlgChoose_SeatLayout
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnOk = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.pnlMain = New System.Windows.Forms.Panel()
         Me.grbMain.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -73,7 +74,7 @@ Partial Class dlgChoose_SeatLayout
         Me.grbMain.Font = New System.Drawing.Font("新細明體", 12.0!)
         Me.grbMain.Location = New System.Drawing.Point(16, 42)
         Me.grbMain.Name = "grbMain"
-        Me.grbMain.Size = New System.Drawing.Size(356, 141)
+        Me.grbMain.Size = New System.Drawing.Size(356, 142)
         Me.grbMain.TabIndex = 3
         Me.grbMain.TabStop = False
         Me.grbMain.Text = "設定值"
@@ -93,7 +94,7 @@ Partial Class dlgChoose_SeatLayout
         '
         Me.txtAisle.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.txtAisle.Location = New System.Drawing.Point(157, 90)
-        Me.txtAisle.MaxLength = 2
+        Me.txtAisle.MaxLength = 10
         Me.txtAisle.Name = "txtAisle"
         Me.txtAisle.Size = New System.Drawing.Size(101, 27)
         Me.txtAisle.TabIndex = 3
@@ -161,7 +162,7 @@ Partial Class dlgChoose_SeatLayout
         Me.btnOk.BackColor = System.Drawing.SystemColors.Info
         Me.btnOk.Font = New System.Drawing.Font("新細明體", 12.0!)
         Me.btnOk.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.ok
-        Me.btnOk.Location = New System.Drawing.Point(166, 189)
+        Me.btnOk.Location = New System.Drawing.Point(166, 190)
         Me.btnOk.Name = "btnOk"
         Me.btnOk.Size = New System.Drawing.Size(100, 60)
         Me.btnOk.TabIndex = 0
@@ -173,7 +174,7 @@ Partial Class dlgChoose_SeatLayout
         '
         Me.btnCancel.Font = New System.Drawing.Font("新細明體", 12.0!)
         Me.btnCancel.Image = Global.AUCourseHelper_Teacher.My.Resources.Resources.cancel
-        Me.btnCancel.Location = New System.Drawing.Point(272, 189)
+        Me.btnCancel.Location = New System.Drawing.Point(272, 190)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(100, 60)
         Me.btnCancel.TabIndex = 0
@@ -181,12 +182,20 @@ Partial Class dlgChoose_SeatLayout
         Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnCancel.UseVisualStyleBackColor = True
         '
+        'pnlMain
+        '
+        Me.pnlMain.Location = New System.Drawing.Point(378, 13)
+        Me.pnlMain.Name = "pnlMain"
+        Me.pnlMain.Size = New System.Drawing.Size(394, 237)
+        Me.pnlMain.TabIndex = 5
+        '
         'dlgChoose_SeatLayout
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(384, 261)
+        Me.ClientSize = New System.Drawing.Size(784, 262)
         Me.ControlBox = False
+        Me.Controls.Add(Me.pnlMain)
         Me.Controls.Add(Me.grbMain)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cboType)
@@ -214,4 +223,5 @@ Partial Class dlgChoose_SeatLayout
     Friend WithEvents txtAisle As System.Windows.Forms.TextBox
     Friend WithEvents txtRow As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents pnlMain As System.Windows.Forms.Panel
 End Class

@@ -32,9 +32,9 @@ Partial Class dlgCreateSeat
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.pnlMain = New System.Windows.Forms.Panel()
-        Me.mnuStudents = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.lblFront = New System.Windows.Forms.Label()
         Me.pnlSeat = New System.Windows.Forms.Panel()
+        Me.lblFront = New System.Windows.Forms.Label()
+        Me.mnuStudents = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.pnlBtn.SuspendLayout()
         Me.pnlMain.SuspendLayout()
         Me.SuspendLayout()
@@ -69,7 +69,7 @@ Partial Class dlgCreateSeat
         Me.pnlBtn.Controls.Add(Me.btnSave, 5, 0)
         Me.pnlBtn.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.pnlBtn.Font = New System.Drawing.Font("新細明體", 12.0!)
-        Me.pnlBtn.Location = New System.Drawing.Point(0, 669)
+        Me.pnlBtn.Location = New System.Drawing.Point(0, 670)
         Me.pnlBtn.Margin = New System.Windows.Forms.Padding(0)
         Me.pnlBtn.Name = "pnlBtn"
         Me.pnlBtn.RowCount = 1
@@ -163,16 +163,17 @@ Partial Class dlgCreateSeat
         Me.pnlMain.Location = New System.Drawing.Point(0, 30)
         Me.pnlMain.Margin = New System.Windows.Forms.Padding(0)
         Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(1008, 639)
+        Me.pnlMain.Size = New System.Drawing.Size(1008, 640)
         Me.pnlMain.TabIndex = 3
         '
-        'mnuStudents
+        'pnlSeat
         '
-        Me.mnuStudents.AutoSize = False
-        Me.mnuStudents.Font = New System.Drawing.Font("新細明體", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
-        Me.mnuStudents.Name = "mnuStudents"
-        Me.mnuStudents.ShowImageMargin = False
-        Me.mnuStudents.Size = New System.Drawing.Size(153, 250)
+        Me.pnlSeat.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlSeat.Location = New System.Drawing.Point(0, 22)
+        Me.pnlSeat.Margin = New System.Windows.Forms.Padding(0)
+        Me.pnlSeat.Name = "pnlSeat"
+        Me.pnlSeat.Size = New System.Drawing.Size(1008, 618)
+        Me.pnlSeat.TabIndex = 1
         '
         'lblFront
         '
@@ -188,20 +189,19 @@ Partial Class dlgCreateSeat
         Me.lblFront.Text = "==講　台=="
         Me.lblFront.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'pnlSeat
+        'mnuStudents
         '
-        Me.pnlSeat.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlSeat.Location = New System.Drawing.Point(0, 22)
-        Me.pnlSeat.Margin = New System.Windows.Forms.Padding(0)
-        Me.pnlSeat.Name = "pnlSeat"
-        Me.pnlSeat.Size = New System.Drawing.Size(1008, 617)
-        Me.pnlSeat.TabIndex = 1
+        Me.mnuStudents.AutoSize = False
+        Me.mnuStudents.Font = New System.Drawing.Font("新細明體", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(136, Byte))
+        Me.mnuStudents.Name = "mnuStudents"
+        Me.mnuStudents.ShowImageMargin = False
+        Me.mnuStudents.Size = New System.Drawing.Size(153, 250)
         '
         'dlgCreateSeat
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1008, 729)
+        Me.ClientSize = New System.Drawing.Size(1008, 730)
         Me.ControlBox = False
         Me.Controls.Add(Me.pnlMain)
         Me.Controls.Add(Me.pnlBtn)
