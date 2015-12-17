@@ -40,7 +40,7 @@
                     sColName(i) = Format(nTemp, "00")
                     nTemp += 1
                 End If
-            Next ' =-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=反轉功能需修正
+            Next
 
             seatLayout = New TableLayoutPanel
             seatLayout.Dock = DockStyle.Fill
